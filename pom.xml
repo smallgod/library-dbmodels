@@ -110,12 +110,6 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.jettyhttpserver</groupId>
-            <artifactId>jettyhttpserver</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>com.sgutilities</groupId>
             <artifactId>sgutilities</artifactId>
             <version>1.0</version>
@@ -132,55 +126,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.12</version>
             <type>jar</type>
-        </dependency>
-   
-    
-    
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>9.2.14.v20151106</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.2.14.v20151106</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>9.2.14.v20151106</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-plus</artifactId>
-            <version>9.2.7.v20150116</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jndi</artifactId>
-            <version>9.2.7.v20150116</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.30</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
         </dependency>
         
         <dependency>

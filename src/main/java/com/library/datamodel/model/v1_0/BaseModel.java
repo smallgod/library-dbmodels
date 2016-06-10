@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.library.datamodel.jaxb.model.v1_0;
+package com.library.datamodel.model.v1_0;
 
 import java.io.Serializable;
 import javax.persistence.Column;

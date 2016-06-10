@@ -6,7 +6,7 @@
 //
 
 
-package com.library.datamodel.jaxb.model.v1_0;
+package com.library.datamodel.model.v1_0;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
