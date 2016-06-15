@@ -5,7 +5,9 @@
  */
 package com.library.datamodel.datawrappers;
 
+import com.library.datamodel.Constants.APIContentType;
 import com.library.datamodel.jaxb.config.v1_0.Appconfig;
+import com.library.sgsharedinterface.Remote;
 import com.library.sgsharedinterface.SharedAppConfigIF;
 import java.util.List;
 
@@ -111,16 +113,6 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
-    public String getCentralServerJsonUrl() {
-        return this.appConfig.getCentralServerJsonUrl();
-    }
-
-    @Override
-    public String getCentralServerXmlUrl() {
-        return this.appConfig.getCentralServerXmlUrl();
-    }
-
-    @Override
     public String getLog4JpropsAbsPath() {
         return (getConfigsDir() + this.appConfig.getConfigfiles().getLog4Jprops());
     }
@@ -201,6 +193,21 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     @Override
     public List<String> getAllowedIps() {
         return (appConfig.getAllowedips().getIp());
+    }
+
+    @Override
+    public Remote getAdDisplayUnit() {
+        return new RemoteUnitWrapper(appConfig.getRemoteunits().getAddisplay());
+    }
+
+    @Override
+    public Remote getAdCentralUnit() {
+        return new RemoteUnitWrapper(appConfig.getRemoteunits().getAdcentral());
+    }
+
+    @Override
+    public Remote getAdDbManagerUnit() {
+        return new RemoteUnitWrapper(appConfig.getRemoteunits().getAddbmanager());
     }
 
 }

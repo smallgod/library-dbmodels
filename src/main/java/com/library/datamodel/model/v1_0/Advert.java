@@ -15,7 +15,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Table(name = "advert")
 
 //id int auto_increment primary key, subject varchar(30),description varchar(100), targetArea varchar(40),startTime varchar(20),endTime varchar(20),imageUrl varchar(100),contactDetails varchar(50),category varchar (30),paymentMethod varchar(30),advertType varchar(20),advertiserType varchar(30), advertiserId varchar (10000),DateSent currentTimestamp)")
-public class Advert extends BaseModel implements Auditable, Serializable {
+public class Advert extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 

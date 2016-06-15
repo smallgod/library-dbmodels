@@ -31,7 +31,7 @@ import org.joda.time.LocalDateTime;
     )
 })
 @MappedSuperclass
-public class BaseModel implements Serializable {
+public class BaseEntity implements Serializable {
     
     private static final long serialVersionUID = -8171202186820119866L;
 

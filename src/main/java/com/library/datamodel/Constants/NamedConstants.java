@@ -30,6 +30,18 @@ public interface NamedConstants {
     public static final String APPCONFIGS_ATTR_NAME = "appconfigs";
 
     /**
+     * When storing the database reference in the servlet context, we will use
+     * this as the attribute name
+     */
+    public static String DATABASE_ATTR_NAME = "dbreference";
+
+    /**
+     * When storing the http pool reference in the servlet context, we will use
+     * this as the attribute name
+     */
+    public static String HTTP_POOL_ATTR_NAME = "httppool";
+
+    /**
      * A username that last modified a given auditable database entity
      */
     public static final String PROPNAME_LAST_MODIFIED_BY = "lastModifiedBy";
@@ -92,12 +104,12 @@ public interface NamedConstants {
     /**
      * Http header value for the JSON content type
      */
-    public static final String HTTP_CONTENT_TYPE_JSON = "application/json"; //"application/json;charset=UTF-8")
+    //public static final String HTTP_CONTENT_TYPE_JSON = "application/json"; //"application/json;charset=UTF-8")
 
     /**
      * Http header value for the XML content type
      */
-    public static final String HTTP_CONTENT_TYPE_XML = "application/xml";
+    //public static final String HTTP_CONTENT_TYPE_XML = "application/xml";
 
     /**
      * An http server can return a success http response but with no content in
@@ -114,5 +126,11 @@ public interface NamedConstants {
      */
     public static final String HTTP_REQUESTMETHOD_GET = "GET";
     
+    /**
+     * Attribute name for the http parameter name holding the database entity name/type
+     * useful when passing a request to the DB manager unit, so that the entity in context
+     * can be idenitified
+     */
+    public static final String HTTP_PARAM_ENTITYNAME = "entityname";
 
 }
