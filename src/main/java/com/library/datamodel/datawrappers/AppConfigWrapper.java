@@ -5,11 +5,10 @@
  */
 package com.library.datamodel.datawrappers;
 
-import com.library.datamodel.Constants.APIContentType;
 import com.library.datamodel.jaxb.config.v1_0.Appconfig;
-import com.library.sgsharedinterface.Remote;
 import com.library.sgsharedinterface.SharedAppConfigIF;
 import java.util.List;
+import com.library.sgsharedinterface.RemoteRequest;
 
 /**
  * We are implementing a wrapper since JAXB classes are ever changing, we dont
@@ -23,6 +22,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     private final String configsDir;
     private final String logsDir;
     private final String projectDir;
+    private final String dsmWebAppDir;
     private final String daemonProfile;
 
     /**
@@ -31,14 +31,16 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
      * @param configsDir
      * @param logsDir
      * @param projectDir
+     * @param dsmWebAppDir
      * @param daemonProfile
      */
-    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String daemonProfile) {
+    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String daemonProfile) {
 
         this.appConfig = appConfig;
         this.configsDir = configsDir;
         this.logsDir = logsDir;
         this.projectDir = projectDir;
+        this.dsmWebAppDir = dsmWebAppDir;
         this.daemonProfile = daemonProfile;
     }
 
@@ -164,6 +166,11 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     public String getProjectDir() {
         return projectDir;
     }
+    
+    @Override
+    public String getDsmWebAppDir() {
+        return dsmWebAppDir;
+    }
 
     @Override
     public String getDaemonProfile() {
@@ -196,17 +203,17 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
-    public Remote getAdDisplayUnit() {
+    public RemoteRequest getAdDisplayUnit() {
         return new RemoteUnitWrapper(appConfig.getRemoteunits().getAddisplay());
     }
 
     @Override
-    public Remote getAdCentralUnit() {
+    public RemoteRequest getAdCentralUnit() {
         return new RemoteUnitWrapper(appConfig.getRemoteunits().getAdcentral());
     }
 
     @Override
-    public Remote getAdDbManagerUnit() {
+    public RemoteRequest getAdDbManagerUnit() {
         return new RemoteUnitWrapper(appConfig.getRemoteunits().getAddbmanager());
     }
 

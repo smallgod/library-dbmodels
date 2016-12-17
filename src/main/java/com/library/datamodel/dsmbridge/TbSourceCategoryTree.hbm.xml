@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbSourceCategoryTree" table="tb_source_category_tree" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbSourceCategoryTreeId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="catId" type="int">
+                <column name="CAT_ID" />
+            </key-property>
+            <key-property name="parentId" type="int">
+                <column name="PARENT_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbCustomer" class="TbCustomer" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

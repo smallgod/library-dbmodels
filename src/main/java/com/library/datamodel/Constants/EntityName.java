@@ -2,8 +2,7 @@ package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.library.utilities.LoggerUtil;
 
 /**
  * 
@@ -17,7 +16,7 @@ public enum EntityName implements Constants {
     
     private final String entityNameStr;
 
-    private static final Logger logger = LoggerFactory.getLogger(EntityName.class);
+    private static final LoggerUtil logger = new LoggerUtil(EntityName.class);
 
     EntityName(String entityNameStr) {
         this.entityNameStr = entityNameStr;

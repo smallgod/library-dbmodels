@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbSource" table="tb_source" catalog="gnamp_v4">
+        <composite-id name="id" class="TbSourceId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="sourceId" type="int">
+                <column name="SOURCE_ID" />
+            </key-property>
+        </composite-id>
+        <timestamp name="version" column="VERSION" />
+        <many-to-one name="tbSourceCategory" class="TbSourceCategory" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true" />
+            <column name="CAT_ID" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true" />
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" not-null="true" />
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" not-null="true">
+                <comment>&#215;&#180;&#204;&#172;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

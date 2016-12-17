@@ -6,15 +6,15 @@
 package com.library.datamodel.datawrappers;
 
 import com.library.datamodel.jaxb.config.v1_0.Remoteunittype;
-import com.library.sgsharedinterface.Remote;
 import java.util.Collections;
 import java.util.Map;
+import com.library.sgsharedinterface.RemoteRequest;
 
 /**
  *
  * @author smallgod
  */
-public class RemoteUnitWrapper implements Remote {
+public class RemoteUnitWrapper implements RemoteRequest {
 
     private final Remoteunittype remoteUnitType;
     private Map<String, String> httpParams;
@@ -50,7 +50,7 @@ public class RemoteUnitWrapper implements Remote {
 
     @Override
     public Map<String, String> getHttpParams() {
-        return Collections.unmodifiableMap(httpParams);
+        return httpParams;
     }
 
     @Override

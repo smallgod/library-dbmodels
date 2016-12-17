@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbSystemTemplateRect" table="tb_system_template_rect" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbSystemTemplateRectId">
+            <key-property name="tmpltId" type="int">
+                <column name="TMPLT_ID" />
+            </key-property>
+            <key-property name="rectId" type="int">
+                <column name="RECT_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbSystemTemplate" class="TbSystemTemplate" update="false" insert="false" fetch="select">
+            <column name="TMPLT_ID" not-null="true">
+                <comment>&#196;&#163;</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true" />
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true" />
+        </property>
+        <property name="layer" type="int">
+            <column name="LAYER" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="TYPE" not-null="true" />
+        </property>
+        <property name="posX" type="int">
+            <column name="POS_X" not-null="true">
+                <comment>X</comment>
+            </column>
+        </property>
+        <property name="posY" type="int">
+            <column name="POS_Y" not-null="true">
+                <comment>Y</comment>
+            </column>
+        </property>
+        <property name="width" type="int">
+            <column name="WIDTH" not-null="true" />
+        </property>
+        <property name="height" type="int">
+            <column name="HEIGHT" not-null="true" />
+        </property>
+        <property name="detail" type="string">
+            <column name="DETAIL" length="4096" not-null="true" />
+        </property>
+        <set name="tbSystemTemplateRectImages" table="tb_system_template_rect_image" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TMPLT_ID" not-null="true">
+                    <comment>&#196;&#163;</comment>
+                </column>
+                <column name="RECT_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbSystemTemplateRectImage" />
+        </set>
+    </class>
+</hibernate-mapping>

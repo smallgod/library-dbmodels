@@ -1,5 +1,9 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.AdPaymentStatus;
+import com.library.datamodel.Constants.AdvertStatus;
+import com.library.datamodel.Constants.AdvertStep;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -20,10 +24,25 @@ public class Advert extends BaseEntity implements Auditable, Serializable {
     private static final long serialVersionUID = -7420964819128665745L;
 
     @Column(name = "advertiser_id", nullable = true, unique = false)
+    @SerializedName(value = "advertiserId")
     private String advertiserId;
 
+    @SerializedName(value = "advertText")
     @Column(name = "advert_text", length = 10000) //might want to change this - what if the data is too long
     private String advertText;
+    
+    @SerializedName(value = "adStatus")
+    //the status of the advert whether successful, Rejected or ....
+    private AdvertStatus adStatus;
+    
+    @SerializedName(value = "adStep")
+    //at which processing level this advert is at
+    private AdvertStep adStep;
+    
+    @SerializedName(value = "paymentStatus")
+    //whether this advert has been paid for or not - if an advert is rejected after payment, 
+    //payment should be reversed and this value should read 'REVERSED'
+    private AdPaymentStatus paymentStatus;
 
     public Advert(String advertiserId, String advertText) {
         this.advertiserId = advertiserId;
@@ -53,6 +72,30 @@ public class Advert extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public AdvertStatus getAdStatus() {
+        return adStatus;
+    }
+
+    public void setAdStatus(AdvertStatus adStatus) {
+        this.adStatus = adStatus;
+    }
+
+    public AdvertStep getAdStep() {
+        return adStep;
+    }
+
+    public void setAdStep(AdvertStep adStep) {
+        this.adStep = adStep;
+    }
+
+    public AdPaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(AdPaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
 }

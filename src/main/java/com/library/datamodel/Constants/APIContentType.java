@@ -2,8 +2,7 @@ package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.library.utilities.LoggerUtil;
 
 /**
  * Represents the different states a processing unit such as a monitoring unit or AdDisplay unit 
@@ -18,7 +17,7 @@ public enum APIContentType implements Constants {
     
     private final String apiType;
 
-    private static final Logger logger = LoggerFactory.getLogger(APIContentType.class);
+    private static final LoggerUtil logger = new LoggerUtil(APIContentType.class);
 
     APIContentType(String apiType) {
         this.apiType = apiType;

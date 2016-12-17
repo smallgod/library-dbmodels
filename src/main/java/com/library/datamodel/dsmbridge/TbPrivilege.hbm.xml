@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbPrivilege" table="tb_privilege" catalog="gnamp_v4" optimistic-lock="version">
+        <id name="privilegeId" type="int">
+            <column name="PRIVILEGE_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#230;&#157;&#131;&#233;&#153;&#144;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <set name="tbRoles" table="tb_role_privilege" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRIVILEGE_ID" not-null="true">
+                    <comment>&#230;&#157;&#131;&#233;&#153;&#144;ID</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="TbRole">
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <set name="tbUsers" table="tb_user_privilege" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRIVILEGE_ID" not-null="true">
+                    <comment>&#230;&#157;&#131;&#233;&#153;&#144;ID</comment>
+                </column>
+            </key>
+            <many-to-many entity-name="TbUser">
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

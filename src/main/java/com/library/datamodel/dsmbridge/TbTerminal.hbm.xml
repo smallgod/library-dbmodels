@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbTerminal" table="tb_terminal" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbTerminalId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="devId" type="long">
+                <column name="DEV_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbApp" class="TbApp" fetch="select">
+            <column name="ASSIGN_APP" length="64">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#231;&#168;&#139;&#229;&#186;&#143;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbCity" class="TbCity" fetch="select">
+            <column name="CITY_ID">
+                <comment>&#229;&#159;&#142;&#229;&#184;&#130;ID</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbConfig" class="TbConfig" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="ASSIGN_CONFIG_ID">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#233;&#133;&#141;&#231;&#189;&#174;ID</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbDemandTask" class="TbDemandTask" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="ASSIGN_DEMANDTASK_ID">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#231;&#130;&#185;&#230;&#146;&#173;&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbGroup" class="TbGroup" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="GROUP_ID">
+                <comment>&#229;&#136;&#134;&#231;&#187;&#132;ID</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbKernel" class="TbKernel" fetch="select">
+            <column name="ASSIGN_KERNEL" length="64">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#229;&#134;&#133;&#230;&#160;&#184;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbLoopTask" class="TbLoopTask" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="ASSIGN_LOOPTASK_ID">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#232;&#189;&#174;&#230;&#146;&#173;&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbPluginTask" class="TbPluginTask" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="ASSIGN_PLUGINTASK_ID">
+                <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#230;&#143;&#146;&#230;&#146;&#173;&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#231;&#187;&#136;&#231;&#171;&#175;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#232;&#128;&#133;</comment>
+            </column>
+        </property>
+        <property name="curKernel" type="string">
+            <column name="CUR_KERNEL" length="64">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#229;&#134;&#133;&#230;&#160;&#184;</comment>
+            </column>
+        </property>
+        <property name="curApp" type="string">
+            <column name="CUR_APP" length="64">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#231;&#168;&#139;&#229;&#186;&#143;</comment>
+            </column>
+        </property>
+        <property name="curConfigId" type="java.lang.Integer">
+            <column name="CUR_CONFIG_ID">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#233;&#133;&#141;&#231;&#189;&#174;ID</comment>
+            </column>
+        </property>
+        <property name="curConfigVersion" type="timestamp">
+            <column name="CUR_CONFIG_VERSION" length="19">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#233;&#133;&#141;&#231;&#189;&#174;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curLooptaskId" type="java.lang.Integer">
+            <column name="CUR_LOOPTASK_ID">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#232;&#189;&#174;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+        </property>
+        <property name="curLooptaskVersion" type="timestamp">
+            <column name="CUR_LOOPTASK_VERSION" length="19">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#232;&#189;&#174;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curLoopfileVersion" type="timestamp">
+            <column name="CUR_LOOPFILE_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#232;&#189;&#174;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#150;&#135;&#228;&#187;&#182;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curLoopplayVersion" type="timestamp">
+            <column name="CUR_LOOPPLAY_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#232;&#189;&#174;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#146;&#173;&#230;&#148;&#190;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curLoopstrategyVersion" type="timestamp">
+            <column name="CUR_LOOPSTRATEGY_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#232;&#189;&#174;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#231;&#173;&#150;&#231;&#149;&#165;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curDemandtaskId" type="java.lang.Integer">
+            <column name="CUR_DEMANDTASK_ID">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#231;&#130;&#185;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+        </property>
+        <property name="curDemandtaskVersion" type="timestamp">
+            <column name="CUR_DEMANDTASK_VERSION" length="19">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#231;&#130;&#185;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curDemandfileVersion" type="timestamp">
+            <column name="CUR_DEMANDFILE_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#231;&#130;&#185;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#150;&#135;&#228;&#187;&#182;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curDemandplayVersion" type="timestamp">
+            <column name="CUR_DEMANDPLAY_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#231;&#130;&#185;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#146;&#173;&#230;&#148;&#190;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curPlugintaskId" type="java.lang.Integer">
+            <column name="CUR_PLUGINTASK_ID">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#230;&#143;&#146;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+        </property>
+        <property name="curPlugintaskVersion" type="timestamp">
+            <column name="CUR_PLUGINTASK_VERSION" length="19">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#230;&#143;&#146;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curPluginfileVersion" type="timestamp">
+            <column name="CUR_PLUGINFILE_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#230;&#143;&#146;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#150;&#135;&#228;&#187;&#182;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curPluginplayVersion" type="timestamp">
+            <column name="CUR_PLUGINPLAY_VERSION" length="19">
+                <comment>
+                &#229;&#189;&#147;&#229;&#137;&#141;&#230;&#143;&#146;&#230;&#146;&#173;&#228;&#187;&#187;&#229;&#138;&#161;&#230;&#146;&#173;&#230;&#148;&#190;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="assignSourceVersion" type="timestamp">
+            <column name="ASSIGN_SOURCE_VERSION" length="19" not-null="true" />
+        </property>
+        <property name="restSchedule" type="string">
+            <column name="REST_SCHEDULE" length="1024" not-null="true">
+                <comment>&#229;&#174;&#154;&#230;&#151;&#182;&#233;&#135;&#141;&#229;&#144;&#175;</comment>
+            </column>
+        </property>
+        <property name="standbySchedule" type="string">
+            <column name="STANDBY_SCHEDULE" length="1024" not-null="true">
+                <comment>&#229;&#174;&#154;&#230;&#151;&#182;&#229;&#190;&#133;&#230;&#156;&#186;</comment>
+            </column>
+        </property>
+        <property name="captureSchedule" type="string">
+            <column name="CAPTURE_SCHEDULE" length="1024" not-null="true">
+                <comment>&#229;&#174;&#154;&#230;&#151;&#182;&#229;&#190;&#133;&#230;&#156;&#186;</comment>
+            </column>
+        </property>
+        <property name="demandSchedule" type="string">
+            <column name="DEMAND_SCHEDULE" length="1024" not-null="true">
+                <comment>&#229;&#174;&#154;&#230;&#151;&#182;&#231;&#130;&#185;&#230;&#146;&#173;</comment>
+            </column>
+        </property>
+        <property name="scheduleVersion" type="timestamp">
+            <column name="SCHEDULE_VERSION" length="19" not-null="true">
+                <comment>&#229;&#174;&#154;&#230;&#151;&#182;&#232;&#174;&#161;&#229;&#136;&#146;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="subtitle" type="string">
+            <column name="SUBTITLE" length="4096" not-null="true">
+                <comment>&#231;&#187;&#136;&#231;&#171;&#175;&#230;&#150;&#135;&#229;&#173;&#151;</comment>
+            </column>
+        </property>
+        <property name="subtitleVersion" type="timestamp">
+            <column name="SUBTITLE_VERSION" length="19" not-null="true">
+                <comment>&#231;&#187;&#136;&#231;&#171;&#175;&#230;&#150;&#135;&#229;&#173;&#151;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="curSubtitleVersion" type="timestamp">
+            <column name="CUR_SUBTITLE_VERSION" length="19" not-null="true">
+                <comment>&#229;&#189;&#147;&#229;&#137;&#141;&#230;&#150;&#135;&#229;&#173;&#151;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="onlineState" type="int">
+            <column name="ONLINE_STATE" not-null="true">
+                <comment>&#229;&#156;&#168;&#231;&#186;&#191;&#231;&#138;&#182;&#230;&#128;&#129;</comment>
+            </column>
+        </property>
+        <property name="logonTime" type="timestamp">
+            <column name="LOGON_TIME" length="19" not-null="true">
+                <comment>&#228;&#184;&#138;&#231;&#186;&#191;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="logoffTime" type="timestamp">
+            <column name="LOGOFF_TIME" length="19" not-null="true">
+                <comment>&#231;&#166;&#187;&#231;&#186;&#191;&#231;&#186;&#191;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="downloadTotal" type="long">
+            <column name="DOWNLOAD_TOTAL" not-null="true">
+                <comment>&#233;&#156;&#128;&#228;&#184;&#139;&#232;&#189;&#189;&#230;&#128;&#187;&#229;&#164;&#167;&#229;&#176;&#143;</comment>
+            </column>
+        </property>
+        <property name="downloadFinished" type="long">
+            <column name="DOWNLOAD_FINISHED" not-null="true">
+                <comment>&#229;&#183;&#178;&#228;&#184;&#139;&#232;&#189;&#189;&#229;&#164;&#167;&#229;&#176;&#143;</comment>
+            </column>
+        </property>
+        <property name="downloadType" type="int">
+            <column name="DOWNLOAD_TYPE" not-null="true">
+                <comment>&#228;&#184;&#139;&#232;&#189;&#189;&#231;&#177;&#187;&#229;&#158;&#139;</comment>
+            </column>
+        </property>
+        <property name="poweron" type="int">
+            <column name="POWERON" not-null="true">
+                <comment>&#229;&#188;&#128;&#230;&#156;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="poweroff" type="int">
+            <column name="POWEROFF" not-null="true">
+                <comment>&#229;&#133;&#179;&#230;&#156;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="aliveInterval" type="int">
+            <column name="ALIVE_INTERVAL" not-null="true">
+                <comment>&#229;&#191;&#131;&#232;&#183;&#179;&#233;&#151;&#180;&#233;&#154;&#148;</comment>
+            </column>
+        </property>
+        <property name="lastAlive" type="timestamp">
+            <column name="LAST_ALIVE" length="19" not-null="true">
+                <comment>&#230;&#156;&#128;&#232;&#191;&#145;&#229;&#191;&#131;&#232;&#183;&#179;</comment>
+            </column>
+        </property>
+        <property name="lastPatrol" type="timestamp">
+            <column name="LAST_PATROL" length="19" not-null="true">
+                <comment>&#230;&#156;&#128;&#232;&#191;&#145;&#229;&#183;&#161;&#230;&#159;&#165;</comment>
+            </column>
+        </property>
+        <property name="lastDownload" type="timestamp">
+            <column name="LAST_DOWNLOAD" length="19" not-null="true">
+                <comment>&#230;&#156;&#128;&#232;&#191;&#145;&#228;&#184;&#139;&#232;&#189;&#189;</comment>
+            </column>
+        </property>
+        <property name="flowLimit" type="long">
+            <column name="FLOW_LIMIT" not-null="true" />
+        </property>
+        <property name="netFlow" type="long">
+            <column name="NET_FLOW" not-null="true" />
+        </property>
+        <set name="tbTerminalEvents" table="tb_terminal_event" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="DEV_ID" not-null="true">
+                    <comment>&#231;&#187;&#136;&#231;&#171;&#175;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbTerminalEvent" />
+        </set>
+        <set name="tbExceptions" table="tb_exception" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="DEV_ID" not-null="true">
+                    <comment>&#231;&#187;&#136;&#231;&#171;&#175;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbException" />
+        </set>
+        <set name="tbKeylogs" table="tb_keylog" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="DEV_ID" not-null="true">
+                    <comment>&#231;&#187;&#136;&#231;&#171;&#175;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbKeylog" />
+        </set>
+        <set name="tbPlaylogs" table="tb_playlog" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="DEV_ID" not-null="true">
+                    <comment>&#231;&#187;&#136;&#231;&#171;&#175;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbPlaylog" />
+        </set>
+    </class>
+</hibernate-mapping>

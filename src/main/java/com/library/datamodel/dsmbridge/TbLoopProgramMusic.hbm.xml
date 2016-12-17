@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbLoopProgramMusic" table="tb_loop_program_music" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbLoopProgramMusicId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="taskId" type="int">
+                <column name="TASK_ID" />
+            </key-property>
+            <key-property name="prgmId" type="int">
+                <column name="PRGM_ID" />
+            </key-property>
+            <key-property name="musicId" type="int">
+                <column name="MUSIC_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbLoopProgram" class="TbLoopProgram" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="TASK_ID" not-null="true">
+                <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+            <column name="PRGM_ID" not-null="true">
+                <comment>&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+            </column>
+        </many-to-one>
+        <property name="seq" type="int">
+            <column name="SEQ" not-null="true">
+                <comment>&#229;&#186;&#143;&#229;&#143;&#183;</comment>
+            </column>
+        </property>
+        <property name="fileId" type="long">
+            <column name="FILE_ID" not-null="true">
+                <comment>&#230;&#150;&#135;&#228;&#187;&#182;ID</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

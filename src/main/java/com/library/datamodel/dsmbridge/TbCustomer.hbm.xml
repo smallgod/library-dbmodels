@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbCustomer" table="tb_customer" catalog="gnamp_v4" optimistic-lock="version">
+        <id name="cstmId" type="int">
+            <column name="CSTM_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="shortName" type="string">
+            <column name="SHORT_NAME" length="32" not-null="true" unique="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;&#231;&#174;&#128;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true" unique="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;&#229;&#144;&#141;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#232;&#128;&#133;</comment>
+            </column>
+        </property>
+        <set name="tbCategoryTrees" table="tb_category_tree" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbCategoryTree" />
+        </set>
+        <set name="tbLoopTasks" table="tb_loop_task" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbLoopTask" />
+        </set>
+        <set name="tbGroups" table="tb_group" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbGroup" />
+        </set>
+        <set name="tbUsers" table="tb_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbUser" />
+        </set>
+        <set name="tbCategories" table="tb_category" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbCategory" />
+        </set>
+        <set name="tbDemandTasks" table="tb_demand_task" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbDemandTask" />
+        </set>
+        <set name="tbSourceCategories" table="tb_source_category" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbSourceCategory" />
+        </set>
+        <set name="tbRoles" table="tb_role" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbRole" />
+        </set>
+        <set name="tbSourceCategoryTrees" table="tb_source_category_tree" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbSourceCategoryTree" />
+        </set>
+        <set name="tbTemplates" table="tb_template" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbTemplate" />
+        </set>
+        <set name="tbTerminalTodos" table="tb_terminal_todo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbTerminalTodo" />
+        </set>
+        <set name="tbPluginTasks" table="tb_plugin_task" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbPluginTask" />
+        </set>
+        <set name="tbConfigs" table="tb_config" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbConfig" />
+        </set>
+    </class>
+</hibernate-mapping>

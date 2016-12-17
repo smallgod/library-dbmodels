@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbCity" table="tb_city" catalog="gnamp_v4" optimistic-lock="version">
+        <id name="cityId" type="int">
+            <column name="CITY_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#229;&#159;&#142;&#229;&#184;&#130;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="province" type="string">
+            <column name="PROVINCE" length="64" not-null="true">
+                <comment>&#230;&#137;&#128;&#229;&#156;&#168;&#231;&#156;&#129;</comment>
+            </column>
+        </property>
+        <set name="tbWeathers" table="tb_weather" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CITY_ID" not-null="true">
+                    <comment>&#229;&#159;&#142;&#229;&#184;&#130;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbWeather" />
+        </set>
+        <set name="tbTerminals" table="tb_terminal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CITY_ID">
+                    <comment>&#229;&#159;&#142;&#229;&#184;&#130;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbTerminal" />
+        </set>
+    </class>
+</hibernate-mapping>

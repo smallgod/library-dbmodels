@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbTerminalTodo" table="tb_terminal_todo" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbTerminalTodoId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="devId" type="long">
+                <column name="DEV_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbCustomer" class="TbCustomer" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#231;&#187;&#136;&#231;&#171;&#175;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

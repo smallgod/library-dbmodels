@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="VwTerminalDetail" table="vw_terminal_detail" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="VwTerminalDetailId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="devId" type="long">
+                <column name="DEV_ID" />
+            </key-property>
+            <key-property name="name" type="string">
+                <column name="NAME" length="64" />
+            </key-property>
+            <key-property name="descp" type="string">
+                <column name="DESCP" length="256" />
+            </key-property>
+            <key-property name="groupId" type="java.lang.Integer">
+                <column name="GROUP_ID" />
+            </key-property>
+            <key-property name="groupName" type="string">
+                <column name="GROUP_NAME" length="64" />
+            </key-property>
+            <key-property name="cityId" type="java.lang.Integer">
+                <column name="CITY_ID" />
+            </key-property>
+            <key-property name="cityName" type="string">
+                <column name="CITY_NAME" length="64" />
+            </key-property>
+            <key-property name="createTime" type="timestamp">
+                <column name="CREATE_TIME" length="19" />
+            </key-property>
+            <key-property name="createUser" type="string">
+                <column name="CREATE_USER" length="64" />
+            </key-property>
+            <key-property name="assignKernel" type="string">
+                <column name="ASSIGN_KERNEL" length="64" />
+            </key-property>
+            <key-property name="assignApp" type="string">
+                <column name="ASSIGN_APP" length="64" />
+            </key-property>
+            <key-property name="curKernel" type="string">
+                <column name="CUR_KERNEL" length="64" />
+            </key-property>
+            <key-property name="curApp" type="string">
+                <column name="CUR_APP" length="64" />
+            </key-property>
+            <key-property name="kernelUpdated" type="int">
+                <column name="KERNEL_UPDATED" />
+            </key-property>
+            <key-property name="appUpdated" type="int">
+                <column name="APP_UPDATED" />
+            </key-property>
+            <key-property name="assignConfigId" type="java.lang.Integer">
+                <column name="ASSIGN_CONFIG_ID" />
+            </key-property>
+            <key-property name="assignConfigName" type="string">
+                <column name="ASSIGN_CONFIG_NAME" length="64" />
+            </key-property>
+            <key-property name="assignConfigVersion" type="timestamp">
+                <column name="ASSIGN_CONFIG_VERSION" length="19" />
+            </key-property>
+            <key-property name="curConfigId" type="java.lang.Integer">
+                <column name="CUR_CONFIG_ID" />
+            </key-property>
+            <key-property name="curConfigName" type="string">
+                <column name="CUR_CONFIG_NAME" length="64" />
+            </key-property>
+            <key-property name="curConfigVersion" type="timestamp">
+                <column name="CUR_CONFIG_VERSION" length="19" />
+            </key-property>
+            <key-property name="configUpdated" type="int">
+                <column name="CONFIG_UPDATED" />
+            </key-property>
+            <key-property name="assignLooptaskId" type="java.lang.Integer">
+                <column name="ASSIGN_LOOPTASK_ID" />
+            </key-property>
+            <key-property name="assignLooptaskName" type="string">
+                <column name="ASSIGN_LOOPTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="assignLooptaskVersion" type="timestamp">
+                <column name="ASSIGN_LOOPTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignLoopfileVersion" type="timestamp">
+                <column name="ASSIGN_LOOPFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignLoopplayVersion" type="timestamp">
+                <column name="ASSIGN_LOOPPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignLoopstrategyVersion" type="timestamp">
+                <column name="ASSIGN_LOOPSTRATEGY_VERSION" length="19" />
+            </key-property>
+            <key-property name="curLooptaskId" type="java.lang.Integer">
+                <column name="CUR_LOOPTASK_ID" />
+            </key-property>
+            <key-property name="curLooptaskName" type="string">
+                <column name="CUR_LOOPTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="curLooptaskVersion" type="timestamp">
+                <column name="CUR_LOOPTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="curLoopfileVersion" type="timestamp">
+                <column name="CUR_LOOPFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="curLoopplayVersion" type="timestamp">
+                <column name="CUR_LOOPPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="curLoopstrategyVersion" type="timestamp">
+                <column name="CUR_LOOPSTRATEGY_VERSION" length="19" />
+            </key-property>
+            <key-property name="looptaskUpdated" type="int">
+                <column name="LOOPTASK_UPDATED" />
+            </key-property>
+            <key-property name="assignDemandtaskId" type="java.lang.Integer">
+                <column name="ASSIGN_DEMANDTASK_ID" />
+            </key-property>
+            <key-property name="assignDemandtaskName" type="string">
+                <column name="ASSIGN_DEMANDTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="assignDemandtaskVersion" type="timestamp">
+                <column name="ASSIGN_DEMANDTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignDemandfileVersion" type="timestamp">
+                <column name="ASSIGN_DEMANDFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignDemandplayVersion" type="timestamp">
+                <column name="ASSIGN_DEMANDPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="curDemandtaskId" type="java.lang.Integer">
+                <column name="CUR_DEMANDTASK_ID" />
+            </key-property>
+            <key-property name="curDemandtaskName" type="string">
+                <column name="CUR_DEMANDTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="curDemandtaskVersion" type="timestamp">
+                <column name="CUR_DEMANDTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="curDemandfileVersion" type="timestamp">
+                <column name="CUR_DEMANDFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="curDemandplayVersion" type="timestamp">
+                <column name="CUR_DEMANDPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="demandtaskUpdated" type="int">
+                <column name="DEMANDTASK_UPDATED" />
+            </key-property>
+            <key-property name="assignPlugintaskId" type="java.lang.Integer">
+                <column name="ASSIGN_PLUGINTASK_ID" />
+            </key-property>
+            <key-property name="assignPlugintaskName" type="string">
+                <column name="ASSIGN_PLUGINTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="assignPlugintaskVersion" type="timestamp">
+                <column name="ASSIGN_PLUGINTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignPluginfileVersion" type="timestamp">
+                <column name="ASSIGN_PLUGINFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="assignPluginplayVersion" type="timestamp">
+                <column name="ASSIGN_PLUGINPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="curPlugintaskId" type="java.lang.Integer">
+                <column name="CUR_PLUGINTASK_ID" />
+            </key-property>
+            <key-property name="curPlugintaskName" type="string">
+                <column name="CUR_PLUGINTASK_NAME" length="64" />
+            </key-property>
+            <key-property name="curPlugintaskVersion" type="timestamp">
+                <column name="CUR_PLUGINTASK_VERSION" length="19" />
+            </key-property>
+            <key-property name="curPluginfileVersion" type="timestamp">
+                <column name="CUR_PLUGINFILE_VERSION" length="19" />
+            </key-property>
+            <key-property name="curPluginplayVersion" type="timestamp">
+                <column name="CUR_PLUGINPLAY_VERSION" length="19" />
+            </key-property>
+            <key-property name="plugintaskUpdated" type="int">
+                <column name="PLUGINTASK_UPDATED" />
+            </key-property>
+            <key-property name="assignSourceVersion" type="timestamp">
+                <column name="ASSIGN_SOURCE_VERSION" length="19" />
+            </key-property>
+            <key-property name="restSchedule" type="string">
+                <column name="REST_SCHEDULE" length="1024" />
+            </key-property>
+            <key-property name="standbySchedule" type="string">
+                <column name="STANDBY_SCHEDULE" length="1024" />
+            </key-property>
+            <key-property name="captureSchedule" type="string">
+                <column name="CAPTURE_SCHEDULE" length="1024" />
+            </key-property>
+            <key-property name="demandSchedule" type="string">
+                <column name="DEMAND_SCHEDULE" length="1024" />
+            </key-property>
+            <key-property name="scheduleVersion" type="timestamp">
+                <column name="SCHEDULE_VERSION" length="19" />
+            </key-property>
+            <key-property name="subtitle" type="string">
+                <column name="SUBTITLE" length="4096" />
+            </key-property>
+            <key-property name="subtitleVersion" type="timestamp">
+                <column name="SUBTITLE_VERSION" length="19" />
+            </key-property>
+            <key-property name="curSubtitleVersion" type="timestamp">
+                <column name="CUR_SUBTITLE_VERSION" length="19" />
+            </key-property>
+            <key-property name="subtitleUpdated" type="int">
+                <column name="SUBTITLE_UPDATED" />
+            </key-property>
+            <key-property name="onlineState" type="int">
+                <column name="ONLINE_STATE" />
+            </key-property>
+            <key-property name="logonTime" type="timestamp">
+                <column name="LOGON_TIME" length="19" />
+            </key-property>
+            <key-property name="logoffTime" type="timestamp">
+                <column name="LOGOFF_TIME" length="19" />
+            </key-property>
+            <key-property name="downloadTotal" type="long">
+                <column name="DOWNLOAD_TOTAL" />
+            </key-property>
+            <key-property name="downloadFinished" type="long">
+                <column name="DOWNLOAD_FINISHED" />
+            </key-property>
+            <key-property name="downloadType" type="int">
+                <column name="DOWNLOAD_TYPE" />
+            </key-property>
+            <key-property name="poweron" type="int">
+                <column name="POWERON" />
+            </key-property>
+            <key-property name="poweroff" type="int">
+                <column name="POWEROFF" />
+            </key-property>
+            <key-property name="aliveInterval" type="int">
+                <column name="ALIVE_INTERVAL" />
+            </key-property>
+            <key-property name="lastAlive" type="timestamp">
+                <column name="LAST_ALIVE" length="19" />
+            </key-property>
+            <key-property name="lastPatrol" type="timestamp">
+                <column name="LAST_PATROL" length="19" />
+            </key-property>
+            <key-property name="lastDownload" type="timestamp">
+                <column name="LAST_DOWNLOAD" length="19" />
+            </key-property>
+            <key-property name="flowLimit" type="long">
+                <column name="FLOW_LIMIT" />
+            </key-property>
+            <key-property name="netFlow" type="long">
+                <column name="NET_FLOW" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

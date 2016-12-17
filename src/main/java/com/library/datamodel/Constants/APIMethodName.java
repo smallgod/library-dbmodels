@@ -2,9 +2,7 @@ package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.library.utilities.LoggerUtil;
 /**
  * 
  * @author smallgod
@@ -17,7 +15,7 @@ public enum APIMethodName implements Constants {
     
     private final String methodNameString;
 
-    private static final Logger logger = LoggerFactory.getLogger(APIMethodName.class);
+    private static final LoggerUtil logger = new LoggerUtil(APIMethodName.class);
 
     APIMethodName(String wrapperNodeStr) {
         this.methodNameString = wrapperNodeStr;

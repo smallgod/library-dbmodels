@@ -2,8 +2,7 @@ package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.library.utilities.LoggerUtil;
 
 /**
  * 
@@ -11,18 +10,19 @@ import org.slf4j.LoggerFactory;
  */
 public enum DbOperation implements Constants {
 
-    SAVE("SAVE_SINGLE", Boolean.FALSE),
-    SAVE("SAVE_MULTIPE", Boolean.TRUE),
-    READ_SINGLE("READ_SINGLE"),
-    READ_MULTIPE("READ_MULTIPE"),
-    DELETE_SINGLE("DELETE_SINGLE"),
-    DELETE_MULTIPLE("DELETE_MULTIPLE");
+    SAVE_SINGLE("save"),
+    SAVE_BULK("savebulk"),
+    READ_SINGLE("read"),
+    READ_BULK("readbulk"),
+    DELETE_SINGLE("delete"),
+    DELETE_BULK("deletebulk"),
+    PROCESS_AND_SAVE("processandsave");
     
     private final String entityNameStr;
 
-    private static final Logger logger = LoggerFactory.getLogger(DbOperation.class);
+    private static final LoggerUtil logger = new LoggerUtil(DbOperation.class);
 
-    DbOperation(String entityNameStr, boolean multiple) {
+    DbOperation(String entityNameStr) {
         this.entityNameStr = entityNameStr;
     }
 

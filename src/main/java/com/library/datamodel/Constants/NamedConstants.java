@@ -10,6 +10,33 @@ package com.library.datamodel.Constants;
  * @author smallgod
  */
 public interface NamedConstants {
+    
+    public static final int DEFAULT_DSM8_CUSTOMER_ID = 1;
+    
+    /**
+     * Date time string formats
+     *
+     * public static final String timeMinAndSecFormat = "HH:mm:ss"; public
+     * static final String timeAndMinutesFormat = "HH:mm"; public static final
+     * String dateOnlyFormat = "dd/MM/yyyy"; public static final String
+     * dateOnlyDashFormat = "dd-MM-yyyy"; public static final String
+     * dateTimeFormat = "dd/MM/yyyy HH:mm"; public static final String
+     * dateOnlyDashYearFirstFormat = "yyyy-MM-dd";
+     *
+     */
+    public static final String KAMPALA_TIME_ZONE = "Africa/Kampala";
+
+    /**
+     * The DateTime format we are using in this application is in the format
+     * "2016-07-25 08:55:09"
+     */
+    public static final String DATE_TIME_DASH_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * The Date only format we are using in this application is in the format
+     * "2016-07-25"
+     */
+    public static final String DATE_DASH_FORMAT = "yyyy-MM-dd";
 
     /**
      * All JSON request strings must have a root node named 'method' which
@@ -33,13 +60,21 @@ public interface NamedConstants {
      * When storing the database reference in the servlet context, we will use
      * this as the attribute name
      */
-    public static String DATABASE_ATTR_NAME = "dbreference";
+    public static final String DATABASE_ATTR_NAME = "dbreference";
 
     /**
      * When storing the http pool reference in the servlet context, we will use
      * this as the attribute name
      */
-    public static String HTTP_POOL_ATTR_NAME = "httppool";
+    public static final String HTTP_POOL_ATTR_NAME = "httppool";
+    
+    public static final String ADCENTRAL_JSON_HANDLER = "adcentraljsonhandler";
+    
+    public static final String ADDISPLAY_JSON_HANDLER = "addisplayjsonhandler";
+    
+    public static final String AD_DBMANAGER_JSON_HANDLER = "addbmanagerjsonhandler";
+    
+    public static final String DSM_ADXPO_BRIDGE_REQUEST_HANDLER = "dsmAdXpoBridgeProcessor";
 
     /**
      * A username that last modified a given auditable database entity
@@ -132,5 +167,10 @@ public interface NamedConstants {
      * can be idenitified
      */
     public static final String HTTP_PARAM_ENTITYNAME = "entityname";
+    
+    /**
+     * HTTP parameter name with value to identify which DB operation is being executed
+     */
+    public static final String HTTP_PARAM_DB_OPERATION = "dboperation";
 
 }

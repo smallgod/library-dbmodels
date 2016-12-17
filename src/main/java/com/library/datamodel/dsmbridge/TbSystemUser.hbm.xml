@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbSystemUser" table="tb_system_user" catalog="gnamp_v4" optimistic-lock="version">
+        <id name="userId" type="int">
+            <column name="USER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#231;&#148;&#168;&#230;&#136;&#183;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="256" not-null="true">
+                <comment>&#229;&#175;&#134;&#231;&#160;&#129;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" not-null="true">
+                <comment>&#231;&#138;&#182;&#230;&#128;&#129;</comment>
+            </column>
+        </property>
+        <property name="level" type="int">
+            <column name="LEVEL" not-null="true">
+                <comment>&#231;&#173;&#137;&#231;&#186;&#167;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

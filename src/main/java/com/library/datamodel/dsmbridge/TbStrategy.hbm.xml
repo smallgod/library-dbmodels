@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbStrategy" table="tb_strategy" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbStrategyId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="taskId" type="int">
+                <column name="TASK_ID" />
+            </key-property>
+            <key-property name="strategyId" type="int">
+                <column name="STRATEGY_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbLoopTask" class="TbLoopTask" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true" />
+            <column name="TASK_ID" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true" />
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true" />
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="START_DATE" length="19" not-null="true" />
+        </property>
+        <property name="stopDate" type="timestamp">
+            <column name="STOP_DATE" length="19" not-null="true" />
+        </property>
+        <property name="weekDays" type="int">
+            <column name="WEEK_DAYS" not-null="true" />
+        </property>
+        <property name="startTime" type="int">
+            <column name="START_TIME" not-null="true" />
+        </property>
+        <property name="stopTime" type="int">
+            <column name="STOP_TIME" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true" />
+        </property>
+        <set name="tbStrategyPrograms" table="tb_strategy_program" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+                <column name="TASK_ID" not-null="true" />
+                <column name="STRATEGY_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbStrategyProgram" />
+        </set>
+    </class>
+</hibernate-mapping>

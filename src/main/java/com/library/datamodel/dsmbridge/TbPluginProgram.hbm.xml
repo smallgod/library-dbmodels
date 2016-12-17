@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbPluginProgram" table="tb_plugin_program" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbPluginProgramId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="taskId" type="int">
+                <column name="TASK_ID" />
+            </key-property>
+            <key-property name="prgmId" type="int">
+                <column name="PRGM_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbPluginRect" class="TbPluginRect" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="TASK_ID" not-null="true">
+                <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+            <column name="PRGM_ID" not-null="true">
+                <comment>&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+            </column>
+            <column name="MAIN_RECT">
+                <comment>&#228;&#184;&#187;&#229;&#140;&#186;&#229;&#159;&#159;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbPluginTask" class="TbPluginTask" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+            <column name="TASK_ID" not-null="true">
+                <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+            </column>
+        </many-to-one>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#232;&#138;&#130;&#231;&#155;&#174;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="seq" type="int">
+            <column name="SEQ" not-null="true">
+                <comment>&#229;&#186;&#143;&#229;&#143;&#183;</comment>
+            </column>
+        </property>
+        <property name="width" type="int">
+            <column name="WIDTH" not-null="true">
+                <comment>&#229;&#174;&#189;</comment>
+            </column>
+        </property>
+        <property name="height" type="int">
+            <column name="HEIGHT" not-null="true">
+                <comment>&#233;&#171;&#152;</comment>
+            </column>
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" not-null="true">
+                <comment>
+                &#231;&#138;&#182;&#230;&#128;&#129;&#239;&#188;&#136;&#230;&#146;&#173;&#230;&#148;&#190;&#227;&#128;&#129;&#230;&#154;&#130;&#229;&#129;&#156;&#239;&#188;&#137;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#232;&#128;&#133;</comment>
+            </column>
+        </property>
+        <set name="tbPluginRects" table="tb_plugin_rect" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="TASK_ID" not-null="true">
+                    <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+                </column>
+                <column name="PRGM_ID" not-null="true">
+                    <comment>&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbPluginRect" />
+        </set>
+        <set name="tbPluginProgramMusics" table="tb_plugin_program_music" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="TASK_ID" not-null="true">
+                    <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+                </column>
+                <column name="PRGM_ID" not-null="true">
+                    <comment>&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbPluginProgramMusic" />
+        </set>
+    </class>
+</hibernate-mapping>

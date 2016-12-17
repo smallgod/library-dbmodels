@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 7, 2016 4:56:51 PM by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="TbLoopTask" table="tb_loop_task" catalog="gnamp_v4" optimistic-lock="version">
+        <composite-id name="id" class="TbLoopTaskId">
+            <key-property name="cstmId" type="int">
+                <column name="CSTM_ID" />
+            </key-property>
+            <key-property name="taskId" type="int">
+                <column name="TASK_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbCustomer" class="TbCustomer" update="false" insert="false" fetch="select">
+            <column name="CSTM_ID" not-null="true">
+                <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="64" not-null="true">
+                <comment>&#228;&#187;&#187;&#229;&#138;&#161;&#229;&#144;&#141;&#231;&#167;&#176;</comment>
+            </column>
+        </property>
+        <property name="descp" type="string">
+            <column name="DESCP" length="256" not-null="true">
+                <comment>&#230;&#143;&#143;&#232;&#191;&#176;</comment>
+            </column>
+        </property>
+        <property name="taskVersion" type="timestamp">
+            <column name="TASK_VERSION" length="19" not-null="true">
+                <comment>&#228;&#187;&#187;&#229;&#138;&#161;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="fileVersion" type="timestamp">
+            <column name="FILE_VERSION" length="19" not-null="true">
+                <comment>&#230;&#150;&#135;&#228;&#187;&#182;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="playVersion" type="timestamp">
+            <column name="PLAY_VERSION" length="19" not-null="true">
+                <comment>&#230;&#146;&#173;&#230;&#148;&#190;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="strategyVersion" type="timestamp">
+            <column name="STRATEGY_VERSION" length="19" not-null="true">
+                <comment>&#231;&#173;&#150;&#231;&#149;&#165;&#231;&#137;&#136;&#230;&#156;&#172;</comment>
+            </column>
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" not-null="true">
+                <comment>&#231;&#138;&#182;&#230;&#128;&#129;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
+            </column>
+        </property>
+        <property name="createUser" type="string">
+            <column name="CREATE_USER" length="64" not-null="true">
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#232;&#128;&#133;</comment>
+            </column>
+        </property>
+        <set name="tbLoopPrograms" table="tb_loop_program" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="TASK_ID" not-null="true">
+                    <comment>&#228;&#187;&#187;&#229;&#138;&#161;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbLoopProgram" />
+        </set>
+        <set name="tbLoopSources" table="tb_loop_source" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+                <column name="TASK_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbLoopSource" />
+        </set>
+        <set name="tbStrategies" table="tb_strategy" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true" />
+                <column name="TASK_ID" not-null="true" />
+            </key>
+            <one-to-many class="TbStrategy" />
+        </set>
+        <set name="tbTerminals" table="tb_terminal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CSTM_ID" not-null="true">
+                    <comment>&#229;&#174;&#162;&#230;&#136;&#183;ID</comment>
+                </column>
+                <column name="ASSIGN_LOOPTASK_ID">
+                    <comment>&#230;&#140;&#135;&#229;&#174;&#154;&#232;&#189;&#174;&#230;&#146;&#173;&#232;&#138;&#130;&#231;&#155;&#174;ID</comment>
+                </column>
+            </key>
+            <one-to-many class="TbTerminal" />
+        </set>
+    </class>
+</hibernate-mapping>

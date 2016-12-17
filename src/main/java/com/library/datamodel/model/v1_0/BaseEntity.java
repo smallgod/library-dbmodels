@@ -5,6 +5,7 @@
  */
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -38,11 +39,13 @@ public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
     private long id;
 
 //    @XmlAttribute(name = "version", required = true)
 //    protected String version;
     @Column(name = "created_by")
+    @SerializedName(value = "createdBy")
     private String createdBy;
 
     @Type(type = "jodalocaldatetime")
