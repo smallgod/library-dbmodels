@@ -6,6 +6,7 @@
 package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.SerializedName;
+import com.library.sgsharedinterface.DBInterface;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ import org.joda.time.LocalDateTime;
     )
 })
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable, DBInterface {
     
     private static final long serialVersionUID = -8171202186820119866L;
 

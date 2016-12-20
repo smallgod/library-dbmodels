@@ -23,6 +23,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     private final String logsDir;
     private final String projectDir;
     private final String dsmWebAppDir;
+    private final String tempUploadDir;
     private final String daemonProfile;
 
     /**
@@ -32,15 +33,17 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
      * @param logsDir
      * @param projectDir
      * @param dsmWebAppDir
+     * @param tempUploadDir
      * @param daemonProfile
      */
-    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String daemonProfile) {
+    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String tempUploadDir, String daemonProfile) {
 
         this.appConfig = appConfig;
         this.configsDir = configsDir;
         this.logsDir = logsDir;
         this.projectDir = projectDir;
         this.dsmWebAppDir = dsmWebAppDir;
+        this.tempUploadDir = tempUploadDir;
         this.daemonProfile = daemonProfile;
     }
 
@@ -166,7 +169,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     public String getProjectDir() {
         return projectDir;
     }
-    
+
     @Override
     public String getDsmWebAppDir() {
         return dsmWebAppDir;
@@ -215,6 +218,11 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     @Override
     public RemoteRequest getAdDbManagerUnit() {
         return new RemoteUnitWrapper(appConfig.getRemoteunits().getAddbmanager());
+    }
+
+    @Override
+    public String getTempUploadDir() {
+        return tempUploadDir;
     }
 
 }
