@@ -65,18 +65,57 @@
                         </goals>
                         <configuration>
                             <schemaIncludes>
-                                <include>jaxb/appConfigsBinding/*.xsd</include>
+                                <include>jaxb/program_bind/*.xsd</include>
                             </schemaIncludes>
-                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-appconfigbinding.episode</episodeFile>
-                            <generatePackage>jaxb.com.datamodel.config.v1_0</generatePackage>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-program_bind.episode</episodeFile>
+                            <generatePackage>jaxb.com.library.datamodel.dsm_bridge.xmlpojos.program</generatePackage>
                         </configuration>
-                        <id>jaxb-generate-appconfigbinding</id>
+                        <id>jaxb-generate-program_bind</id>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/file_bind/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-file_bind.episode</episodeFile>
+                            <generatePackage>jaxb.com.library.datamodel.dsm_bridge.xmlpojos.file</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-file_bind</id>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/strategy_bind/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-strategy_bind.episode</episodeFile>
+                            <generatePackage>jaxb.com.library.datamodel.dsm_bridge.xmlpojos.strategy</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-strategy_bind</id>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/task_bind/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-task_bind.episode</episodeFile>
+                            <generatePackage>jaxb.com.library.datamodel.dsm_bridge.xmlpojos.task</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-task_bind</id>
                     </execution>
                 </executions>
                 <configuration>
-                    <!--<catalog>src/main/resources/jaxb/catalog.xml</catalog>-->
+                    <catalog>src/main/resources/jaxb/catalog.xml</catalog>
                     <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
-                    <forceRegenerate>false</forceRegenerate>
+                    <forceRegenerate>true</forceRegenerate>
                     <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
                     <verbose>true</verbose>
                 </configuration>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/srv/applications/Libraries/SGDataModels/../../advertexpo/dsmBridgeService/dsmXsdFiles/file.xsd" uri="src/main/resources/jaxb/file_bind/file.xsd"/>
+    <system systemId="file:/srv/applications/Libraries/SGDataModels/dsmXsdFiles/program.xsd" uri="src/main/resources/jaxb/program_bind/program.xsd"/>
+    <system systemId="file:/srv/applications/Libraries/SGDataModels/dsmXsdFiles/file.xsd" uri="src/main/resources/jaxb/file_bind/file.xsd"/>
+    <system systemId="file:/srv/applications/Libraries/SGDataModels/dsmXsdFiles/strategy.xsd" uri="src/main/resources/jaxb/strategy_bind/strategy.xsd"/>
+    <system systemId="file:/srv/applications/Libraries/SGDataModels/dsmXsdFiles/task.xsd" uri="src/main/resources/jaxb/task_bind/task.xsd"/>
+</catalog>

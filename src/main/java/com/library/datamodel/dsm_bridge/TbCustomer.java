@@ -25,6 +25,8 @@ import javax.persistence.UniqueConstraint;
 		@UniqueConstraint(columnNames = "SHORT_NAME") })
 public class TbCustomer implements Serializable, DBInterface {
 
+    private static final long serialVersionUID = -1980513392981053226L;
+
 	private int cstmId;
 	private String shortName;
 	private String name;
@@ -85,7 +87,6 @@ public class TbCustomer implements Serializable, DBInterface {
 	}
 
 	@Id
-
 	@Column(name = "CSTM_ID", unique = true, nullable = false)
 	public int getCstmId() {
 		return this.cstmId;

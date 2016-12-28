@@ -2,6 +2,8 @@ package com.library.datamodel.dsm_bridge;
 // default package
 // Generated Dec 17, 2016 3:56:53 PM by Hibernate Tools 4.3.5.Final
 
+import com.library.sgsharedinterface.TaskDBInterface;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +25,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_loop_task")
-public class TbLoopTask implements java.io.Serializable {
+public class TbLoopTask implements  Serializable, TaskDBInterface {
+
+    @Override
+    public String toString() {
+        return "TbLoopTask{" + "id=" + id + ", tbCustomer=" + tbCustomer + ", name=" + name + ", descp=" + descp + ", taskVersion=" + taskVersion + ", fileVersion=" + fileVersion + ", playVersion=" + playVersion + ", strategyVersion=" + strategyVersion + ", state=" + state + ", createTime=" + createTime + ", createUser=" + createUser + '}';
+    }
+
+    private static final long serialVersionUID = -5068398776832701893L;
 
 	private TbLoopTaskId id;
 	private TbCustomer tbCustomer;

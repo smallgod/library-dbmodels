@@ -2,6 +2,8 @@ package com.library.datamodel.dsm_bridge;
 // default package
 // Generated Dec 17, 2016 3:56:53 PM by Hibernate Tools 4.3.5.Final
 
+import com.library.sgsharedinterface.TaskDBInterface;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +25,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_demand_task")
-public class TbDemandTask implements java.io.Serializable {
+public class TbDemandTask implements  Serializable, TaskDBInterface {
+
+    private static final long serialVersionUID = 9030468618303524507L;
 
 	private TbDemandTaskId id;
 	private TbCustomer tbCustomer;

@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="config" type="configType"/>
+  <xs:complexType name="programlistType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:int" name="taskid"/>
+        <xs:attribute type="xs:string" name="taskname"/>
+        <xs:attribute type="xs:string" name="ver"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="videoType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:long" name="path" use="optional"/>
+        <xs:attribute type="xs:string" name="position" use="optional"/>
+        <xs:attribute type="xs:byte" name="seq" use="optional"/>
+        <xs:attribute type="xs:byte" name="showtime" use="optional"/>
+        <xs:attribute type="xs:string" name="unrotate" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="videorectType">
+    <xs:sequence>
+      <xs:element type="videoType" name="video" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="interactive"/>
+    <xs:attribute type="xs:byte" name="jump"/>
+    <xs:attribute type="xs:byte" name="layer"/>
+    <xs:attribute type="xs:short" name="nH"/>
+    <xs:attribute type="xs:short" name="nW"/>
+    <xs:attribute type="xs:byte" name="nX"/>
+    <xs:attribute type="xs:byte" name="nY"/>
+    <xs:attribute type="xs:int" name="rectid"/>
+    <xs:attribute type="xs:string" name="rectname"/>
+  </xs:complexType>
+  <xs:complexType name="imgType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="cutin" use="optional"/>
+        <xs:attribute type="xs:byte" name="effecttime" use="optional"/>
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:long" name="path" use="optional"/>
+        <xs:attribute type="xs:string" name="position" use="optional"/>
+        <xs:attribute type="xs:string" name="scroll" use="optional"/>
+        <xs:attribute type="xs:byte" name="seq" use="optional"/>
+        <xs:attribute type="xs:byte" name="showtime" use="optional"/>
+        <xs:attribute type="xs:string" name="swap" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="imagerectType">
+    <xs:sequence>
+      <xs:element type="imgType" name="img" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="interactive"/>
+    <xs:attribute type="xs:byte" name="jump"/>
+    <xs:attribute type="xs:byte" name="layer"/>
+    <xs:attribute type="xs:short" name="nH"/>
+    <xs:attribute type="xs:short" name="nW"/>
+    <xs:attribute type="xs:short" name="nX"/>
+    <xs:attribute type="xs:byte" name="nY"/>
+    <xs:attribute type="xs:int" name="rectid"/>
+    <xs:attribute type="xs:string" name="rectname"/>
+  </xs:complexType>
+  <xs:complexType name="imageType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:byte" name="file" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="marqueeType">
+    <xs:sequence>
+      <xs:element type="imageType" name="image" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:int" name="id"/>
+    <xs:attribute type="xs:byte" name="seq"/>
+  </xs:complexType>
+  <xs:complexType name="extenttextrectType">
+    <xs:sequence>
+      <xs:element type="marqueeType" name="marquee"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="align_h"/>
+    <xs:attribute type="xs:string" name="align_v"/>
+    <xs:attribute type="xs:string" name="backcolor"/>
+    <xs:attribute type="xs:string" name="fontcolor"/>
+    <xs:attribute type="xs:string" name="fontname"/>
+    <xs:attribute type="xs:byte" name="fontsize"/>
+    <xs:attribute type="xs:string" name="interactive"/>
+    <xs:attribute type="xs:byte" name="jump"/>
+    <xs:attribute type="xs:byte" name="layer"/>
+    <xs:attribute type="xs:byte" name="marqueetype"/>
+    <xs:attribute type="xs:short" name="nH"/>
+    <xs:attribute type="xs:short" name="nW"/>
+    <xs:attribute type="xs:byte" name="nX"/>
+    <xs:attribute type="xs:short" name="nY"/>
+    <xs:attribute type="xs:int" name="rectid"/>
+    <xs:attribute type="xs:string" name="rectname"/>
+    <xs:attribute type="xs:byte" name="speed"/>
+    <xs:attribute type="xs:string" name="transparent"/>
+  </xs:complexType>
+  <xs:complexType name="programType">
+    <xs:sequence>
+      <xs:element type="videorectType" name="videorect"/>
+      <xs:element type="imagerectType" name="imagerect"/>
+      <xs:element type="extenttextrectType" name="extenttextrect"/>
+    </xs:sequence>
+    <xs:attribute type="xs:short" name="height"/>
+    <xs:attribute type="xs:int" name="id"/>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="state"/>
+    <xs:attribute type="xs:short" name="width"/>
+  </xs:complexType>
+  <xs:complexType name="fileType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:long" name="crc" use="optional"/>
+        <xs:attribute type="xs:byte" name="name" use="optional"/>
+        <xs:attribute type="xs:short" name="size" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="filesType">
+    <xs:sequence>
+      <xs:element type="fileType" name="file" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="metaType">
+    <xs:sequence>
+      <xs:element type="filesType" name="files"/>
+      <xs:element type="xs:string" name="fonts"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configType">
+    <xs:sequence>
+      <xs:element type="programlistType" name="programlist"/>
+      <xs:element type="programType" name="program"/>
+      <xs:element type="metaType" name="meta"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

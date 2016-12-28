@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <programlist taskid="1482237516" taskname="LOOP campaign 1" ver="20161220 172531" />
+   <program height="1080" id="1482241681" name="LOOP program 1" state="play" width="1920">
+      <videorect interactive="off" jump="0" layer="1" nH="930" nW="1255" nX="0" nY="0" rectid="1482242432" rectname="loop_prog1_video">
+         <video name="UsainBolt.mp4" path="97138406719744" position="full" seq="0" showtime="0" unrotate="FALSE" />
+         <video name="wireless mount.mp4" path="97140223619200" position="full" seq="1" showtime="0" unrotate="FALSE" />
+      </videorect>
+      <imagerect interactive="off" jump="0" layer="2" nH="930" nW="665" nX="1255" nY="0" rectid="1482242433" rectname="loop_prog1_image">
+         <img cutin="normal" effecttime="2" name="2differentworlds.jpeg" path="97140223614784" position="full" scroll="normal" seq="0" showtime="5" swap="normal" />
+         <img cutin="normal" effecttime="2" name="prof.png" path="97140223618112" position="full" scroll="normal" seq="1" showtime="5" swap="normal" />
+         <img cutin="normal" effecttime="2" name="IMG_20161205_135544.jpg" path="97111623484416" position="full" scroll="normal" seq="2" showtime="5" swap="normal" />
+         <img cutin="normal" effecttime="2" name="2differentworlds.jpeg" path="97138310705664" position="full" scroll="normal" seq="3" showtime="5" swap="normal" />
+      </imagerect>
+      <extenttextrect align_h="center" align_v="center" backcolor="#000000" fontcolor="#FFFFFF" fontname="Arial" fontsize="20" interactive="off" jump="0" layer="3" marqueetype="2" nH="150" nW="1920" nX="0" nY="930" rectid="1482242434" rectname="loop_prog1_text" speed="3" transparent="true">
+         <marquee id="1482242740" seq="0">
+            <image file="100" />
+            <image file="101" />
+            <image file="102" />
+         </marquee>
+      </extenttextrect>
+   </program>
+   <meta>
+      <files>
+         <file crc="3067770772" name="100" size="6252" />
+         <file crc="2536186128" name="101" size="6192" />
+         <file crc="3152542349" name="102" size="3659" />
+      </files>
+      <fonts />
+   </meta>
+</config>
+
