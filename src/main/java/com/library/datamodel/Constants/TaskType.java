@@ -9,9 +9,9 @@ import com.library.utilities.LoggerUtil;
  */
 public enum TaskType implements Constants {
 
-    LOOP("LOOP"),
-    DEMAND("DEMAND"),
-    PLUGIN("PLUGIN");
+    LOOP("loop"),
+    DEMAND("demand"),
+    PLUGIN("plugin");
 
     private final String enumValue;
 

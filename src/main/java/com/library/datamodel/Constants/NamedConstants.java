@@ -192,10 +192,20 @@ public interface NamedConstants {
     public static final String TASK_NAME = "TASK_NAME";
 
     public static final String TASK_DESC = "TASK_DESC";
-    
+
     /**
      * Thread shutdown delay if busy, in Minutes
      */
     public static long SHUTDOWN_DELAY = 5;  //5 minutes
+
+    /**
+     * Ad TEXT that will scroll
+     */
+    public static String SCROLL_TEXT_CONTENT = "SCROLL_TEXT";
+
+    /**
+     * Header TEXT to the scroll text ad (static)
+     */
+    public static String SCROLL_TEXT_HEADER = "SCROLL_HEADER";
 
 }
