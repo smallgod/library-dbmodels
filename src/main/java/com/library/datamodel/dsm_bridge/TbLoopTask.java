@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_loop_task")
-public class TbLoopTask implements  Serializable, TaskDBInterface {
+public class TbLoopTask implements Serializable, TaskDBInterface {
 
     @Override
     public String toString() {
@@ -34,203 +34,204 @@ public class TbLoopTask implements  Serializable, TaskDBInterface {
 
     private static final long serialVersionUID = -5068398776832701893L;
 
-	private TbLoopTaskId id;
-	private TbCustomer tbCustomer;
-	private String name;
-	private String descp;
-	private Date taskVersion;
-	private Date fileVersion;
-	private Date playVersion;
-	private Date strategyVersion;
-	private int state;
-	private Date createTime;
-	private String createUser;
-	private Set<TbLoopProgram> tbLoopPrograms = new HashSet<TbLoopProgram>(0);
-	private Set<TbLoopSource> tbLoopSources = new HashSet<TbLoopSource>(0);
-	private Set<TbStrategy> tbStrategies = new HashSet<TbStrategy>(0);
-	private Set<TbTerminal> tbTerminals = new HashSet<TbTerminal>(0);
+    private TbLoopTaskId id;
+    private TbCustomer tbCustomer;
+    private String name;
+    private String descp;
+    private Date taskVersion;
+    private Date fileVersion;
+    private Date playVersion;
+    private Date strategyVersion;
+    private int state;
+    private Date createTime;
+    private String createUser;
 
-	public TbLoopTask() {
-	}
+    private Set<TbLoopProgram> tbLoopPrograms = new HashSet<>(0);
+    private Set<TbLoopSource> tbLoopSources = new HashSet<>(0);
+    private Set<TbStrategy> tbStrategies = new HashSet<>(0);
+    private Set<TbTerminal> tbTerminals = new HashSet<>(0);
 
-	public TbLoopTask(TbLoopTaskId id, TbCustomer tbCustomer, String name, String descp, Date taskVersion,
-			Date fileVersion, Date playVersion, Date strategyVersion, int state, Date createTime, String createUser) {
-		this.id = id;
-		this.tbCustomer = tbCustomer;
-		this.name = name;
-		this.descp = descp;
-		this.taskVersion = taskVersion;
-		this.fileVersion = fileVersion;
-		this.playVersion = playVersion;
-		this.strategyVersion = strategyVersion;
-		this.state = state;
-		this.createTime = createTime;
-		this.createUser = createUser;
-	}
+    public TbLoopTask() {
+    }
 
-	public TbLoopTask(TbLoopTaskId id, TbCustomer tbCustomer, String name, String descp, Date taskVersion,
-			Date fileVersion, Date playVersion, Date strategyVersion, int state, Date createTime, String createUser,
-			Set<TbLoopProgram> tbLoopPrograms, Set<TbLoopSource> tbLoopSources, Set<TbStrategy> tbStrategies,
-			Set<TbTerminal> tbTerminals) {
-		this.id = id;
-		this.tbCustomer = tbCustomer;
-		this.name = name;
-		this.descp = descp;
-		this.taskVersion = taskVersion;
-		this.fileVersion = fileVersion;
-		this.playVersion = playVersion;
-		this.strategyVersion = strategyVersion;
-		this.state = state;
-		this.createTime = createTime;
-		this.createUser = createUser;
-		this.tbLoopPrograms = tbLoopPrograms;
-		this.tbLoopSources = tbLoopSources;
-		this.tbStrategies = tbStrategies;
-		this.tbTerminals = tbTerminals;
-	}
+    public TbLoopTask(TbLoopTaskId id, TbCustomer tbCustomer, String name, String descp, Date taskVersion,
+            Date fileVersion, Date playVersion, Date strategyVersion, int state, Date createTime, String createUser) {
+        this.id = id;
+        this.tbCustomer = tbCustomer;
+        this.name = name;
+        this.descp = descp;
+        this.taskVersion = taskVersion;
+        this.fileVersion = fileVersion;
+        this.playVersion = playVersion;
+        this.strategyVersion = strategyVersion;
+        this.state = state;
+        this.createTime = createTime;
+        this.createUser = createUser;
+    }
 
-	@EmbeddedId
+    public TbLoopTask(TbLoopTaskId id, TbCustomer tbCustomer, String name, String descp, Date taskVersion,
+            Date fileVersion, Date playVersion, Date strategyVersion, int state, Date createTime, String createUser,
+            Set<TbLoopProgram> tbLoopPrograms, Set<TbLoopSource> tbLoopSources, Set<TbStrategy> tbStrategies,
+            Set<TbTerminal> tbTerminals) {
+        this.id = id;
+        this.tbCustomer = tbCustomer;
+        this.name = name;
+        this.descp = descp;
+        this.taskVersion = taskVersion;
+        this.fileVersion = fileVersion;
+        this.playVersion = playVersion;
+        this.strategyVersion = strategyVersion;
+        this.state = state;
+        this.createTime = createTime;
+        this.createUser = createUser;
+        this.tbLoopPrograms = tbLoopPrograms;
+        this.tbLoopSources = tbLoopSources;
+        this.tbStrategies = tbStrategies;
+        this.tbTerminals = tbTerminals;
+    }
 
-	@AttributeOverrides({ @AttributeOverride(name = "cstmId", column = @Column(name = "CSTM_ID", nullable = false)),
-			@AttributeOverride(name = "taskId", column = @Column(name = "TASK_ID", nullable = false)) })
-	public TbLoopTaskId getId() {
-		return this.id;
-	}
+    @EmbeddedId
 
-	public void setId(TbLoopTaskId id) {
-		this.id = id;
-	}
+    @AttributeOverrides({
+        @AttributeOverride(name = "cstmId", column = @Column(name = "CSTM_ID", nullable = false)),
+        @AttributeOverride(name = "taskId", column = @Column(name = "TASK_ID", nullable = false))})
+    public TbLoopTaskId getId() {
+        return this.id;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CSTM_ID", nullable = false, insertable = false, updatable = false)
-	public TbCustomer getTbCustomer() {
-		return this.tbCustomer;
-	}
+    public void setId(TbLoopTaskId id) {
+        this.id = id;
+    }
 
-	public void setTbCustomer(TbCustomer tbCustomer) {
-		this.tbCustomer = tbCustomer;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CSTM_ID", nullable = false, insertable = false, updatable = false)
+    public TbCustomer getTbCustomer() {
+        return this.tbCustomer;
+    }
 
-	@Column(name = "NAME", nullable = false, length = 64)
-	public String getName() {
-		return this.name;
-	}
+    public void setTbCustomer(TbCustomer tbCustomer) {
+        this.tbCustomer = tbCustomer;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "NAME", nullable = false, length = 64)
+    public String getName() {
+        return this.name;
+    }
 
-	@Column(name = "DESCP", nullable = false, length = 256)
-	public String getDescp() {
-		return this.descp;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescp(String descp) {
-		this.descp = descp;
-	}
+    @Column(name = "DESCP", nullable = false, length = 256)
+    public String getDescp() {
+        return this.descp;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "TASK_VERSION", nullable = false, length = 19)
-	public Date getTaskVersion() {
-		return this.taskVersion;
-	}
+    public void setDescp(String descp) {
+        this.descp = descp;
+    }
 
-	public void setTaskVersion(Date taskVersion) {
-		this.taskVersion = taskVersion;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "TASK_VERSION", nullable = false, length = 19)
+    public Date getTaskVersion() {
+        return this.taskVersion;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FILE_VERSION", nullable = false, length = 19)
-	public Date getFileVersion() {
-		return this.fileVersion;
-	}
+    public void setTaskVersion(Date taskVersion) {
+        this.taskVersion = taskVersion;
+    }
 
-	public void setFileVersion(Date fileVersion) {
-		this.fileVersion = fileVersion;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "FILE_VERSION", nullable = false, length = 19)
+    public Date getFileVersion() {
+        return this.fileVersion;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "PLAY_VERSION", nullable = false, length = 19)
-	public Date getPlayVersion() {
-		return this.playVersion;
-	}
+    public void setFileVersion(Date fileVersion) {
+        this.fileVersion = fileVersion;
+    }
 
-	public void setPlayVersion(Date playVersion) {
-		this.playVersion = playVersion;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "PLAY_VERSION", nullable = false, length = 19)
+    public Date getPlayVersion() {
+        return this.playVersion;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "STRATEGY_VERSION", nullable = false, length = 19)
-	public Date getStrategyVersion() {
-		return this.strategyVersion;
-	}
+    public void setPlayVersion(Date playVersion) {
+        this.playVersion = playVersion;
+    }
 
-	public void setStrategyVersion(Date strategyVersion) {
-		this.strategyVersion = strategyVersion;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "STRATEGY_VERSION", nullable = false, length = 19)
+    public Date getStrategyVersion() {
+        return this.strategyVersion;
+    }
 
-	@Column(name = "STATE", nullable = false)
-	public int getState() {
-		return this.state;
-	}
+    public void setStrategyVersion(Date strategyVersion) {
+        this.strategyVersion = strategyVersion;
+    }
 
-	public void setState(int state) {
-		this.state = state;
-	}
+    @Column(name = "STATE", nullable = false)
+    public int getState() {
+        return this.state;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_TIME", nullable = false, length = 19)
-	public Date getCreateTime() {
-		return this.createTime;
-	}
+    public void setState(int state) {
+        this.state = state;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_TIME", nullable = false, length = 19)
+    public Date getCreateTime() {
+        return this.createTime;
+    }
 
-	@Column(name = "CREATE_USER", nullable = false, length = 64)
-	public String getCreateUser() {
-		return this.createUser;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
+    @Column(name = "CREATE_USER", nullable = false, length = 64)
+    public String getCreateUser() {
+        return this.createUser;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
-	public Set<TbLoopProgram> getTbLoopPrograms() {
-		return this.tbLoopPrograms;
-	}
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
-	public void setTbLoopPrograms(Set<TbLoopProgram> tbLoopPrograms) {
-		this.tbLoopPrograms = tbLoopPrograms;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
+    public Set<TbLoopProgram> getTbLoopPrograms() {
+        return this.tbLoopPrograms;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
-	public Set<TbLoopSource> getTbLoopSources() {
-		return this.tbLoopSources;
-	}
+    public void setTbLoopPrograms(Set<TbLoopProgram> tbLoopPrograms) {
+        this.tbLoopPrograms = tbLoopPrograms;
+    }
 
-	public void setTbLoopSources(Set<TbLoopSource> tbLoopSources) {
-		this.tbLoopSources = tbLoopSources;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
+    public Set<TbLoopSource> getTbLoopSources() {
+        return this.tbLoopSources;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
-	public Set<TbStrategy> getTbStrategies() {
-		return this.tbStrategies;
-	}
+    public void setTbLoopSources(Set<TbLoopSource> tbLoopSources) {
+        this.tbLoopSources = tbLoopSources;
+    }
 
-	public void setTbStrategies(Set<TbStrategy> tbStrategies) {
-		this.tbStrategies = tbStrategies;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
+    public Set<TbStrategy> getTbStrategies() {
+        return this.tbStrategies;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
-	public Set<TbTerminal> getTbTerminals() {
-		return this.tbTerminals;
-	}
+    public void setTbStrategies(Set<TbStrategy> tbStrategies) {
+        this.tbStrategies = tbStrategies;
+    }
 
-	public void setTbTerminals(Set<TbTerminal> tbTerminals) {
-		this.tbTerminals = tbTerminals;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbLoopTask")
+    public Set<TbTerminal> getTbTerminals() {
+        return this.tbTerminals;
+    }
 
+    public void setTbTerminals(Set<TbTerminal> tbTerminals) {
+        this.tbTerminals = tbTerminals;
+    }
 }

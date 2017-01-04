@@ -207,5 +207,10 @@ public interface NamedConstants {
      * Header TEXT to the scroll text ad (static)
      */
     public static String SCROLL_TEXT_HEADER = "SCROLL_HEADER";
+    
+    /**
+     * Header TEXT to the list of all device ids that we are binding this campaing to
+     */
+    public static String BIND_DEVICE_IDS = "BIND_DEVICE_IDS";
 
 }

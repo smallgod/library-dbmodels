@@ -2,6 +2,8 @@ package com.library.datamodel.dsm_bridge;
 // default package
 // Generated Dec 17, 2016 3:56:53 PM by Hibernate Tools 4.3.5.Final
 
+import com.library.sgsharedinterface.DBInterface;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +26,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_terminal")
-public class TbTerminal implements java.io.Serializable {
+public class TbTerminal implements Serializable, DBInterface {
+
+    private static final long serialVersionUID = -2535532264508982021L;
 
 	private TbTerminalId id;
 	private TbApp tbApp;
@@ -279,6 +283,7 @@ public class TbTerminal implements java.io.Serializable {
 		this.tbKernel = tbKernel;
 	}
 
+        //@ManyToOne(optional = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = EAGER)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
 			@JoinColumn(name = "CSTM_ID", referencedColumnName = "CSTM_ID", nullable = false, insertable = false, updatable = false),
