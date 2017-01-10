@@ -11,6 +11,12 @@ package com.library.datamodel.dsm_bridge.adpojos;
  */
 public class AdTask {
 
+    //for tasktype - PLUGIN
+    private int count;
+    private String stop;
+    private String start;
+    
+    //for all tasktypes
     private int taskId;
     private String taskName;
     private String taskType;
@@ -46,6 +52,30 @@ public class AdTask {
 
     public void setTaskVersion(String taskVersion) {
         this.taskVersion = taskVersion;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getStop() {
+        return stop;
+    }
+
+    public void setStop(String stop) {
+        this.stop = stop;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
     }
 
 }

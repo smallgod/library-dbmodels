@@ -12,6 +12,7 @@ public enum APIMethodName implements Constants {
     WAKEUP_REQUEST("WAKEUP_REQUEST"),
     SCHEDULE_REQUEST("SCHEDULE_REQUEST"),
     FETCH_REQUEST("ADFETCH_REQUEST"),
+    PLAYER_DETAIL("PLAYER_DETAIL"),
     DSM_AD_SCHEDULE("DSM_AD_SCHEDULE");
     
     private final String methodNameString;
