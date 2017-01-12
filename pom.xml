@@ -59,6 +59,21 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
                 <version>0.12.3</version>
                 <executions>
+                    
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/appConfigsBinding/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-appConfigsBinding.episode</episodeFile>
+                            <generatePackage>jaxb.com.library.datamodel.config.v1_0</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-appConfigsBinding</id>
+                    </execution>
+                    
                     <execution>
                         <goals>
                             <goal>generate</goal>

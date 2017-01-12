@@ -207,10 +207,27 @@ public interface NamedConstants {
      * Header TEXT to the scroll text ad (static)
      */
     public static String SCROLL_TEXT_HEADER = "SCROLL_HEADER";
-    
+
     /**
-     * Header TEXT to the list of all device ids that we are binding this campaing to
+     * Header TEXT to the list of all device ids that we are binding this
+     * campaign to
      */
     public static String BIND_DEVICE_IDS = "BIND_DEVICE_IDS";
+
+    /**
+     * Identifies by name the RemoteRequest put in the Remote unit's map
+     *
+     */
+    public static String DSM_UNIT_REQUEST = "DSM_UNIT";
+
+    /**
+     * Identifies by name the RemoteRequest put in the Remote unit's map
+     */
+    public static String CENTRAL_UNIT_REQUEST = "CENTRAL_UNIT";
+
+    /**
+     * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap
+     */
+    public static String CLIENT_POOL = "CLIENT_POOL";
 
 }

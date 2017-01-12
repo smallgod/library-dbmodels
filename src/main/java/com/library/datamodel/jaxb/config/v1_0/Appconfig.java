@@ -1326,6 +1326,8 @@ public class Appconfig {
         protected Remoteunittype addevice;
         @XmlElement(required = true)
         protected Remoteunittype admonitor;
+        @XmlElement(required = true)
+        protected Remoteunittype dsmbridge;
 
         /**
          * Gets the value of the addisplay property.
@@ -1446,6 +1448,31 @@ public class Appconfig {
         public void setAdmonitor(Remoteunittype value) {
             this.admonitor = value;
         }
+        
+        /**
+         * Gets the value of the dsmbridge property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Remoteunittype }
+         *     
+         */
+        public Remoteunittype getDsmbridge() {
+            return dsmbridge;
+        }
+
+        /**
+         * Sets the value of the dsmbridge property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Remoteunittype }
+         *     
+         */
+        public void setDsmbridge(Remoteunittype value) {
+            this.dsmbridge = value;
+        }
+
 
     }
 

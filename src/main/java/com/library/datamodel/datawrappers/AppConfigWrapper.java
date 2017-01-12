@@ -19,7 +19,7 @@ import com.library.sgsharedinterface.RemoteRequest;
 public final class AppConfigWrapper implements SharedAppConfigIF {
 
     private final Appconfig appConfig;
-    private final String xsdFIlesDir;
+    private final String xsdFilesDir;
     private final String configsDir;
     private final String logsDir;
     private final String projectDir;
@@ -30,7 +30,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     /**
      *
      * @param appConfig
-     * @param xsdFIlesDir
+     * @param xsdFilesDir
      * @param configsDir
      * @param logsDir
      * @param projectDir
@@ -38,16 +38,29 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
      * @param tempUploadDir
      * @param daemonProfile
      */
-    public AppConfigWrapper(Appconfig appConfig, String xsdFIlesDir, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String tempUploadDir, String daemonProfile) {
+    public AppConfigWrapper(Appconfig appConfig, String xsdFilesDir, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String tempUploadDir, String daemonProfile) {
 
         this.appConfig = appConfig;
-        this.xsdFIlesDir = xsdFIlesDir;
+        this.xsdFilesDir = xsdFilesDir;
         this.configsDir = configsDir;
         this.logsDir = logsDir;
         this.projectDir = projectDir;
         this.dsmWebAppDir = dsmWebAppDir;
         this.tempUploadDir = tempUploadDir;
         this.daemonProfile = daemonProfile;
+    }
+
+    /**
+     * 
+     * @param appConfig
+     * @param configsDir
+     * @param logsDir
+     * @param projectDir
+     * @param daemonProfile 
+     */
+    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String daemonProfile) {
+
+        this(appConfig, "", configsDir, logsDir, projectDir, "", "", daemonProfile);
     }
 
     @Override
@@ -162,7 +175,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     public String getLogsDir() {
         return logsDir;
     }
-    
+
     @Override
     public String getXsdFilesDir() {
         return configsDir;
@@ -231,6 +244,11 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     @Override
     public String getTempUploadDir() {
         return tempUploadDir;
+    }
+
+    @Override
+    public RemoteRequest getDSMBridgeUnit() {
+        return new RemoteUnitWrapper(appConfig.getRemoteunits().getDsmbridge());
     }
 
 }
