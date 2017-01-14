@@ -11,8 +11,6 @@ package com.library.datamodel.Constants;
  */
 public interface NamedConstants {
 
-    public static final int DEFAULT_DSM8_CUSTOMER_ID = 1;
-
     /**
      * Date time string formats
      *
@@ -175,6 +173,17 @@ public interface NamedConstants {
     public static final String HTTP_PARAM_DB_OPERATION = "dboperation";
 
     /**
+     * This is the single/default customer ID we will be using for all tasks and
+     * programs
+     */
+    public static final int CUSTOMER_ID = 20120101;
+
+    /**
+     * When no customer ID is provided, use default which is one (1)
+     */
+    public static final int DEFAULT_DSM8_CUSTOMER_ID = 1;
+
+    /**
      * Header Name containing the enum value name of the task type
      */
     public static final String TASK_TYPE = "TASK_TYPE";
@@ -182,7 +191,7 @@ public interface NamedConstants {
     /**
      * Header Name containing the customer ID value
      */
-    public static final String CUSTOMER_ID = "CUSTOMER_ID";
+    public static final String CUSTOMER_ID_HEADER = "CUSTOMER_ID";
 
     /**
      * Header name for this task ID value if it exists

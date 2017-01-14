@@ -127,8 +127,14 @@ public class PlayerDetail implements JsonDataModel {
             @SerializedName(value = "terminal_id")
             private String terminalId;
 
+            @SerializedName(value = "terminal_width")
+            private int terminalWidth;
+
+            @SerializedName(value = "terminal_height")
+            private int terminalHeight;
+
             @SerializedName(value = "task_id")
-            private String taskId;
+            private int taskId;
 
             @SerializedName(value = "task_name")
             private String taskName;
@@ -144,11 +150,11 @@ public class PlayerDetail implements JsonDataModel {
                 this.terminalId = terminalId;
             }
 
-            public String getTaskId() {
+            public int getTaskId() {
                 return taskId;
             }
 
-            public void setTaskId(String taskId) {
+            public void setTaskId(int taskId) {
                 this.taskId = taskId;
             }
 
@@ -166,6 +172,22 @@ public class PlayerDetail implements JsonDataModel {
 
             public void setProgramIdList(List<Long> programIdList) {
                 this.programIdList = programIdList;
+            }
+
+            public int getTerminalWidth() {
+                return terminalWidth;
+            }
+
+            public void setTerminalWidth(int terminalWidth) {
+                this.terminalWidth = terminalWidth;
+            }
+
+            public int getTerminalHeight() {
+                return terminalHeight;
+            }
+
+            public void setTerminalHeight(int terminalHeight) {
+                this.terminalHeight = terminalHeight;
             }
 
         }

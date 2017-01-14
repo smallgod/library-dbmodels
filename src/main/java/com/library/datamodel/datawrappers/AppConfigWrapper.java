@@ -5,7 +5,10 @@
  */
 package com.library.datamodel.datawrappers;
 
+import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.datamodel.jaxb.config.v1_0.Appconfig;
+import com.library.datamodel.jaxb.config.v1_0.LayoutContentType;
+import com.library.datamodel.jaxb.config.v1_0.LayoutType;
 import com.library.sgsharedinterface.SharedAppConfigIF;
 import java.util.List;
 import com.library.sgsharedinterface.RemoteRequest;
@@ -51,12 +54,12 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     /**
-     * 
+     *
      * @param appConfig
      * @param configsDir
      * @param logsDir
      * @param projectDir
-     * @param daemonProfile 
+     * @param daemonProfile
      */
     public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String daemonProfile) {
 
@@ -251,4 +254,21 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
         return new RemoteUnitWrapper(appConfig.getRemoteunits().getDsmbridge());
     }
 
+    @Override
+    public List<LayoutType> getLayoutConfig() {
+        
+        List<LayoutType> layoutTypes = appConfig.getDisplayLayout().getLayout();
+        
+        return layoutTypes;
+
+//        List<LayoutType> layoutTypes = appConfig.getDisplayLayout().getLayout();
+//
+//        for (LayoutType layout : layoutTypes) {
+//
+//            if (layoutName == ProgDisplayLayout.convertToEnum(layout.getName())) {
+//                return layout;
+//            }
+//        }
+//        throw new IllegalArgumentException("No layout type matches given layoutName");
+    }
 }
