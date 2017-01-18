@@ -28,11 +28,14 @@ public class ProgramDetail implements JsonDataModel {
                      "stoptime":"22:07:49"
                   }
                ],
-               "resource_ids":[
-                  1580212807,
-                  6290434822,
-                  2481434800
-               ]
+               "resources": [
+                        {
+                            "resource_id": 5480212808,
+                            "resource_detail": "restaurant_front.mp4",
+                            "resource_type": "VIDEO",
+                            "status": "OLD", //NEW - UPDATED - OLD ----- resource is new, updated OR old
+                        }
+                    ]
             },
             {
                "program_id":97011480463480900778,
@@ -48,9 +51,32 @@ public class ProgramDetail implements JsonDataModel {
                      "stoptime":"22:07:49"
                   }
                ],
-               "resource_ids":[
-                  5480212808
-               ]
+               "resources": [
+                        {
+                            "resource_id": 5480212808,
+                            "resource_detail": "restaurant_front.mp4",
+                            "resource_type": "VIDEO",
+                            "status": "OLD", //NEW - UPDATED - OLD ----- resource is new, updated OR old
+                        },
+                        {
+                            "resource_id": 2481434800,
+                            "resource_detail": "This is Header text",
+                            "resource_type": "HEADER_TEXT",
+                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
+                        },
+                        {
+                            "resource_id": 2481434801,
+                            "resource_detail": "This is scrolling text here..",
+                            "resource_type": "SCROLL_TEXT",
+                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
+                        },
+                        {
+                            "resource_id": 2481434800,
+                            "resource_detail": "swimming pool.jpg",
+                            "resource_type": "IMAGE",
+                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
+                        }
+                    ]
             }
          ]
       }
@@ -117,8 +143,16 @@ public class ProgramDetail implements JsonDataModel {
             @SerializedName(value = "display_times")
             private List<DisplayTime> displayTimesList;
 
-            @SerializedName(value = "resource_ids")
-            private List<Long> resourceIdList;
+            @SerializedName(value = "resources")
+            private List<Resources> resources;
+
+            public List<Resources> getResources() {
+                return resources;
+            }
+
+            public void setResources(List<Resources> resources) {
+                this.resources = resources;
+            }
 
             public String getProgramId() {
                 return programId;
@@ -152,14 +186,6 @@ public class ProgramDetail implements JsonDataModel {
                 this.displayTimesList = displayTimesList;
             }
 
-            public List<Long> getResourceIdList() {
-                return resourceIdList;
-            }
-
-            public void setResourceIdList(List<Long> resourceIdList) {
-                this.resourceIdList = resourceIdList;
-            }
-
             public class DisplayTime {
 
                 @SerializedName(value = "starttime")
@@ -183,6 +209,65 @@ public class ProgramDetail implements JsonDataModel {
                 public void setStoptime(String stoptime) {
                     this.stoptime = stoptime;
                 }
+            }
+
+            public class Resources {
+
+                @SerializedName(value = "resource_id")
+                private String resourceId;
+
+                @SerializedName(value = "resource_detail")
+                private String resourceDetail;
+
+                @SerializedName(value = "resource_type")
+                private String resourceType;
+
+                @SerializedName(value = "status")
+                private String status;
+                
+                @SerializedName(value = "sequence")
+                private int sequence;
+
+                public String getResourceId() {
+                    return resourceId;
+                }
+
+                public void setResourceId(String resourceId) {
+                    this.resourceId = resourceId;
+                }
+
+                public String getResourceDetail() {
+                    return resourceDetail;
+                }
+
+                public void setResourceDetail(String resourceDetail) {
+                    this.resourceDetail = resourceDetail;
+                }
+
+                public String getResourceType() {
+                    return resourceType;
+                }
+
+                public void setResourceType(String resourceType) {
+                    this.resourceType = resourceType;
+                }
+
+                public String getStatus() {
+                    return status;
+                }
+
+                public void setStatus(String status) {
+                    this.status = status;
+                }
+
+                public int getSequence() {
+                    return sequence;
+                }
+
+                public void setSequence(int sequence) {
+                    this.sequence = sequence;
+                }
+
             }
 
         }

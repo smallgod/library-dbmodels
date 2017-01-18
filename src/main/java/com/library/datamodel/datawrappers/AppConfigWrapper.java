@@ -5,9 +5,7 @@
  */
 package com.library.datamodel.datawrappers;
 
-import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.datamodel.jaxb.config.v1_0.Appconfig;
-import com.library.datamodel.jaxb.config.v1_0.LayoutContentType;
 import com.library.datamodel.jaxb.config.v1_0.LayoutType;
 import com.library.sgsharedinterface.SharedAppConfigIF;
 import java.util.List;

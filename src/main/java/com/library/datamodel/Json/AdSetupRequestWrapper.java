@@ -14,8 +14,8 @@ public class AdSetupRequestWrapper implements JsonDataModel {
     @SerializedName(value = "program_detail")
     private ProgramDetail programDetail;
 
-    @SerializedName(value = "resource_detail")
-    private ResourceDetail resourceDetail;
+    //@SerializedName(value = "resource_detail")
+    //private ResourceDetail resourceDetail;
 
     public PlayerDetail getPlayerDetail() {
         return playerDetail;
@@ -33,13 +33,13 @@ public class AdSetupRequestWrapper implements JsonDataModel {
         this.programDetail = programDetail;
     }
 
-    public ResourceDetail getResourceDetail() {
+    /*public ResourceDetail getResourceDetail() {
         return resourceDetail;
     }
 
     public void setResourceDetail(ResourceDetail resourceDetail) {
         this.resourceDetail = resourceDetail;
-    }
+    }*/
 
     public String getMethodName() {
         return methodName;

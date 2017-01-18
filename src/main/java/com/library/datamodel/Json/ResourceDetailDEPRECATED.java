@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
 
-public class ResourceDetail implements JsonDataModel {
+public class ResourceDetailDEPRECATED implements JsonDataModel {
 
     /*
     
