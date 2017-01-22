@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
 
-public class PlayerDetail implements JsonDataModel {
+public class PlayerDetailOLD implements JsonDataModel {
 
     /*
     

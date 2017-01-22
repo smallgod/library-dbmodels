@@ -5,6 +5,7 @@
  */
 package com.library.datamodel.dsm_bridge.adpojos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ public class MetaFileWrapper {
     private long lastFileId;
 
     public List<MetaFile> getMetaFileList() {
-        return metaFileList;
-    }
 
-    public void setMetaFileList(List<MetaFile> metaFileList) {
-        this.metaFileList = metaFileList;
+        if (metaFileList == null) {
+            metaFileList = new ArrayList<>();
+        }
+        return this.metaFileList;
     }
 
     public long getLastFileId() {
