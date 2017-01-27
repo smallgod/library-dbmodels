@@ -65,7 +65,7 @@ public class GeneratedIdResponse {
         @SerializedName(value = "generated_ids")
         private List<String> generatedIdList;
 
-        @SerializedName(value = "generated_ids")
+        @SerializedName(value = "exising_id_check")
         private List<ExistingIDCheck> existingIdCheck;
 
         public String getId() {
