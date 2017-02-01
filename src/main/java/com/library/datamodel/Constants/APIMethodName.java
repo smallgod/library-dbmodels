@@ -3,8 +3,9 @@ package com.library.datamodel.Constants;
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
 import com.library.utilities.LoggerUtil;
+
 /**
- * 
+ *
  * @author smallgod
  */
 public enum APIMethodName implements Constants {
@@ -14,9 +15,11 @@ public enum APIMethodName implements Constants {
     FETCH_REQUEST("ADFETCH_REQUEST"),
     PLAYER_DETAIL("PLAYER_DETAIL"),
     GENERATE_ID("GENERATE_ID"),
-    DSM_AD_SCHEDULE("DSM_AD_SCHEDULE"), 
+    DAILY_SETUP_STEP1("DAILY_SETUP_STEP1"),
+    DAILY_SETUP_STEP2("DAILY_SETUP_STEP2"),
+    DSM_AD_SCHEDULE("DSM_AD_SCHEDULE"),
     BULK_ADVERT_SETUP("BULK_ADVERT_SETUP");
-    
+
     private final String methodNameString;
 
     private static final LoggerUtil logger = new LoggerUtil(APIMethodName.class);

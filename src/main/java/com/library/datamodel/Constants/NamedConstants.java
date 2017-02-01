@@ -222,6 +222,12 @@ public interface NamedConstants {
      * campaign to
      */
     public static String BIND_DEVICE_IDS = "BIND_DEVICE_IDS";
+    
+    //We might want to make this dynamic
+    /**
+     * this task was created in the database via the DSM UI
+     */
+    public static int RESET_LOOP_TASKID = 1483959575;
 
     /**
      * Identifies by name the RemoteRequest put in the Remote unit's map

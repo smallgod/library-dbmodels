@@ -1,7 +1,7 @@
 package com.library.datamodel.Json;
 
 import com.google.gson.annotations.SerializedName;
-import com.library.datamodel.model.v1_0.Advert;
+import com.library.datamodel.model.v1_0.AdTerminal;
 import com.library.sgsharedinterface.JsonDataModel;
 
 public class AdvertRequest implements JsonDataModel {
@@ -11,7 +11,7 @@ public class AdvertRequest implements JsonDataModel {
     private String identifier;
 
     @SerializedName(value = "params")
-    private Advert advertParams;
+    private AdTerminal advertParams;
 
     public String getIdentifier() {
         return identifier;
@@ -21,11 +21,11 @@ public class AdvertRequest implements JsonDataModel {
         this.identifier = identifier;
     }
 
-    public Advert getAdvertParams() {
+    public AdTerminal getAdvertParams() {
         return advertParams;
     }
 
-    public void setAdvertParams(Advert advertParams) {
+    public void setAdvertParams(AdTerminal advertParams) {
         this.advertParams = advertParams;
     }
 
