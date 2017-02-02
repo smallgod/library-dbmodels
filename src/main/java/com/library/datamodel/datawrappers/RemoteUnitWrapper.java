@@ -47,6 +47,11 @@ public class RemoteUnitWrapper implements RemoteRequest {
     public String getUnitName() {
         return this.remoteUnitType.getName();
     }
+    
+    @Override
+    public String getPreviewUrl() {
+        return this.remoteUnitType.getPreviewurl();
+    }
 
     @Override
     public Map<String, String> getHttpParams() {
@@ -57,5 +62,7 @@ public class RemoteUnitWrapper implements RemoteRequest {
     public void setHttpParams(Map<String, String> httpParams) {
         this.httpParams = httpParams;
     }
+
+    
 
 }

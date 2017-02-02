@@ -25,7 +25,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     private final String logsDir;
     private final String projectDir;
     private final String dsmWebAppDir;
-    private final String tempUploadDir;
+    private final String tempDir;
     private final String daemonProfile;
 
     /**
@@ -36,10 +36,10 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
      * @param logsDir
      * @param projectDir
      * @param dsmWebAppDir
-     * @param tempUploadDir
+     * @param tempDir
      * @param daemonProfile
      */
-    public AppConfigWrapper(Appconfig appConfig, String xsdFilesDir, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String tempUploadDir, String daemonProfile) {
+    public AppConfigWrapper(Appconfig appConfig, String xsdFilesDir, String configsDir, String logsDir, String projectDir, String dsmWebAppDir, String tempDir, String daemonProfile) {
 
         this.appConfig = appConfig;
         this.xsdFilesDir = xsdFilesDir;
@@ -47,8 +47,22 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
         this.logsDir = logsDir;
         this.projectDir = projectDir;
         this.dsmWebAppDir = dsmWebAppDir;
-        this.tempUploadDir = tempUploadDir;
+        this.tempDir = tempDir;
         this.daemonProfile = daemonProfile;
+    }
+
+    /**
+     *
+     * @param appConfig
+     * @param configsDir
+     * @param logsDir
+     * @param projectDir
+     * @param tempDir
+     * @param daemonProfile
+     */
+    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir,  String tempDir, String daemonProfile) {
+
+        this(appConfig, "", configsDir, logsDir, projectDir, "", tempDir, daemonProfile);
     }
 
     /**
@@ -173,6 +187,28 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
+    public String getMidnightCallJobName() {
+        return this.appConfig.getSchedulers().getMidnightcall().getJobname();
+    }
+
+    @Override
+    public String getMidnightCallTriggerName() {
+        return this.appConfig.getSchedulers().getMidnightcall().getTriggername();
+    }
+
+    @Override
+    public int getMidnightCallInterval() {
+        return this.appConfig.getSchedulers().getMidnightcall().getInterval();
+    }
+
+    @Override
+    public String getMidnightCallGroupName() {
+
+        return this.appConfig.getSchedulers().getMidnightcall().getGroupname();
+
+    }
+
+    @Override
     public String getLogsDir() {
         return logsDir;
     }
@@ -243,8 +279,8 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
-    public String getTempUploadDir() {
-        return tempUploadDir;
+    public String getTempDir() {
+        return tempDir;
     }
 
     @Override
@@ -254,9 +290,9 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
 
     @Override
     public List<LayoutType> getLayoutConfig() {
-        
+
         List<LayoutType> layoutTypes = appConfig.getDisplayLayout().getLayout();
-        
+
         return layoutTypes;
 
 //        List<LayoutType> layoutTypes = appConfig.getDisplayLayout().getLayout();
@@ -269,4 +305,5 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
 //        }
 //        throw new IllegalArgumentException("No layout type matches given layoutName");
     }
+
 }

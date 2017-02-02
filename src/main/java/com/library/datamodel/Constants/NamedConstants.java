@@ -73,6 +73,8 @@ public interface NamedConstants {
     public static final String AD_DBMANAGER_JSON_HANDLER = "addbmanagerjsonhandler";
 
     public static final String DSM_ADXPO_BRIDGE_FILE_HANDLER = "dsmAdXpoBridgeFileProcessor";
+    
+     public static final String ADCENTRAL_FILE_HANDLER = "adCentralFileProcessor";
 
     public static final String DSM_ADXPO_BRIDGE_JSON_HANDLER = "dsmAdXpoBridgeJsonProcessor";
 
@@ -239,6 +241,11 @@ public interface NamedConstants {
      * Identifies by name the RemoteRequest put in the Remote unit's map
      */
     public static String CENTRAL_UNIT_REQUEST = "CENTRAL_UNIT";
+    
+    /**
+     * Identifies by name the RemoteRequest put in the Remote unit's map
+     */
+    public static String ADDISPLAY_UNIT_REQUEST = "ADDISPLAY_UNIT";
 
     /**
      * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap
