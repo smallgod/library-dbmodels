@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum APIMethodName implements Constants {
 
+    PLACE_AD("PLACE_AD"),
     WAKEUP_REQUEST("WAKEUP_REQUEST"),
     SCHEDULE_REQUEST("SCHEDULE_REQUEST"),
     FETCH_REQUEST("ADFETCH_REQUEST"),

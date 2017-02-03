@@ -10,9 +10,30 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
-//@Entity(name = "recon_entity1")
+@TypeDefs({
+    @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    ),
+    @TypeDef(name = "jodalocaldate", typeClass = PersistentLocalDate.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    )
+})
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
@@ -23,34 +44,29 @@ public class Advert extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
-    @Column(name = "advertiser_id", nullable = true, unique = false)
-    @SerializedName(value = "advertiserId")
+    @Column(name = "advertiser_id")
     private String advertiserId;
 
-    @SerializedName(value = "advertText")
-    @Column(name = "advert_text", length = 10000) //might want to change this - what if the data is too long
-    private String advertText;
-    
     @SerializedName(value = "adStatus")
     //the status of the advert whether successful, Rejected or ....
     private AdvertStatus adStatus;
-    
+
     @SerializedName(value = "adStep")
     //at which processing level this advert is at
     private AdvertStep adStep;
-    
-    @SerializedName(value = "paymentStatus")
+
     //whether this advert has been paid for or not - if an advert is rejected after payment, 
     //payment should be reversed and this value should read 'REVERSED'
+    @SerializedName(value = "paymentStatus")
     private AdPaymentStatus paymentStatus;
 
-    public Advert(String advertiserId, String advertText) {
-        this.advertiserId = advertiserId;
-        this.advertText = advertText;
-    }
+    @Type(type = "jodalocaldate")
+    private LocalDate startDate;
+
+    @Type(type = "jodalocaldate")
+    private LocalDate endDate;
 
     public Advert() {
-        this("", ""); //initialise fields
     }
 
     public String getAdvertiserId() {
@@ -59,19 +75,6 @@ public class Advert extends BaseEntity implements Auditable, Serializable {
 
     public void setAdvertiserId(String advertiserId) {
         this.advertiserId = advertiserId;
-    }
-
-    public String getAdvertText() {
-        return advertText;
-    }
-
-    public void setAdvertText(String advertText) {
-        this.advertText = advertText;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
     }
 
     public AdvertStatus getAdStatus() {
@@ -96,6 +99,27 @@ public class Advert extends BaseEntity implements Auditable, Serializable {
 
     public void setPaymentStatus(AdPaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
     }
 
 }

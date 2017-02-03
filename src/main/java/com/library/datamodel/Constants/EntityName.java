@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum EntityName implements Constants {
 
+    AD_RESOURCE("AD_RESOURCE"),
     ADVERT("ADVERT"),
     TARGET_AREA("TARGET_AREA"),
     AD_OWNER("AD_OWNER");
