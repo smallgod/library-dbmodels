@@ -173,6 +173,12 @@ public interface NamedConstants {
      * executed
      */
     public static final String HTTP_PARAM_DB_OPERATION = "dboperation";
+    
+    
+    /**
+     * DB Table property names and values
+     */
+    public static final String HTTP_PARAM_DB_PROPS = "dbproperties";
 
     /**
      * This is the single/default customer ID we will be using for all tasks and
@@ -246,6 +252,11 @@ public interface NamedConstants {
      * Identifies by name the RemoteRequest put in the Remote unit's map
      */
     public static String ADDISPLAY_UNIT_REQUEST = "ADDISPLAY_UNIT";
+    
+    /**
+     * Identifies by name the RemoteRequest put in the Remote unit's map
+     */
+    public static String ADDBManager_UNIT_REQUEST = "ADDBManager_UNIT";
 
     /**
      * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap

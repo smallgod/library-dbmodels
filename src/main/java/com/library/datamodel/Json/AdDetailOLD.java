@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.library.datamodel.Json;
 
 /**
@@ -8,7 +13,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AdDetail {
+public class AdDetailOLD {
 
     @SerializedName("method")
     @Expose
@@ -31,7 +36,6 @@ public class AdDetail {
 
     public void setParams(Params params) {
         this.params = params;
-
     }
 
     public class Params {
@@ -234,7 +238,7 @@ public class AdDetail {
             private String endDate;
             @SerializedName("schedule")
             @Expose
-            private List<Schedule> schedule;
+            private List<Schedule> schedule = null;
 
             public String getStartDate() {
                 return startDate;
@@ -262,52 +266,52 @@ public class AdDetail {
 
             public class Schedule {
 
-                @SerializedName("time")
+                @SerializedName("time_slot")
                 @Expose
-                private Time time;
-                @SerializedName("day")
+                private String timeSlot;
+                @SerializedName("detail")
                 @Expose
-                private List<String> day;
+                private List<Detail> detail = null;
 
-                public Time getTime() {
-                    return time;
+                public String getTimeSlot() {
+                    return timeSlot;
                 }
 
-                public void setTime(Time time) {
-                    this.time = time;
+                public void setTimeSlot(String timeSlot) {
+                    this.timeSlot = timeSlot;
                 }
 
-                public List<String> getDay() {
-                    return day;
+                public List<Detail> getDetail() {
+                    return detail;
                 }
 
-                public void setDay(List<String> day) {
-                    this.day = day;
+                public void setDetail(List<Detail> detail) {
+                    this.detail = detail;
                 }
 
-                public class Time {
+                public class Detail {
 
-                    @SerializedName("slot")
+                    @SerializedName("day")
                     @Expose
-                    private String slot;
-                    @SerializedName("preferred")
+                    private List<String> day = null;
+                    @SerializedName("display_time")
                     @Expose
-                    private Integer preferred;
+                    private List<String> displayTime = null;
 
-                    public String getSlot() {
-                        return slot;
+                    public List<String> getDay() {
+                        return day;
                     }
 
-                    public void setSlot(String slot) {
-                        this.slot = slot;
+                    public void setDay(List<String> day) {
+                        this.day = day;
                     }
 
-                    public Integer getPreferred() {
-                        return preferred;
+                    public List<String> getDisplayTime() {
+                        return displayTime;
                     }
 
-                    public void setPreferred(Integer preferred) {
-                        this.preferred = preferred;
+                    public void setDisplayTime(List<String> displayTime) {
+                        this.displayTime = displayTime;
                     }
 
                 }

@@ -1,5 +1,6 @@
 package com.library.datamodel.Constants;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Constants;
 import com.library.utilities.LoggerUtil;
 
@@ -7,20 +8,24 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ProgDisplayLayout implements Constants {
+public enum AdScreenType implements Constants {
 
-    TWO_SPLIT("2SPLIT"),
-    THREE_SPLIT("3SPLIT"),
-    TEXT_ONLY("TEXT"),
-    FULL_SCREEN("FULLSCREEN"),
-    FULLSCREEN_TEXT("FULLSCREEN_TEXT"),
-    AV_ONLY("AV_ONLY");
+    @SerializedName("KABUTO_TV")
+    KABUTO_TV("KABUTO_TV"),
+    @SerializedName("FLAT_LCD_TV")
+    FLAT_LCD_TV("FLAT_LCD_TV"),
+    @SerializedName("FLAT_LED_TV")
+    FLAT_LED_TV("FLAT_LED_TV"),
+    @SerializedName("KABUTO_MONITOR")
+    KABUTO_MONITOR("KABUTO_MONITOR"),
+    @SerializedName("FLAT_LCD_MONITOR")
+    FLAT_LCD_MONITOR("FLAT_LCD_MONITOR");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ProgDisplayLayout.class);
+    private static final LoggerUtil logger = new LoggerUtil(AdScreenType.class);
 
-    ProgDisplayLayout(String enumValue) {
+    AdScreenType(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -29,11 +34,11 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) {
+    public static AdScreenType convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ProgDisplayLayout availableValue : ProgDisplayLayout.values()) {
+            for (AdScreenType availableValue : AdScreenType.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

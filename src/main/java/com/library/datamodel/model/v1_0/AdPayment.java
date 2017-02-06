@@ -1,33 +1,21 @@
 package com.library.datamodel.model.v1_0;
 
+import com.library.sgsharedinterface.Auditable;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
-//import com.library.datamodel.Constants.ValueStore;
-//import com.library.sgsharedinterface.Auditable;
-//import com.library.sgsharedinterface.Processeable;
-//import java.io.Serializable;
-//import javax.persistence.Column;
-//import javax.persistence.Embedded;
-//import javax.persistence.Entity;
-//import javax.persistence.EnumType;
-//import javax.persistence.Enumerated;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.OneToOne;
-//import javax.persistence.Table;
-//import javax.persistence.Transient;
-//import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-//import org.hibernate.annotations.DynamicUpdate;
-//import org.hibernate.annotations.SelectBeforeUpdate;
-//import org.joda.time.DateTime;
-//
-//@Entity
-//@DynamicUpdate(value = true)
-//@SelectBeforeUpdate(value = true)
-//@Table(name = "payments")
+@Entity
+@DynamicUpdate(value = true)
+@SelectBeforeUpdate(value = true)
+@Table(name = "ad_payment")
 
-//public class AdvertPayment extends BaseEntity implements Auditable, Serializable, Processeable {
-//
-//    private static final long serialVersionUID = -1408718657632013689L;
-//
+public class AdPayment extends BaseEntity implements Auditable, Serializable {
+
+    private static final long serialVersionUID = -1408718657632013689L;
+
 //    @Embedded
 //    @Column(name = "Amount")
 //    private Amounttype amount;
@@ -372,9 +360,13 @@ package com.library.datamodel.model.v1_0;
 //    public void setPayerID(String payerID) {
 //        this.payerID = payerID;
 //    }
-//
 //     @Override
 //    public String getModifyAction() {
 //        return "modify action";
 //    }
-//}
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+}

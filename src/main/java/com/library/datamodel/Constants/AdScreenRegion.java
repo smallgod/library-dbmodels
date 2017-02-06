@@ -6,21 +6,23 @@ import com.library.utilities.LoggerUtil;
 /**
  *
  * @author smallgod
+ *
+ * The screen needs to be sub-divided into any of the following known
+ * sub-regions
  */
-public enum ProgDisplayLayout implements Constants {
+public enum AdScreenRegion implements Constants {
 
-    TWO_SPLIT("2SPLIT"),
-    THREE_SPLIT("3SPLIT"),
-    TEXT_ONLY("TEXT"),
-    FULL_SCREEN("FULLSCREEN"),
-    FULLSCREEN_TEXT("FULLSCREEN_TEXT"),
-    AV_ONLY("AV_ONLY");
+    CENTER("CENTER"),
+    RIGHT("RIGHT"),
+    LEFT("LEFT"),
+    LOWER_RIGHT("LOWER_RIGHT"),
+    LOWER_LEFT("LOWER_LEFT");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ProgDisplayLayout.class);
+    private static final LoggerUtil logger = new LoggerUtil(AdScreenRegion.class);
 
-    ProgDisplayLayout(String enumValue) {
+    AdScreenRegion(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -29,11 +31,11 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) {
+    public static AdScreenRegion convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ProgDisplayLayout availableValue : ProgDisplayLayout.values()) {
+            for (AdScreenRegion availableValue : AdScreenRegion.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

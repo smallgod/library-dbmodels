@@ -1,9 +1,12 @@
 package com.library.datamodel.model.v1_0;
 
+import com.library.datamodel.Constants.AdScreenRegion;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -13,12 +16,11 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_resource")
 
-//id int auto_increment primary key, subject varchar(30),description varchar(100), targetArea varchar(40),startTime varchar(20),endTime varchar(20),imageUrl varchar(100),contactDetails varchar(50),category varchar (30),paymentMethod varchar(30),advertType varchar(20),advertiserType varchar(30), resourceId varchar (10000),DateSent currentTimestamp)")
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
 
-    @Column(name = "resource_id", nullable = false, unique = true)
+    @Column(name = "resource_id") //this can be null, since this resourceId is just generated later
     private String resourceId;
 
     @Column(name = "name")
@@ -35,6 +37,13 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Column(name = "resource_code")
     private long resourseCode; //sum
+
+    @Column(name = "region")
+    @Enumerated(EnumType.STRING)
+    private AdScreenRegion screenRegion; //region of the screen where the advert is going to display
+
+    @Column(name = "uploaded_to_dsm")
+    private boolean isUploadedToDSM;
 
     public AdResource() {
     }
@@ -90,6 +99,22 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public boolean isIsUploadedToDSM() {
+        return isUploadedToDSM;
+    }
+
+    public void setIsUploadedToDSM(boolean isUploadedToDSM) {
+        this.isUploadedToDSM = isUploadedToDSM;
+    }
+
+    public AdScreenRegion getScreenRegion() {
+        return screenRegion;
+    }
+
+    public void setScreenRegion(AdScreenRegion screenRegion) {
+        this.screenRegion = screenRegion;
     }
 
 }

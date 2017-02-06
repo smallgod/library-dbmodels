@@ -19,7 +19,9 @@ public enum APIMethodName implements Constants {
     DAILY_SETUP_STEP1("DAILY_SETUP_STEP1"),
     DAILY_SETUP_STEP2("DAILY_SETUP_STEP2"),
     DSM_AD_SCHEDULE("DSM_AD_SCHEDULE"),
-    BULK_ADVERT_SETUP("BULK_ADVERT_SETUP");
+    BULK_ADVERT_SETUP("BULK_ADVERT_SETUP"),
+    
+    FETCH_ENTITY("FETCH_ENTITY");
 
     private final String methodNameString;
 

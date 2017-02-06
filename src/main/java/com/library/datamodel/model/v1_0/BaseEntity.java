@@ -34,7 +34,7 @@ import org.joda.time.LocalDateTime;
 })
 @MappedSuperclass
 public class BaseEntity implements Serializable, DBInterface {
-    
+
     private static final long serialVersionUID = -8171202186820119866L;
 
     @Id
@@ -46,22 +46,33 @@ public class BaseEntity implements Serializable, DBInterface {
 //    @XmlAttribute(name = "version", required = true)
 //    protected String version;
     @Column(name = "created_by")
-    @SerializedName(value = "createdBy")
+    @SerializedName(value = "created_by")
     private String createdBy;
 
     @Type(type = "jodalocaldatetime")
     @Column(name = "created_on")
+    @SerializedName(value = "created_on")
     private LocalDateTime createdOn;
+
     @Column(name = "last_modified_by")
+    @SerializedName(value = "last_modified_by")
     private String lastModifiedBy;
+
     @Column(name = "date_last_modified")
     @Type(type = "jodalocaldatetime")
+    @SerializedName(value = "date_last_modified")
     private LocalDateTime dateLastModified;
+
     @Column(name = "date_modified_history")
+    @SerializedName(value = "date_modified_history")
     private String dateModifiedHistory; // '|' separated strings
+
     @Column(name = "modified_by_history")
+    @SerializedName(value = "modified_by_history")
     private String modifiedByHistory; // '|' separated strings    
+
     @Column(name = "description")
+    @SerializedName(value = "description")
     private String description;
 
     /**

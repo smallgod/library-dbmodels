@@ -140,7 +140,14 @@
     
     <dependencies>
         
-        <dependency>
+         <dependency>
+            <groupId>com.sglogger</groupId>
+            <artifactId>sglogger</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!--<dependency>
             <groupId>com.sgsharedinterfce</groupId>
             <artifactId>sgsharedinterface</artifactId>
             <version>1.0</version>
@@ -152,7 +159,7 @@
             <artifactId>sgutilities</artifactId>
             <version>1.0</version>
             <type>jar</type>
-        </dependency>
+        </dependency>-->
         
         <dependency>
             <groupId>commons-daemon</groupId>

@@ -7,20 +7,21 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ProgDisplayLayout implements Constants {
+public enum WeekDay implements Constants {
 
-    TWO_SPLIT("2SPLIT"),
-    THREE_SPLIT("3SPLIT"),
-    TEXT_ONLY("TEXT"),
-    FULL_SCREEN("FULLSCREEN"),
-    FULLSCREEN_TEXT("FULLSCREEN_TEXT"),
-    AV_ONLY("AV_ONLY");
+    MONDAY("MON"),
+    TUESDAY("TUE"),
+    WEDNESDAY("WED"),
+    THURSDAY("THUR"),
+    FRIDAY("FRI"),
+    SATURDAY("SAT"),
+    SUNDAY("SUN");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ProgDisplayLayout.class);
+    private static final LoggerUtil logger = new LoggerUtil(WeekDay.class);
 
-    ProgDisplayLayout(String enumValue) {
+    WeekDay(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -29,11 +30,11 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) {
+    public static WeekDay convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ProgDisplayLayout availableValue : ProgDisplayLayout.values()) {
+            for (WeekDay availableValue : WeekDay.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

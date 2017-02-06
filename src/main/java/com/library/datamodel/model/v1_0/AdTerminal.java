@@ -4,88 +4,48 @@ import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
-//@Entity(name = "recon_entity1")
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_terminal")
+@Table(name = "ad_terminal", uniqueConstraints = @UniqueConstraint(columnNames = {"terminal_id", "task_id"}))
 
-//id int auto_increment primary key, subject varchar(30),description varchar(100), targetArea varchar(40),startTime varchar(20),endTime varchar(20),imageUrl varchar(100),contactDetails varchar(50),category varchar (30),paymentMethod varchar(30),advertType varchar(20),advertiserType varchar(30), terminalDeviceId varchar (10000),DateSent currentTimestamp)")
 public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
-    @Column(name = "terminal_dev_id", nullable = false, unique = true)
-    private String terminalDeviceId;
+    @Column(name = "terminal_id")
+    private String terminalId;
 
-    @Column(name = "audience_count", nullable = true, unique = false)
-    private int audienceCount;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    //@JoinColumns({ //see TbFile.java class for details using this relation
-    //			@JoinColumn(name = "CSTM_ID", referencedColumnName = "CSTM_ID", nullable = false, insertable = false, updatable = false),
-//			@JoinColumn(name = "CAT_ID", referencedColumnName = "CAT_ID", nullable = false, insertable = false, updatable = false) 
-//        })
-    @Column(name = "area")
-    private Area area;
-
-    @Column(name = "audience_type")
-    @ManyToOne
-    private AudienceType audienceType;
+    @Column(name = "task_id")
+    private String taskId;
 
     @Column(name = "latitude")
     private long latitude;
 
     @Column(name = "longitude")
     private long longitude;
-    
 
-    public AdTerminal(String advertiserId) {
-        this.terminalDeviceId = advertiserId;
-    }
-
+    //private int displayWidth; //terminal resolution ??
+    //private int displayHeight;
     public AdTerminal() {
-        this(""); //initialise fields
     }
 
-    public String getTerminalDeviceId() {
-        return terminalDeviceId;
+    public String getTerminalId() {
+        return terminalId;
     }
 
-    public void setTerminalDeviceId(String terminalDeviceId) {
-        this.terminalDeviceId = terminalDeviceId;
+    public void setTerminalId(String terminalId) {
+        this.terminalId = terminalId;
     }
-
-   
 
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
-    }
-
-    public int getAudienceCount() {
-        return audienceCount;
-    }
-
-    public void setAudienceCount(int audienceCount) {
-        this.audienceCount = audienceCount;
-    }
-
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
     }
 
     public long getLatitude() {
@@ -104,14 +64,12 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
         this.longitude = longitude;
     }
 
-    public AudienceType getAudienceType() {
-        return audienceType;
+    public String getTaskId() {
+        return taskId;
     }
 
-    public void setAudienceType(AudienceType audienceType) {
-        this.audienceType = audienceType;
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
-
-    
 
 }

@@ -1,5 +1,6 @@
 package com.library.datamodel.Constants;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Constants;
 import com.library.utilities.LoggerUtil;
 
@@ -7,20 +8,31 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ProgDisplayLayout implements Constants {
+public enum AdScreenSize implements Constants {
 
-    TWO_SPLIT("2SPLIT"),
-    THREE_SPLIT("3SPLIT"),
-    TEXT_ONLY("TEXT"),
-    FULL_SCREEN("FULLSCREEN"),
-    FULLSCREEN_TEXT("FULLSCREEN_TEXT"),
-    AV_ONLY("AV_ONLY");
+    @SerializedName("15 INCH")
+    FIFTEEN("15 INCH"),
+    
+    @SerializedName("21 INCH")
+    TWENTYONE("21 INCH"),
+    
+    @SerializedName("29 INCH")
+    TWENTYNINE("29 INCH"),
+    
+    @SerializedName("32 INCH")
+    THIRTYTWO("32 INCH"),
+    
+    @SerializedName("40 INCH")
+    FOURTY("40 INCH"),
+    
+    @SerializedName("52 INCH")
+    FIFTYTWO("52 INCH");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ProgDisplayLayout.class);
+    private static final LoggerUtil logger = new LoggerUtil(AdScreenSize.class);
 
-    ProgDisplayLayout(String enumValue) {
+    AdScreenSize(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -29,11 +41,11 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) {
+    public static AdScreenSize convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ProgDisplayLayout availableValue : ProgDisplayLayout.values()) {
+            for (AdScreenSize availableValue : AdScreenSize.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;
