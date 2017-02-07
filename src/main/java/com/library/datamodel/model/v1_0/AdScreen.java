@@ -5,7 +5,9 @@ import com.library.datamodel.Constants.AdScreenSize;
 import com.library.datamodel.Constants.AdScreenType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,19 +15,22 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
-
+//@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
+@Table(name = "ad_screen")
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = 2301296823801925900L;
@@ -55,10 +60,23 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private AdScreenSize screenSize; // in inches e.g. 32 inch TV
 
-    @SerializedName(value = "audience")
-    @ManyToMany
-    @Column(name = "audience_list")
-    private List<AudienceType> audienceTypes;// e.g. ALL, MEN, WOMEN, CORPORATES, STUDENTS
+//    @SerializedName(value = "audience")
+//    @Column(name = "audience_list")
+//    @ManyToMany
+//    @Cascade(CascadeType.SAVE_UPDATE)//cascade on save and update but not delete (so we didnt use .ALL
+//    private Set<AudienceType> audienceTypes = new HashSet<AudienceType>(0);// e.g. ALL, MEN, WOMEN, CORPORATES, STUDENTS
+    @SerializedName(value = "audience_list")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "list_screen_audience_types",
+            joinColumns = {
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code", nullable = false, updatable = false)
+            }
+    )
+    //@Cascade(CascadeType.SAVE_UPDATE)
+    private Set<AudienceType> audienceTypes = new HashSet<>(0);// e.g. ALL, MEN, WOMEN, CORPORATES, STUDENTS
 
     @OneToOne
     @JoinColumns({
@@ -168,11 +186,11 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         this.supportTerminal = supportTerminal;
     }
 
-    public List<AudienceType> getAudienceTypes() {
+    public Set<AudienceType> getAudienceTypes() {
         return audienceTypes;
     }
 
-    public void setAudienceTypes(List<AudienceType> audienceTypes) {
+    public void setAudienceTypes(Set<AudienceType> audienceTypes) {
         this.audienceTypes = audienceTypes;
     }
 

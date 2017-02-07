@@ -19,7 +19,7 @@ public class LocationType extends BaseEntity implements Auditable, Serializable 
     private static final long serialVersionUID = -1139458573433634348L;
 
     @Column(name = "location_type_code")
-    private String locTypeCode;
+    private int locTypeCode;
 
     @Column(name = "location_type_name", length = 1000)
     private String locTypeName; //BAR, SALON, SPORTS_HOUSE, HOTEL, HOSTELS, SCHOOLS, UNIVERSITIES, AIRPORT, BIBANDA, RESTAURANT, SUPERMARKET, SHOP, etc
@@ -27,11 +27,11 @@ public class LocationType extends BaseEntity implements Auditable, Serializable 
     public LocationType() {
     }
 
-    public String getLocTypeCode() {
+    public int getLocTypeCode() {
         return locTypeCode;
     }
 
-    public void setLocTypeCode(String locTypeCode) {
+    public void setLocTypeCode(int locTypeCode) {
         this.locTypeCode = locTypeCode;
     }
 

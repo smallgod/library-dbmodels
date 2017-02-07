@@ -26,118 +26,119 @@ import javax.persistence.TemporalType;
 @Table(name = "tb_user")
 public class TbUser implements java.io.Serializable {
 
-	private TbUserId id;
-	private TbCustomer tbCustomer;
-	private String name;
-	private String password;
-	private String descp;
-	private Date createTime;
-	private Set<TbPrivilege> tbPrivileges = new HashSet<TbPrivilege>(0);
-	private Set<TbRole> tbRoles = new HashSet<TbRole>(0);
+    private TbUserId id;
+    private TbCustomer tbCustomer;
+    private String name;
+    private String password;
+    private String descp;
+    private Date createTime;
+    private Set<TbPrivilege> tbPrivileges = new HashSet<TbPrivilege>(0);
+    private Set<TbRole> tbRoles = new HashSet<TbRole>(0);
 
-	public TbUser() {
-	}
+    public TbUser() {
+    }
 
-	public TbUser(TbUserId id, TbCustomer tbCustomer, String name, String password, String descp, Date createTime) {
-		this.id = id;
-		this.tbCustomer = tbCustomer;
-		this.name = name;
-		this.password = password;
-		this.descp = descp;
-		this.createTime = createTime;
-	}
+    public TbUser(TbUserId id, TbCustomer tbCustomer, String name, String password, String descp, Date createTime) {
+        this.id = id;
+        this.tbCustomer = tbCustomer;
+        this.name = name;
+        this.password = password;
+        this.descp = descp;
+        this.createTime = createTime;
+    }
 
-	public TbUser(TbUserId id, TbCustomer tbCustomer, String name, String password, String descp, Date createTime,
-			Set<TbPrivilege> tbPrivileges, Set<TbRole> tbRoles) {
-		this.id = id;
-		this.tbCustomer = tbCustomer;
-		this.name = name;
-		this.password = password;
-		this.descp = descp;
-		this.createTime = createTime;
-		this.tbPrivileges = tbPrivileges;
-		this.tbRoles = tbRoles;
-	}
+    public TbUser(TbUserId id, TbCustomer tbCustomer, String name, String password, String descp, Date createTime,
+            Set<TbPrivilege> tbPrivileges, Set<TbRole> tbRoles) {
+        this.id = id;
+        this.tbCustomer = tbCustomer;
+        this.name = name;
+        this.password = password;
+        this.descp = descp;
+        this.createTime = createTime;
+        this.tbPrivileges = tbPrivileges;
+        this.tbRoles = tbRoles;
+    }
 
-	@EmbeddedId
+    @EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "cstmId", column = @Column(name = "CSTM_ID", nullable = false)),
-			@AttributeOverride(name = "userId", column = @Column(name = "USER_ID", nullable = false)) })
-	public TbUserId getId() {
-		return this.id;
-	}
+    @AttributeOverrides({
+        @AttributeOverride(name = "cstmId", column = @Column(name = "CSTM_ID", nullable = false)),
+        @AttributeOverride(name = "userId", column = @Column(name = "USER_ID", nullable = false))})
+    public TbUserId getId() {
+        return this.id;
+    }
 
-	public void setId(TbUserId id) {
-		this.id = id;
-	}
+    public void setId(TbUserId id) {
+        this.id = id;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CSTM_ID", nullable = false, insertable = false, updatable = false)
-	public TbCustomer getTbCustomer() {
-		return this.tbCustomer;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CSTM_ID", nullable = false, insertable = false, updatable = false)
+    public TbCustomer getTbCustomer() {
+        return this.tbCustomer;
+    }
 
-	public void setTbCustomer(TbCustomer tbCustomer) {
-		this.tbCustomer = tbCustomer;
-	}
+    public void setTbCustomer(TbCustomer tbCustomer) {
+        this.tbCustomer = tbCustomer;
+    }
 
-	@Column(name = "NAME", nullable = false, length = 64)
-	public String getName() {
-		return this.name;
-	}
+    @Column(name = "NAME", nullable = false, length = 64)
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Column(name = "PASSWORD", nullable = false, length = 256)
-	public String getPassword() {
-		return this.password;
-	}
+    @Column(name = "PASSWORD", nullable = false, length = 256)
+    public String getPassword() {
+        return this.password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Column(name = "DESCP", nullable = false, length = 256)
-	public String getDescp() {
-		return this.descp;
-	}
+    @Column(name = "DESCP", nullable = false, length = 256)
+    public String getDescp() {
+        return this.descp;
+    }
 
-	public void setDescp(String descp) {
-		this.descp = descp;
-	}
+    public void setDescp(String descp) {
+        this.descp = descp;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_TIME", nullable = false, length = 19)
-	public Date getCreateTime() {
-		return this.createTime;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_TIME", nullable = false, length = 19)
+    public Date getCreateTime() {
+        return this.createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tb_user_privilege", joinColumns = {
-			@JoinColumn(name = "CSTM_ID", nullable = false, updatable = false),
-			@JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "PRIVILEGE_ID", nullable = false, updatable = false) })
-	public Set<TbPrivilege> getTbPrivileges() {
-		return this.tbPrivileges;
-	}
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tb_user_privilege", joinColumns = {
+        @JoinColumn(name = "CSTM_ID", nullable = false, updatable = false),
+        @JoinColumn(name = "USER_ID", nullable = false, updatable = false)}, inverseJoinColumns = {
+        @JoinColumn(name = "PRIVILEGE_ID", nullable = false, updatable = false)})
+    public Set<TbPrivilege> getTbPrivileges() {
+        return this.tbPrivileges;
+    }
 
-	public void setTbPrivileges(Set<TbPrivilege> tbPrivileges) {
-		this.tbPrivileges = tbPrivileges;
-	}
+    public void setTbPrivileges(Set<TbPrivilege> tbPrivileges) {
+        this.tbPrivileges = tbPrivileges;
+    }
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	public Set<TbRole> getTbRoles() {
-		return this.tbRoles;
-	}
+    @ManyToMany(fetch = FetchType.LAZY)
+    public Set<TbRole> getTbRoles() {
+        return this.tbRoles;
+    }
 
-	public void setTbRoles(Set<TbRole> tbRoles) {
-		this.tbRoles = tbRoles;
-	}
+    public void setTbRoles(Set<TbRole> tbRoles) {
+        this.tbRoles = tbRoles;
+    }
 
 }
