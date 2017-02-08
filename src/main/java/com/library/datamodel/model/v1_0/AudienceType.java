@@ -18,8 +18,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-//@Table(name = "audience_type", uniqueConstraints = @UniqueConstraint(columnNames = {"audience_code"}))
-@Table(name = "audience_type")
+@Table(name = "audience_type", uniqueConstraints = @UniqueConstraint(columnNames = {"audience_code"}))
+//@Table(name = "audience_type")
 
 public class AudienceType extends BaseEntity implements Auditable, Serializable {
 
@@ -33,7 +33,7 @@ public class AudienceType extends BaseEntity implements Auditable, Serializable 
     private String audienceName;
     
     //@ManyToMany(mappedBy = "audienceTypes")
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "audienceTypes")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "audienceTypes")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     private Set<AdScreen> adScreens = new HashSet<>(0);
 
     public AudienceType() {

@@ -17,6 +17,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 import org.joda.time.LocalDateTime;
 
@@ -26,6 +27,12 @@ import org.joda.time.LocalDateTime;
  */
 @TypeDefs({
     @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    ),
+    @TypeDef(name = "jodalocaldate", typeClass = PersistentLocalDate.class,
             parameters = {
                 @Parameter(value = "UTC", name = "databaseZone"),
                 @Parameter(value = "UTC", name = "javaZone")

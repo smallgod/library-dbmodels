@@ -35,6 +35,11 @@ public interface NamedConstants {
      * "2016-07-25"
      */
     public static final String DATE_DASH_FORMAT = "yyyy-MM-dd";
+    
+    /**
+     * The time represented as Hour:Minute
+     */
+    public static final String HOUR_MINUTE_FORMAT = "HH:mm";
 
     /**
      * All JSON request strings must have a root node named 'method' which

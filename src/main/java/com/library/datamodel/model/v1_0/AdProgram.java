@@ -1,18 +1,23 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdPaymentStatus;
 import com.library.datamodel.Constants.AdvertStatus;
 import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -48,7 +53,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
-    @Column(name = "program_id", nullable = false)
+    @Column(name = "program_id") //this is the ID we internally generate for every program
     private int advertProgramId;
 
     @ManyToOne
@@ -71,24 +76,32 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private ProgDisplayLayout displayLayout;
 
     @Column(name = "ad_status")
+    @Enumerated(EnumType.STRING)
     private AdvertStatus adStatus;//the status of the advert whether successful, Rejected or ....
 
     @Column(name = "processing_step")
+    @Enumerated(EnumType.STRING)
     private AdvertStep adStep;//at which processing level this advert is at
 
     //whether this advert has been paid for or not - if an advert is rejected after payment, 
     //payment should be reversed and this value should read 'REVERSED'
     @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
     private AdPaymentStatus paymentStatus;
 
     //@ManyToMany(mappedBy = "ad_screen_list")
-    @ManyToMany
-    @JoinColumns({
-        @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false),
-        @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false)
-    })
-    @Column(name = "screen_list")
-    private List<AdScreen> adScreenList;//all the screens on which this ad needs to display
+    @SerializedName(value = "program_screens")
+    @ManyToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "list_program_screens",
+            joinColumns = {
+                @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false, insertable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
+            }
+    )
+    //@Cascade(CascadeType.SAVE_UPDATE)
+    private Set<AdScreen> adScreenList = new HashSet<>(0);//all the screens on which this ad needs to display
 
     @Column(name = "schedules_to_play")
     private int totalSchedulesToPlay; //number of schedules paid for, to be played
@@ -144,14 +157,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.adClient = adClient;
     }
 
-    public List<AdScreen> getAdScreenList() {
-        return adScreenList;
-    }
-
-    public void setAdScreenList(List<AdScreen> adScreenList) {
-        this.adScreenList = adScreenList;
-    }
-
     public String getAdCampaignName() {
         return adCampaignName;
     }
@@ -199,4 +204,15 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public void setTotalSchedulesPlayed(int totalSchedulesPlayed) {
         this.totalSchedulesPlayed = totalSchedulesPlayed;
     }
+
+    public Set<AdScreen> getAdScreenList() {
+        return adScreenList;
+    }
+
+    public void setAdScreenList(Set<AdScreen> adScreenList) {
+        this.adScreenList = adScreenList;
+    }
+
+
+    
 }

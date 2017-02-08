@@ -29,8 +29,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-//@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
-@Table(name = "ad_screen")
+@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
+//@Table(name = "ad_screen")
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = 2301296823801925900L;
@@ -60,19 +60,14 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private AdScreenSize screenSize; // in inches e.g. 32 inch TV
 
-//    @SerializedName(value = "audience")
-//    @Column(name = "audience_list")
-//    @ManyToMany
-//    @Cascade(CascadeType.SAVE_UPDATE)//cascade on save and update but not delete (so we didnt use .ALL
-//    private Set<AudienceType> audienceTypes = new HashSet<AudienceType>(0);// e.g. ALL, MEN, WOMEN, CORPORATES, STUDENTS
     @SerializedName(value = "audience_list")
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "list_screen_audience_types",
             joinColumns = {
-                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, updatable = false)
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code", nullable = false, updatable = false)
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code", nullable = false, insertable = false, updatable = false)
             }
     )
     //@Cascade(CascadeType.SAVE_UPDATE)
@@ -90,7 +85,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     private int audienceCount;
 
     @SerializedName(value = "screen_area")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinColumns({
         @JoinColumn(name = "area_code", referencedColumnName = "area_code")
     })
@@ -110,6 +105,12 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         @JoinColumn(name = "terminal_id", referencedColumnName = "terminal_id")
     })
     private AdTerminal supportTerminal;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adScreenList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    private Set<AdProgram> adPrograms = new HashSet<>(0);
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "screenScheduleList")
+    private Set<AdSchedule> adSchedules = new HashSet<>(0);
 
     public AdScreen() {
     }
@@ -210,9 +211,24 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         this.locationType = locationType;
     }
 
+    public Set<AdProgram> getAdPrograms() {
+        return adPrograms;
+    }
+
+    public void setAdPrograms(Set<AdProgram> adPrograms) {
+        this.adPrograms = adPrograms;
+    }
+
+    public Set<AdSchedule> getAdSchedules() {
+        return adSchedules;
+    }
+
+    public void setAdSchedules(Set<AdSchedule> adSchedules) {
+        this.adSchedules = adSchedules;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
     }
-
 }
