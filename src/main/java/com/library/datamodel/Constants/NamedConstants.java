@@ -35,7 +35,7 @@ public interface NamedConstants {
      * "2016-07-25"
      */
     public static final String DATE_DASH_FORMAT = "yyyy-MM-dd";
-    
+
     /**
      * The time represented as Hour:Minute
      */
@@ -78,8 +78,8 @@ public interface NamedConstants {
     public static final String AD_DBMANAGER_JSON_HANDLER = "addbmanagerjsonhandler";
 
     public static final String DSM_ADXPO_BRIDGE_FILE_HANDLER = "dsmAdXpoBridgeFileProcessor";
-    
-     public static final String ADCENTRAL_FILE_HANDLER = "adCentralFileProcessor";
+
+    public static final String ADCENTRAL_FILE_HANDLER = "adCentralFileProcessor";
 
     public static final String DSM_ADXPO_BRIDGE_JSON_HANDLER = "dsmAdXpoBridgeJsonProcessor";
 
@@ -178,8 +178,7 @@ public interface NamedConstants {
      * executed
      */
     public static final String HTTP_PARAM_DB_OPERATION = "dboperation";
-    
-    
+
     /**
      * DB Table property names and values
      */
@@ -235,7 +234,7 @@ public interface NamedConstants {
      * campaign to
      */
     public static String BIND_DEVICE_IDS = "BIND_DEVICE_IDS";
-    
+
     //We might want to make this dynamic
     /**
      * this task was created in the database via the DSM UI
@@ -252,12 +251,12 @@ public interface NamedConstants {
      * Identifies by name the RemoteRequest put in the Remote unit's map
      */
     public static String CENTRAL_UNIT_REQUEST = "CENTRAL_UNIT";
-    
+
     /**
      * Identifies by name the RemoteRequest put in the Remote unit's map
      */
     public static String ADDISPLAY_UNIT_REQUEST = "ADDISPLAY_UNIT";
-    
+
     /**
      * Identifies by name the RemoteRequest put in the Remote unit's map
      */
@@ -267,5 +266,30 @@ public interface NamedConstants {
      * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap
      */
     public static String CLIENT_POOL = "CLIENT_POOL";
+
+    /**
+     * Advert/Program Slots (minutes) available in one Hour
+     */
+    final int SLOTS_IN_HOUR = 60;
+
+    /**
+     * Multiples of 3 slots/minutes Advert/Program Slots to allocate first
+     *
+     */
+    final int FIRST_SLOT_ALLOCATION = 3;
+
+    /**
+     * Multiples of 5 slots/minutes Advert/Program Slots to allocate second
+     *
+     */
+    final int SECOND_SLOT_ALLOCATION = 5;
+
+    /**
+     * Multiples of 2 slots/minutes Advert/Program Slots to allocate second
+     * last, since the last allocation is for minutes that are prime numbers
+     * (remaining)
+     *
+     */
+    final int THIRD_SLOT_ALLOCATION = 2;
 
 }

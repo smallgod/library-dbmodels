@@ -49,20 +49,20 @@ import org.joda.time.LocalTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"time_slot_id"}))
+@Table(name = "time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
 
 public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -4958704682470297016L;
 
-    @SerializedName(value = "slot_id")
-    @Column(name = "slot_id")
-    private long timeSlotId;
+    @SerializedName(value = "slot_code")
+    @Column(name = "slot_code", length = 30)
+    private String timeSlotCode; // "EARLY_BIRD"
 
     @SerializedName(value = "slot_name")
     
     @Column(name = "slot_name")
-    private String timeSlotName;
+    private String timeSlotName; //"Early Bird"
 
     @SerializedName(value = "slot_description")
     @Column(name = "slot_description")
@@ -86,17 +86,57 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
     public TimeSlot() {
     }
 
-    public long getTimeSlotId() {
-        return timeSlotId;
+    public String getTimeSlotCode() {
+        return timeSlotCode;
     }
 
-    public void setTimeSlotId(long timeSlotId) {
-        this.timeSlotId = timeSlotId;
+    public void setTimeSlotCode(String timeSlotCode) {
+        this.timeSlotCode = timeSlotCode;
     }
 
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public String getTimeSlotName() {
+        return timeSlotName;
+    }
+
+    public void setTimeSlotName(String timeSlotName) {
+        this.timeSlotName = timeSlotName;
+    }
+
+    public String getTimeSlotDescription() {
+        return timeSlotDescription;
+    }
+
+    public void setTimeSlotDescription(String timeSlotDescription) {
+        this.timeSlotDescription = timeSlotDescription;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Amounttype getSlotAdPrice() {
+        return slotAdPrice;
+    }
+
+    public void setSlotAdPrice(Amounttype slotAdPrice) {
+        this.slotAdPrice = slotAdPrice;
     }
 
 }

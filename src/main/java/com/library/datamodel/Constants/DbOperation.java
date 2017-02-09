@@ -5,19 +5,20 @@ import com.library.sgsharedinterface.Constants;
 import com.library.utilities.LoggerUtil;
 
 /**
- * 
+ *
  * @author smallgod
  */
 public enum DbOperation implements Constants {
 
     SAVE_SINGLE("save"),
-    SAVE_BULK("savebulk"),
     READ_SINGLE("read"),
+    SAVE_BULK("savebulk"),
     READ_BULK("readbulk"),
     DELETE_SINGLE("delete"),
     DELETE_BULK("deletebulk"),
+    UPDATE_ENTITY("updateentity"),
     PROCESS_AND_SAVE("processandsave");
-    
+
     private final String entityNameStr;
 
     private static final LoggerUtil logger = new LoggerUtil(DbOperation.class);

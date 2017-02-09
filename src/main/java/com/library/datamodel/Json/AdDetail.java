@@ -267,7 +267,7 @@ public class AdDetail {
                 private Time time;
                 @SerializedName("day")
                 @Expose
-                private List<String> day;
+                private List<Integer> day;
 
                 public Time getTime() {
                     return time;
@@ -277,11 +277,11 @@ public class AdDetail {
                     this.time = time;
                 }
 
-                public List<String> getDay() {
+                public List<Integer> getDay() {
                     return day;
                 }
 
-                public void setDay(List<String> day) {
+                public void setDay(List<Integer> day) {
                     this.day = day;
                 }
 

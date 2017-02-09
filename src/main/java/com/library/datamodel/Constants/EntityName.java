@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum EntityName implements Constants {
 
+    TIME_SLOT("TIME_SLOT"),
     LOCATION_TYPE("LOCATION_TYPE"),
     AUDIENCE_TYPE("AUDIENCE_TYPE"),
     AD_SCREENOWNER("AD_SCREENOWNER"),

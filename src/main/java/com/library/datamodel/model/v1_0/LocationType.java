@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -18,9 +19,11 @@ public class LocationType extends BaseEntity implements Auditable, Serializable 
 
     private static final long serialVersionUID = -1139458573433634348L;
 
+    @SerializedName(value = "location_type_code")
     @Column(name = "location_type_code")
     private int locationTypeCode;
 
+    @SerializedName(value = "location_type_name")
     @Column(name = "location_type_name", length = 1000)
     private String locationTypeName; //BAR, SALON, SPORTS_HOUSE, HOTEL, HOSTELS, SCHOOLS, UNIVERSITIES, AIRPORT, BIBANDA, RESTAURANT, SUPERMARKET, SHOP, etc
 

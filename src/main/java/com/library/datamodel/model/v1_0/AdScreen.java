@@ -6,7 +6,6 @@ import com.library.datamodel.Constants.AdScreenType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,8 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -108,9 +105,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adScreenList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     private Set<AdProgram> adPrograms = new HashSet<>(0);
-
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "screenScheduleList")
-    private Set<AdSchedule> adSchedules = new HashSet<>(0);
 
     public AdScreen() {
     }
@@ -217,14 +211,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public void setAdPrograms(Set<AdProgram> adPrograms) {
         this.adPrograms = adPrograms;
-    }
-
-    public Set<AdSchedule> getAdSchedules() {
-        return adSchedules;
-    }
-
-    public void setAdSchedules(Set<AdSchedule> adSchedules) {
-        this.adSchedules = adSchedules;
     }
 
     @Override

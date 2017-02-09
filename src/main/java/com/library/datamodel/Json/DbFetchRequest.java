@@ -130,7 +130,7 @@ public class DbFetchRequest implements JsonDataModel {
         private String name;
 
         @SerializedName(value = "values")
-        private List<Integer> values;
+        private List<Object> values;
 
         public String getName() {
             return name;
@@ -140,11 +140,11 @@ public class DbFetchRequest implements JsonDataModel {
             this.name = name;
         }
 
-        public List<Integer> getValues() {
+        public List<Object> getValues() {
             return values;
         }
 
-        public void setValues(List<Integer> values) {
+        public void setValues(List<Object> values) {
             this.values = values;
         }
 
