@@ -8,6 +8,7 @@
 
 package com.library.datamodel.jaxb.config.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -43,8 +44,11 @@ import javax.xml.bind.annotation.XmlType;
 public class Amounttype {
 
     @XmlElement(required = true)
+    @SerializedName(value = "amount")
     protected int amount;
+    
     @XmlElement(required = true)
+    @SerializedName(value = "currency_code")
     protected String currencycode;
 
     /**

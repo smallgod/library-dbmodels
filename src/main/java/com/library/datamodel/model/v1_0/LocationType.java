@@ -5,6 +5,7 @@ import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,6 +28,7 @@ public class LocationType extends BaseEntity implements Auditable, Serializable 
     @Column(name = "location_type_name", length = 1000)
     private String locationTypeName; //BAR, SALON, SPORTS_HOUSE, HOTEL, HOSTELS, SCHOOLS, UNIVERSITIES, AIRPORT, BIBANDA, RESTAURANT, SUPERMARKET, SHOP, etc
 
+    
     public LocationType() {
     }
 

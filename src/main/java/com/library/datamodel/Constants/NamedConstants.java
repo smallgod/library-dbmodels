@@ -266,6 +266,12 @@ public interface NamedConstants {
      * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap
      */
     public static String CLIENT_POOL = "CLIENT_POOL";
+    
+    
+    /**
+     * Identifies by name the SGDbAdapter object stored in the JOBS datamap
+     */
+    public static String DB_ADAPTER = "DB_ADAPTER";
 
     /**
      * Advert/Program Slots (minutes) available in one Hour

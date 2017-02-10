@@ -8,7 +8,6 @@ import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,10 +24,12 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
+import org.joda.time.LocalDate;
 
 @TypeDefs({
     @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
@@ -108,6 +109,24 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     @Column(name = "schedules_played")
     private int totalSchedulesPlayed; //number of schedules played so far
+
+    @SerializedName(value = "start_date")
+    @Column(name = "start_date")
+    @Type(type = "jodalocaldate")
+    private LocalDate startAdDate;
+
+    @SerializedName(value = "end_date")
+    @Column(name = "end_date")
+    @Type(type = "jodalocaldate")
+    private LocalDate endAdDate;
+    
+    @SerializedName(value = "dsm_updated")
+    @Column(name = "dsm_updated")
+    private boolean isDSMUpdated;
+    
+    @SerializedName(value = "number_of_files")
+    @Column(name = "number_of_files")
+    private int numOfFileResources;
 
     public AdProgram() {
     }
@@ -213,6 +232,36 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.adScreenList = adScreenList;
     }
 
+    public LocalDate getStartAdDate() {
+        return startAdDate;
+    }
 
-    
+    public void setStartAdDate(LocalDate startAdDate) {
+        this.startAdDate = startAdDate;
+    }
+
+    public LocalDate getEndAdDate() {
+        return endAdDate;
+    }
+
+    public void setEndAdDate(LocalDate endAdDate) {
+        this.endAdDate = endAdDate;
+    }
+
+    public boolean isIsDSMUpdated() {
+        return isDSMUpdated;
+    }
+
+    public void setIsDSMUpdated(boolean isDSMUpdated) {
+        this.isDSMUpdated = isDSMUpdated;
+    }
+
+    public int getNumOfFileResources() {
+        return numOfFileResources;
+    }
+
+    public void setNumOfFileResources(int numOfFileResources) {
+        this.numOfFileResources = numOfFileResources;
+    }
+
 }
