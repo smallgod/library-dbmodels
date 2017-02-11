@@ -1,5 +1,6 @@
 package com.library.datamodel.Json;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
@@ -9,161 +10,169 @@ public class AdSetupRequest implements JsonDataModel {
     /*
     
     {
-    "method": "BULK_ADVERT_SETUP",
-    "player_detail":[
-        {
-            "display_date": "2017-01-10",
-            "terminals": [
-                {
-                    "task_id": 3480434808,
-                    "task_name": 3480434808,
-                    "terminal_id": 49011480463480900778,
-                    "terminal_width":1080,
-                    "terminal_height":720,
-                    "program_ids": [
-                        1480212808,
-                        6280434808,
-                        2481434808,
-                        8783334808,
-                        7480224808,
-                        9080434808
-                    ],
-                },
-                {
-                    "task_id": 1480434808,
-                    "task_name": 3480434808,
-                    "terminal_id": 89011480463480900778,
-                    "terminal_width":1080,
-                    "terminal_height":720,
-                    "program_ids": [
-                        1480212808,
-                        6280434808,
-                        2481434808,
-                        8783334808,
-                        7480224808,
-                        9080434808
-                    ],
-                }
-            ]
-        }
-    ],
-    "program_detail":[
-        {
-            "display_date": "2017-01-10",
-            "program_ids": [
-                {
-                    "program_id": 19011480463480900778,
-                    "status": "UPDATED",
-                    "display_layout": "3SPLIT",
-                    "display_times": [
-                        {
-                            "starttime": "21:06:49",
-                            "stoptime": "21:07:49"
-                        },
-                        {
-                            "starttime": "22:06:49",
-                            "stoptime": "22:07:49"
-                        }
-                    ],
-                    "resources": [
-                        {
-                            "resource_id": 5480212808,
-                            "resource_detail": "restaurant_front.mp4",
-                            "resource_type": "VIDEO",
-                            "status": "OLD", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                            "sequence":1
-                        },
-                        {
-                            "resource_id": 5480212848,
-                            "resource_detail": "restaurant_front2.mp4",
-                            "resource_type": "VIDEO",
-                            "status": "OLD", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                            "sequence":2
-                        },
-                        {
-                            "resource_id": 2481434800,
-                            "resource_detail": "This is Header text",
-                            "resource_type": "HEADER_TEXT",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        },
-                        {
-                            "resource_id": 2481434801,
-                            "resource_detail": "This is scrolling text here..",
-                            "resource_type": "SCROLL_TEXT",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        },
-                        {
-                            "resource_id": 2481434800,
-                            "resource_detail": "swimming pool.jpg",
-                            "resource_type": "IMAGE",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                            "sequence":3
-                        }
-                    ]
-                },
-                {
-                    "program_id": 97011480463480900778,
-                    "status": "NEW", //NEW - UPDATED - OLD ----- Program is new, updated OR old
-                    "display_layout": "TEXT",
-                    "display_times": [
-                        {
-                            "starttime": "21:06:49",
-                            "stoptime": "21:07:49"
-                        },
-                        {
-                            "starttime": "22:06:49",
-                            "stoptime": "22:07:49"
-                        }
-                    ],
-                    "resources": [
-                        {
-                            "resource_id": 5480212808,
-                            "resource_detail": "restaurant_front.mp4",
-                            "resource_type": "VIDEO",
-                            "status": "OLD", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        },
-                        {
-                            "resource_id": 2481434800,
-                            "resource_detail": "This is Header text",
-                            "resource_type": "HEADER_TEXT",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        },
-                        {
-                            "resource_id": 2481434801,
-                            "resource_detail": "This is scrolling text here..",
-                            "resource_type": "SCROLL_TEXT",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        },
-                        {
-                            "resource_id": 2481434800,
-                            "resource_detail": "swimming pool.jpg",
-                            "resource_type": "IMAGE",
-                            "status": "NEW", //NEW - UPDATED - OLD ----- resource is new, updated OR old
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+   "method":"DAILY_SETUP_STEP2",
+   "terminal_detail":[
+      {
+         "display_date":"2017-01-27",
+         "terminals":[
+            {
+               "task_id":3480434,
+               "task_name":3480434,
+               "terminal_id":230901364454349,
+               "terminal_width":1080,
+               "terminal_height":720,
+               "program_ids":[
+                  1485513768,
+                  1485513769
+               ]
+            },
+            {
+               "task_id":1480434,
+               "task_name":3480434,
+               "terminal_id":230901364454350,
+               "terminal_width":1080,
+               "terminal_height":720,
+               "program_ids":[
+                  1485513769,
+                  1485513768
+               ]
+            }
+         ]
+      }
+   ],
+   "program_detail":[
+      {
+         "display_date":"2017-01-27",
+         "program_ids":[
+            {
+               "program_id":1485513769,
+               "status":"UPDATED",
+               "display_layout":"3SPLIT",
+               "display_times":[
+                  {
+                     "starttime":"14:36:49",
+                     "stoptime":"14:39:49"
+                  },
+                  {
+                     "starttime":"14:46:49",
+                     "stoptime":"14:49:49"
+                  }
+               ],
+               "resources":[
+                  {
+                     "resource_id":97354630322880,
+                     "resource_detail":"30Movies_2017.mp4",
+                     "resource_type":"VIDEO",
+                     "status":"OLD",
+                     "sequence":1
+                  },
+                  {
+                     "resource_id":97354630323904,
+                     "resource_detail":"breadV.jpg",
+                     "resource_type":"IMAGE",
+                     "status":"NEW",
+                     "sequence":2
+                  },
+                  {
+                     "resource_id":97230072297028,
+                     "resource_detail":"Fist Header text",
+                     "resource_type":"HEADER_TEXT",
+                     "status":"NEW"
+                  },
+                  {
+                     "resource_id":97230473397020,
+                     "resource_detail":"This is my first scrolling text here..",
+                     "resource_type":"SCROLL_TEXT",
+                     "status":"NEW"
+                  }
+               ],
+                "text": [
+                    {
+                        "text": "This is scrolling text here..",
+                        "type": "SCROLL_TEXT"
+                    },
+                    {
+                        "text": "This is Header text",
+                        "type": "HEADER_TEXT"
+                    }
+                ]
+    
+    
+    
+    
+            },
+            {
+               "program_id":1485513768,
+               "status":"NEW",
+               "display_layout":"TEXT",
+               "display_times":[
+                  {
+                     "starttime":"14:50:49",
+                     "stoptime":"14:59:49"
+                  }
+               ],
+               "resources":[
+                  {
+                     "resource_id":97354630325888,
+                     "resource_detail":"chimei-lcd2.vob",
+                     "resource_type":"VIDEO",
+                     "status":"OLD",
+                     "sequence":1
+                  },
+                  {
+                     "resource_id":97354630323904,
+                     "resource_detail":"breadV.jpg",
+                     "resource_type":"IMAGE",
+                     "status":"NEW",
+                     "sequence":2
+                  },
+                  {
+                     "resource_id":97230472297021,
+                     "resource_detail":"2nd Header Text",
+                     "resource_type":"HEADER_TEXT",
+                     "status":"NEW"
+                  },
+                  {
+                     "resource_id":97230472297020,
+                     "resource_detail":"My next scrolling next, part 2...",
+                     "resource_type":"SCROLL_TEXT",
+                     "status":"NEW"
+                  }
+               ],
+                "text": [
+                    {
+                        "text": "This is scrolling text here..",
+                        "type": "SCROLL_TEXT"
+                    },
+                    {
+                        "text": "This is Header text",
+                        "type": "HEADER_TEXT"
+                    }
+                ]
+    
+            }
+         ]
+      }
+   ]
 }
     
      */
     @SerializedName(value = "method")
     private String methodName;
 
-    @SerializedName(value = "player_detail")
-    private List<PlayerDetail> playerDetail;
+    @SerializedName(value = "terminal_detail")
+    private List<TerminalDetail> terminalDetail;
 
     @SerializedName(value = "program_detail")
     private List<ProgramDetail> programDetail;
 
-    public class PlayerDetail {
+    public class TerminalDetail {
 
         @SerializedName(value = "display_date")
         private String displayDate;
 
         @SerializedName(value = "terminals")
-        private List<TerminalDetail> terminals;
+        private List<Terminal> terminals;
 
         public String getDisplayDate() {
             return displayDate;
@@ -173,15 +182,15 @@ public class AdSetupRequest implements JsonDataModel {
             this.displayDate = displayDate;
         }
 
-        public List<TerminalDetail> getTerminals() {
+        public List<Terminal> getTerminals() {
             return terminals;
         }
 
-        public void setTerminals(List<TerminalDetail> terminals) {
+        public void setTerminals(List<Terminal> terminals) {
             this.terminals = terminals;
         }
 
-        public class TerminalDetail {
+        public class Terminal {
 
             @SerializedName(value = "terminal_id")
             private String terminalId;
@@ -199,7 +208,7 @@ public class AdSetupRequest implements JsonDataModel {
             private String taskName;
 
             @SerializedName(value = "program_ids")
-            private List<Long> programIdList;
+            private List<Integer> programIdList;
 
             public String getTerminalId() {
                 return terminalId;
@@ -225,11 +234,11 @@ public class AdSetupRequest implements JsonDataModel {
                 this.taskName = taskName;
             }
 
-            public List<Long> getProgramIdList() {
+            public List<Integer> getProgramIdList() {
                 return programIdList;
             }
 
-            public void setProgramIdList(List<Long> programIdList) {
+            public void setProgramIdList(List<Integer> programIdList) {
                 this.programIdList = programIdList;
             }
 
@@ -279,7 +288,7 @@ public class AdSetupRequest implements JsonDataModel {
         public class Program {
 
             @SerializedName(value = "program_id")
-            private String programId;
+            private int programId;
 
             @SerializedName(value = "status")
             private String status;
@@ -293,6 +302,18 @@ public class AdSetupRequest implements JsonDataModel {
             @SerializedName(value = "resources")
             private List<Resources> resources;
 
+            @SerializedName("text")
+            @Expose
+            private List<Text> text = null;
+
+            public List<Text> getText() {
+                return text;
+            }
+
+            public void setText(List<Text> text) {
+                this.text = text;
+            }
+
             public List<Resources> getResources() {
                 return resources;
             }
@@ -301,11 +322,11 @@ public class AdSetupRequest implements JsonDataModel {
                 this.resources = resources;
             }
 
-            public String getProgramId() {
+            public int getProgramId() {
                 return programId;
             }
 
-            public void setProgramId(String programId) {
+            public void setProgramId(int programId) {
                 this.programId = programId;
             }
 
@@ -361,7 +382,7 @@ public class AdSetupRequest implements JsonDataModel {
             public class Resources {
 
                 @SerializedName(value = "resource_id")
-                private String resourceId;
+                private long resourceId;
 
                 @SerializedName(value = "resource_detail")
                 private String resourceDetail;
@@ -375,11 +396,11 @@ public class AdSetupRequest implements JsonDataModel {
                 @SerializedName(value = "sequence")
                 private int sequence;
 
-                public String getResourceId() {
+                public long getResourceId() {
                     return resourceId;
                 }
 
-                public void setResourceId(String resourceId) {
+                public void setResourceId(long resourceId) {
                     this.resourceId = resourceId;
                 }
 
@@ -418,6 +439,33 @@ public class AdSetupRequest implements JsonDataModel {
             }
 
         }
+
+        public class Text {
+
+            @SerializedName("text")
+            @Expose
+            private String text;
+            @SerializedName("type")
+            @Expose
+            private String type;
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+        }
     }
 
     public String getMethodName() {
@@ -428,12 +476,12 @@ public class AdSetupRequest implements JsonDataModel {
         this.methodName = methodName;
     }
 
-    public List<PlayerDetail> getPlayerDetail() {
-        return playerDetail;
+    public List<TerminalDetail> getTerminalDetail() {
+        return terminalDetail;
     }
 
-    public void setPlayerDetail(List<PlayerDetail> playerDetail) {
-        this.playerDetail = playerDetail;
+    public void setTerminalDetail(List<TerminalDetail> terminalDetail) {
+        this.terminalDetail = terminalDetail;
     }
 
     public List<ProgramDetail> getProgramDetail() {

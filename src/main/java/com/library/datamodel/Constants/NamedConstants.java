@@ -5,6 +5,8 @@
  */
 package com.library.datamodel.Constants;
 
+import org.joda.time.DateTimeZone;
+
 /**
  *
  * @author smallgod
@@ -24,6 +26,8 @@ public interface NamedConstants {
      */
     public static final String KAMPALA_TIME_ZONE = "Africa/Kampala";
 
+    public static final DateTimeZone UTC_TIME_ZONE = DateTimeZone.UTC;
+
     /**
      * The DateTime format we are using in this application is in the format
      * "2016-07-25 08:55:09"
@@ -40,6 +44,11 @@ public interface NamedConstants {
      * The time represented as Hour:Minute
      */
     public static final String HOUR_MINUTE_FORMAT = "HH:mm";
+    
+    /**
+     * The time represented as Hour:minute:second
+     */
+    public static final String HOUR_MINUTE_SEC_FORMAT = "HH:mm:ss";
 
     /**
      * All JSON request strings must have a root node named 'method' which
@@ -266,8 +275,7 @@ public interface NamedConstants {
      * Identifies by name the HTTP CLIENT pool stored in the JOBS datamap
      */
     public static String CLIENT_POOL = "CLIENT_POOL";
-    
-    
+
     /**
      * Identifies by name the SGDbAdapter object stored in the JOBS datamap
      */

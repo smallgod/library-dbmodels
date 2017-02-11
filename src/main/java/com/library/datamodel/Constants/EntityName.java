@@ -23,7 +23,8 @@ public enum EntityName implements Constants {
     AD_SCREEN("AD_SCREEN"),
     AD_CLIENT("AD_CLIENT"),
     AD_OWNER("AD_OWNER"),
-    AD_AREA("AD_AREA");
+    AD_AREA("AD_AREA"),
+    AD_TEXT("AD_TEXT");
 
     private final String entityNameStr;
 

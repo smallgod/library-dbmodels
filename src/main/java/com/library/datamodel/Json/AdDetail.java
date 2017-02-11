@@ -9,6 +9,117 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AdDetail {
+    
+    /*
+        ISIAH 45:11 - LIVING BIBLE / KJV
+    
+        {
+        "method": "PLACE_AD",
+        "params": {
+            "basic_info": {
+                "phone_contact": "774983602",
+                "campaign_name": "Jgifts new Campaign",
+                "advert_length": 10,
+                "notifications": true,
+                "layout_type": "3SPLIT"
+            },
+            "targeting": {
+                "target_screen_code": "",
+                "areas": [
+                    8,
+                    7,
+                    6,
+                    4,
+                    5,
+                    3
+                ],
+                "location_types": [
+                    7,
+                    9,
+                    3,
+                    5,
+                    2
+                ],
+                "audience_types": [
+                    2,
+                    4,
+                    5,
+                    9
+                ]
+            },
+
+            "schedule_info": {
+                "start_date": "2017-01-20",
+                "end_date": "2017-01-22",
+                "schedule": [
+                        {
+                            "time": {
+                                "slot": "EARLY_BIRD",
+                                "preferred": 7, //should be -1 incase not set by user, Hour preferred to play program
+                                "occurrence":3 //number of times we can play this ad within this time slot
+                            },
+                            "day": [
+                                1, //1 for first day of week - Monday
+                                4,
+                                7,
+                                6
+                            ]
+                        },
+                        {
+                            "time": {
+                                "slot": "PRIME",
+                                "preferred": 21,
+                                "occurrence":3 //number of times we can play this ad within this time slot
+                            },
+                            "day": [
+                                5,
+                                6,
+                                7
+                            ]
+                        }
+                    ]
+                },
+
+                "payment_info": {
+                    "payment_method": "MTNMOMO_UG",
+                    "account_number": "07888788878"
+                },
+                "resources": [
+                    {
+                        "upload_id": "1486059288818_97354630323904.jpg",
+                        "region": "RIGHT",
+                        "sequence": 2
+                    },
+                    {
+                        "upload_id": "1486059288839_97354630322880.mp4",
+                        "region": "RIGHT",
+                        "sequence": 1
+                    },
+                    {
+                        "upload_id": "1486115397494_97354630325888.vob",
+                        "region": "MIDDLE",
+                        "sequence": 1
+                    }
+                ],
+                "text": [
+                    {
+                        "text": "This is scrolling text here..",
+                        "type": "SCROLL_TEXT"
+                    },
+                    {
+                        "text": "This is Header text",
+                        "type": "HEADER_TEXT"
+                    }
+                ]
+            }
+        }
+    
+    */
+    
+    
+    
+    
+    
 
     @SerializedName("method")
     @Expose

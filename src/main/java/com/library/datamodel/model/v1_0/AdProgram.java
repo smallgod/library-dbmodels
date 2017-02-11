@@ -48,14 +48,14 @@ import org.joda.time.LocalDate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"program_id"}))
+@Table(name = "ad_program")
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
-    @Column(name = "program_id") //this is the ID we internally generate for every program
-    private int advertProgramId;
+    @Column(name = "program_id") //this is the ID we internally generate for every program, by default, let it be zero(0) since we dont have it till later after generation
+    private int advertProgramId = 0;
 
     @ManyToOne
     @JoinColumns({
@@ -67,7 +67,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private String adCampaignName;
 
     @Column(name = "ad_length")
-    private int adLength;
+    private long adLength;
 
     @Column(name = "notfiy")
     private boolean isToBeNotified; //send SMS notification concerning this ad
@@ -127,6 +127,38 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "number_of_files")
     @Column(name = "number_of_files")
     private int numOfFileResources;
+    
+    @SerializedName(value = "program_resources")
+    @ManyToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "list_program_resources",
+            joinColumns = {
+                @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false, insertable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "resource_id", referencedColumnName = "resource_id", nullable = false, insertable = false, updatable = false),
+                @JoinColumn(name = "resource_size", referencedColumnName = "resource_size", nullable = false, insertable = false, updatable = false),
+                @JoinColumn(name = "resource_name", referencedColumnName = "resource_name", nullable = false, insertable = false, updatable = false)
+            }
+    )
+    //@Cascade(CascadeType.SAVE_UPDATE)
+    private Set<AdResource> adResourceList = new HashSet<>(0);//all the screens on which this ad needs to display
+    
+    
+     //@ManyToMany(mappedBy = "ad_screen_list")
+    @SerializedName(value = "program_text")
+    @ManyToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "list_program_text",
+            joinColumns = {
+                @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false, insertable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "text_id", referencedColumnName = "text_id", nullable = false, insertable = false, updatable = false)
+            }
+    )
+    //@Cascade(CascadeType.SAVE_UPDATE)
+    private Set<AdText> adTextList = new HashSet<>(0);//all the screens on which this ad needs to display
+
+    
 
     public AdProgram() {
     }
@@ -184,11 +216,11 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.adCampaignName = adCampaignName;
     }
 
-    public int getAdLength() {
+    public long getAdLength() {
         return adLength;
     }
 
-    public void setAdLength(int adLength) {
+    public void setAdLength(long adLength) {
         this.adLength = adLength;
     }
 
@@ -262,6 +294,22 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setNumOfFileResources(int numOfFileResources) {
         this.numOfFileResources = numOfFileResources;
+    }
+
+    public Set<AdResource> getAdResourceList() {
+        return adResourceList;
+    }
+
+    public void setAdResourceList(Set<AdResource> adResourceList) {
+        this.adResourceList = adResourceList;
+    }
+
+    public Set<AdText> getAdTextList() {
+        return adTextList;
+    }
+
+    public void setAdTextList(Set<AdText> adTextList) {
+        this.adTextList = adTextList;
     }
 
 }

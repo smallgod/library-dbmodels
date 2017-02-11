@@ -7,34 +7,33 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ResourceType implements Constants {
+public enum TextType implements Constants {
 
-    IMAGE(0),
-    VIDEO(1),
-    AUDIO(2),
-    FLASH(3),
-    TEXT(4);
+    HEADER_TEXT("HEADER_TEXT"),
+    SCROLL_TEXT("SCROLL_TEXT");
+    //VIDEO("VIDEO"),
+    //IMAGE("IMAGE");
 
-    private final int enumValue;
+    private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ResourceType.class);
+    private static final LoggerUtil logger = new LoggerUtil(TextType.class);
 
-    ResourceType(int enumValue) {
+    TextType(String enumValue) {
         this.enumValue = enumValue;
     }
 
     @Override
-    public Integer getValue() {
+    public String getValue() {
         return this.enumValue;
     }
 
-    public static ResourceType convertToEnum(int value) {
+    public static TextType convertToEnum(String value) {
 
-        if (!(((value + "").trim()).isEmpty())) {
+        if (value != null) {
 
-            for (ResourceType availableValue : ResourceType.values()) {
+            for (TextType availableValue : TextType.values()) {
 
-                if (value == availableValue.getValue()) {
+                if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;
                 }
             }
@@ -42,5 +41,6 @@ public enum ResourceType implements Constants {
         logger.warn("No constant with text " + value + " found");
         throw new IllegalArgumentException("No constant with text " + value + " found");
         //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
+
     }
 }

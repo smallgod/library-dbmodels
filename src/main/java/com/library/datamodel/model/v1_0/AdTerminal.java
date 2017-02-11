@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,15 +21,27 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     private static final long serialVersionUID = -7420964819128665745L;
 
     @Column(name = "terminal_id")
-    private long terminalId;
+    @SerializedName(value = "terminal_id")
+    private String terminalId;
+    
+    @Column(name = "terminal_name")
+    @SerializedName(value = "terminal_name")
+    private String terminalName;
+    
+    @Column(name = "terminal_description")
+    @SerializedName(value = "terminal_description")
+    private String terminalDescription;
 
     @Column(name = "task_id")
+    @SerializedName(value = "task_id")
     private int taskId;
 
     @Column(name = "latitude", precision = 9, scale = 7)
+    @SerializedName(value = "latitude")
     private double latitude;
 
     @Column(name = "longitude", precision = 9, scale = 7)
+    @SerializedName(value = "longitude")
     private double longitude;
 
     //private int displayWidth; //terminal resolution ??
@@ -36,11 +49,11 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     public AdTerminal() {
     }
 
-    public long getTerminalId() {
+    public String getTerminalId() {
         return terminalId;
     }
 
-    public void setTerminalId(long terminalId) {
+    public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
     }
 
@@ -71,6 +84,22 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public String getTerminalName() {
+        return terminalName;
+    }
+
+    public void setTerminalName(String terminalName) {
+        this.terminalName = terminalName;
+    }
+
+    public String getTerminalDescription() {
+        return terminalDescription;
+    }
+
+    public void setTerminalDescription(String terminalDescription) {
+        this.terminalDescription = terminalDescription;
     }
 
 }
