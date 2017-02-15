@@ -25,11 +25,8 @@ public class AdMonitor extends BaseEntity implements Auditable, Serializable {
     @Column(name = "monitor_id")
     private String monitorId;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false)
-    })
-    private AdProgram adProgram;
+    
+////    private AdProgram adProgram;
 
     @Column(name = "sched_screen_count")
     private int scheduledScreenCount; //number of screens to reach for this schedule
@@ -53,13 +50,13 @@ public class AdMonitor extends BaseEntity implements Auditable, Serializable {
         this.monitorId = monitorId;
     }
 
-    public AdProgram getAdProgram() {
-        return adProgram;
-    }
-
-    public void setAdProgram(AdProgram adProgram) {
-        this.adProgram = adProgram;
-    }
+//    public AdProgram getAdProgram() {
+//        return adProgram;
+//    }
+//
+//    public void setAdProgram(AdProgram adProgram) {
+//        this.adProgram = adProgram;
+//    }
 
     public int getScheduledScreenCount() {
         return scheduledScreenCount;
@@ -78,3 +75,9 @@ public class AdMonitor extends BaseEntity implements Auditable, Serializable {
     }
 
 }
+
+
+//@OneToOne(fetch = FetchType.EAGER)
+//    @JoinColumns({
+//        @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false)
+//    })

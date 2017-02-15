@@ -33,8 +33,8 @@ public class AudienceType extends BaseEntity implements Auditable, Serializable 
     private String audienceName;
     
     //@ManyToMany(mappedBy = "audienceTypes")
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "audienceTypes")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    private Set<AdScreen> adScreens = new HashSet<>(0);
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "audienceTypes")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+//    private Set<AdScreen> adAudienceScreens = new HashSet<>(0);
 
     public AudienceType() {
     }
@@ -60,12 +60,12 @@ public class AudienceType extends BaseEntity implements Auditable, Serializable 
         return this.getLastModifiedBy();
     }
 
-    public Set<AdScreen> getAdScreens() {
-        return adScreens;
-    }
-
-    public void setAdScreens(Set<AdScreen> adScreens) {
-        this.adScreens = adScreens;
-    }
+//    public Set<AdScreen> getAdAudienceScreens() {
+//        return adAudienceScreens;
+//    }
+//
+//    public void setAdAudienceScreens(Set<AdScreen> adAudienceScreens) {
+//        this.adAudienceScreens = adAudienceScreens;
+//    }
 
 }

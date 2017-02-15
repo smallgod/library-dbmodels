@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -28,7 +26,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_text", uniqueConstraints = @UniqueConstraint(columnNames = {"text_id"}))
 
-public class AdText extends BaseEntity implements Auditable, Serializable {
+public class AdText1 extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
 
@@ -54,19 +52,11 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "uploaded_to_dsm")
     private boolean isUploadedToDSM;
 
-    @SerializedName(value = "program_text")
-    @ManyToMany(fetch = FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "ad_program_text",
-        joinColumns = {
-            @JoinColumn(name = "text_id", referencedColumnName = "text_id")
-        },
-        inverseJoinColumns = {
-            @JoinColumn(name = "program_join_id", referencedColumnName = "program_join_id")
-        }
-    )
-    private Set<AdProgram> adPrograms = new HashSet<>();
+    @SerializedName(value = "program")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adTextList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    private Set<AdProgram> adProgramTexts = new HashSet<>();
 
-    public AdText() {
+    public AdText1() {
     }
 
     public long getTextId() {
@@ -114,21 +104,66 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
         this.screenRegion = screenRegion;
     }
 
-    public Set<AdProgram> getAdPrograms() {
-        return adPrograms;
+    public Set<AdProgram> getAdProgramTexts() {
+        return adProgramTexts;
     }
 
-    public void setAdPrograms(Set<AdProgram> adPrograms) {
-        this.adPrograms = adPrograms;
+    public void setAdProgramTexts(Set<AdProgram> adProgramTexts) {
+        this.adProgramTexts = adProgramTexts;
     }
+    
+    
 
 //    public Set<AdProgram> getAdProgramTexts() {
-//        return adPrograms;
+//        return adProgramTexts;
 //    }
 //
-//    public void setAdProgramTexts(Set<AdProgram> adPrograms) {
-//        this.adPrograms = adPrograms;
+//    public void setAdProgramTexts(Set<AdProgram> adProgramTexts) {
+//        this.adProgramTexts = adProgramTexts;
 //    }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + (int) (this.textId ^ (this.textId >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.textContent);
+        hash = 79 * hash + Objects.hashCode(this.textType);
+        hash = 79 * hash + Objects.hashCode(this.screenRegion);
+        hash = 79 * hash + (this.isUploadedToDSM ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.adProgramTexts);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdText1 other = (AdText1) obj;
+        if (this.textId != other.textId) {
+            return false;
+        }
+        if (this.isUploadedToDSM != other.isUploadedToDSM) {
+            return false;
+        }
+        if (!Objects.equals(this.textContent, other.textContent)) {
+            return false;
+        }
+        if (this.textType != other.textType) {
+            return false;
+        }
+        if (this.screenRegion != other.screenRegion) {
+            return false;
+        }
+        if (!Objects.equals(this.adProgramTexts, other.adProgramTexts)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -62,38 +62,28 @@ public class AdSetupRequest implements JsonDataModel {
                   {
                      "resource_id":97354630322880,
                      "resource_detail":"30Movies_2017.mp4",
-                     "resource_type":"VIDEO",
+                     "resource_type":1,
                      "status":"OLD",
                      "sequence":1
                   },
                   {
                      "resource_id":97354630323904,
                      "resource_detail":"breadV.jpg",
-                     "resource_type":"IMAGE",
+                     "resource_type":0,
                      "status":"NEW",
                      "sequence":2
-                  },
-                  {
-                     "resource_id":97230072297028,
-                     "resource_detail":"Fist Header text",
-                     "resource_type":"HEADER_TEXT",
-                     "status":"NEW"
-                  },
-                  {
-                     "resource_id":97230473397020,
-                     "resource_detail":"This is my first scrolling text here..",
-                     "resource_type":"SCROLL_TEXT",
-                     "status":"NEW"
                   }
                ],
                 "text": [
                     {
                         "text": "This is scrolling text here..",
-                        "type": "SCROLL_TEXT"
+                        "type": "SCROLL_TEXT",
+                        "text_id":93939993
                     },
                     {
                         "text": "This is Header text",
-                        "type": "HEADER_TEXT"
+                        "type": "HEADER_TEXT",
+                        "text_id":93934533
                     }
                 ]
     
@@ -115,38 +105,28 @@ public class AdSetupRequest implements JsonDataModel {
                   {
                      "resource_id":97354630325888,
                      "resource_detail":"chimei-lcd2.vob",
-                     "resource_type":"VIDEO",
+                     "resource_type":1,
                      "status":"OLD",
                      "sequence":1
                   },
                   {
                      "resource_id":97354630323904,
                      "resource_detail":"breadV.jpg",
-                     "resource_type":"IMAGE",
+                     "resource_type":0,
                      "status":"NEW",
                      "sequence":2
-                  },
-                  {
-                     "resource_id":97230472297021,
-                     "resource_detail":"2nd Header Text",
-                     "resource_type":"HEADER_TEXT",
-                     "status":"NEW"
-                  },
-                  {
-                     "resource_id":97230472297020,
-                     "resource_detail":"My next scrolling next, part 2...",
-                     "resource_type":"SCROLL_TEXT",
-                     "status":"NEW"
                   }
                ],
                 "text": [
                     {
                         "text": "This is scrolling text here..",
-                        "type": "SCROLL_TEXT"
+                        "type": "SCROLL_TEXT",
+                        "text_id":93934533
                     },
                     {
                         "text": "This is Header text",
-                        "type": "HEADER_TEXT"
+                        "type": "HEADER_TEXT",
+                        "text_id":93934533
                     }
                 ]
     
@@ -287,6 +267,10 @@ public class AdSetupRequest implements JsonDataModel {
 
         public class Program {
 
+            @Expose(deserialize = false, serialize = false)
+            private long entityId;
+
+            //private transient long entityId;
             @SerializedName(value = "program_id")
             private int programId;
 
@@ -354,6 +338,14 @@ public class AdSetupRequest implements JsonDataModel {
                 this.displayTimesList = displayTimesList;
             }
 
+            public long getEntityId() {
+                return entityId;
+            }
+
+            public void setEntityId(long entityId) {
+                this.entityId = entityId;
+            }
+
             public class DisplayTime {
 
                 @SerializedName(value = "starttime")
@@ -381,6 +373,18 @@ public class AdSetupRequest implements JsonDataModel {
 
             public class Resources {
 
+                public long getEntityId() {
+                    return entityId;
+                }
+
+                public void setEntityId(long entityId) {
+                    this.entityId = entityId;
+                }
+
+                @Expose(serialize = false, deserialize = false)
+                private long entityId;
+
+                //private transient long entityId;// will not be serialized or deserialized
                 @SerializedName(value = "resource_id")
                 private long resourceId;
 
@@ -388,7 +392,7 @@ public class AdSetupRequest implements JsonDataModel {
                 private String resourceDetail;
 
                 @SerializedName(value = "resource_type")
-                private String resourceType;
+                private int resourceType;
 
                 @SerializedName(value = "status")
                 private String status;
@@ -412,11 +416,11 @@ public class AdSetupRequest implements JsonDataModel {
                     this.resourceDetail = resourceDetail;
                 }
 
-                public String getResourceType() {
+                public int getResourceType() {
                     return resourceType;
                 }
 
-                public void setResourceType(String resourceType) {
+                public void setResourceType(int resourceType) {
                     this.resourceType = resourceType;
                 }
 
@@ -438,34 +442,48 @@ public class AdSetupRequest implements JsonDataModel {
 
             }
 
+            public class Text {
+
+                @SerializedName("text")
+                @Expose
+                private String text;
+
+                @SerializedName("type")
+                @Expose
+                private String type;
+
+                @SerializedName("text_id")
+                @Expose
+                private long textId;
+
+                public String getText() {
+                    return text;
+                }
+
+                public void setText(String text) {
+                    this.text = text;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
+                }
+
+                public long getTextId() {
+                    return textId;
+                }
+
+                public void setTextId(long textId) {
+                    this.textId = textId;
+                }
+
+            }
+
         }
 
-        public class Text {
-
-            @SerializedName("text")
-            @Expose
-            private String text;
-            @SerializedName("type")
-            @Expose
-            private String type;
-
-            public String getText() {
-                return text;
-            }
-
-            public void setText(String text) {
-                this.text = text;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-        }
     }
 
     public String getMethodName() {

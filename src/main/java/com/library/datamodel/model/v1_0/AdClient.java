@@ -1,11 +1,20 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -40,6 +49,8 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
     @Column(name = "client_id")
     private String clientId; //this can be a telephone number  / primary contact
 
+    //private Set<AdProgram> clientAdPrograms = new HashSet<>(0);
+
     public AdClient() {
     }
 
@@ -56,4 +67,25 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         return this.getLastModifiedBy();
     }
 
+//    public Set<AdProgram> getClientAdPrograms() {
+//        return clientAdPrograms;
+//    }
+//
+//    public void setClientAdPrograms(Set<AdProgram> clientAdPrograms) {
+//        this.clientAdPrograms = clientAdPrograms;
+//    }
+
 }
+
+//@SerializedName(value = "client_programs")
+//    @OneToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+//    @JoinTable(name = "client_programs",
+//            joinColumns = {
+//                @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false, insertable = false, updatable = false)
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "client_program_id", referencedColumnName = "program_id", nullable = false, insertable = false, updatable = false),
+//                @JoinColumn(name = "campaign_name", referencedColumnName = "campaign_name", nullable = false, insertable = false, updatable = false)
+//            }
+//    )
+//    //@Cascade(CascadeType.SAVE_UPDATE)

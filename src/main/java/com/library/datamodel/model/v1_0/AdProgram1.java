@@ -53,7 +53,7 @@ import org.joda.time.LocalDate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"program_join_id"}))
 
-public class AdProgram extends BaseEntity implements Auditable, Serializable {
+public class AdProgram1 extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
@@ -126,21 +126,21 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private int numOfFileResources;
 
     @SerializedName(value = "program_texts")
-    @ManyToMany(fetch = FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL, mappedBy = "adPrograms") //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-//    @JoinTable(name = "ad_program_text",
-//            joinColumns = {
-//                @JoinColumn(name = "program_join_id", referencedColumnName = "program_join_id", nullable = false, insertable = false, updatable = false)
-//            },
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "text_id", referencedColumnName = "text_id", nullable = false, insertable = false, updatable = false)
-//            }
-//    )
+    @ManyToMany(fetch = FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "ad_program_text",
+            joinColumns = {
+                @JoinColumn(name = "program_join_id", referencedColumnName = "program_join_id", nullable = false, insertable = false, updatable = false)
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "text_id", referencedColumnName = "text_id", nullable = false, insertable = false, updatable = false)
+            }
+    )
     //@Cascade(CascadeType.ALL)
     private Set<AdText> adTextList = new HashSet<>();//all the screens on which this ad needs to display
 
 //  private Set<AdResource> adResourceList = new HashSet<AdResource>();//all the screens on which this ad needs to display
     
-    public AdProgram() {
+    public AdProgram1() {
     }
 
     public AdvertStatus getAdStatus() {
@@ -291,6 +291,91 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.progJoinId = progJoinId;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + this.advertProgramId;
+        hash = 83 * hash + this.progJoinId;
+        hash = 83 * hash + Objects.hashCode(this.adCampaignName);
+        hash = 83 * hash + (int) (this.adLength ^ (this.adLength >>> 32));
+        hash = 83 * hash + (this.isToBeNotified ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.displayLayout);
+        hash = 83 * hash + Objects.hashCode(this.adStatus);
+        hash = 83 * hash + Objects.hashCode(this.adStep);
+        hash = 83 * hash + Objects.hashCode(this.paymentStatus);
+        hash = 83 * hash + this.totalSchedulesToPlay;
+        hash = 83 * hash + this.totalSchedulesPlayed;
+        hash = 83 * hash + Objects.hashCode(this.startAdDate);
+        hash = 83 * hash + Objects.hashCode(this.endAdDate);
+        hash = 83 * hash + (this.isDSMUpdated ? 1 : 0);
+        hash = 83 * hash + this.numOfFileResources;
+        hash = 83 * hash + Objects.hashCode(this.adTextList);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdProgram1 other = (AdProgram1) obj;
+        if (this.advertProgramId != other.advertProgramId) {
+            return false;
+        }
+        if (this.progJoinId != other.progJoinId) {
+            return false;
+        }
+        if (this.adLength != other.adLength) {
+            return false;
+        }
+        if (this.isToBeNotified != other.isToBeNotified) {
+            return false;
+        }
+        if (this.totalSchedulesToPlay != other.totalSchedulesToPlay) {
+            return false;
+        }
+        if (this.totalSchedulesPlayed != other.totalSchedulesPlayed) {
+            return false;
+        }
+        if (this.isDSMUpdated != other.isDSMUpdated) {
+            return false;
+        }
+        if (this.numOfFileResources != other.numOfFileResources) {
+            return false;
+        }
+        if (!Objects.equals(this.adCampaignName, other.adCampaignName)) {
+            return false;
+        }
+        if (this.displayLayout != other.displayLayout) {
+            return false;
+        }
+        if (this.adStatus != other.adStatus) {
+            return false;
+        }
+        if (this.adStep != other.adStep) {
+            return false;
+        }
+        if (this.paymentStatus != other.paymentStatus) {
+            return false;
+        }
+        if (!Objects.equals(this.startAdDate, other.startAdDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.endAdDate, other.endAdDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.adTextList, other.adTextList)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 

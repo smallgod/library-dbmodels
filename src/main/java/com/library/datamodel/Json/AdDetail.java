@@ -56,7 +56,7 @@ public class AdDetail {
                             "time": {
                                 "slot": "EARLY_BIRD",
                                 "preferred": 7, //should be -1 incase not set by user, Hour preferred to play program
-                                "occurrence":3 //number of times we can play this ad within this time slot
+                                "frequency":3 //number of times we can play this ad within this time slot
                             },
                             "day": [
                                 1, //1 for first day of week - Monday
@@ -69,7 +69,7 @@ public class AdDetail {
                             "time": {
                                 "slot": "PRIME",
                                 "preferred": 21,
-                                "occurrence":3 //number of times we can play this ad within this time slot
+                                "frequency":3 //number of times we can play this ad within this time slot
                             },
                             "day": [
                                 5,
@@ -401,9 +401,14 @@ public class AdDetail {
                     @SerializedName("slot")
                     @Expose
                     private String slot;
+                    
                     @SerializedName("preferred")
                     @Expose
                     private Integer preferred;
+                    
+                    @SerializedName("frequency")
+                    @Expose
+                    private Integer frequency = 1;//number of times we can play this ad within this time slot
 
                     public String getSlot() {
                         return slot;
@@ -419,6 +424,14 @@ public class AdDetail {
 
                     public void setPreferred(Integer preferred) {
                         this.preferred = preferred;
+                    }
+
+                    public Integer getFrequency() {
+                        return frequency;
+                    }
+
+                    public void setFrequency(Integer frequency) {
+                        this.frequency = frequency;
                     }
 
                 }

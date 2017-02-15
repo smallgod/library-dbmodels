@@ -3,11 +3,15 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -23,11 +27,11 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @Column(name = "terminal_id")
     @SerializedName(value = "terminal_id")
     private String terminalId;
-    
+
     @Column(name = "terminal_name")
     @SerializedName(value = "terminal_name")
     private String terminalName;
-    
+
     @Column(name = "terminal_description")
     @SerializedName(value = "terminal_description")
     private String terminalDescription;
@@ -43,6 +47,28 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @Column(name = "longitude", precision = 9, scale = 7)
     @SerializedName(value = "longitude")
     private double longitude;
+    
+//    @SerializedName(value = "terminal_screens")
+//    @OneToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+//    @JoinTable(name = "terminal_screens",
+//            joinColumns = {
+//                @JoinColumn(name = "terminal_id", referencedColumnName = "terminal_id", nullable = false, insertable = false, updatable = false)
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
+//            }
+//    )
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    private Set<AdScreen> terminalScreens = new HashSet<>(0);
+    
+    
+//    @SerializedName(value = "terminal_screen")
+//    @OneToOne //For now, let's have only one screen (max) for every terminal
+//    @JoinColumns({
+//        @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
+//    })
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    private AdScreen terminalScreen;
 
     //private int displayWidth; //terminal resolution ??
     //private int displayHeight;

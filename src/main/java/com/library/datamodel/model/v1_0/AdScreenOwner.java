@@ -1,12 +1,26 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -37,8 +51,30 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
 
     private static final long serialVersionUID = -7420964819128665745L;
 
-    @Column(name = "owner_id")
+    @Column(name = "owner_id", nullable = false)
+    @SerializedName(value = "owner_id")
+    @Expose
     private String screenOwnerId;
+
+    
+    //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    //@Cascade(CascadeType.SAVE_UPDATE)
+    //@Fetch(FetchMode.JOIN)
+    
+//    @JoinTable(name = "owner_screens",
+//            joinColumns = {
+//                @JoinColumn(name = "owner_id", referencedColumnName = "owner_id", nullable = false, insertable = false, updatable = false)
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
+//
+//            }
+//    )
+    @Expose
+    @SerializedName(value = "owner_screens")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "screenOwner")
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Set<AdScreen> screensOwned = new HashSet<>(0);
 
     public AdScreenOwner() {
     }
@@ -56,4 +92,11 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
         return this.getLastModifiedBy();
     }
 
+    public Set<AdScreen> getScreensOwned() {
+        return screensOwned;
+    }
+
+    public void setScreensOwned(Set<AdScreen> screensOwned) {
+        this.screensOwned = screensOwned;
+    }
 }

@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum DbOperation implements Constants {
 
+    FETCH_SET("fetchset"),
     SAVE_SINGLE("save"),
     READ_SINGLE("read"),
     SAVE_BULK("savebulk"),
