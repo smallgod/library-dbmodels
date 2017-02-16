@@ -45,13 +45,11 @@ public class BaseEntity implements Serializable, DBInterface {
     private static final long serialVersionUID = -8171202186820119866L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     @SerializedName(value = "id")
     private long id;
-
-//    @XmlAttribute(name = "version", required = true)
-//    protected String version;
+    
     @Column(name = "created_by")
     @SerializedName(value = "created_by")
     private String createdBy;

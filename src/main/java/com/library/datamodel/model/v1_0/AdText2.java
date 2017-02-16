@@ -1,5 +1,77 @@
 package com.library.datamodel.model.v1_0;
 
+/**
+ * Works but inserts duplicate entries in all tables involved
+ * 
+ * AdText adText1 = new AdText();
+        adText1.setIsUploadedToDSM(Boolean.FALSE);
+        adText1.setScreenRegion(AdScreenRegion.CENTER);
+        adText1.setTextContent("This is scroll text right here...");
+        adText1.setTextType(TextType.SCROLL_TEXT);
+        adText1.setTextId(new Random().nextInt());
+
+        AdText adText2 = new AdText();
+        adText2.setIsUploadedToDSM(Boolean.FALSE);
+        adText2.setScreenRegion(AdScreenRegion.CENTER);
+        adText2.setTextContent("This is Header Text.");
+        adText2.setTextType(TextType.HEADER_TEXT);
+        adText2.setTextId(new Random().nextInt());
+
+        AdProgram program1 = new AdProgram();
+        program1.setAdCampaignName("Test Campaign - No. 1");
+        program1.setAdLength(10);
+        program1.setAdStatus(AdvertStatus.PROCESSING);
+        program1.setProgJoinId(new Random().nextInt());
+        program1.setDisplayLayout(ProgDisplayLayout.THREE_SPLIT);
+        program1.setIsDSMUpdated(Boolean.FALSE);
+        program1.setStartAdDate(new LocalDate(2017, 2, 15));
+        program1.setEndAdDate(new LocalDate(2017, 2, 17));
+        program1.setIsToBeNotified(Boolean.TRUE);
+        program1.setNumOfFileResources(3);
+        program1.setPaymentStatus(AdPaymentStatus.NOT_PAID);
+        program1.setTotalSchedulesPlayed(9);
+        program1.setTotalSchedulesToPlay(900);
+
+        AdProgram program2 = new AdProgram();
+        program2.setAdCampaignName("Test Campaign - No. 2");
+        program2.setAdLength(15);
+        program2.setAdStatus(AdvertStatus.PROCESSING);
+        program2.setProgJoinId(new Random().nextInt());
+        program2.setDisplayLayout(ProgDisplayLayout.THREE_SPLIT);
+        program2.setIsDSMUpdated(Boolean.FALSE);
+        program2.setStartAdDate(new LocalDate(2017, 2, 15));
+        program2.setEndAdDate(new LocalDate(2017, 2, 18));
+        program2.setIsToBeNotified(Boolean.TRUE);
+        program2.setNumOfFileResources(3);
+        program2.setPaymentStatus(AdPaymentStatus.NOT_PAID);
+        program2.setTotalSchedulesPlayed(10);
+        program2.setTotalSchedulesToPlay(999);
+
+        
+        
+        //Add programs to each of the adText sets
+        adText1.getAdPrograms().add(program1);
+        adText1.getAdPrograms().add(program2);
+        adText2.getAdPrograms().add(program1);
+        adText2.getAdPrograms().add(program2);
+        
+        //Add Text to each of the Program sets
+        program1.getAdTextList().add(adText1);
+        program1.getAdTextList().add(adText2);
+        program2.getAdTextList().add(adText1);
+        program2.getAdTextList().add(adText2);
+        
+        
+
+        databaseAdapter.saveOrUpdateEntity(program1, Boolean.TRUE);
+
+        Thread.sleep(delay);
+
+        databaseAdapter.saveOrUpdateEntity(program2, Boolean.TRUE);
+
+        Thread.sleep(delay);
+ */
+
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdScreenRegion;
 import com.library.datamodel.Constants.TextType;
@@ -24,11 +96,11 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-//@DynamicUpdate(value = true)
-//@SelectBeforeUpdate(value = true)
+@DynamicUpdate(value = true)
+@SelectBeforeUpdate(value = true)
 @Table(name = "ad_text")
 
-public class AdText extends BaseEntity implements Auditable, Serializable {
+public class AdText2 extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
 
@@ -56,11 +128,11 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
 
     @SerializedName(value = "program_text")
     @ManyToMany(
-            fetch = FetchType.EAGER
-//            cascade = {
-//                //javax.persistence.CascadeType.PERSIST, 
-//                javax.persistence.CascadeType.ALL
-//            }
+            fetch = FetchType.EAGER, 
+            cascade = {
+                //javax.persistence.CascadeType.PERSIST, 
+                javax.persistence.CascadeType.ALL
+            }
     )//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "ad_program_text",
             joinColumns = {
@@ -70,10 +142,9 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
                 @JoinColumn(name = "program_join_id")
             }
     )
-    @Cascade({CascadeType.SAVE_UPDATE})
-    private Set<AdProgram> adPrograms = new HashSet<AdProgram>(0);
+    private Set<AdProgram> adPrograms = new HashSet<AdProgram>();
 
-    public AdText() {
+    public AdText2() {
     }
 
     public long getTextId() {
@@ -136,33 +207,4 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
 //    public void setAdProgramTexts(Set<AdProgram> adPrograms) {
 //        this.adPrograms = adPrograms;
 //    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (int) (this.textId ^ (this.textId >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdText other = (AdText) obj;
-        
-        if (this.getId() == other.getId()) {
-            return true;
-        }
-        
-        return this.textId == other.getTextId();
-    }
-    
-    
 }

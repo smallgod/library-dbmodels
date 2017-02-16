@@ -5,29 +5,40 @@
  */
 package com.library.datamodel.model.v1_0;
 
+import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-public class Author implements Serializable {
+//@DynamicUpdate(value = true)
+//@SelectBeforeUpdate(value = true)
+@Table(name = "ad_author")
+public class Author extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = 7606418115873045512L;
 
-    private Long authorId;
-    private String authorName;
-    private Set<Book> books;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
+    private Long authorId;
+
+    @Column(name = "author_name")
+    private String authorName;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "authors")
+    private Set<Book> books = new HashSet<Book>();
+
     public Long getAuthorId() {
         return authorId;
     }
@@ -36,7 +47,6 @@ public class Author implements Serializable {
         this.authorId = authorId;
     }
 
-    @Column(name = "author_name")
     public String getAuthorName() {
         return authorName;
     }
@@ -45,12 +55,16 @@ public class Author implements Serializable {
         this.authorName = authorName;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authors")
     public Set<Book> getBooks() {
         return books;
     }
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String getUsername() {
+        return "SmallGod";
     }
 }

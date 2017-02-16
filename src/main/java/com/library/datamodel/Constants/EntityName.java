@@ -24,7 +24,9 @@ public enum EntityName implements Constants {
     AD_CLIENT("AD_CLIENT"),
     AD_OWNER("AD_OWNER"),
     AD_AREA("AD_AREA"),
-    AD_TEXT("AD_TEXT");
+    AD_TEXT("AD_TEXT"),
+    AUTHOR("AUTHOR"),
+    BOOK("BOOK");
 
     private final String entityNameStr;
 
