@@ -7,6 +7,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
@@ -55,6 +58,14 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -4958704682470297016L;
 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
+    
     @SerializedName(value = "slot_code")
     @Column(name = "slot_code", length = 30)
     private String timeSlotCode; // "EARLY_BIRD"
@@ -137,6 +148,14 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     public void setSlotAdPrice(Amounttype slotAdPrice) {
         this.slotAdPrice = slotAdPrice;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

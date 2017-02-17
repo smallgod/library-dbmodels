@@ -13,21 +13,34 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_resource", uniqueConstraints = @UniqueConstraint(columnNames = {"upload_id"}))
+@Table(name = "ad_resource")
 
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
     @Column(name = "resource_id") //this by default should be zero(0), since this resourceId is just generated later
     @SerializedName(value = "resource_id")
     private long resourceId = 0;
@@ -36,8 +49,8 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "resource_sequence")
     private int sequence = 1;
 
-    @Column(name = "upload_id") //this by default should be zero(0), since this resourceId is just generated later
     @Expose(deserialize = false, serialize = false)
+    @Column(name = "upload_id") //this by default should be zero(0), since this resourceId is just generated later
     private String uploadId;
 
     @Column(name = "resource_name")
@@ -69,10 +82,22 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "uploaded_to_dsm")
     private boolean isUploadedToDSM;
 
-    //for now comment the Many-to-Many out but ideally we should be able tö use resources across multiple programs i.e. Many-to-Many
-//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adResourceList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-//    private Set<AdProgram> adProgramResources = new HashSet<>();
-//    
+    
+    
+    @SerializedName(value = "program_text")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "ad_program_text",
+            joinColumns = {
+                @JoinColumn(name = "upload_id")
+
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "program_join_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdProgram> adPrograms = new HashSet<>(0);
+    
     public AdResource() {
     }
 
@@ -176,6 +201,22 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 //    public void setAdProgramResources(Set<AdProgram> adProgramResources) {
 //        this.adProgramResources = adProgramResources;
 //    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<AdProgram> getAdPrograms() {
+        return adPrograms;
+    }
+
+    public void setAdPrograms(Set<AdProgram> adPrograms) {
+        this.adPrograms = adPrograms;
+    }
 
 
 }

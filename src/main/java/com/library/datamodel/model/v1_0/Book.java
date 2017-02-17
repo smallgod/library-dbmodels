@@ -5,6 +5,7 @@
  */
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -33,6 +34,14 @@ public class Book extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7166945670028255018L;
 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
+    
     @Column(name = "book_id")
     private Long bookId;
 
@@ -77,5 +86,13 @@ public class Book extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return "SmallGod";
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

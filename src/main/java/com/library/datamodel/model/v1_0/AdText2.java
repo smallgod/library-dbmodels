@@ -85,6 +85,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -104,6 +107,13 @@ public class AdText2 extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
+    
     @Column(name = "text_id")
     @SerializedName(value = "text_id")
     private long textId;
@@ -207,4 +217,12 @@ public class AdText2 extends BaseEntity implements Auditable, Serializable {
 //    public void setAdProgramTexts(Set<AdProgram> adPrograms) {
 //        this.adPrograms = adPrograms;
 //    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

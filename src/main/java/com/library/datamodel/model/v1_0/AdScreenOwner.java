@@ -9,6 +9,9 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
@@ -51,29 +54,21 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
 
     private static final long serialVersionUID = -7420964819128665745L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+
     @Column(name = "owner_id", nullable = false)
     @SerializedName(value = "owner_id")
     @Expose
     private String screenOwnerId;
 
-    
-    //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    //@Cascade(CascadeType.SAVE_UPDATE)
-    //@Fetch(FetchMode.JOIN)
-    
-//    @JoinTable(name = "owner_screens",
-//            joinColumns = {
-//                @JoinColumn(name = "owner_id", referencedColumnName = "owner_id", nullable = false, insertable = false, updatable = false)
-//            },
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
-//
-//            }
-//    )
     @Expose
     @SerializedName(value = "owner_screens")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "screenOwner")
-    @Cascade(CascadeType.SAVE_UPDATE)
+    @Cascade(CascadeType.ALL)
     private Set<AdScreen> screensOwned = new HashSet<>(0);
 
     public AdScreenOwner() {
@@ -99,4 +94,25 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     public void setScreensOwned(Set<AdScreen> screensOwned) {
         this.screensOwned = screensOwned;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
+
+//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+//@Cascade(CascadeType.SAVE_UPDATE)
+//@Fetch(FetchMode.JOIN)
+//    @JoinTable(name = "owner_screens",
+//            joinColumns = {
+//                @JoinColumn(name = "owner_id", referencedColumnName = "owner_id", nullable = false, insertable = false, updatable = false)
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
+//
+//            }
+//    )

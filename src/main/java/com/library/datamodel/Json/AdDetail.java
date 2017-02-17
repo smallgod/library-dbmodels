@@ -376,7 +376,7 @@ public class AdDetail {
                 @SerializedName("time")
                 @Expose
                 private Time time;
-                @SerializedName("day")
+                @SerializedName("days")
                 @Expose
                 private List<Integer> day;
 

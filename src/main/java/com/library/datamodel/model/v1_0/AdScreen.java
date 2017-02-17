@@ -6,35 +6,49 @@ import com.library.datamodel.Constants.AdScreenSize;
 import com.library.datamodel.Constants.AdScreenType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
-//@Table(name = "ad_screen")
+
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = 2301296823801925900L;
+
+    @Expose
+    @SerializedName(value = "entity_id")
+    @Id
+    @GeneratedValue(generator = "myGenerator")
+    @GenericGenerator(
+            name = "myGenerator",
+            strategy = "foreign",
+            parameters = @Parameter(
+                    value = "supportTerminal",
+                    name = "property"
+            )
+    )
+    private long id;
 
     @Expose
     @SerializedName(value = "screen_id")
@@ -56,15 +70,8 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "screen_size")
     @Column(name = "screen_size")
     @Enumerated(EnumType.STRING)
-    private AdScreenSize screenSize; // in inches e.g. 32 inch TV
+    private AdScreenSize screenSize; //  e.g. 32 inch TV
 
-//  private Set<AudienceType> audienceTypes = new HashSet<>(0);// e.g. ALL, MEN, WOMEN, CORPORATES, STUDENTS
-//    @OneToOne
-//    @JoinColumns({
-//        @JoinColumn(name = "location_type_code", referencedColumnName = "location_type_code")
-//    })
-//    @SerializedName(value = "location_type_code")
-//    private LocationType locationType; //BAR, SALON, SPORTS_HOUSE, HOTEL
     @Expose
     @SerializedName(value = "audience_count")
     @Column(name = "audience_count")
@@ -80,23 +87,43 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @Column(name = "display_height")
     private int displayHeight;
 
-//    @SerializedName(value = "terminal")
-//    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
-//    @JoinColumns({
-//        @JoinColumn(name = "terminal_id", referencedColumnName = "terminal_id")
-//    })
-//    private AdTerminal supportTerminal;
+    @Expose
+    @SerializedName(value = "terminal")
+    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
+    @JoinColumns({
+        @JoinColumn(name = "terminal_id")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdTerminal supportTerminal;
+
 //    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adScreenList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
 //    private Set<AdProgram> adPrograms = new HashSet<>(0);
+    @Expose
+    @SerializedName(value = "business_type_code")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+    })
+    @Cascade(CascadeType.ALL)
+    private BusinessType businessType;
 
-    
+    @Expose
+    @SerializedName(value = "screen_owner")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
         @JoinColumn(name = "owner_id", referencedColumnName = "owner_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
-    @SerializedName(value = "screen_owner")
-    @Cascade(CascadeType.SAVE_UPDATE)
+    @Cascade(CascadeType.ALL)
     private AdScreenOwner screenOwner;
+
+    @Expose
+    @SerializedName(value = "screen_area")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name = "area_code", referencedColumnName = "area_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+    })
+    @Cascade({CascadeType.ALL})
+    private AdScreenArea screenArea;
 
     public AdScreen() {
     }
@@ -213,4 +240,71 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     public void setScreenOwner(AdScreenOwner screenOwner) {
         this.screenOwner = screenOwner;
     }
+
+    public AdTerminal getSupportTerminal() {
+        return supportTerminal;
+    }
+
+    public void setSupportTerminal(AdTerminal supportTerminal) {
+        this.supportTerminal = supportTerminal;
+    }
+
+    //@Override
+    public long getId() {
+        return id;
+    }
+
+    //@Override
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.screenId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        final AdScreen other = (AdScreen) obj;
+
+        if (this.id != other.getId()) {
+            return false;
+        }
+
+        return Objects.equals(this.screenId, other.getScreenId());
+    }
+
+    public BusinessType getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(BusinessType businessType) {
+        this.businessType = businessType;
+    }
+
+    public AdScreenArea getScreenArea() {
+        return screenArea;
+    }
+
+    public void setScreenArea(AdScreenArea screenArea) {
+        this.screenArea = screenArea;
+    }
+
 }

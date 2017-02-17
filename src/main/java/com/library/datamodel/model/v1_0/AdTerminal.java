@@ -3,8 +3,12 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
@@ -23,6 +27,12 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
 
     @Column(name = "terminal_id")
     @SerializedName(value = "terminal_id")
@@ -47,7 +57,7 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @Column(name = "longitude", precision = 9, scale = 7)
     @SerializedName(value = "longitude")
     private double longitude;
-    
+
 //    @SerializedName(value = "terminal_screens")
 //    @OneToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
 //    @JoinTable(name = "terminal_screens",
@@ -60,8 +70,6 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 //    )
 //    @Cascade(CascadeType.SAVE_UPDATE)
 //    private Set<AdScreen> terminalScreens = new HashSet<>(0);
-    
-    
 //    @SerializedName(value = "terminal_screen")
 //    @OneToOne //For now, let's have only one screen (max) for every terminal
 //    @JoinColumns({
@@ -69,7 +77,6 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 //    })
 //    @Cascade(CascadeType.SAVE_UPDATE)
 //    private AdScreen terminalScreen;
-
     //private int displayWidth; //terminal resolution ??
     //private int displayHeight;
     public AdTerminal() {
@@ -126,6 +133,47 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     public void setTerminalDescription(String terminalDescription) {
         this.terminalDescription = terminalDescription;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.terminalId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        
+        if (this == obj) {
+            return true;
+        }
+        
+        if (obj == null) {
+            return false;
+        }
+        
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final AdTerminal other = (AdTerminal) obj;
+        
+        if (this.id != other.getId()) {
+            return false;
+        }
+        
+        return Objects.equals(this.terminalId, other.getTerminalId());
+
     }
 
 }

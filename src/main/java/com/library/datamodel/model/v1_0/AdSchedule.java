@@ -1,18 +1,25 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.Type;
@@ -45,8 +52,21 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3186734784130219196L;
 
-    //@EmbeddedId
-    //private AdSchedCompositeId key;
+    @Expose
+    @SerializedName(value = "entity_id")
+    @Id
+    @GeneratedValue(generator = "myGenerator")
+    @GenericGenerator(
+            name = "myGenerator",
+            strategy = "foreign",
+            parameters = @Parameter(
+                    value = "adScreen",
+                    name = "property"
+            )
+    )
+    private long id;
+
+    //@EmbeddedId private AdSchedCompositeId key;
     @SerializedName(value = "schedule_id")
     @Column(name = "schedule_id")
     private long scheduleId;
@@ -63,11 +83,14 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     @Column(name = "to_update")
     private boolean isToUpdate; //True - If we need to fetch this schedule and update DSM and the row as well
 
-    @OneToOne //one schedule can belong to multiple screens, //e.g. "prog_id:time;prog_id:time" i.e. 764:4563;905:2355; according to the way we are storing our schedule, only one schedule can belong to a screen on a particular day
+    @Expose
+    @SerializedName(value = "schedule_screen")
+    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
     @JoinColumns({
-        @JoinColumn(name = "schedule_screen_id", referencedColumnName = "screen_id")})
-    @SerializedName(value = "screen_id")
-    private AdScreen adScheduleScreen;
+        @JoinColumn(name = "screen_id")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdScreen adScreen;
 
     public boolean isIsToUpdate() {
         return isToUpdate;
@@ -96,10 +119,6 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
         this.scheduleDetail = scheduleDetail;
     }
 
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
 
     public long getScheduleId() {
         return scheduleId;
@@ -109,12 +128,53 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
         this.scheduleId = scheduleId;
     }
 
-    public AdScreen getAdScheduleScreen() {
-        return adScheduleScreen;
+    public long getId() {
+        return id;
     }
 
-    public void setAdScheduleScreen(AdScreen adScheduleScreen) {
-        this.adScheduleScreen = adScheduleScreen;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public AdScreen getAdScreen() {
+        return adScreen;
+    }
+
+    public void setAdScreen(AdScreen adScreen) {
+        this.adScreen = adScreen;
+    }
+    
+    
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + (int) (this.scheduleId ^ (this.scheduleId >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdSchedule other = (AdSchedule) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return this.scheduleId == other.getScheduleId();
     }
 
     /**
@@ -176,5 +236,4 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
         }
 
     }*/
-
 }

@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdPaymentStatus;
 import com.library.datamodel.Constants.AdvertStatus;
@@ -7,21 +8,18 @@ import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -49,13 +47,19 @@ import org.joda.time.LocalDate;
     )
 })
 @Entity
-//@DynamicUpdate(value = true)
-//@SelectBeforeUpdate(value = true)
+@DynamicUpdate(value = true)
+@SelectBeforeUpdate(value = true)
 @Table(name = "ad_program")
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
 
     @SerializedName(value = "program_id")
     @Column(name = "program_id") //this is the ID we internally generate for every program, by default, let it be zero(0) since we dont have it till later after generation
@@ -124,6 +128,15 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "number_of_files")
     @Column(name = "number_of_files")
     private int numOfFileResources;
+
+    @Expose
+    @SerializedName(value = "program_client")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name = "client_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+    })
+    @Cascade({CascadeType.ALL})
+    private AdClient client;
 
 //    @ManyToMany(
 //        fetch = FetchType.EAGER, 
@@ -291,14 +304,30 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final AdProgram other = (AdProgram) obj;
-        
+
         if (this.getId() == other.getId()) {
             return true;
         }
 
         return this.progJoinId == other.getProgJoinId();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public AdClient getClient() {
+        return client;
+    }
+
+    public void setClient(AdClient client) {
+        this.client = client;
     }
 
 }

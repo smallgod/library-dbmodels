@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
@@ -8,6 +9,9 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
@@ -46,10 +50,20 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -6439854988797731103L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+
     @Column(name = "client_id")
     private String clientId; //this can be a telephone number  / primary contact
 
-    //private Set<AdProgram> clientAdPrograms = new HashSet<>(0);
+    @Expose
+    @SerializedName(value = "client_programs")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+    @Cascade(CascadeType.ALL)
+    private Set<AdProgram> clientPrograms = new HashSet<>(0);
 
     public AdClient() {
     }
@@ -67,13 +81,21 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         return this.getLastModifiedBy();
     }
 
-//    public Set<AdProgram> getClientAdPrograms() {
-//        return clientAdPrograms;
-//    }
-//
-//    public void setClientAdPrograms(Set<AdProgram> clientAdPrograms) {
-//        this.clientAdPrograms = clientAdPrograms;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<AdProgram> getClientPrograms() {
+        return clientPrograms;
+    }
+
+    public void setClientPrograms(Set<AdProgram> clientPrograms) {
+        this.clientPrograms = clientPrograms;
+    }
 
 }
 

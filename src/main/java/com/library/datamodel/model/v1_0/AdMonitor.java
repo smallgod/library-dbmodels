@@ -1,10 +1,14 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
@@ -21,6 +25,12 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 public class AdMonitor extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3896516545777190361L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
 
     @Column(name = "monitor_id")
     private String monitorId;
@@ -72,6 +82,14 @@ public class AdMonitor extends BaseEntity implements Auditable, Serializable {
 
     public void setScreensReached(int screensReached) {
         this.screensReached = screensReached;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

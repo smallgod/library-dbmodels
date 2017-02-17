@@ -44,11 +44,11 @@ public class BaseEntity implements Serializable, DBInterface {
 
     private static final long serialVersionUID = -8171202186820119866L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    @SerializedName(value = "id")
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id", updatable = false, nullable = false)
+//    @SerializedName(value = "id")
+//    private long id;
     
     @Column(name = "created_by")
     @SerializedName(value = "created_by")
@@ -85,18 +85,18 @@ public class BaseEntity implements Serializable, DBInterface {
      *
      * @return
      */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * Set Id of the object
-     *
-     * @param id
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    /**
+//     * Set Id of the object
+//     *
+//     * @param id
+//     */
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getCreatedBy() {
         return createdBy;

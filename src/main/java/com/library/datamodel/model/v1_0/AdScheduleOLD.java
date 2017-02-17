@@ -1,10 +1,14 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
@@ -43,6 +47,12 @@ public class AdScheduleOLD extends BaseEntity implements Auditable, Serializable
 
     private static final long serialVersionUID = -3186734784130219196L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumns({
         @JoinColumn(name = "program_id", referencedColumnName = "program_id", nullable = false)
@@ -99,5 +109,13 @@ public class AdScheduleOLD extends BaseEntity implements Auditable, Serializable
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

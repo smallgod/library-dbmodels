@@ -1,8 +1,13 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -15,6 +20,13 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 public class AdPayment extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -1408718657632013689L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
+    private long id;
+    
 
 //    @Embedded
 //    @Column(name = "Amount")
@@ -367,6 +379,14 @@ public class AdPayment extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }
