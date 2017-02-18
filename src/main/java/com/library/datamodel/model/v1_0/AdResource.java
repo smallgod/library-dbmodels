@@ -35,58 +35,70 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
 
+    @Expose
+    @SerializedName(value = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    @SerializedName(value = "id")
     private long id;
     
-    @Column(name = "resource_id") //this by default should be zero(0), since this resourceId is just generated later
+    @Expose
     @SerializedName(value = "resource_id")
+    @Column(name = "resource_id") //this by default should be zero(0), since this resourceId is just generated later
     private long resourceId = 0;
 
-    @Column(name = "resource_sequence")
+    @Expose
     @SerializedName(value = "resource_sequence")
+    @Column(name = "resource_sequence")
     private int sequence = 1;
 
     @Expose(deserialize = false, serialize = false)
+    @SerializedName(value = "upload_id")
     @Column(name = "upload_id") //this by default should be zero(0), since this resourceId is just generated later
     private String uploadId;
 
-    @Column(name = "resource_name")
+    @Expose
     @SerializedName(value = "resource_name")
+    @Column(name = "resource_name")
     private String resourceName;
 
-    @Column(name = "res_description")
+    @Expose
     @SerializedName(value = "res_description")
+    @Column(name = "res_description")
     private String resourceDesc;
 
+    @Expose
+    @SerializedName(value = "resource_type")
     @Column(name = "resource_type")
     @Enumerated(EnumType.ORDINAL)
-    @SerializedName(value = "resource_type")
     private ResourceType resourceType;
 
+    @Expose
+    @SerializedName(value = "resource_size")
     @Column(name = "resource_size")
     private long resourceSize;
 
-    @Column(name = "resource_code")
+    @Expose
     @SerializedName(value = "resource_code")
+    @Column(name = "resource_code")
     private long resourseCode; //sum
 
+    @Expose
+    @SerializedName(value = "region")
     @Column(name = "region")
     @Enumerated(EnumType.STRING)
-    @SerializedName(value = "region")
     private AdScreenRegion screenRegion; //region of the screen where the advert is going to display
 
-    @Column(name = "uploaded_to_dsm")
+    @Expose
     @SerializedName(value = "uploaded_to_dsm")
+    @Column(name = "uploaded_to_dsm")
     private boolean isUploadedToDSM;
 
     
-    
-    @SerializedName(value = "program_text")
+    @Expose
+    @SerializedName(value = "program_resources")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "ad_program_text",
+    @JoinTable(name = "program_resources",
             joinColumns = {
                 @JoinColumn(name = "upload_id")
 

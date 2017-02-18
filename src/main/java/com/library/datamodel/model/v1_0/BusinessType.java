@@ -48,12 +48,6 @@ public class BusinessType extends BaseEntity implements Auditable, Serializable 
     @Column(name = "busines_type_name", length = 1000)
     private String businessTypeName;
 
-    @Expose
-    @SerializedName(value = "screens")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "businessType")
-    @Cascade(CascadeType.ALL)
-    private Set<AdScreen> screens = new HashSet<>(0);
-
     public BusinessType() {
     }
 
@@ -84,14 +78,6 @@ public class BusinessType extends BaseEntity implements Auditable, Serializable 
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<AdScreen> getScreens() {
-        return screens;
-    }
-
-    public void setScreens(Set<AdScreen> screens) {
-        this.screens = screens;
     }
 
 }

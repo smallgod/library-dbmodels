@@ -65,12 +65,6 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     @Expose
     private String screenOwnerId;
 
-    @Expose
-    @SerializedName(value = "owner_screens")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "screenOwner")
-    @Cascade(CascadeType.ALL)
-    private Set<AdScreen> screensOwned = new HashSet<>(0);
-
     public AdScreenOwner() {
     }
 
@@ -85,14 +79,6 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
-    }
-
-    public Set<AdScreen> getScreensOwned() {
-        return screensOwned;
-    }
-
-    public void setScreensOwned(Set<AdScreen> screensOwned) {
-        this.screensOwned = screensOwned;
     }
 
     public long getId() {

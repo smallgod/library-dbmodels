@@ -70,7 +70,7 @@ public class DbFetchRequest implements JsonDataModel {
 
         @SerializedName(value = "entity_name")
         private String entityName;
-        
+
         @SerializedName(value = "columns_to_fetch")
         private List<String> columnsToFetch;
 

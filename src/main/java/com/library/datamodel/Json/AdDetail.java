@@ -4,12 +4,12 @@ package com.library.datamodel.Json;
  *
  * @author smallgod
  */
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.Set;
 
 public class AdDetail {
-    
+
     /*
         ISIAH 45:11 - LIVING BIBLE / KJV
     
@@ -114,13 +114,7 @@ public class AdDetail {
             }
         }
     
-    */
-    
-    
-    
-    
-    
-
+     */
     @SerializedName("method")
     @Expose
     private String method;
@@ -165,11 +159,11 @@ public class AdDetail {
 
         @SerializedName("resources")
         @Expose
-        private List<Resource> resources = null;
+        private Set<Resource> resources = null;
 
         @SerializedName("text")
         @Expose
-        private List<Text> text = null;
+        private Set<Text> text = null;
 
         public BasicInfo getBasicInfo() {
             return basicInfo;
@@ -203,19 +197,19 @@ public class AdDetail {
             this.paymentInfo = paymentInfo;
         }
 
-        public List<Resource> getResources() {
+        public Set<Resource> getResources() {
             return resources;
         }
 
-        public void setResources(List<Resource> resources) {
+        public void setResources(Set<Resource> resources) {
             this.resources = resources;
         }
 
-        public List<Text> getText() {
+        public Set<Text> getText() {
             return text;
         }
 
-        public void setText(List<Text> text) {
+        public void setText(Set<Text> text) {
             this.text = text;
         }
 
@@ -291,15 +285,15 @@ public class AdDetail {
 
             @SerializedName("areas")
             @Expose
-            private List<Integer> areas = null;
+            private Set<Integer> areas = null;
 
             @SerializedName("location_types")
             @Expose
-            private List<Integer> locationTypes = null;
+            private Set<Integer> locationTypes = null;
 
             @SerializedName("audience_types")
             @Expose
-            private List<Integer> audienceTypes = null;
+            private Set<Integer> audienceTypes = null;
 
             public String getTargetScreenCode() {
                 return targetScreenCode;
@@ -309,27 +303,27 @@ public class AdDetail {
                 this.targetScreenCode = targetScreenCode;
             }
 
-            public List<Integer> getAreas() {
+            public Set<Integer> getAreas() {
                 return areas;
             }
 
-            public void setAreas(List<Integer> areas) {
+            public void setAreas(Set<Integer> areas) {
                 this.areas = areas;
             }
 
-            public List<Integer> getLocationTypes() {
+            public Set<Integer> getLocationTypes() {
                 return locationTypes;
             }
 
-            public void setLocationTypes(List<Integer> locationTypes) {
+            public void setLocationTypes(Set<Integer> locationTypes) {
                 this.locationTypes = locationTypes;
             }
 
-            public List<Integer> getAudienceTypes() {
+            public Set<Integer> getAudienceTypes() {
                 return audienceTypes;
             }
 
-            public void setAudienceTypes(List<Integer> audienceTypes) {
+            public void setAudienceTypes(Set<Integer> audienceTypes) {
                 this.audienceTypes = audienceTypes;
             }
 
@@ -345,7 +339,7 @@ public class AdDetail {
             private String endDate;
             @SerializedName("schedule")
             @Expose
-            private List<Schedule> schedule;
+            private Set<Schedule> schedule;
 
             public String getStartDate() {
                 return startDate;
@@ -363,11 +357,11 @@ public class AdDetail {
                 this.endDate = endDate;
             }
 
-            public List<Schedule> getSchedule() {
+            public Set<Schedule> getSchedule() {
                 return schedule;
             }
 
-            public void setSchedule(List<Schedule> schedule) {
+            public void setSchedule(Set<Schedule> schedule) {
                 this.schedule = schedule;
             }
 
@@ -378,7 +372,7 @@ public class AdDetail {
                 private Time time;
                 @SerializedName("days")
                 @Expose
-                private List<Integer> day;
+                private Set<Integer> day;
 
                 public Time getTime() {
                     return time;
@@ -388,11 +382,17 @@ public class AdDetail {
                     this.time = time;
                 }
 
-                public List<Integer> getDay() {
+                /**
+                 * Get all the days to advertise on
+                 * e.g [1,3,6,7] means [Monday, Wednesday, Saturday & Saturday]
+                 * 
+                 * @return
+                 */
+                public Set<Integer> getDay() {
                     return day;
                 }
 
-                public void setDay(List<Integer> day) {
+                public void setDay(Set<Integer> day) {
                     this.day = day;
                 }
 
@@ -401,11 +401,11 @@ public class AdDetail {
                     @SerializedName("slot")
                     @Expose
                     private String slot;
-                    
+
                     @SerializedName("preferred")
                     @Expose
                     private Integer preferred;
-                    
+
                     @SerializedName("frequency")
                     @Expose
                     private Integer frequency = 1;//number of times we can play this ad within this time slot

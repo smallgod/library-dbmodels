@@ -50,20 +50,17 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -6439854988797731103L;
 
+    @Expose
+    @SerializedName(value = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    @SerializedName(value = "id")
     private long id;
 
+    @Expose
+    @SerializedName(value = "client_id")
     @Column(name = "client_id")
     private String clientId; //this can be a telephone number  / primary contact
-
-    @Expose
-    @SerializedName(value = "client_programs")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
-    @Cascade(CascadeType.ALL)
-    private Set<AdProgram> clientPrograms = new HashSet<>(0);
 
     public AdClient() {
     }
@@ -87,14 +84,6 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<AdProgram> getClientPrograms() {
-        return clientPrograms;
-    }
-
-    public void setClientPrograms(Set<AdProgram> clientPrograms) {
-        this.clientPrograms = clientPrograms;
     }
 
 }

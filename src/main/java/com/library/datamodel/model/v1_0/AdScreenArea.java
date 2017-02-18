@@ -41,12 +41,6 @@ public class AdScreenArea extends BaseEntity implements Auditable, Serializable 
     @Column(name = "area_name", length = 1000) //might want to change this - what if the data is too long
     private String areaName;
 
-    @Expose
-    @SerializedName(value = "area_screens")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "screenArea")
-    @Cascade({CascadeType.ALL})
-    private Set<AdScreen> areaScreens = new HashSet<>(0);
-
     public AdScreenArea() {
     }
 
@@ -72,14 +66,6 @@ public class AdScreenArea extends BaseEntity implements Auditable, Serializable 
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<AdScreen> getAreaScreens() {
-        return areaScreens;
-    }
-
-    public void setAreaScreens(Set<AdScreen> areaScreens) {
-        this.areaScreens = areaScreens;
     }
 
     @Override

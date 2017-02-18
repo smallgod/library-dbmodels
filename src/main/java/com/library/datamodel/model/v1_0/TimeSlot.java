@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.jaxb.config.v1_0.Amounttype;
 import com.library.sgsharedinterface.Auditable;
@@ -93,6 +94,16 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
     @Column(name = "slot_adprice")
     @SerializedName(value = "slot_adprice")
     private Amounttype slotAdPrice;
+    
+    @Expose
+    @Column(name = "slot_discount")
+    @SerializedName(value = "slot_discount")
+    private float slotDiscount; //slots discounted for promotional purpose
+    
+    @Expose
+    @Column(name = "instant_slot")
+    @SerializedName(value = "instant_slot")
+    private boolean isInstant;
 
     public TimeSlot() {
     }
@@ -156,6 +167,22 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public float getSlotDiscount() {
+        return slotDiscount;
+    }
+
+    public void setSlotDiscount(float slotDiscount) {
+        this.slotDiscount = slotDiscount;
+    }
+
+    public boolean isIsInstant() {
+        return isInstant;
+    }
+
+    public void setIsInstant(boolean isInstant) {
+        this.isInstant = isInstant;
     }
 
 }

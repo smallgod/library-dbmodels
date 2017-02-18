@@ -6,7 +6,9 @@ import com.library.datamodel.Constants.AdScreenSize;
 import com.library.datamodel.Constants.AdScreenType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -96,13 +100,11 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @Cascade(CascadeType.ALL)
     private AdTerminal supportTerminal;
 
-//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adScreenList")//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-//    private Set<AdProgram> adPrograms = new HashSet<>(0);
     @Expose
     @SerializedName(value = "business_type_code")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+        @JoinColumn(name = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade(CascadeType.ALL)
     private BusinessType businessType;
@@ -124,6 +126,21 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     })
     @Cascade({CascadeType.ALL})
     private AdScreenArea screenArea;
+
+    @Expose
+    @SerializedName(value = "screen_programs")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "ad_screen_programs",
+            joinColumns = {
+                @JoinColumn(name = "screen_id")
+
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "program_join_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdProgram> adPrograms = new HashSet<>(0);
 
     public AdScreen() {
     }
@@ -305,6 +322,14 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public void setScreenArea(AdScreenArea screenArea) {
         this.screenArea = screenArea;
+    }
+
+    public Set<AdProgram> getAdPrograms() {
+        return adPrograms;
+    }
+
+    public void setAdPrograms(Set<AdProgram> adPrograms) {
+        this.adPrograms = adPrograms;
     }
 
 }

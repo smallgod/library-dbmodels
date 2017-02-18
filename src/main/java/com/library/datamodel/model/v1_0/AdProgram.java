@@ -55,16 +55,19 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
+    @Expose
+    @SerializedName(value = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    @SerializedName(value = "id")
     private long id;
 
+    @Expose
     @SerializedName(value = "program_id")
     @Column(name = "program_id") //this is the ID we internally generate for every program, by default, let it be zero(0) since we dont have it till later after generation
     private int advertProgramId = 0;
 
+    @Expose
     @SerializedName(value = "program_join_id")
     @Column(name = "program_join_id") //this is the ID we internally generate for every program, later when we figure out, we can use the BaseEntity id
     private int progJoinId;
@@ -73,24 +76,29 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "campaign_name")
     private String adCampaignName;
 
+    @Expose
     @SerializedName(value = "ad_length")
     @Column(name = "ad_length")
     private long adLength;
 
+    @Expose
     @SerializedName(value = "notify_client")
     @Column(name = "notfiy")
     private boolean isToBeNotified; //send SMS notification concerning this ad
 
+    @Expose
     @SerializedName(value = "display_layout")
     @Column(name = "display_layout")
     @Enumerated(EnumType.STRING)
     private ProgDisplayLayout displayLayout;
 
+    @Expose
     @SerializedName(value = "ad_status")
     @Column(name = "ad_status")
     @Enumerated(EnumType.STRING)
     private AdvertStatus adStatus;//the status of the advert whether successful, Rejected or ....
 
+    @Expose
     @SerializedName(value = "processing_step")
     @Column(name = "processing_step")
     @Enumerated(EnumType.STRING)
@@ -98,33 +106,40 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     //whether this advert has been paid for or not - if an advert is rejected after payment, 
     //payment should be reversed and this value should read 'REVERSED'
+    @Expose
     @SerializedName(value = "payment_status")
     @Column(name = "payment_status")
     @Enumerated(EnumType.STRING)
     private AdPaymentStatus paymentStatus;
 
+    @Expose
     @SerializedName(value = "schedules_to_play")
     @Column(name = "schedules_to_play")
     private int totalSchedulesToPlay; //number of schedules paid for, to be played
 
+    @Expose
     @SerializedName(value = "schedules_played")
     @Column(name = "schedules_played")
     private int totalSchedulesPlayed; //number of schedules played so far
 
+    @Expose
     @SerializedName(value = "start_date")
     @Column(name = "start_date")
     @Type(type = "jodalocaldate")
     private LocalDate startAdDate;
 
+    @Expose
     @SerializedName(value = "end_date")
     @Column(name = "end_date")
     @Type(type = "jodalocaldate")
     private LocalDate endAdDate;
 
+    @Expose
     @SerializedName(value = "dsm_updated")
     @Column(name = "dsm_updated")
     private boolean isDSMUpdated;
 
+    @Expose
     @SerializedName(value = "number_of_files")
     @Column(name = "number_of_files")
     private int numOfFileResources;
