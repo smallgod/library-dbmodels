@@ -6,10 +6,13 @@ import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -50,17 +53,10 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     private static final long serialVersionUID = -3186734784130219196L;
 
     @Expose
-    @SerializedName(value = "entity_id")
+    @SerializedName(value = "id")
     @Id
-    @GeneratedValue(generator = "myGenerator")
-    @GenericGenerator(
-            name = "myGenerator",
-            strategy = "foreign",
-            parameters = @Parameter(
-                    value = "adScreen",
-                    name = "property"
-            )
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
     //@EmbeddedId private AdSchedCompositeId key;
@@ -82,7 +78,7 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "schedule_screen")
-    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
+    @ManyToOne(fetch = FetchType.EAGER) //Many schedules can have the same adScreen
     @JoinColumns({
         @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
     })
@@ -148,8 +144,8 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 59 * hash + (int) (this.scheduleId ^ (this.scheduleId >>> 32));
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + (int) (this.scheduleId ^ (this.scheduleId >>> 32));
         return hash;
     }
 
@@ -165,7 +161,7 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         final AdSchedule other = (AdSchedule) obj;
-        if (this.id != other.getId()) {
+        if (this.id != other.getScheduleId()) {
             return false;
         }
         return this.scheduleId == other.getScheduleId();
