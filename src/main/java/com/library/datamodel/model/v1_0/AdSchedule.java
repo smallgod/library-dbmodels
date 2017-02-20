@@ -43,7 +43,7 @@ import org.joda.time.LocalDate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_schedule", uniqueConstraints = @UniqueConstraint(columnNames = {"schedule_id"}))
+@Table(name = "ad_schedule")
 
 public class AdSchedule extends BaseEntity implements Auditable, Serializable {
 
@@ -84,7 +84,7 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "schedule_screen")
     @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
     @JoinColumns({
-        @JoinColumn(name = "screen_id")
+        @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
     })
     @Cascade(CascadeType.ALL)
     private AdScreen adScreen;
@@ -116,7 +116,6 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
         this.scheduleDetail = scheduleDetail;
     }
 
-
     public long getScheduleId() {
         return scheduleId;
     }
@@ -140,13 +139,11 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     public void setAdScreen(AdScreen adScreen) {
         this.adScreen = adScreen;
     }
-    
-    
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
     }
-    
 
     @Override
     public int hashCode() {

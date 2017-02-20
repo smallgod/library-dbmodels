@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,6 +63,11 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
     @Column(name = "client_id")
     private String clientId; //this can be a telephone number  / primary contact
 
+    @Expose
+    @SerializedName(value = "number_of_ads")
+    @Column(name = "number_of_programs")
+    private int numberOfPrograms;
+
     public AdClient() {
     }
 
@@ -73,9 +79,12 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         this.clientId = clientId;
     }
 
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
+    public int getNumberOfPrograms() {
+        return numberOfPrograms;
+    }
+
+    public void setNumberOfPrograms(int numberOfPrograms) {
+        this.numberOfPrograms = numberOfPrograms;
     }
 
     public long getId() {
@@ -84,6 +93,37 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.clientId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdClient other = (AdClient) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return Objects.equals(this.clientId, other.getClientId());
     }
 
 }

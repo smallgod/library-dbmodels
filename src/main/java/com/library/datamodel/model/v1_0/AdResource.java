@@ -41,7 +41,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
-    
+
     @Expose
     @SerializedName(value = "resource_id")
     @Column(name = "resource_id") //this by default should be zero(0), since this resourceId is just generated later
@@ -94,7 +94,6 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @Column(name = "uploaded_to_dsm")
     private boolean isUploadedToDSM;
 
-    
     @Expose
     @SerializedName(value = "program_resources")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
@@ -108,8 +107,8 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
-    private Set<AdProgram> adPrograms = new HashSet<>(0);
-    
+    private Set<AdProgram> adResourcePrograms = new HashSet<>(0);
+
     public AdResource() {
     }
 
@@ -213,7 +212,6 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 //    public void setAdProgramResources(Set<AdProgram> adProgramResources) {
 //        this.adProgramResources = adProgramResources;
 //    }
-
     public long getId() {
         return id;
     }
@@ -222,13 +220,12 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
-    public Set<AdProgram> getAdPrograms() {
-        return adPrograms;
+    public Set<AdProgram> getAdResourcePrograms() {
+        return adResourcePrograms;
     }
 
-    public void setAdPrograms(Set<AdProgram> adPrograms) {
-        this.adPrograms = adPrograms;
+    public void setAdResourcePrograms(Set<AdProgram> adResourcePrograms) {
+        this.adResourcePrograms = adResourcePrograms;
     }
-
 
 }

@@ -53,7 +53,7 @@ import org.joda.time.LocalTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
+@Table(name = "time_slot")
 
 public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 

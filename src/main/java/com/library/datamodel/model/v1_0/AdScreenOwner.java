@@ -48,7 +48,7 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_screenowner", uniqueConstraints = @UniqueConstraint(columnNames = {"owner_id"}))
+@Table(name = "ad_screenowner")
 
 public class AdScreenOwner extends BaseEntity implements Auditable, Serializable {
 

@@ -75,7 +75,7 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
-    private Set<AdProgram> adPrograms = new HashSet<>(0);
+    private Set<AdProgram> adTextPrograms = new HashSet<>(0);
 
     public AdText() {
     }
@@ -120,12 +120,12 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
         this.screenRegion = screenRegion;
     }
 
-    public Set<AdProgram> getAdPrograms() {
-        return adPrograms;
+    public Set<AdProgram> getAdTextPrograms() {
+        return adTextPrograms;
     }
 
-    public void setAdPrograms(Set<AdProgram> adPrograms) {
-        this.adPrograms = adPrograms;
+    public void setAdTextPrograms(Set<AdProgram> adTextPrograms) {
+        this.adTextPrograms = adTextPrograms;
     }
 
     @Override
@@ -134,11 +134,11 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     }
 
 //    public Set<AdProgram> getAdProgramTexts() {
-//        return adPrograms;
+//        return adTextPrograms;
 //    }
 //
-//    public void setAdProgramTexts(Set<AdProgram> adPrograms) {
-//        this.adPrograms = adPrograms;
+//    public void setAdProgramTexts(Set<AdProgram> adTextPrograms) {
+//        this.adTextPrograms = adTextPrograms;
 //    }
     @Override
     public int hashCode() {

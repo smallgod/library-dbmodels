@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.APIMethodName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
+import java.util.Set;
 
 public class DbFetchRequest implements JsonDataModel {
 
@@ -40,7 +41,7 @@ public class DbFetchRequest implements JsonDataModel {
     private Params params;
 
     @SerializedName(value = "properties")
-    private List<Property> property;
+    private Set<Property> property;
 
     public String getMethod() {
         return method;
@@ -58,11 +59,11 @@ public class DbFetchRequest implements JsonDataModel {
         this.params = params;
     }
 
-    public List<Property> getProperty() {
+    public Set<Property> getProperty() {
         return property;
     }
 
-    public void setProperty(List<Property> property) {
+    public void setProperty(Set<Property> property) {
         this.property = property;
     }
 
@@ -72,7 +73,7 @@ public class DbFetchRequest implements JsonDataModel {
         private String entityName;
 
         @SerializedName(value = "columns_to_fetch")
-        private List<String> columnsToFetch;
+        private Set<String> columnsToFetch;
 
         @SerializedName(value = "order_by")
         private String orderBy;
@@ -115,11 +116,11 @@ public class DbFetchRequest implements JsonDataModel {
             this.entityName = entityName;
         }
 
-        public List<String> getColumnsToFetch() {
+        public Set<String> getColumnsToFetch() {
             return columnsToFetch;
         }
 
-        public void setColumnsToFetch(List<String> columnsToFetch) {
+        public void setColumnsToFetch(Set<String> columnsToFetch) {
             this.columnsToFetch = columnsToFetch;
         }
     }
@@ -130,7 +131,7 @@ public class DbFetchRequest implements JsonDataModel {
         private String name;
 
         @SerializedName(value = "values")
-        private List<Object> values;
+        private Set<Object> values;
 
         public String getName() {
             return name;
@@ -140,11 +141,11 @@ public class DbFetchRequest implements JsonDataModel {
             this.name = name;
         }
 
-        public List<Object> getValues() {
+        public Set<Object> getValues() {
             return values;
         }
 
-        public void setValues(List<Object> values) {
+        public void setValues(Set<Object> values) {
             this.values = values;
         }
 

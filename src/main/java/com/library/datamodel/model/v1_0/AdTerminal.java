@@ -22,7 +22,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_terminal", uniqueConstraints = @UniqueConstraint(columnNames = {"terminal_id", "task_id"}))
+@Table(name = "ad_terminal")
 
 public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 

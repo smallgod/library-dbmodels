@@ -34,7 +34,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
+//@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
+@Table(name = "ad_screen")
 
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
@@ -104,7 +105,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "business_type_code")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+        @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade(CascadeType.ALL)
     private BusinessType businessType;

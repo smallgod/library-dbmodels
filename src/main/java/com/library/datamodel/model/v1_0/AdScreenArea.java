@@ -23,7 +23,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_screen_area", uniqueConstraints = @UniqueConstraint(columnNames = {"area_code"}))
+@Table(name = "ad_screen_area")
 
 public class AdScreenArea extends BaseEntity implements Auditable, Serializable {
 

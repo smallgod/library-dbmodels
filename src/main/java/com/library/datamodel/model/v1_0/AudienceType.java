@@ -26,7 +26,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "audience_type", uniqueConstraints = @UniqueConstraint(columnNames = {"audience_code"}))
+@Table(name = "audience_type")
 //@Table(name = "audience_type")
 
 public class AudienceType extends BaseEntity implements Auditable, Serializable {
