@@ -22,17 +22,28 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_text")
-
+@NamedQueries(
+        @NamedQuery(name = AdText.FETCH_TEXT, query = AdText.FETCH_TEXT_QUERY)
+)
 public class AdText extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
 
+    public static final String FETCH_TEXT_QUERY = "SELECT DISTINCT txt FROM AdText txt INNER JOIN txt.adTextPrograms prog where prog.id=:id";
+    public static final String FETCH_TEXT = "fetch_text";
+
+    //HQL queries are written differently especially joins e.g.
+    //In SQL, select a.id, a.name, a.url from FilesInfo a inner join FilesShare b on a.id=b.fileid where b.userid=5 and b.owner=1;
+    //In HQL, is:
+    //select a.id, a.name, a.url from FilesInfo a inner join a.filesShared b where b.userid=5 and b.owner=1;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
@@ -133,17 +144,19 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
         return this.getLastModifiedBy();
     }
 
-//    public Set<AdProgram> getAdProgramTexts() {
-//        return adTextPrograms;
-//    }
-//
-//    public void setAdProgramTexts(Set<AdProgram> adTextPrograms) {
-//        this.adTextPrograms = adTextPrograms;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (int) (this.textId ^ (this.textId >>> 32));
+        int hash = 5;
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + (int) (this.textId ^ (this.textId >>> 32));
         return hash;
     }
 
@@ -159,20 +172,10 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         final AdText other = (AdText) obj;
-
-        if (this.getId() == other.getId()) {
-            return true;
+        if (this.id != other.getId()) {
+            return false;
         }
-
         return this.textId == other.getTextId();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
 }

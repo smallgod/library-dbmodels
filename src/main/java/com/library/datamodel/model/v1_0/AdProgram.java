@@ -8,6 +8,8 @@ import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -153,11 +156,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Cascade({CascadeType.ALL})
     private AdClient client;
 
-//    @ManyToMany(
-//        fetch = FetchType.EAGER, 
-//        mappedBy = "adPrograms"
-//    )
-//    private Set<AdText> adTextList = new HashSet<AdText>();
     public AdProgram() {
     }
 
@@ -285,48 +283,12 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.numOfFileResources = numOfFileResources;
     }
 
-//    public Set<AdResource> getAdResourceList() {
-//        return adResourceList;
-//    }
-//
-//    public void setAdResourceList(Set<AdResource> adResourceList) {
-//        this.adResourceList = adResourceList;
-//    }
-//
     public int getProgJoinId() {
         return progJoinId;
     }
 
     public void setProgJoinId(int progJoinId) {
         this.progJoinId = progJoinId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + this.progJoinId;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-
-        final AdProgram other = (AdProgram) obj;
-
-        if (this.getId() == other.getId()) {
-            return true;
-        }
-
-        return this.progJoinId == other.getProgJoinId();
     }
 
     public long getId() {
@@ -345,8 +307,48 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.client = client;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + this.progJoinId;
+        return hash;
+    }
+
+   
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdProgram other = (AdProgram) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return this.progJoinId == other.getProgJoinId();
+    }
+
 }
 
+
+/*@Expose
+    @SerializedName(value = "resource_list")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adResourcePrograms")
+    @Cascade({CascadeType.ALL})
+    private Set<AdResource> adResourceList = new HashSet<>(0);
+
+    @Expose
+    @SerializedName(value = "text_list")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "adTextPrograms")
+    @Cascade({CascadeType.ALL})
+    private Set<AdText> adTextList = new HashSet<>(0);*/
 //    @SerializedName(value = "program_screens")
 //    @ManyToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
 //    @JoinTable(name = "list_program_screens",

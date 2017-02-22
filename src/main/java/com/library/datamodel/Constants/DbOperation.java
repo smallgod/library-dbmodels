@@ -10,14 +10,15 @@ import com.library.utilities.LoggerUtil;
  */
 public enum DbOperation implements Constants {
 
-    FETCH_SET("fetchset"),
     SAVE_SINGLE("save"),
     READ_SINGLE("read"),
     SAVE_BULK("savebulk"),
     READ_BULK("readbulk"),
+    FETCH_SET("fetchset"),
     DELETE_SINGLE("delete"),
     DELETE_BULK("deletebulk"),
     UPDATE_ENTITY("updateentity"),
+    FETCH_RESOURCES("fetchresources"),
     PROCESS_AND_SAVE("processandsave");
 
     private final String entityNameStr;

@@ -31,7 +31,7 @@ public class DbFetchRequest implements JsonDataModel {
 }
      */
     public DbFetchRequest() {
-        this.method = APIMethodName.FETCH_ENTITY.getValue();
+        //this.method = APIMethodName.FETCH_ENTITY.getValue();
     }
 
     @SerializedName(value = "method")

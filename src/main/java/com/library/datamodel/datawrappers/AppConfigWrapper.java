@@ -215,7 +215,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
 
     @Override
     public String getXsdFilesDir() {
-        return configsDir;
+        return this.xsdFilesDir;
     }
 
     @Override

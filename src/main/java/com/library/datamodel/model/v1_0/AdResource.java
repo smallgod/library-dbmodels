@@ -24,16 +24,23 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_resource")
-
+@NamedQueries(
+        @NamedQuery(name = AdResource.FETCH_RESOURCE, query = AdResource.FETCH_RESOURCE_QUERY)
+)
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
+    
+    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT res FROM AdResource res INNER JOIN res.adResourcePrograms prog where prog.id=:id";
+    public static final String FETCH_RESOURCE = "fetch_resource";
 
     @Expose
     @SerializedName(value = "id")
@@ -92,7 +99,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @Expose
     @SerializedName(value = "uploaded_to_dsm")
     @Column(name = "uploaded_to_dsm")
-    private boolean isUploadedToDSM;
+    private boolean isUploadedToDSM; //we need to choose how to use this. Either to show we have uploaded a file to DSM or to show we have already uploaded and generated a file ID - resource ID for this file
 
     @Expose
     @SerializedName(value = "program_resources")
