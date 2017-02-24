@@ -1,5 +1,6 @@
 package com.library.datamodel.model.v1_0;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdScreenRegion;
 import com.library.datamodel.Constants.TextType;
@@ -19,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,7 +31,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_text")
+//@Table(name = "ad_text")
+@Table(name = "ad_text", uniqueConstraints = @UniqueConstraint(columnNames = {"text_id"}))
 @NamedQueries(
         @NamedQuery(name = AdText.FETCH_TEXT, query = AdText.FETCH_TEXT_QUERY)
 )
@@ -50,6 +53,7 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "id")
     private long id;
 
+    @Expose
     @Column(name = "text_id")
     @SerializedName(value = "text_id")
     private long textId;

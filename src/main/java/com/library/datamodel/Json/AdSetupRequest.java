@@ -373,14 +373,6 @@ public class AdSetupRequest implements JsonDataModel {
 
             public class Resources {
 
-                public long getEntityId() {
-                    return entityId;
-                }
-
-                public void setEntityId(long entityId) {
-                    this.entityId = entityId;
-                }
-
                 @Expose(serialize = false, deserialize = false)
                 private long entityId;
 
@@ -399,6 +391,20 @@ public class AdSetupRequest implements JsonDataModel {
 
                 @SerializedName(value = "sequence")
                 private int sequence;
+
+                @SerializedName(value = "upload_id")
+                private transient String uploadId;
+
+                @SerializedName(value = "uploaded_to_dsm")
+                private transient boolean isUploadedToDSM;
+
+                public long getEntityId() {
+                    return entityId;
+                }
+
+                public void setEntityId(long entityId) {
+                    this.entityId = entityId;
+                }
 
                 public long getResourceId() {
                     return resourceId;
@@ -438,6 +444,22 @@ public class AdSetupRequest implements JsonDataModel {
 
                 public void setSequence(int sequence) {
                     this.sequence = sequence;
+                }
+
+                public String getUploadId() {
+                    return uploadId;
+                }
+
+                public void setUploadId(String uploadId) {
+                    this.uploadId = uploadId;
+                }
+
+                public boolean isIsUploadedToDSM() {
+                    return isUploadedToDSM;
+                }
+
+                public void setIsUploadedToDSM(boolean isUploadedToDSM) {
+                    this.isUploadedToDSM = isUploadedToDSM;
                 }
 
             }

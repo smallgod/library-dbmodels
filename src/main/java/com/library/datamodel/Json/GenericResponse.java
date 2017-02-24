@@ -3,7 +3,7 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 
-public class PlaceAdResponse implements JsonDataModel {
+public class GenericResponse implements JsonDataModel {
 
     /*
     {
@@ -11,7 +11,7 @@ public class PlaceAdResponse implements JsonDataModel {
         "description": "Advert has been scheduled"
     }
      */
-    public PlaceAdResponse() {
+    public GenericResponse() {
     }
 
     @SerializedName(value = "success")

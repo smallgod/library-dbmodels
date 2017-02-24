@@ -7,6 +7,7 @@ import com.library.datamodel.Constants.ResourceType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_resource")
+//@Table(name = "ad_resource")
+@Table(name = "ad_resource", uniqueConstraints = @UniqueConstraint(columnNames = {"upload_id"}))
 @NamedQueries(
         @NamedQuery(name = AdResource.FETCH_RESOURCE, query = AdResource.FETCH_RESOURCE_QUERY)
 )
@@ -212,13 +214,6 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         this.sequence = sequence;
     }
 
-//    public Set<AdProgram> getAdProgramResources() {
-//        return adProgramResources;
-//    }
-//
-//    public void setAdProgramResources(Set<AdProgram> adProgramResources) {
-//        this.adProgramResources = adProgramResources;
-//    }
     public long getId() {
         return id;
     }
@@ -234,5 +229,39 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     public void setAdResourcePrograms(Set<AdProgram> adResourcePrograms) {
         this.adResourcePrograms = adResourcePrograms;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 29 * hash + Objects.hashCode(this.uploadId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdResource other = (AdResource) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        if (!Objects.equals(this.uploadId, other.getUploadId())) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    
+    
 
 }

@@ -14,6 +14,7 @@ public enum DbOperation implements Constants {
     READ_SINGLE("read"),
     SAVE_BULK("savebulk"),
     READ_BULK("readbulk"),
+    UPDATE_BULK("UPDATE_BULK"),
     FETCH_SET("fetchset"),
     DELETE_SINGLE("delete"),
     DELETE_BULK("deletebulk"),
