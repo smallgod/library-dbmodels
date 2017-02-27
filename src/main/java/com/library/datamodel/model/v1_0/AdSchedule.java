@@ -46,7 +46,7 @@ import org.joda.time.LocalDate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_schedule")
+@Table(name = "ad_schedule", uniqueConstraints = @UniqueConstraint(columnNames = {"schedule_id"}))
 
 public class AdSchedule extends BaseEntity implements Auditable, Serializable {
 

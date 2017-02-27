@@ -64,9 +64,14 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
     private String clientId; //this can be a telephone number  / primary contact
 
     @Expose
-    @SerializedName(value = "number_of_ads")
+    @SerializedName(value = "number_of_programs")
     @Column(name = "number_of_programs")
     private int numberOfPrograms;
+
+    @Expose
+    @SerializedName(value = "censor")
+    @Column(name = "censor")
+    private boolean isToBeCensored; //whether we need to take programs/ads from this account through a check for approval (this means a couple of minutes' delay before scheduling)
 
     public AdClient() {
     }
@@ -124,6 +129,14 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         return Objects.equals(this.clientId, other.getClientId());
+    }
+
+    public boolean isIsToBeCensored() {
+        return isToBeCensored;
+    }
+
+    public void setIsToBeCensored(boolean isToBeCensored) {
+        this.isToBeCensored = isToBeCensored;
     }
 
 }

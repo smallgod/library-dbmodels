@@ -6,12 +6,21 @@
 package com.library.datamodel.Constants;
 
 import org.joda.time.DateTimeZone;
+import org.joda.time.Duration;
 
 /**
  *
  * @author smallgod
  */
 public interface NamedConstants {
+
+    /**
+     * 1 minute Delay in scheduling the advert due to system delays, for example
+     * Uploading Resources to servers, moving resources,
+     * downloading resources by the player etc
+     *
+     */
+    public static final long SYSTEM_SCHEDULE_DELAY = Duration.standardSeconds(60).getMillis();
 
     /**
      * Date time string formats
@@ -44,7 +53,7 @@ public interface NamedConstants {
      * The time represented as Hour:Minute
      */
     public static final String HOUR_MINUTE_FORMAT = "HH:mm";
-    
+
     /**
      * The time represented as Hour:minute:second
      */

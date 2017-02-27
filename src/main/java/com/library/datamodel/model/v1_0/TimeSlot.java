@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.jaxb.config.v1_0.Amounttype;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalTime;
+import org.joda.time.Duration;
 import org.joda.time.LocalTime;
 
 @TypeDefs({
@@ -48,31 +50,36 @@ import org.joda.time.LocalTime;
                 @Parameter(value = "UTC", name = "databaseZone"),
                 @Parameter(value = "UTC", name = "javaZone")
             }
+    ),
+    @TypeDef(name = "jodaduration", typeClass = Duration.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
     )
+
 })
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "time_slot")
+@Table(name = "time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
 
 public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -4958704682470297016L;
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     @SerializedName(value = "id")
     private long id;
-    
-    
+
     @SerializedName(value = "slot_code")
     @Column(name = "slot_code", length = 30)
-    private String timeSlotCode; // "EARLY_BIRD"
+    private String timeSlotCode; // "EARLYBIRD"
 
     @SerializedName(value = "slot_name")
-    
+
     @Column(name = "slot_name")
     private String timeSlotName; //"Early Bird"
 
@@ -94,16 +101,21 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
     @Column(name = "slot_adprice")
     @SerializedName(value = "slot_adprice")
     private Amounttype slotAdPrice;
-    
+
     @Expose
     @Column(name = "slot_discount")
     @SerializedName(value = "slot_discount")
     private float slotDiscount; //slots discounted for promotional purpose
-    
+
     @Expose
     @Column(name = "instant_slot")
     @SerializedName(value = "instant_slot")
     private boolean isInstant;
+
+    @Expose
+    @SerializedName(value = "approval_delay")
+    @Column(name = "approval_delay")
+    private long approvalDelay; // in millis
 
     public TimeSlot() {
     }
@@ -114,11 +126,6 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     public void setTimeSlotCode(String timeSlotCode) {
         this.timeSlotCode = timeSlotCode;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
     }
 
     public String getTimeSlotName() {
@@ -183,6 +190,45 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
 
     public void setIsInstant(boolean isInstant) {
         this.isInstant = isInstant;
+    }
+
+    public long getApprovalDelay() {
+        return approvalDelay;
+    }
+
+    public void setApprovalDelay(long approvalDelay) {
+        this.approvalDelay = approvalDelay;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.timeSlotCode);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TimeSlot other = (TimeSlot) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return Objects.equals(this.timeSlotCode, other.getTimeSlotCode());
     }
 
 }
