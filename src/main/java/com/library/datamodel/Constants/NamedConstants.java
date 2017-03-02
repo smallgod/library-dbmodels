@@ -13,6 +13,11 @@ import org.joda.time.Duration;
  * @author smallgod
  */
 public interface NamedConstants {
+    
+    /**
+     * Use this mutex to lock threads on sensitive portions portion of code
+     */
+    public static final String MUTEX = "MUTEX";
 
     /**
      * 1 minute Delay in scheduling the advert due to system delays, for example
@@ -20,7 +25,7 @@ public interface NamedConstants {
      * downloading resources by the player etc
      *
      */
-    public static final long SYSTEM_SCHEDULE_DELAY = Duration.standardSeconds(60).getMillis();
+    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(120).getMillis();
 
     /**
      * Date time string formats
