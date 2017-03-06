@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum APIMethodName implements Constants {
 
+    GET_PRICE("GET_PRICE"),
     GET_AREAS("GET_AREAS"),
     GET_BUSINESS_TYPES("GET_BUSINESS_TYPES"),
     GET_AUDIENCE_TYPES("GET_AUDIENCE_TYPES"),

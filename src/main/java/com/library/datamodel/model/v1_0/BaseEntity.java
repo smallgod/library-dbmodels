@@ -68,11 +68,11 @@ public class BaseEntity implements Serializable, DBInterface {
     @SerializedName(value = "date_last_modified")
     private LocalDateTime dateLastModified;
 
-    @Column(name = "date_modified_history")
+    @Column(name = "date_modified_history", length = 7000)
     @SerializedName(value = "date_modified_history")
     private String dateModifiedHistory; // '|' separated strings
 
-    @Column(name = "modified_by_history")
+    @Column(name = "modified_by_history", length = 7000)
     @SerializedName(value = "modified_by_history")
     private String modifiedByHistory; // '|' separated strings    
 

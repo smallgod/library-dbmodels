@@ -253,10 +253,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         if (this.id != other.getId()) {
             return false;
         }
-        if (!Objects.equals(this.uploadId, other.getUploadId())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.uploadId, other.getUploadId());
     }
 
     

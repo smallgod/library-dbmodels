@@ -23,7 +23,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -81,6 +80,11 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "audience_count")
     @Column(name = "audience_count")
     private int audienceCount;
+
+    @Expose
+    @SerializedName(value = "screen_value") //different screens will fall in diff categories depending on location, audience_count, audience_type, size, etc
+    @Column(name = "screen_value")
+    private float screenValue; //a percentage value e.g 1.2 or 0.75
 
     @Expose
     @SerializedName(value = "display_width")
@@ -331,6 +335,20 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public void setAdPrograms(Set<AdProgram> adPrograms) {
         this.adPrograms = adPrograms;
+    }
+
+    /**
+     * Different screens will fall in different categories depending on
+     * location, audience_count, audience_type, size, etc
+     *
+     * @return
+     */
+    public float getScreenValue() {
+        return screenValue;
+    }
+
+    public void setScreenValue(float screenValue) {
+        this.screenValue = screenValue;
     }
 
 }

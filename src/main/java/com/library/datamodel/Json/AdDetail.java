@@ -24,7 +24,7 @@ public class AdDetail {
                 "layout_type": "3SPLIT"
             },
             "targeting": {
-                "target_screen_code": "",
+                "target_screen_codes": "",
                 "areas": [
                     8,
                     7,
@@ -58,8 +58,8 @@ public class AdDetail {
                                 "preferred": 7, //should be -1 incase not set by user, Hour preferred to play program
                                 "frequency":3 //number of times we can play this ad within this time slot
                             },
-                            "day": [
-                                1, //1 for first day of week - Monday
+                            "days": [
+                                1, //1 for first days of week - Monday
                                 4,
                                 7,
                                 6
@@ -71,7 +71,7 @@ public class AdDetail {
                                 "preferred": 21,
                                 "frequency":3 //number of times we can play this ad within this time slot
                             },
-                            "day": [
+                            "days": [
                                 5,
                                 6,
                                 7
@@ -279,9 +279,9 @@ public class AdDetail {
 
         public class Targeting {
 
-            @SerializedName("target_screen_code")
+            @SerializedName("target_screen_codes")
             @Expose
-            private String targetScreenCode;
+            private Set<String> targetScreenCodes = null;
 
             @SerializedName("areas")
             @Expose
@@ -295,12 +295,12 @@ public class AdDetail {
             @Expose
             private Set<Integer> audienceTypes = null;
 
-            public String getTargetScreenCode() {
-                return targetScreenCode;
+            public Set<String> getTargetScreenCodes() {
+                return targetScreenCodes;
             }
 
-            public void setTargetScreenCode(String targetScreenCode) {
-                this.targetScreenCode = targetScreenCode;
+            public void setTargetScreenCodes(Set<String>  targetScreenCodes) {
+                this.targetScreenCodes = targetScreenCodes;
             }
 
             public Set<Integer> getAreas() {
@@ -372,7 +372,7 @@ public class AdDetail {
                 private Time time;
                 @SerializedName("days")
                 @Expose
-                private Set<Integer> day;
+                private Set<Integer> days;
 
                 public Time getTime() {
                     return time;
@@ -388,12 +388,12 @@ public class AdDetail {
                  * 
                  * @return
                  */
-                public Set<Integer> getDay() {
-                    return day;
+                public Set<Integer> getDays() {
+                    return days;
                 }
 
-                public void setDay(Set<Integer> day) {
-                    this.day = day;
+                public void setDays(Set<Integer> days) {
+                    this.days = days;
                 }
 
                 public class Time {
