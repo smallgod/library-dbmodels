@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_terminal")
-public class TbTerminal implements Serializable, DBInterface {
+public class TbTerminal implements Serializable, DBInterface  {
 
     private static final long serialVersionUID = -2535532264508982021L;
 
@@ -283,7 +283,7 @@ public class TbTerminal implements Serializable, DBInterface {
 		this.tbKernel = tbKernel;
 	}
 
-        //@ManyToOne(optional = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = EAGER)
+        //@ManyToOne(optional = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = LAZY)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
 			@JoinColumn(name = "CSTM_ID", referencedColumnName = "CSTM_ID", nullable = false, insertable = false, updatable = false),

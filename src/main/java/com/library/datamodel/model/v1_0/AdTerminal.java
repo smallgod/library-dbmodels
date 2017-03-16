@@ -9,13 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -46,9 +40,13 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "terminal_description")
     private String terminalDescription;
 
-    @Column(name = "task_id")
-    @SerializedName(value = "task_id")
-    private int taskId;
+    @Column(name = "task_idx")
+    @SerializedName(value = "task_idx")
+    private int taskIdX;  
+    
+    @Column(name = "task_idy")
+    @SerializedName(value = "task_idy")
+    private int taskIdY;
 
     @Column(name = "latitude", precision = 9, scale = 7)
     @SerializedName(value = "latitude")
@@ -106,12 +104,12 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
         this.longitude = longitude;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getTaskIdX() {
+        return taskIdX;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setTaskIdX(int taskIdX) {
+        this.taskIdX = taskIdX;
     }
 
     @Override
@@ -174,6 +172,14 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
         
         return Objects.equals(this.terminalId, other.getTerminalId());
 
+    }
+
+    public int getTaskIdY() {
+        return taskIdY;
+    }
+
+    public void setTaskIdY(int taskIdY) {
+        this.taskIdY = taskIdY;
     }
 
 }

@@ -15,122 +15,154 @@ public class GetAdPriceResponse {
         // Get ad length amount
         //we start with amount - 0 & audience reach - 0
         //this request is sent both at adding a parameter or at its removal
-        {
-            "target_reach":{
-              "amount":500,
-              "audience_count":4, //people
-              "screen_count":1,
-            },
-            "potential_reach":{
-              "amount":500000,
-              "audience_count":50000,
-              "screen_count":9100
-            }
-        }
+    
+    
+{
+   "success":true,
+   "data":{
+      "target_reach":{
+         "amount":500,
+         "audience_count":4,
+         "screen_count":1
+      },
+      "potential_reach":{
+         "amount":500000,
+         "audience_count":50000,
+         "screen_count":9100
+      }
+   }
+}
     
      */
-    @SerializedName("target_reach")
+    @SerializedName("success")
     @Expose
-    private TargetReach targetReach;
+    private boolean success;
 
-    @SerializedName("potential_reach")
+    @SerializedName("data")
     @Expose
-    private PotentialReach potentialReach;
+    private Data data;
 
-    public TargetReach getTargetReach() {
-        return targetReach;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setTargetReach(TargetReach targetReach) {
-        this.targetReach = targetReach;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public PotentialReach getPotentialReach() {
-        return potentialReach;
+    public Data getData() {
+        return data;
     }
 
-    public void setPotentialReach(PotentialReach potentialReach) {
-        this.potentialReach = potentialReach;
-
+    public void setData(Data data) {
+        this.data = data;
     }
 
-    public class TargetReach {
+    public class Data {
 
-        @SerializedName("amount")
+        @SerializedName("target_reach")
         @Expose
-        private int amount;
+        private TargetReach targetReach;
 
-        @SerializedName("audience_count")
+        @SerializedName("potential_reach")
         @Expose
-        private int audienceCount;
+        private PotentialReach potentialReach;
 
-        @SerializedName("screen_count")
-        @Expose
-        private int screenCount;
-
-        public int getAmount() {
-            return amount;
+        public TargetReach getTargetReach() {
+            return targetReach;
         }
 
-        public void setAmount(int amount) {
-            this.amount = amount;
+        public void setTargetReach(TargetReach targetReach) {
+            this.targetReach = targetReach;
         }
 
-        public int getAudienceCount() {
-            return audienceCount;
+        public PotentialReach getPotentialReach() {
+            return potentialReach;
         }
 
-        public void setAudienceCount(int audienceCount) {
-            this.audienceCount = audienceCount;
+        public void setPotentialReach(PotentialReach potentialReach) {
+            this.potentialReach = potentialReach;
+
         }
 
-        public int getScreenCount() {
-            return screenCount;
+        public class TargetReach {
+
+            @SerializedName("amount")
+            @Expose
+            private int amount;
+
+            @SerializedName("audience_count")
+            @Expose
+            private int audienceCount;
+
+            @SerializedName("screen_count")
+            @Expose
+            private int screenCount;
+
+            public int getAmount() {
+                return amount;
+            }
+
+            public void setAmount(int amount) {
+                this.amount = amount;
+            }
+
+            public int getAudienceCount() {
+                return audienceCount;
+            }
+
+            public void setAudienceCount(int audienceCount) {
+                this.audienceCount = audienceCount;
+            }
+
+            public int getScreenCount() {
+                return screenCount;
+            }
+
+            public void setScreenCount(int screenCount) {
+                this.screenCount = screenCount;
+            }
+
         }
 
-        public void setScreenCount(int screenCount) {
-            this.screenCount = screenCount;
+        public class PotentialReach {
+
+            @SerializedName("amount")
+            @Expose
+            private int amount;
+
+            @SerializedName("audience_count")
+            @Expose
+            private int audienceCount;
+
+            @SerializedName("screen_count")
+            @Expose
+            private int screenCount;
+
+            public int getAmount() {
+                return amount;
+            }
+
+            public void setAmount(int amount) {
+                this.amount = amount;
+            }
+
+            public int getAudienceCount() {
+                return audienceCount;
+            }
+
+            public void setAudienceCount(int audienceCount) {
+                this.audienceCount = audienceCount;
+            }
+
+            public int getScreenCount() {
+                return screenCount;
+            }
+
+            public void setScreenCount(int screenCount) {
+                this.screenCount = screenCount;
+            }
+
         }
-
-    }
-
-    public class PotentialReach {
-
-        @SerializedName("amount")
-        @Expose
-        private int amount;
-
-        @SerializedName("audience_count")
-        @Expose
-        private int audienceCount;
-
-        @SerializedName("screen_count")
-        @Expose
-        private int screenCount;
-
-        public int getAmount() {
-            return amount;
-        }
-
-        public void setAmount(int amount) {
-            this.amount = amount;
-        }
-
-        public int getAudienceCount() {
-            return audienceCount;
-        }
-
-        public void setAudienceCount(int audienceCount) {
-            this.audienceCount = audienceCount;
-        }
-
-        public int getScreenCount() {
-            return screenCount;
-        }
-
-        public void setScreenCount(int screenCount) {
-            this.screenCount = screenCount;
-        }
-
     }
 }

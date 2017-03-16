@@ -5,6 +5,8 @@
  */
 package com.library.datamodel.Constants;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 
@@ -13,16 +15,25 @@ import org.joda.time.Duration;
  * @author smallgod
  */
 public interface NamedConstants {
-    
+
+    public static int ARREST_CRIPPY_THREADS = 1;
+
+    public static final Lock FETCH_SCHEDULE_LOCK = new ReentrantLock();
+
     /**
-     * Use this mutex to lock threads on sensitive portions portion of code
+     * Use this mutex to lock threads on sensitive portions of code
      */
-    public static final String MUTEX = "MUTEX";
+    public static final String READ_SETUP_PARAMS_MUTEX = "READ_SETUP_PARAMS";
+
+    /**
+     * Use this mutex to lock threads on sensitive portions of code
+     */
+    public static final String FETCH_SCHEDULE_MUTEX = "FETCH_SCHEDULE_MUTEX";
 
     /**
      * 1 minute Delay in scheduling the advert due to system delays, for example
-     * Uploading Resources to servers, moving resources,
-     * downloading resources by the player etc
+     * Uploading Resources to servers, moving resources, downloading resources
+     * by the player etc
      *
      */
     public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(120).getMillis();

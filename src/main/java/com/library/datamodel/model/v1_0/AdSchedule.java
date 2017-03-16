@@ -2,10 +2,13 @@ package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.FetchStatus;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -70,9 +73,12 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     @Column(name = "display_date")
     @Type(type = "jodalocaldate")
     private LocalDate displayDate;
-
-    @Column(name = "to_update")
-    private boolean isToUpdate; //True - If we need to fetch this schedule and update DSM and the row as well
+    
+    @Expose
+    @SerializedName(value = "fetch_status")
+    @Column(name = "fetch_status")
+    @Enumerated(EnumType.STRING)
+    private FetchStatus fetchStatus;//whether or not we need to fetch this schedule and update DSM and the row as well
 
     @Expose
     @SerializedName(value = "schedule_screen")
@@ -83,13 +89,6 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
     @Cascade(CascadeType.ALL)
     private AdScreen adScreen;
 
-    public boolean isIsToUpdate() {
-        return isToUpdate;
-    }
-
-    public void setIsToUpdate(boolean isToUpdate) {
-        this.isToUpdate = isToUpdate;
-    }
 
     public AdSchedule() {
     }
@@ -163,6 +162,14 @@ public class AdSchedule extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         return this.scheduleId == other.getScheduleId();
+    }
+
+    public FetchStatus getFetchStatus() {
+        return fetchStatus;
+    }
+
+    public void setFetchStatus(FetchStatus fetchStatus) {
+        this.fetchStatus = fetchStatus;
     }
 
     /**

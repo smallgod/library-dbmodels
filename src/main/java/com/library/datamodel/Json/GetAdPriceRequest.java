@@ -26,7 +26,6 @@ public class GetAdPriceRequest {
             "areas": [8, 7, 6], //default is []
              "location_types": [7, 9, 3], //default is []
              "audience_types": [2, 4], //default is []
-             "instant_ad":true, //default is false
              "start_date": "2017-03-06", //default is today, 2017-03-05
              "end_date": "2017-03-11", //default is today, 2017-03-05
              "slots":[                // default is [], I will use freebie
@@ -97,10 +96,6 @@ public class GetAdPriceRequest {
         @Expose
         private Set<Integer> audienceTypes = new HashSet<>();
 
-        @SerializedName("instant_advert")
-        @Expose
-        private boolean isIstantAdvert;
-
         @SerializedName("start_date")
         @Expose
         private String startDate;
@@ -158,14 +153,6 @@ public class GetAdPriceRequest {
 
         public void setAudienceTypes(Set<Integer> audienceTypes) {
             this.audienceTypes = audienceTypes;
-        }
-
-        public boolean isIsIstantAdvert() {
-            return isIstantAdvert;
-        }
-
-        public void setIsIstantAdvert(boolean isIstantAdvert) {
-            this.isIstantAdvert = isIstantAdvert;
         }
 
         public String getStartDate() {

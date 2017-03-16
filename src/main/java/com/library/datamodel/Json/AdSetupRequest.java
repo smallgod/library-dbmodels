@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
+import javax.persistence.Column;
 
 public class AdSetupRequest implements JsonDataModel {
 
@@ -181,8 +182,11 @@ public class AdSetupRequest implements JsonDataModel {
             @SerializedName(value = "terminal_height")
             private int terminalHeight;
 
-            @SerializedName(value = "task_id")
-            private int taskId;
+            @SerializedName(value = "task_idx")
+            private int taskIdX;
+
+            @SerializedName(value = "task_idy")
+            private int taskIdY;
 
             @SerializedName(value = "task_name")
             private String taskName;
@@ -196,14 +200,6 @@ public class AdSetupRequest implements JsonDataModel {
 
             public void setTerminalId(String terminalId) {
                 this.terminalId = terminalId;
-            }
-
-            public int getTaskId() {
-                return taskId;
-            }
-
-            public void setTaskId(int taskId) {
-                this.taskId = taskId;
             }
 
             public String getTaskName() {
@@ -236,6 +232,22 @@ public class AdSetupRequest implements JsonDataModel {
 
             public void setTerminalHeight(int terminalHeight) {
                 this.terminalHeight = terminalHeight;
+            }
+
+            public int getTaskIdX() {
+                return taskIdX;
+            }
+
+            public void setTaskIdX(int taskIdX) {
+                this.taskIdX = taskIdX;
+            }
+
+            public int getTaskIdY() {
+                return taskIdY;
+            }
+
+            public void setTaskIdY(int taskIdY) {
+                this.taskIdY = taskIdY;
             }
 
         }

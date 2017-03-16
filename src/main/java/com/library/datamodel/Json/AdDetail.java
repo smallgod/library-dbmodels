@@ -299,7 +299,7 @@ public class AdDetail {
                 return targetScreenCodes;
             }
 
-            public void setTargetScreenCodes(Set<String>  targetScreenCodes) {
+            public void setTargetScreenCodes(Set<String> targetScreenCodes) {
                 this.targetScreenCodes = targetScreenCodes;
             }
 
@@ -383,9 +383,9 @@ public class AdDetail {
                 }
 
                 /**
-                 * Get all the days to advertise on
-                 * e.g [1,3,6,7] means [Monday, Wednesday, Saturday & Saturday]
-                 * 
+                 * Get all the days to advertise on e.g [1,3,6,7] means [Monday,
+                 * Wednesday, Saturday & Saturday]
+                 *
                  * @return
                  */
                 public Set<Integer> getDays() {
