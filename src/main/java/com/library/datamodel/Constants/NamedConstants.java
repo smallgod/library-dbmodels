@@ -36,7 +36,7 @@ public interface NamedConstants {
      * by the player etc
      *
      */
-    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(120).getMillis();
+    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(60).getMillis(); //changed from 120
 
     /**
      * Date time string formats
@@ -52,6 +52,9 @@ public interface NamedConstants {
     public static final String KAMPALA_TIME_ZONE = "Africa/Kampala";
 
     public static final DateTimeZone UTC_TIME_ZONE = DateTimeZone.UTC;
+    
+    
+    public static final int OTP_EXPIRY_DAYS = 30;
 
     /**
      * The DateTime format we are using in this application is in the format

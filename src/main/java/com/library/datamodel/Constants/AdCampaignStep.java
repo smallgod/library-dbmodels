@@ -7,22 +7,22 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ValueStore implements Constants {
+public enum AdCampaignStep implements Constants {
 
-    MTNMOMO_UG("MTNMOMO_UG"),
-    AIRTELMOMO_UG("AIRTELMOMO_UG"),
-    CENTE_UG("CENTE_UG"),
-    CELLUMONEY("CELLUMONEY"),
-    CASHMONEY("CASHMONEY"),
-    STANBIC_UG("STANBIC_UG"),
-    GTBANK_UG("GTBANK_UG"),
-    UNKNOWNSTORE("UKNOWNSTORE");
+    DRAFT("DRAFT"),
+    PENDING_PAYMENT("PENDING_PAYMENT"),
+    IN_REVIEW("IN_REVIEW"),
+    ACTIVE("ACTIVE"), //when scheduled
+    COMPLETED("COMPLETED"), //when reached end_date
+    FLAGGED("FLAGGED"),
+    REJECTED("REJECTED"),
+    REVERSED("REVERSED");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ValueStore.class);
+    private static final LoggerUtil logger = new LoggerUtil(AdCampaignStep.class);
 
-    ValueStore(String enumValue) {
+    AdCampaignStep(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -31,11 +31,11 @@ public enum ValueStore implements Constants {
         return this.enumValue;
     }
 
-    public static ValueStore convertToEnum(String value) {
+    public static AdCampaignStep convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ValueStore availableValue : ValueStore.values()) {
+            for (AdCampaignStep availableValue : AdCampaignStep.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

@@ -97,7 +97,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     private int displayHeight;
 
     @Expose
-    @SerializedName(value = "terminal")
+    @SerializedName(value = "terminal_id")
     @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
     @JoinColumns({
         @JoinColumn(name = "terminal_id")
@@ -112,7 +112,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade(CascadeType.ALL)
-    private BusinessType businessType;
+    private AdBusinessType businessType;
 
     @Expose
     @SerializedName(value = "screen_owner")
@@ -313,11 +313,11 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         return Objects.equals(this.screenId, other.getScreenId());
     }
 
-    public BusinessType getBusinessType() {
+    public AdBusinessType getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(BusinessType businessType) {
+    public void setBusinessType(AdBusinessType businessType) {
         this.businessType = businessType;
     }
 

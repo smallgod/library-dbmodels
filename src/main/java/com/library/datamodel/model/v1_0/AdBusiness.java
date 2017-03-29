@@ -14,16 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -48,53 +46,59 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_client")
+@Table(name = "ad_business", uniqueConstraints = @UniqueConstraint(columnNames = {"business_id"}))
 
-public class AdClient extends BaseEntity implements Auditable, Serializable {
+public class AdBusiness extends BaseEntity implements Auditable, Serializable {
 
-    private static final long serialVersionUID = -6439854988797731103L;
+    private static final long serialVersionUID = -8412758120450080292L;
 
     @Expose
+    @SerializedName(value = "id")
     @Id
-    @GeneratedValue(generator = "myGenerator")
-    @GenericGenerator(
-            name = "adClientKeyGenerator",
-            strategy = "foreign",
-            parameters = @Parameter(
-                    value = "adUser",
-                    name = "property"
-            )
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
     @Expose
-    @SerializedName(value = "number_of_programs")
-    @Column(name = "number_of_programs")
-    private int numberOfPrograms;
+    @SerializedName(value = "business_id")
+    @Column(name = "business_id", nullable = false)
+    private String businessId;
 
-    @Expose
-    @SerializedName(value = "censor")
-    @Column(name = "censor")
-    private boolean isToBeCensored; //whether we need to take programs/ads from this account through a check for approval (this means a couple of minutes' delay before scheduling)
+    @SerializedName(value = "business_name")
+    @Column(name = "business_name")
+    private String businessName;
 
-    @Expose
-    @SerializedName(value = "user_id")
-    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
-    @JoinColumns({
-        @JoinColumn(name = "user_id")
-    })
-    @Cascade(CascadeType.ALL)
-    private AdUser adUser;
+    @Column(name = "business_type")
+    private String businessType; // e.g. Plumbing | Telecom
 
-    public AdClient() {
+    @Column(name = "business_location")
+    private String businessLocation; // e.g. Ntinda
+
+    @Column(name = "business_audience")
+    private String businessAudience; //e.g. Boda-Boda Riders | ALL | Corporates
+
+    @SerializedName(value = "preferred_audience")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "business_preferred_audience",
+            joinColumns = {
+                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdAudienceType> preferredAudience = new HashSet<>(0);
+
+    public AdBusiness() {
     }
 
-    public int getNumberOfPrograms() {
-        return numberOfPrograms;
+    public String getBusinessId() {
+        return businessId;
     }
 
-    public void setNumberOfPrograms(int numberOfPrograms) {
-        this.numberOfPrograms = numberOfPrograms;
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 
     public long getId() {
@@ -105,22 +109,6 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
-    public boolean isIsToBeCensored() {
-        return isToBeCensored;
-    }
-
-    public void setIsToBeCensored(boolean isToBeCensored) {
-        this.isToBeCensored = isToBeCensored;
-    }
-
-    public AdUser getAdUser() {
-        return adUser;
-    }
-
-    public void setAdUser(AdUser adUser) {
-        this.adUser = adUser;
-    }
-
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -129,8 +117,8 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.adUser);
+        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 83 * hash + Objects.hashCode(this.businessId);
         return hash;
     }
 
@@ -145,14 +133,51 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdClient other = (AdClient) obj;
+        final AdBusiness other = (AdBusiness) obj;
         if (this.id != other.getId()) {
             return false;
         }
-        if (!Objects.equals(this.adUser, other.getAdUser())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.businessId, other.getBusinessId());
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType;
+    }
+
+    public String getBusinessLocation() {
+        return businessLocation;
+    }
+
+    public void setBusinessLocation(String businessLocation) {
+        this.businessLocation = businessLocation;
+    }
+
+    public String getBusinessAudience() {
+        return businessAudience;
+    }
+
+    public void setBusinessAudience(String businessAudience) {
+        this.businessAudience = businessAudience;
+    }
+
+    public Set<AdAudienceType> getPreferredAudience() {
+        return preferredAudience;
+    }
+
+    public void setPreferredAudience(Set<AdAudienceType> preferredAudience) {
+        this.preferredAudience = preferredAudience;
     }
 
 }

@@ -17,7 +17,7 @@ public class AdDetail {
         "method": "PLACE_AD",
         "params": {
             "basic_info": {
-                "phone_contact": "774983602",
+                "phone_contact": "774983602", //for logged in users, this is the user id otherwise the primary contact
                 "campaign_name": "Jgifts new Campaign",
                 "advert_length": 10,
                 "notifications": true,
@@ -215,6 +215,7 @@ public class AdDetail {
 
         public class BasicInfo {
 
+            ////for logged in users, this is the user id otherwise the primary contact
             @SerializedName("phone_contact")
             @Expose
             private String phoneContact;

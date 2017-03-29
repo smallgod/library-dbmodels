@@ -7,22 +7,21 @@ import com.library.utilities.LoggerUtil;
  *
  * @author smallgod
  */
-public enum ValueStore implements Constants {
+public enum AdXpoAccountStatus implements Constants {
 
-    MTNMOMO_UG("MTNMOMO_UG"),
-    AIRTELMOMO_UG("AIRTELMOMO_UG"),
-    CENTE_UG("CENTE_UG"),
-    CELLUMONEY("CELLUMONEY"),
-    CASHMONEY("CASHMONEY"),
-    STANBIC_UG("STANBIC_UG"),
-    GTBANK_UG("GTBANK_UG"),
-    UNKNOWNSTORE("UKNOWNSTORE");
+    ACTIVE("ACTIVE"),
+    SUSPENDED("SUSPENDED"),
+    PENDING_OTP("PENDING_OTP"),
+    FLAGGED("FLAGGED"),
+    DELETED("DELETED"),
+    EXPIRED("EXPIRED"),
+    GUEST("GUEST"); //user who is not yet registered aka Guest User
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ValueStore.class);
+    private static final LoggerUtil logger = new LoggerUtil(AdXpoAccountStatus.class);
 
-    ValueStore(String enumValue) {
+    AdXpoAccountStatus(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -31,11 +30,11 @@ public enum ValueStore implements Constants {
         return this.enumValue;
     }
 
-    public static ValueStore convertToEnum(String value) {
+    public static AdXpoAccountStatus convertToEnum(String value) {
 
         if (value != null) {
 
-            for (ValueStore availableValue : ValueStore.values()) {
+            for (AdXpoAccountStatus availableValue : AdXpoAccountStatus.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

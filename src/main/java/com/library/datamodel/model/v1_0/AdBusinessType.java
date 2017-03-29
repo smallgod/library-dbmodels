@@ -16,9 +16,9 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "business_type")
+@Table(name = "ad_business_type")
 
-public class BusinessType extends BaseEntity implements Auditable, Serializable {
+public class AdBusinessType extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -1139458573433634348L;
 
@@ -37,7 +37,7 @@ public class BusinessType extends BaseEntity implements Auditable, Serializable 
     @Column(name = "busines_type_name", length = 1000)
     private String businessTypeName;
 
-    public BusinessType() {
+    public AdBusinessType() {
     }
 
     public String getBusinessTypeName() {

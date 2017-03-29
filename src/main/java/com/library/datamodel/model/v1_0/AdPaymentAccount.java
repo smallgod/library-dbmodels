@@ -2,6 +2,7 @@ package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.ValueStore;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -9,21 +10,19 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -48,53 +47,48 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_client")
+@Table(name = "ad_payment_account")
 
-public class AdClient extends BaseEntity implements Auditable, Serializable {
+public class AdPaymentAccount extends BaseEntity implements Auditable, Serializable {
 
-    private static final long serialVersionUID = -6439854988797731103L;
+    private static final long serialVersionUID = 1590135329856889692L;
 
     @Expose
+    @SerializedName(value = "id")
     @Id
-    @GeneratedValue(generator = "myGenerator")
-    @GenericGenerator(
-            name = "adClientKeyGenerator",
-            strategy = "foreign",
-            parameters = @Parameter(
-                    value = "adUser",
-                    name = "property"
-            )
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Expose
-    @SerializedName(value = "number_of_programs")
-    @Column(name = "number_of_programs")
-    private int numberOfPrograms;
+    @SerializedName(value = "account_number")
+    @Column(name = "account_number")
+    private String accountNumber;
+
+    @Column(name = "payment_method")
+    @Enumerated(EnumType.STRING)
+    private ValueStore paymentMethod;
+
+    @SerializedName(value = "account_preferred")
+    @Column(name = "account_preferred")
+    private boolean isAccountPreferred;
 
     @Expose
-    @SerializedName(value = "censor")
-    @Column(name = "censor")
-    private boolean isToBeCensored; //whether we need to take programs/ads from this account through a check for approval (this means a couple of minutes' delay before scheduling)
+    @SerializedName(value = "account_number_holders")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "account_number_holders",
+            joinColumns = {
+                @JoinColumn(name = "account_number"),
+                @JoinColumn(name = "payment_method")
 
-    @Expose
-    @SerializedName(value = "user_id")
-    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
-    @JoinColumns({
-        @JoinColumn(name = "user_id")
-    })
-    @Cascade(CascadeType.ALL)
-    private AdUser adUser;
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdClient> adClients = new HashSet<>(0); //multiple cients can pay from the same account - we don't mind
 
-    public AdClient() {
-    }
-
-    public int getNumberOfPrograms() {
-        return numberOfPrograms;
-    }
-
-    public void setNumberOfPrograms(int numberOfPrograms) {
-        this.numberOfPrograms = numberOfPrograms;
+    public AdPaymentAccount() {
     }
 
     public long getId() {
@@ -105,20 +99,12 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
-    public boolean isIsToBeCensored() {
-        return isToBeCensored;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setIsToBeCensored(boolean isToBeCensored) {
-        this.isToBeCensored = isToBeCensored;
-    }
-
-    public AdUser getAdUser() {
-        return adUser;
-    }
-
-    public void setAdUser(AdUser adUser) {
-        this.adUser = adUser;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     @Override
@@ -129,8 +115,8 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.adUser);
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.accountNumber);
         return hash;
     }
 
@@ -145,14 +131,35 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdClient other = (AdClient) obj;
+        final AdPaymentAccount other = (AdPaymentAccount) obj;
         if (this.id != other.getId()) {
             return false;
         }
-        if (!Objects.equals(this.adUser, other.getAdUser())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.accountNumber, other.getAccountNumber());
+    }
+
+    public ValueStore getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(ValueStore paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public boolean isIsAccountPreferred() {
+        return isAccountPreferred;
+    }
+
+    public void setIsAccountPreferred(boolean isAccountPreferred) {
+        this.isAccountPreferred = isAccountPreferred;
+    }
+
+    public Set<AdClient> getAdClients() {
+        return adClients;
+    }
+
+    public void setAdClients(Set<AdClient> adClients) {
+        this.adClients = adClients;
     }
 
 }

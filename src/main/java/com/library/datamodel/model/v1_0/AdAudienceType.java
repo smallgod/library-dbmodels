@@ -26,10 +26,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "audience_type")
-//@Table(name = "audience_type")
-
-public class AudienceType extends BaseEntity implements Auditable, Serializable {
+@Table(name = "ad_audience_type")
+public class AdAudienceType extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
@@ -58,8 +56,23 @@ public class AudienceType extends BaseEntity implements Auditable, Serializable 
     )
     @Cascade({CascadeType.ALL})
     private Set<AdScreen> adScreens = new HashSet<>(0);
+    
+    
+    @SerializedName(value = "audience_type_screens")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "audience_type_screens",
+            joinColumns = {
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdBusiness> adBusiness = new HashSet<>(0);
+    
 
-    public AudienceType() {
+    public AdAudienceType() {
     }
 
     public int getAudienceCode() {

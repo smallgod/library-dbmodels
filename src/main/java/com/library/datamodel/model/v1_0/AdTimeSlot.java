@@ -62,9 +62,9 @@ import org.joda.time.LocalTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
+@Table(name = "ad_time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
 
-public class TimeSlot extends BaseEntity implements Auditable, Serializable {
+public class AdTimeSlot extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -4958704682470297016L;
 
@@ -117,7 +117,7 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
     @Column(name = "approval_delay")
     private long approvalDelay; // in millis
 
-    public TimeSlot() {
+    public AdTimeSlot() {
     }
 
     public String getTimeSlotCode() {
@@ -224,7 +224,7 @@ public class TimeSlot extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final TimeSlot other = (TimeSlot) obj;
+        final AdTimeSlot other = (AdTimeSlot) obj;
         if (this.id != other.getId()) {
             return false;
         }
