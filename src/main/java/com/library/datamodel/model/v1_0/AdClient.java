@@ -79,9 +79,9 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "user_id")
-    @OneToOne //To-DO I think it is better to have this relationship owned by the terminal one terminal - > one screen for now, later we can have multiple screens on a terminal
+    @OneToOne 
     @JoinColumns({
-        @JoinColumn(name = "user_id")
+        @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     })
     @Cascade(CascadeType.ALL)
     private AdUser adUser;

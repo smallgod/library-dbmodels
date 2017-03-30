@@ -1,8 +1,8 @@
 package com.library.datamodel.Constants;
 
-//import com.advertexpo.addisplay.exceptiontype.MyCustomException;
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
  *
@@ -10,6 +10,7 @@ import com.library.utilities.LoggerUtil;
  */
 public enum APIMethodName implements Constants {
 
+    AUTHENTICATE_USER("AUTHENTICATE_USER"),
     CREATE_ACCOUNT("CREATE_ACCOUNT"),
     GET_PRICE("GET_PRICE"),
     GET_AREAS("GET_AREAS"),
@@ -36,8 +37,6 @@ public enum APIMethodName implements Constants {
 
     private final String methodNameString;
 
-    private static final LoggerUtil logger = new LoggerUtil(APIMethodName.class);
-
     APIMethodName(String wrapperNodeStr) {
         this.methodNameString = wrapperNodeStr;
     }
@@ -47,7 +46,7 @@ public enum APIMethodName implements Constants {
         return this.methodNameString;
     }
 
-    public static APIMethodName convertToEnum(String methodName) {
+    public static APIMethodName convertToEnum(String methodName) throws MyCustomException {
 
         if (methodName != null) {
 
@@ -58,9 +57,10 @@ public enum APIMethodName implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + methodName + " found");
-        throw new IllegalArgumentException("No constant with text " + methodName + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + methodName, ErrorCategory.CLIENT_ERR_TYPE);
+
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Method Name", "Failed to convert API Method Name: " + methodName + "to Enum");
+
+        throw error;
 
     }
 }

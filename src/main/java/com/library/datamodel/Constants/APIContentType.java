@@ -1,23 +1,22 @@
 package com.library.datamodel.Constants;
 
-//import com.advertexpo.addisplay.exceptiontype.MyCustomException;
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
- * Represents the different states a processing unit such as a monitoring unit or AdDisplay unit 
- * could be in at any one moment
+ * Represents the different states a processing unit such as a monitoring unit
+ * or AdDisplay unit could be in at any one moment
+ *
  * @author smallgod
  */
 public enum APIContentType implements Constants {
 
-    JSON("application/json"), 
+    JSON("application/json"),
     XML("application/xml"),
-    HTTP("HTTP"); 
-    
-    private final String apiType;
+    HTTP("HTTP");
 
-    private static final LoggerUtil logger = new LoggerUtil(APIContentType.class);
+    private final String apiType;
 
     APIContentType(String apiType) {
         this.apiType = apiType;
@@ -28,7 +27,7 @@ public enum APIContentType implements Constants {
         return this.apiType;
     }
 
-    public static APIContentType convertToEnum(String givenApiType) {
+    public static APIContentType convertToEnum(String givenApiType) throws MyCustomException {
 
         if (givenApiType != null) {
 
@@ -39,9 +38,9 @@ public enum APIContentType implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + givenApiType + " found");
-        throw new IllegalArgumentException("No constant with text " + givenApiType + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + givenApiType, ErrorCategory.CLIENT_ERR_TYPE);
 
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Content Type", "Failed to convert APIContentType: " + givenApiType + "to Enum");
+
+        throw error;
     }
 }

@@ -1,7 +1,9 @@
 package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
+import com.library.utilities.GeneralUtils;
 import com.library.utilities.LoggerUtil;
 
 /**
@@ -28,7 +30,14 @@ public enum AdPaymentStatus implements Constants {
         return this.payStatus;
     }
 
-    public static AdPaymentStatus convertToEnum(String payStatusValue) {
+    
+    /**
+     * 
+     * @param payStatusValue
+     * @return
+     * @throws MyCustomException 
+     */
+    public static AdPaymentStatus convertToEnum(String payStatusValue) throws MyCustomException {
 
         if (payStatusValue != null) {
 
@@ -39,9 +48,7 @@ public enum AdPaymentStatus implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + payStatusValue + " found");
-        throw new IllegalArgumentException("No constant with text " + payStatusValue + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + payStatusValue, ErrorCategory.CLIENT_ERR_TYPE);
-
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Payment status", "Failed to convert payment status: " + payStatusValue + "to Enum");
+        throw error;
     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
@@ -64,6 +65,15 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     @SerializedName(value = "owner_id")
     @Expose
     private String screenOwnerId;
+    
+    @Expose
+    @SerializedName(value = "user_id")
+    @OneToOne 
+    @JoinColumns({
+        @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdUser adUser;
 
     public AdScreenOwner() {
     }
@@ -87,6 +97,14 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public AdUser getAdUser() {
+        return adUser;
+    }
+
+    public void setAdUser(AdUser adUser) {
+        this.adUser = adUser;
     }
 }
 

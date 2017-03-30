@@ -10,12 +10,14 @@ import com.library.utilities.LoggerUtil;
 public enum AdXpoAccountStatus implements Constants {
 
     ACTIVE("ACTIVE"),
-    SUSPENDED("SUSPENDED"),
     PENDING_OTP("PENDING_OTP"),
-    FLAGGED("FLAGGED"),
     DELETED("DELETED"),
     EXPIRED("EXPIRED"),
-    GUEST("GUEST"); //user who is not yet registered aka Guest User
+    GUEST("GUEST"),//user who is not yet registered aka Guest User
+    FLAGGED("FLAGGED"),
+    SUSPENDED("SUSPENDED"),
+    WARNED("WARNED"),
+    BANNED("BANNED");
 
     private final String enumValue;
 

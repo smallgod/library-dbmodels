@@ -1,13 +1,14 @@
 package com.library.datamodel.Constants;
 
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
  *
  * @author smallgod
  */
-public enum AdCampaignStep implements Constants {
+public enum AdCampaignStatus implements Constants {
 
     DRAFT("DRAFT"),
     PENDING_PAYMENT("PENDING_PAYMENT"),
@@ -20,9 +21,7 @@ public enum AdCampaignStep implements Constants {
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(AdCampaignStep.class);
-
-    AdCampaignStep(String enumValue) {
+    AdCampaignStatus(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -31,20 +30,19 @@ public enum AdCampaignStep implements Constants {
         return this.enumValue;
     }
 
-    public static AdCampaignStep convertToEnum(String value) {
+    public static AdCampaignStatus convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
-            for (AdCampaignStep availableValue : AdCampaignStep.values()) {
+            for (AdCampaignStatus availableValue : AdCampaignStatus.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;
                 }
             }
         }
-        logger.warn("No constant with text " + value + " found");
-        throw new IllegalArgumentException("No constant with text " + value + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
 
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Advert Campaign Status", "Failed to convert Advert Campaign Status: " + value + "to Enum");
+        throw error;
     }
 }

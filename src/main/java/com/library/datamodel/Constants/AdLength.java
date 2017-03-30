@@ -1,6 +1,8 @@
 package com.library.datamodel.Constants;
 
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
+import com.library.utilities.GeneralUtils;
 import com.library.utilities.LoggerUtil;
 
 /**
@@ -25,7 +27,7 @@ public enum AdLength implements Constants {
         return String.valueOf(this.enumValue);
     }
 
-    public static AdLength convertToEnum(int value) {
+    public static AdLength convertToEnum(int value) throws MyCustomException {
 
         if (value > 0) {
 
@@ -36,9 +38,8 @@ public enum AdLength implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + value + " found");
-        throw new IllegalArgumentException("No constant with text " + value + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
 
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Advert length", "Failed to convert Advert Length: " + value + "to Enum");
+        throw error;
     }
 }

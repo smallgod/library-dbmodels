@@ -4,7 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -45,9 +49,9 @@ import org.joda.time.LocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_session", uniqueConstraints = @UniqueConstraint(columnNames = {"token_id"}))
+@Table(name = "ad_otp")
 
-public class AdTokenId extends BaseEntity implements Auditable, Serializable {
+public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = 2875511788949066175L;
 
@@ -58,55 +62,25 @@ public class AdTokenId extends BaseEntity implements Auditable, Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    /**
-     * when the app is installed, a 25-character token id is generated. It is
-     * used for every request from that app so that users don't have to keep
-     * logging in. When the app is un-installed and re-installed, a new key is
-     * generated and requires user login with the backup key in order to
-     * retrieve user data. This key is valid for app install period. Now, for
-     * WEB, I think this token Id should be valid for a day and should be
-     * included in every request as well.
-     */
-    @Column(name = "token_id")
-    private String tokenId;
-
-    /**
-     * Whether login is from app or Web
-     */
-    @Expose
-    @SerializedName(value = "app_login")
-    @Column(name = "app_login")
-    private boolean isAppLogin;
+    @Column(name = "otp")
+    private int otp;
 
     @Expose
-    @SerializedName(value = "user_id")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
-    })
+    @SerializedName(value = "otps_sent")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "otps_sent",
+            joinColumns = {
+                @JoinColumn(name = "otp_id")
+
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "primary_phone", referencedColumnName = "primary_phone")
+            }
+    )
     @Cascade({CascadeType.ALL})
-    private AdUser adUser;
+    private Set<AdUser> adUsers = new HashSet<>(0);
 
-    @Type(type = "jodalocaldatetime")
-    @Column(name = "last_access_time")
-    @SerializedName(value = "last_access_time")
-    private LocalDateTime lastAccessTime; //the most recent date/time when this token_id was used to access resources on this server
-
-    @Column(name = "last_access_ip")
-    private String lastAccessIP;
-
-    @Column(name = "device_mac_address")
-    private String deviceMacAddress; //esp. for mobile apps
-
-    public AdTokenId() {
-    }
-
-    public boolean isIsAppLogin() {
-        return isAppLogin;
-    }
-
-    public void setIsAppLogin(boolean isAppLogin) {
-        this.isAppLogin = isAppLogin;
+    public AdOneTimPin() {
     }
 
     public long getId() {
@@ -117,44 +91,20 @@ public class AdTokenId extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
-    public AdUser getAdUser() {
-        return adUser;
+    public int getOtp() {
+        return otp;
     }
 
-    public void setAdUser(AdUser adUser) {
-        this.adUser = adUser;
+    public void setOtp(int otp) {
+        this.otp = otp;
     }
 
-    public String getTokenId() {
-        return tokenId;
+    public Set<AdUser> getAdUsers() {
+        return adUsers;
     }
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
-    public LocalDateTime getLastAccessTime() {
-        return lastAccessTime;
-    }
-
-    public void setLastAccessTime(LocalDateTime lastAccessTime) {
-        this.lastAccessTime = lastAccessTime;
-    }
-
-    public String getLastAccessIP() {
-        return lastAccessIP;
-    }
-
-    public void setLastAccessIP(String lastAccessIP) {
-        this.lastAccessIP = lastAccessIP;
-    }
-
-    public String getDeviceMacAddress() {
-        return deviceMacAddress;
-    }
-
-    public void setDeviceMacAddress(String deviceMacAddress) {
-        this.deviceMacAddress = deviceMacAddress;
+    public void setAdUsers(Set<AdUser> adUsers) {
+        this.adUsers = adUsers;
     }
 
     @Override
@@ -164,9 +114,8 @@ public class AdTokenId extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.tokenId);
+        int hash = 5;
+        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -181,11 +130,8 @@ public class AdTokenId extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdTokenId other = (AdTokenId) obj;
-        if (this.id != other.getId()) {
-            return false;
-        }
-        return Objects.equals(this.tokenId, other.getTokenId());
+        final AdOneTimPin other = (AdOneTimPin) obj;
+        return this.id == other.getId();
     }
 
 }

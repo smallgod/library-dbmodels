@@ -14,14 +14,23 @@ public class ErrorResponse {
     /*
     
         {
-            "success": true,
-            "data": {
-              "user_id": "774983602", 
-              "otp":5634, // OTP sent to client, used to verify account (so no need to call server again if user enters)
-              "account_status": "PENDING_OTP", // |   REGISTERED
-              "description": "New client accont created, pending OTP verification"
+            "success":false,
+            "data":{
+               "request_id":89383838,
+               "errors":[
+                  {
+                     "error_code":"DUPLICATE_USER_ID",
+                     "description":"A similar account with user id already exists. Please use a different phone number or if password forgotten, reset it.",
+                     "additional_details":"Get this info from the code, e.g. exception.getMessage()"
+                  },
+                  {
+                     "error_code":"INACTIVE_USER_ID",
+                     "description":"User ID was inactivaed due to pending OTP verificaion",
+                     "additional_details":"Get this info from the code, e.g. exception.getMessage()"
+                  }
+               ]
             }
-        }
+         }
     
      */
     @SerializedName("success")
