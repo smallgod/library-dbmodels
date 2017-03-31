@@ -7,7 +7,7 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetAdPriceResponse {
+public class GetAdCampaignStatsResponse {
 
     /*
         ISIAH 45:11 - LIVING BIBLE / KJV
@@ -17,21 +17,22 @@ public class GetAdPriceResponse {
         //this request is sent both at adding a parameter or at its removal
     
     
-{
-   "success":true,
-   "data":{
-      "target_reach":{
-         "amount":500,
-         "audience_count":4,
-         "screen_count":1
-      },
-      "potential_reach":{
-         "amount":500000,
-         "audience_count":50000,
-         "screen_count":9100
-      }
-   }
-}
+        {
+          "success": true,
+          "data": {
+            "display_count":59, //number of times advert is going to be displayed
+            "target_reach": {
+              "amount": 500,
+              "audience_count": 4,
+              "screen_count": 1
+            },
+            "potential_reach": {
+              "amount": 500000,
+              "audience_count": 50000,
+              "screen_count": 9100
+            }
+          }
+        }
     
      */
     @SerializedName("success")
@@ -41,6 +42,14 @@ public class GetAdPriceResponse {
     @SerializedName("data")
     @Expose
     private Data data;
+
+    public GetAdCampaignStatsResponse(boolean success) {
+        this.success = success;
+    }
+
+    public GetAdCampaignStatsResponse() {
+        this(Boolean.TRUE);
+    }
 
     public boolean isSuccess() {
         return success;
@@ -59,6 +68,10 @@ public class GetAdPriceResponse {
     }
 
     public class Data {
+
+        @SerializedName("display_count")
+        @Expose
+        private int numOfTimesAdIsToPlay;
 
         @SerializedName("target_reach")
         @Expose
@@ -83,6 +96,14 @@ public class GetAdPriceResponse {
         public void setPotentialReach(PotentialReach potentialReach) {
             this.potentialReach = potentialReach;
 
+        }
+
+        public int getNumOfTimesAdIsToPlay() {
+            return numOfTimesAdIsToPlay;
+        }
+
+        public void setNumOfTimesAdIsToPlay(int numOfTimesAdIsToPlay) {
+            this.numOfTimesAdIsToPlay = numOfTimesAdIsToPlay;
         }
 
         public class TargetReach {

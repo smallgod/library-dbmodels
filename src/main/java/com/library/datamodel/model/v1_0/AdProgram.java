@@ -2,8 +2,8 @@ package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.AdCampaignStatus;
 import com.library.datamodel.Constants.AdPaymentStatus;
-import com.library.datamodel.Constants.AdvertStatus;
 import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
@@ -19,11 +19,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.Type;
@@ -52,9 +55,30 @@ import org.joda.time.LocalDate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"program_join_id"}))
 
+@NamedQueries(
+        @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS, query = AdProgram.FETCH_USER_CAMPAIGNS_QUERY)
+)
+
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
+    public static final String FETCH_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:id";
+    public static final String FETCH_USER_CAMPAIGNS = "fetch_user_campaigns";
+
     private static final long serialVersionUID = -7420964819128665745L;
+    
+    //Select i from Inventory i,Category c INNER JOIN i.product ip INNER JOIN c.products cp where ip = cp and c.id=?
+    
+   // select e from Employee e inner join e.team;
+            
+   //select p from Products p INNER JOIN p.productlanguages pl where pl.languages.shortname ='eng';
+    
+//    SELECT supplierOrderDetails.productID as product, supplierOrderDetails.orderQty as orderedQty,sum(supplierOrderReceiveDetail.qtyArrived) as qtyArrived 
+//    FROM SupplierOrder as so, SupplierOrderDetails as supplierOrderDetails,  SupplierOrderReceiveDetail as supplierOrderReceiveDetail, SupplierOrderReceive as supplierOrderReceive
+//    INNER JOIN supplierOrderDetails.supplierOrderID
+//    INNER JOIN supplierOrderReceive.supplierOrder
+//    INNER JOIN supplierOrderReceiveDetail.supplierOrderReceive
+//    GROUP BY supplierOrderDetails.productID, supplierOrderDetails.orderQty
+   
 
     @Expose
     @SerializedName(value = "id")
@@ -93,11 +117,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private ProgDisplayLayout displayLayout;
 
-    @Expose
-    @SerializedName(value = "ad_status")
-    @Column(name = "ad_status")
-    @Enumerated(EnumType.STRING)
-    private AdvertStatus adStatus;//the status of the advert whether successful, Rejected or ....
+    
 
     @Expose
     @SerializedName(value = "processing_step")
@@ -112,17 +132,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "payment_status")
     @Enumerated(EnumType.STRING)
     private AdPaymentStatus paymentStatus;
-
-    @Expose
-    @SerializedName(value = "schedules_to_play")
-    @Column(name = "schedules_to_play")
-    private int totalSchedulesToPlay; //number of schedules paid for, to be played
-
-    @Expose
-    @SerializedName(value = "schedules_played")
-    @Column(name = "schedules_played")
-    private int totalSchedulesPlayed; //number of schedules played so far
-
+    
     @Expose
     @SerializedName(value = "start_date")
     @Column(name = "start_date")
@@ -153,16 +163,37 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     })
     @Cascade({CascadeType.ALL})
     private AdClient client;
+    
+    @Expose
+    @SerializedName(value = "campaign_status")
+    @Column(name = "campaign_status")
+    @Enumerated(EnumType.STRING)
+    private AdCampaignStatus adCampaignStatus;
+
+     
+    @Expose
+    @SerializedName(value = "campaign_stats_id")
+    @OneToOne
+    @JoinColumns({
+        @JoinColumn(name = "campaign_stats_id")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdCampaignStats adCampaignStats;
+     
+     
+     
+     
+     
 
     public AdProgram() {
     }
 
-    public AdvertStatus getAdStatus() {
-        return adStatus;
+    public AdCampaignStatus getAdCampaignStatus() {
+        return adCampaignStatus;
     }
 
-    public void setAdStatus(AdvertStatus adStatus) {
-        this.adStatus = adStatus;
+    public void setAdCampaignStatus(AdCampaignStatus adCampaignStatus) {
+        this.adCampaignStatus = adCampaignStatus;
     }
 
     public AdvertStep getAdStep() {
@@ -187,11 +218,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setAdvertProgramId(int advertProgramId) {
         this.advertProgramId = advertProgramId;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
     }
 
     public String getAdCampaignName() {
@@ -226,29 +252,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.displayLayout = displayLayout;
     }
 
-    public int getTotalSchedulesToPlay() {
-        return totalSchedulesToPlay;
-    }
-
-    public void setTotalSchedulesToPlay(int totalSchedulesToPlay) {
-        this.totalSchedulesToPlay = totalSchedulesToPlay;
-    }
-
-    public int getTotalSchedulesPlayed() {
-        return totalSchedulesPlayed;
-    }
-
-    public void setTotalSchedulesPlayed(int totalSchedulesPlayed) {
-        this.totalSchedulesPlayed = totalSchedulesPlayed;
-    }
-
-//    public Set<AdScreen> getAdScreenList() {
-//        return adScreenList;
-//    }
-//
-//    public void setAdScreenList(Set<AdScreen> adScreenList) {
-//        this.adScreenList = adScreenList;
-//    }
     public LocalDate getStartAdDate() {
         return startAdDate;
     }
@@ -305,15 +308,21 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.client = client;
     }
 
+   
+    
     @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+
+     @Override
     public int hashCode() {
         int hash = 5;
         hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 53 * hash + this.progJoinId;
         return hash;
     }
-
-   
 
     @Override
     public boolean equals(Object obj) {
@@ -333,6 +342,13 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         return this.progJoinId == other.getProgJoinId();
     }
 
+    public AdCampaignStats getAdCampaignStats() {
+        return adCampaignStats;
+    }
+
+    public void setAdCampaignStats(AdCampaignStats adCampaignStats) {
+        this.adCampaignStats = adCampaignStats;
+    }
 }
 
 

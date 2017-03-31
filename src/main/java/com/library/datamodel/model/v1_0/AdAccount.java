@@ -47,10 +47,11 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_payment_account")
+@Table(name = "ad_account")
 
-public class AdPaymentAccount extends BaseEntity implements Auditable, Serializable {
+public class AdAccount extends BaseEntity implements Auditable, Serializable {
 
+    //This account will be used for both payment accounts (advertisers) and recieving accounts (screen owners)
     private static final long serialVersionUID = 1590135329856889692L;
 
     @Expose
@@ -64,21 +65,22 @@ public class AdPaymentAccount extends BaseEntity implements Auditable, Serializa
     @Column(name = "account_number")
     private String accountNumber;
 
-    @Column(name = "payment_method")
+    @Column(name = "value_store")
     @Enumerated(EnumType.STRING)
-    private ValueStore paymentMethod;
+    private ValueStore valueStore;
 
     @SerializedName(value = "account_preferred")
     @Column(name = "account_preferred")
     private boolean isAccountPreferred;
 
+    //multiple users can pay from the same account or decide to recieve payments (screen owners) on the same account - we don't mind
     @Expose
     @SerializedName(value = "account_number_holders")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "account_number_holders",
             joinColumns = {
                 @JoinColumn(name = "account_number"),
-                @JoinColumn(name = "payment_method")
+                @JoinColumn(name = "value_store")
 
             },
             inverseJoinColumns = {
@@ -86,9 +88,9 @@ public class AdPaymentAccount extends BaseEntity implements Auditable, Serializa
             }
     )
     @Cascade({CascadeType.ALL})
-    private Set<AdClient> adClients = new HashSet<>(0); //multiple cients can pay from the same account - we don't mind
+    private Set<AdUser> adUsers = new HashSet<>(0); 
 
-    public AdPaymentAccount() {
+    public AdAccount() {
     }
 
     public long getId() {
@@ -131,19 +133,19 @@ public class AdPaymentAccount extends BaseEntity implements Auditable, Serializa
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdPaymentAccount other = (AdPaymentAccount) obj;
+        final AdAccount other = (AdAccount) obj;
         if (this.id != other.getId()) {
             return false;
         }
         return Objects.equals(this.accountNumber, other.getAccountNumber());
     }
 
-    public ValueStore getPaymentMethod() {
-        return paymentMethod;
+    public ValueStore getValueStore() {
+        return valueStore;
     }
 
-    public void setPaymentMethod(ValueStore paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setValueStore(ValueStore valueStore) {
+        this.valueStore = valueStore;
     }
 
     public boolean isIsAccountPreferred() {
@@ -154,12 +156,12 @@ public class AdPaymentAccount extends BaseEntity implements Auditable, Serializa
         this.isAccountPreferred = isAccountPreferred;
     }
 
-    public Set<AdClient> getAdClients() {
-        return adClients;
+    public Set<AdUser> getAdUsers() {
+        return adUsers;
     }
 
-    public void setAdClients(Set<AdClient> adClients) {
-        this.adClients = adClients;
+    public void setAdUsers(Set<AdUser> adUsers) {
+        this.adUsers = adUsers;
     }
 
 }

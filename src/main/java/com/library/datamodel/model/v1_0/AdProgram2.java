@@ -73,8 +73,8 @@ package com.library.datamodel.model.v1_0;
  */
 
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.AdCampaignStatus;
 import com.library.datamodel.Constants.AdPaymentStatus;
-import com.library.datamodel.Constants.AdvertStatus;
 import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
@@ -167,7 +167,7 @@ public class AdProgram2 extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "ad_status")
     @Column(name = "ad_status")
     @Enumerated(EnumType.STRING)
-    private AdvertStatus adStatus;//the status of the advert whether successful, Rejected or ....
+    private AdCampaignStatus adStatus;//the status of the advert whether successful, Rejected or ....
 
     @SerializedName(value = "processing_step")
     @Column(name = "processing_step")
@@ -231,11 +231,11 @@ public class AdProgram2 extends BaseEntity implements Auditable, Serializable {
     public AdProgram2() {
     }
 
-    public AdvertStatus getAdStatus() {
+    public AdCampaignStatus getAdStatus() {
         return adStatus;
     }
 
-    public void setAdStatus(AdvertStatus adStatus) {
+    public void setAdStatus(AdCampaignStatus adStatus) {
         this.adStatus = adStatus;
     }
 

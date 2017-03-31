@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GetAdPriceRequest {
+public class GetAdCampaignStatsRequest {
 
     /*
         ISIAH 45:11 - LIVING BIBLE / KJV
@@ -18,7 +18,7 @@ public class GetAdPriceRequest {
         //we start with amount - 0 & audience reach - 0
         //this request is sent both at adding a parameter or at its removal
         {
-          "method": "GET_PRICE",
+          "method": "GET_CAMPAIGN_STATS",
           "params": {
             "ad_length":60, //default is: 0 seconds
             "layout_type": "3SPLIT",//default is: TEXT_ONLY
@@ -28,7 +28,7 @@ public class GetAdPriceRequest {
              "audience_types": [2, 4], //default is []
              "start_date": "2017-03-06", //default is today, 2017-03-05
              "end_date": "2017-03-11", //default is today, 2017-03-05
-             "slots":[                // default is [], I will use freebie
+             "timeSlots":[                // default is [], I will use freebie
                 {
                   "name":"PRIME",
                   "frequency":2, //default is 1
@@ -103,9 +103,9 @@ public class GetAdPriceRequest {
         @Expose
         private String endDate;
 
-        @SerializedName("slots")
+        @SerializedName("time_slots")
         @Expose
-        private Set<Slot> slots = new HashSet<>();
+        private Set<TimeSlot> timeSlots = new HashSet<>();
 
         public int getAdLength() {
             return adLength;
@@ -171,52 +171,15 @@ public class GetAdPriceRequest {
             this.endDate = endDate;
         }
 
-        public Set<Slot> getSlots() {
-            return slots;
+        public Set<TimeSlot> getTimeSlots() {
+            return timeSlots;
         }
 
-        public void setSlots(Set<Slot> slots) {
-            this.slots = slots;
+        public void setTimeSlots(Set<TimeSlot> timeSlots) {
+            this.timeSlots = timeSlots;
         }
 
-        public class Slot {
-
-            @SerializedName("name")
-            @Expose
-            private String name;
-
-            @SerializedName("frequency")
-            @Expose
-            private Integer frequency = 1;//number of times we can play this ad within this time name
-
-            @SerializedName("days")
-            @Expose
-            private Set<Integer> days;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public Integer getFrequency() {
-                return frequency;
-            }
-
-            public void setFrequency(Integer frequency) {
-                this.frequency = frequency;
-            }
-
-            public Set<Integer> getDays() {
-                return days;
-            }
-
-            public void setDays(Set<Integer> days) {
-                this.days = days;
-            }
-
-        }
     }
+
+    
 }
