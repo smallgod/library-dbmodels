@@ -4,27 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -60,15 +51,14 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     @Column(name = "id", updatable = false, nullable = false)
     @SerializedName(value = "id")
     private long id;
-
-    @Column(name = "owner_id", nullable = false)
-    @SerializedName(value = "owner_id")
-    @Expose
-    private String screenOwnerId;
     
+     @Column(name = "screen_number")
+    @SerializedName(value = "number_of_screens")
+    private int numberOfScreens;
+
     @Expose
     @SerializedName(value = "user_id")
-    @OneToOne 
+    @OneToOne
     @JoinColumns({
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     })
@@ -76,14 +66,6 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     private AdUser adUser;
 
     public AdScreenOwner() {
-    }
-
-    public String getScreenOwnerId() {
-        return screenOwnerId;
-    }
-
-    public void setScreenOwnerId(String screenOwnerId) {
-        this.screenOwnerId = screenOwnerId;
     }
 
     @Override
@@ -105,6 +87,14 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
 
     public void setAdUser(AdUser adUser) {
         this.adUser = adUser;
+    }
+
+    public int getNumberOfScreens() {
+        return numberOfScreens;
+    }
+
+    public void setNumberOfScreens(int numberOfScreens) {
+        this.numberOfScreens = numberOfScreens;
     }
 }
 

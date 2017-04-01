@@ -19,6 +19,8 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.Type;
@@ -45,10 +47,15 @@ import org.joda.time.LocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_session", uniqueConstraints = @UniqueConstraint(columnNames = {"token_id"}))
-
+@Table(name = "ad_token", uniqueConstraints = @UniqueConstraint(columnNames = {"token_id"}))
+@NamedQueries({
+    @NamedQuery(name = AdTokenId.FETCH_TOKENS, query = AdTokenId.FETCH_TOKENS_QUERY)
+})
 public class AdTokenId extends BaseEntity implements Auditable, Serializable {
 
+    public static final String FETCH_TOKENS_QUERY = "SELECT DISTINCT token FROM AdTokenId token INNER JOIN token.adUser user where token.tokenId=:tokenId";
+    public static final String FETCH_TOKENS = "fetch_tokens";
+    
     private static final long serialVersionUID = 2875511788949066175L;
 
     @Expose

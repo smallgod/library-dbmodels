@@ -55,14 +55,17 @@ import org.joda.time.LocalDate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"program_join_id"}))
 
-@NamedQueries(
-        @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS, query = AdProgram.FETCH_USER_CAMPAIGNS_QUERY)
-)
+@NamedQueries({
+    @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY)
+})
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:id";
-    public static final String FETCH_USER_CAMPAIGNS = "fetch_user_campaigns";
+    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND cl.progJoinId IN (:campaignIds)";
+    public static final String FETCH_ALL_USER_CAMPAIGNS = "fetch_user_campaigns";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID = "fetch_user_campaigns_by_id";
 
     private static final long serialVersionUID = -7420964819128665745L;
     

@@ -38,7 +38,10 @@ public enum ErrorCode  implements Constants{
     INVALID_ACCOUNT_DETAILS_ERR("INVALID_ACCOUNT_DETAILS_ERR0R"),
     THIRDPARTY_SYSTEM_ERR("THIRDPARTY_SYSTEM_ERROR"),
     CLIENT_ERR("CLIENT_ERROR"),
-    SERVER_ERR("SERVER_ERROR"); // semicolon needed when fields / methods follow
+    SERVER_ERR("SERVER_ERROR"), 
+    DATABASE_ERR("DATABASE_ERROR"), 
+    BAD_LOGIN_TOKEN_ERR("BAD_LOGIN_TOKEN_ERROR"), 
+    TERMS_AND_CONDITIONS_ERR("TERMS_AND_CONDITIONS_ERROR"); 
 
     private final String errorCodeValue;
 

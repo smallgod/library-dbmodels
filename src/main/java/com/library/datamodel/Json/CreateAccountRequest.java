@@ -9,7 +9,7 @@ public class CreateAccountRequest implements JsonDataModel {
         {
             "method":"CREATE_ACCOUNT",
             "credentials":{
-               "app_id":"ADER6864g25644777",
+               "app_id":"ADER6864g25644777", //subscription_id
                "api_password":"sLA84009rw2",
                "token_id": "" //25-xter optional field, if user not yet logged in, not mandatory
             },
@@ -18,9 +18,12 @@ public class CreateAccountRequest implements JsonDataModel {
                   "first_name":"Davies",
                   "primary_phone":"256774983602",
                   "preferred_password":"eyru474894833y3994ir94309323943"
+               },
+               "addition_info": {
+                 "agreed_to_terms":true
                }
             }
-        }
+         }
              
      */
     @SerializedName(value = "method")
@@ -123,6 +126,9 @@ public class CreateAccountRequest implements JsonDataModel {
 
             @SerializedName(value = "agreed_to_terms")
             private boolean isAgreedToTerms;
+            
+            @SerializedName(value = "user_type")
+            private String userType;
 
             public boolean isIsAgreedToTerms() {
                 return isAgreedToTerms;
@@ -130,6 +136,14 @@ public class CreateAccountRequest implements JsonDataModel {
 
             public void setIsAgreedToTerms(boolean isAgreedToTerms) {
                 this.isAgreedToTerms = isAgreedToTerms;
+            }
+
+            public String getUserType() {
+                return userType;
+            }
+
+            public void setUserType(String userType) {
+                this.userType = userType;
             }
 
         }
