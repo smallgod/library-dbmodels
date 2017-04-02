@@ -23,6 +23,8 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.Type;
@@ -50,8 +52,13 @@ import org.joda.time.LocalDateTime;
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_otp")
-
+@NamedQueries({
+    @NamedQuery(name = AdOneTimPin.FETCH_OTP, query = AdOneTimPin.FETCH_OTP_QUERY)
+})
 public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
+
+    public static final String FETCH_OTP_QUERY = "SELECT DISTINCT otp FROM AdOneTimPin otp INNER JOIN otp.adUsers users where otp.otp IN (:otp) AND users.userId IN (:userId)";
+    public static final String FETCH_OTP = "fetch_otp";
 
     private static final long serialVersionUID = 2875511788949066175L;
 
@@ -79,6 +86,11 @@ public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
     )
     @Cascade({CascadeType.ALL})
     private Set<AdUser> adUsers = new HashSet<>(0);
+
+    @Type(type = "jodalocaldatetime")
+    @Column(name = "otp_expiry_date")
+    @SerializedName(value = "otp_expiry_date")
+    private LocalDateTime otpExpiryDate;
 
     public AdOneTimPin() {
     }
@@ -132,6 +144,14 @@ public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
         }
         final AdOneTimPin other = (AdOneTimPin) obj;
         return this.id == other.getId();
+    }
+
+    public LocalDateTime getOtpExpiryDate() {
+        return otpExpiryDate;
+    }
+
+    public void setOtpExpiryDate(LocalDateTime otpExpiryDate) {
+        this.otpExpiryDate = otpExpiryDate;
     }
 
 }

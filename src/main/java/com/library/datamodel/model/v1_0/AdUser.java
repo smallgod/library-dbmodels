@@ -10,26 +10,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
-import org.joda.time.LocalDateTime;
 
 @TypeDefs({
     @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
@@ -93,15 +85,6 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Expose
-    @SerializedName(value = "business_id")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "business_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
-    })
-    @Cascade({CascadeType.ALL})
-    private AdBusiness business;
-
     @Column(name = "failed_login_attempts")
     private int failedLoginAttempts;
 
@@ -111,14 +94,6 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
 
     @Column(name = "agreed_to_terms")
     private boolean agreedToTermsOfuse;
-
-    @Column(name = "otp")
-    private int otp;
-
-    @Type(type = "jodalocaldatetime")
-    @Column(name = "otp_expiry_date")
-    @SerializedName(value = "otp_expiry_date")
-    private LocalDateTime otpExpiryDate;
 
     public AdUser() {
     }
@@ -187,14 +162,6 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
         this.lastName = lastName;
     }
 
-    public AdBusiness getBusiness() {
-        return business;
-    }
-
-    public void setBusiness(AdBusiness business) {
-        this.business = business;
-    }
-
     public int getFailedLoginAttempts() {
         return failedLoginAttempts;
     }
@@ -218,23 +185,7 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
     public void setAgreedToTermsOfuse(boolean agreedToTermsOfuse) {
         this.agreedToTermsOfuse = agreedToTermsOfuse;
     }
-
-    public int getOtp() {
-        return otp;
-    }
-
-    public void setOtp(int otp) {
-        this.otp = otp;
-    }
-
-    public LocalDateTime getOtpExpiryDate() {
-        return otpExpiryDate;
-    }
-
-    public void setOtpExpiryDate(LocalDateTime otpExpiryDate) {
-        this.otpExpiryDate = otpExpiryDate;
-    }
-
+    
     public boolean isIsPasswordEncrypted() {
         return isPasswordEncrypted;
     }

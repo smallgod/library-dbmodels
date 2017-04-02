@@ -3,20 +3,24 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 
-public class VerifyAccountRequest implements JsonDataModel {
+public class GuestLoginRequest implements JsonDataModel {
 
     /*
         {
-            "method": "VERIFY_ACCOUNT",
+            "method": "GUEST_LOGIN",
             "credentials": {
-              "app_id": "ADER6864g25644777",
+              "app_id": "ADER6864g25644777", 
               "api_password": "sLA84009rw2",
-              "token_id": "y0lhfdety90jfdsa223sxbrj9" //this is like a session id
+              "token_id": ""
             },
             "params": {
-              "otp": 7892
+
+              "user_type":"CLIENT", //I think I should add this field
+              "agreed_to_terms":true //terms & conditions need be for both guest users and upgraded users
+
             }
-        }
+          }
+             
      */
     @SerializedName(value = "method")
     private String methodName;
@@ -53,18 +57,26 @@ public class VerifyAccountRequest implements JsonDataModel {
 
     public class Params {
 
-        @SerializedName(value = "otp")
-        private int otp;
+        @SerializedName(value = "user_type")
+        private String userType;
 
-        public Params() {
+        @SerializedName(value = "agreed_to_terms")
+        private boolean isAgreedToTerms;
+
+        public String getUserType() {
+            return userType;
         }
 
-        public int getOtp() {
-            return otp;
+        public void setUserType(String userType) {
+            this.userType = userType;
         }
 
-        public void setOtp(int otp) {
-            this.otp = otp;
+        public boolean isIsAgreedToTerms() {
+            return isAgreedToTerms;
+        }
+
+        public void setIsAgreedToTerms(boolean isAgreedToTerms) {
+            this.isAgreedToTerms = isAgreedToTerms;
         }
 
     }

@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -56,21 +54,6 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
     )
     @Cascade({CascadeType.ALL})
     private Set<AdScreen> adScreens = new HashSet<>(0);
-    
-    
-    @SerializedName(value = "audience_type_screens")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "audience_type_screens",
-            joinColumns = {
-                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
-            }
-    )
-    @Cascade({CascadeType.ALL})
-    private Set<AdBusiness> adBusiness = new HashSet<>(0);
-    
 
     public AdAudienceType() {
     }
@@ -91,18 +74,6 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
         this.audienceName = audienceName;
     }
 
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
-
-//    public Set<AdScreen> getAdAudienceScreens() {
-//        return adAudienceScreens;
-//    }
-//
-//    public void setAdAudienceScreens(Set<AdScreen> adAudienceScreens) {
-//        this.adAudienceScreens = adAudienceScreens;
-//    }
     public long getId() {
         return id;
     }
@@ -119,4 +90,16 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
         this.adScreens = adScreens;
     }
 
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+//    public Set<AdScreen> getAdAudienceScreens() {
+//        return adAudienceScreens;
+//    }
+//
+//    public void setAdAudienceScreens(Set<AdScreen> adAudienceScreens) {
+//        this.adAudienceScreens = adAudienceScreens;
+//    }
 }

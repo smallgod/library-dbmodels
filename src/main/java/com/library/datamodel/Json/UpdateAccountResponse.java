@@ -7,20 +7,18 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateAccountResponse {
+public class UpdateAccountResponse {
 
     /*
-    {
-        "success": true,
-        "data": {
-          "user_id": "774983602", 
-          "otp":5634, // OTP sent to client, used to verify account (so no need to call server again if user enters)
-          "first_name":"Davies",
-          "token_id": "y0lhfdety90jfdsa223sxbrj9",
-          "account_status": "PENDING_VERIFICATION", // |   REGISTERED
-          "description": "New client accont created, pending OTP verification"
+    
+        {
+            "success": true,
+            "data": {
+              "user_id": "774983602", //generated from the "primary_phone"
+              "account_status": "ACTIVE",
+              "description": "Account details successfuly updated"
+            }
         }
-      }
     
      */
     @SerializedName("success")
@@ -30,6 +28,14 @@ public class CreateAccountResponse {
     @SerializedName("data")
     @Expose
     private Data data;
+
+    private UpdateAccountResponse(boolean success) {
+        this.success = success;
+    }
+
+    public UpdateAccountResponse() {
+        this(Boolean.TRUE);
+    }
 
     public boolean isSuccess() {
         return success;
@@ -53,19 +59,6 @@ public class CreateAccountResponse {
         @Expose
         private String userId;
 
-        @SerializedName("otp")
-        @Expose
-        private int otp;
-        
-        @SerializedName("first_name")
-        @Expose
-        private String firstName;
-        
-        
-        @SerializedName("token_id")
-        @Expose
-        private String tokenId;
-
         @SerializedName("account_status")
         @Expose
         private String accountStatus;
@@ -73,14 +66,6 @@ public class CreateAccountResponse {
         @SerializedName("description")
         @Expose
         private String description;
-
-        public int getOtp() {
-            return otp;
-        }
-
-        public void setOtp(int otp) {
-            this.otp = otp;
-        }
 
         public String getUserId() {
             return userId;
@@ -105,22 +90,5 @@ public class CreateAccountResponse {
         public void setDescription(String description) {
             this.description = description;
         }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getTokenId() {
-            return tokenId;
-        }
-
-        public void setTokenId(String tokenId) {
-            this.tokenId = tokenId;
-        }
-
     }
 }

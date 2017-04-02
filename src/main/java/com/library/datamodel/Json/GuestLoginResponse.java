@@ -7,7 +7,7 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateAccountResponse {
+public class GuestLoginResponse {
 
     /*
     {
@@ -49,19 +49,16 @@ public class CreateAccountResponse {
 
     public class Data {
 
-        @SerializedName("user_id")
-        @Expose
-        private String userId;
+        private Data(String accountStatus, String description) {
+            this.accountStatus = accountStatus;
+            this.description = description;
+        }
 
-        @SerializedName("otp")
-        @Expose
-        private int otp;
-        
-        @SerializedName("first_name")
-        @Expose
-        private String firstName;
-        
-        
+        public Data() {
+
+            this("GUEST", "You are using a guest account, to upgrade, create new account or login");
+        }
+
         @SerializedName("token_id")
         @Expose
         private String tokenId;
@@ -73,22 +70,6 @@ public class CreateAccountResponse {
         @SerializedName("description")
         @Expose
         private String description;
-
-        public int getOtp() {
-            return otp;
-        }
-
-        public void setOtp(int otp) {
-            this.otp = otp;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
 
         public String getAccountStatus() {
             return accountStatus;
@@ -104,14 +85,6 @@ public class CreateAccountResponse {
 
         public void setDescription(String description) {
             this.description = description;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
         }
 
         public String getTokenId() {

@@ -7,20 +7,19 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateAccountResponse {
+public class ResendOTPResponse {
 
     /*
-    {
-        "success": true,
-        "data": {
-          "user_id": "774983602", 
-          "otp":5634, // OTP sent to client, used to verify account (so no need to call server again if user enters)
-          "first_name":"Davies",
-          "token_id": "y0lhfdety90jfdsa223sxbrj9",
-          "account_status": "PENDING_VERIFICATION", // |   REGISTERED
-          "description": "New client accont created, pending OTP verification"
-        }
-      }
+    
+        {
+            "success": true,
+            "data": {
+              "otp": 7892,
+              "user_id": "774983602", 
+              "account_status": "PENDING_VERIFICATION", 
+              "description": "OTP has been sent to user."
+            }
+          }
     
      */
     @SerializedName("success")
@@ -30,6 +29,14 @@ public class CreateAccountResponse {
     @SerializedName("data")
     @Expose
     private Data data;
+
+    private ResendOTPResponse(boolean success) {
+        this.success = success;
+    }
+
+    public ResendOTPResponse() {
+        this(Boolean.TRUE);
+    }
 
     public boolean isSuccess() {
         return success;
@@ -49,22 +56,13 @@ public class CreateAccountResponse {
 
     public class Data {
 
-        @SerializedName("user_id")
-        @Expose
-        private String userId;
-
         @SerializedName("otp")
         @Expose
         private int otp;
-        
-        @SerializedName("first_name")
+
+        @SerializedName("user_id")
         @Expose
-        private String firstName;
-        
-        
-        @SerializedName("token_id")
-        @Expose
-        private String tokenId;
+        private String userId;
 
         @SerializedName("account_status")
         @Expose
@@ -73,14 +71,6 @@ public class CreateAccountResponse {
         @SerializedName("description")
         @Expose
         private String description;
-
-        public int getOtp() {
-            return otp;
-        }
-
-        public void setOtp(int otp) {
-            this.otp = otp;
-        }
 
         public String getUserId() {
             return userId;
@@ -106,20 +96,12 @@ public class CreateAccountResponse {
             this.description = description;
         }
 
-        public String getFirstName() {
-            return firstName;
+        public int getOtp() {
+            return otp;
         }
 
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getTokenId() {
-            return tokenId;
-        }
-
-        public void setTokenId(String tokenId) {
-            this.tokenId = tokenId;
+        public void setOtp(int otp) {
+            this.otp = otp;
         }
 
     }

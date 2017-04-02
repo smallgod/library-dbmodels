@@ -3,7 +3,7 @@ package com.library.datamodel.Json;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 
-public class VerifyAccountRequest implements JsonDataModel {
+public class ResendOTPRequest implements JsonDataModel {
 
     /*
         {
@@ -14,7 +14,7 @@ public class VerifyAccountRequest implements JsonDataModel {
               "token_id": "y0lhfdety90jfdsa223sxbrj9" //this is like a session id
             },
             "params": {
-              "otp": 7892
+              "primary_phone": 739234567
             }
         }
      */
@@ -53,18 +53,18 @@ public class VerifyAccountRequest implements JsonDataModel {
 
     public class Params {
 
-        @SerializedName(value = "otp")
-        private int otp;
+        @SerializedName(value = "primary_phone")
+        private String primaryPhone;
 
         public Params() {
         }
 
-        public int getOtp() {
-            return otp;
+        public String getPrimaryPhone() {
+            return primaryPhone;
         }
 
-        public void setOtp(int otp) {
-            this.otp = otp;
+        public void setPrimaryPhone(String primaryPhone) {
+            this.primaryPhone = primaryPhone;
         }
 
     }

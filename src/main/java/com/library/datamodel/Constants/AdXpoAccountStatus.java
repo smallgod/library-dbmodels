@@ -10,7 +10,7 @@ import com.library.utilities.LoggerUtil;
 public enum AdXpoAccountStatus implements Constants {
 
     ACTIVE("ACTIVE"),
-    PENDING_OTP("PENDING_OTP"),
+    PENDING_VERIFICATION("PENDING_VERIFICATION"),
     DELETED("DELETED"),
     EXPIRED("EXPIRED"),
     GUEST("GUEST"),//user who is not yet registered aka Guest User

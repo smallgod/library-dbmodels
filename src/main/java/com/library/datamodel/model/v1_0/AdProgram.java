@@ -8,6 +8,8 @@ import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +20,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -185,7 +189,18 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
      
      
      
-     
+     @SerializedName(value = "advertising_business")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "advertising_business",
+            joinColumns = {
+                @JoinColumn(name = "program_id", referencedColumnName = "program_join_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})//A user can advertise/campaign from/for 0 or more businesses and multiple campaigns/programs can be for the same business
+    private Set<AdBusiness> advertisingBusinesses = new HashSet<>(0);
      
 
     public AdProgram() {
@@ -351,6 +366,14 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setAdCampaignStats(AdCampaignStats adCampaignStats) {
         this.adCampaignStats = adCampaignStats;
+    }
+
+    public Set<AdBusiness> getAdvertisingBusinesses() {
+        return advertisingBusinesses;
+    }
+
+    public void setAdvertisingBusinesses(Set<AdBusiness> advertisingBusinesses) {
+        this.advertisingBusinesses = advertisingBusinesses;
     }
 }
 

@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -49,9 +51,16 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_account")
 
+@NamedQueries({
+    @NamedQuery(name = AdAccount.FETCH_ACCOUNTS, query = AdAccount.FETCH_ACCOUNTS_QUERY)
+})
+
+//This account will be used for both payment accounts (advertisers) and recieving accounts (screen owners)
 public class AdAccount extends BaseEntity implements Auditable, Serializable {
 
-    //This account will be used for both payment accounts (advertisers) and recieving accounts (screen owners)
+    public static final String FETCH_ACCOUNTS_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId";
+    public static final String FETCH_ACCOUNTS = "fetch_accounts";
+
     private static final long serialVersionUID = 1590135329856889692L;
 
     @Expose
@@ -88,7 +97,7 @@ public class AdAccount extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
-    private Set<AdUser> adUsers = new HashSet<>(0); 
+    private Set<AdUser> adUsers = new HashSet<>(0); //change this after migrating to better design -> Businesses own account numbers not Users
 
     public AdAccount() {
     }

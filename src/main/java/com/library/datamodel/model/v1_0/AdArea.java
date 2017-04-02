@@ -23,9 +23,10 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_screen_area")
+@Table(name = "ad_area")
 
-public class AdScreenArea extends BaseEntity implements Auditable, Serializable {
+//can be used for both screens and normal areas in the database
+public class AdArea extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
@@ -41,7 +42,7 @@ public class AdScreenArea extends BaseEntity implements Auditable, Serializable 
     @Column(name = "area_name", length = 1000) //might want to change this - what if the data is too long
     private String areaName;
 
-    public AdScreenArea() {
+    public AdArea() {
     }
 
     public int getAreaCode() {

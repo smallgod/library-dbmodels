@@ -130,7 +130,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         @JoinColumn(name = "area_code", referencedColumnName = "area_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade({CascadeType.ALL})
-    private AdScreenArea screenArea;
+    private AdArea screenArea;
 
     @Expose
     @SerializedName(value = "screen_programs")
@@ -321,11 +321,11 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         this.businessType = businessType;
     }
 
-    public AdScreenArea getScreenArea() {
+    public AdArea getScreenArea() {
         return screenArea;
     }
 
-    public void setScreenArea(AdScreenArea screenArea) {
+    public void setScreenArea(AdArea screenArea) {
         this.screenArea = screenArea;
     }
 
