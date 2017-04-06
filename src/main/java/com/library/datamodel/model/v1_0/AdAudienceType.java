@@ -3,20 +3,12 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -41,19 +33,6 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
 
     @Column(name = "audience_name", length = 1000) //might want to change this - what if the data is too long
     private String audienceName;
-
-    @SerializedName(value = "audience_type_screens")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "audience_type_screens",
-            joinColumns = {
-                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
-            }
-    )
-    @Cascade({CascadeType.ALL})
-    private Set<AdScreen> adScreens = new HashSet<>(0);
 
     public AdAudienceType() {
     }
@@ -82,24 +61,9 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
         this.id = id;
     }
 
-    public Set<AdScreen> getAdScreens() {
-        return adScreens;
-    }
-
-    public void setAdScreens(Set<AdScreen> adScreens) {
-        this.adScreens = adScreens;
-    }
-
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
     }
 
-//    public Set<AdScreen> getAdAudienceScreens() {
-//        return adAudienceScreens;
-//    }
-//
-//    public void setAdAudienceScreens(Set<AdScreen> adAudienceScreens) {
-//        this.adAudienceScreens = adAudienceScreens;
-//    }
 }

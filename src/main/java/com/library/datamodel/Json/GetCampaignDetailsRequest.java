@@ -2,22 +2,23 @@ package com.library.datamodel.Json;
 
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
-import java.util.Set;
 
-public class GetUserCampaignsRequest implements JsonDataModel {
+public class GetCampaignDetailsRequest implements JsonDataModel {
 
     /*
+    
     {
-        "method": "GET_USER_ADVERTS",
+        "method": "GET_CAMPAIGN_DETAILS",
         "credentials": {
-          "app_id": "ADER6864g25644777",
+          "app_id": "ADER6864g25644777", 
           "api_password": "sLA84009rw2",
           "token_id": "84938urj9338203u349393"
         },
         "params": {
-          "campaign_id": [583746] //default is [] meaning return all campaign ids
+          "campaign_id": 3455843
         }
-      }
+    }
+    
      */
     @SerializedName(value = "credentials")
     private Credentials credentials;
@@ -55,16 +56,14 @@ public class GetUserCampaignsRequest implements JsonDataModel {
     public class Params {
 
         @SerializedName(value = "campaign_id")
-        private Set<Integer> campaignIds;
+        private int campaignId;
 
-        public Set<Integer> getCampaignIds() {
-            return campaignIds;
+        public int getCampaignId() {
+            return campaignId;
         }
 
-        public void setCampaignIds(Set<Integer> campaignIds) {
-            this.campaignIds = campaignIds;
+        public void setCampaignId(int campaignId) {
+            this.campaignId = campaignId;
         }
-
-       
     }
 }

@@ -52,7 +52,8 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Table(name = "ad_account")
 
 @NamedQueries({
-    @NamedQuery(name = AdAccount.FETCH_ACCOUNTS, query = AdAccount.FETCH_ACCOUNTS_QUERY)
+    @NamedQuery(name = AdAccount.FETCH_ACCOUNTS, query = AdAccount.FETCH_ACCOUNTS_QUERY),
+    @NamedQuery(name = AdAccount.FETCH_PREFERRED_ACCOUNT, query = AdAccount.FETCH_PREFERRED_ACCOUNT_QUERY)
 })
 
 //This account will be used for both payment accounts (advertisers) and recieving accounts (screen owners)
@@ -60,6 +61,9 @@ public class AdAccount extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_ACCOUNTS_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId";
     public static final String FETCH_ACCOUNTS = "fetch_accounts";
+
+    public static final String FETCH_PREFERRED_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId AND users.isAccountPreferred=:ispreferred";
+    public static final String FETCH_PREFERRED_ACCOUNT = "fetch_accounts";
 
     private static final long serialVersionUID = 1590135329856889692L;
 

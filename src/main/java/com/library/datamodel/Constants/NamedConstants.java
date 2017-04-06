@@ -16,6 +16,24 @@ import org.joda.time.Duration;
  */
 public interface NamedConstants {
 
+    /**
+     * Campaign Ids that will be used as templates
+     */
+    public static int[] TEMPLATE_CAMPAIGNS = {};
+    
+    public static String TEMPLATE_CAMPAIGNS_USER_ID = "774983602";
+
+    /**
+     * 3SPLIT screen layout description
+     */
+    public static String THREE_SPLIT_LAYOUT_DESC = "This layout splits a display/TV screen into 3 portions and 2 portions can be used for advertising, one Scrolling Text and the other Images and/or Video";
+    public static int THREE_SPLIT_LAYOUT_PRICE = 1000;
+    /**
+     * 3SPLIT screen layout description
+     */
+    public static String FULLSCREEN_LAYOUT_DESC = "This layout lets the user's adverts fill up the entire display/TV screen. ";
+    public static int FULLSCREEN_LAYOUT_PRICE = 1500;
+
     public static int ARREST_CRIPPY_THREADS = 1;
 
     public static final Lock FETCH_SCHEDULE_LOCK = new ReentrantLock();
@@ -307,7 +325,6 @@ public interface NamedConstants {
      * Identifies by name the SGDbAdapter object stored in the JOBS datamap
      */
     public static String DB_ADAPTER = "DB_ADAPTER";
-    
 
     /**
      * Advert/Program Slots (minutes) available in one Hour
@@ -333,7 +350,7 @@ public interface NamedConstants {
      *
      */
     final int THIRD_SLOT_ALLOCATION = 2;
-    
+
     /**
      * Token ID / Subscription ID length
      */
@@ -355,4 +372,5 @@ public interface NamedConstants {
     public static final String SMS_API_PARAM_TEXT = "SMSText";
     public static final String SMS_API_PARAM_RECIPIENT = "GSM";
 
+    public static final String GUEST_USER_ID = "770000000";
 }

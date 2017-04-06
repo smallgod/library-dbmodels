@@ -57,19 +57,23 @@ import org.joda.time.LocalDate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"program_join_id"}))
+@Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"campaign_id"}))
 
 @NamedQueries({
     @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
-    @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY)
+    @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS, query = AdProgram.FETCH_CAMPAIGNS_QUERY)
+
 })
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND cl.progJoinId IN (:campaignIds)";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND cl.campaignId IN (:campaignIds)";
+    public static final String FETCH_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where cl.campaignId IN (:campaignIds)";
     public static final String FETCH_ALL_USER_CAMPAIGNS = "fetch_user_campaigns";
     public static final String FETCH_USER_CAMPAIGNS_BY_ID = "fetch_user_campaigns_by_id";
+    public static final String FETCH_CAMPAIGNS = "fetch_campaigns";
 
     private static final long serialVersionUID = -7420964819128665745L;
     
@@ -100,9 +104,9 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private int advertProgramId = 0;
 
     @Expose
-    @SerializedName(value = "program_join_id")
-    @Column(name = "program_join_id") //this is the ID we internally generate for every program, later when we figure out, we can use the BaseEntity id
-    private int progJoinId;
+    @SerializedName(value = "campaign_id")
+    @Column(name = "campaign_id") //this is the ID we internally generate for every program, later when we figure out, we can use the BaseEntity id
+    private int campaignId;
 
     @SerializedName(value = "campaign_name")
     @Column(name = "campaign_name")
@@ -123,8 +127,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "display_layout")
     @Enumerated(EnumType.STRING)
     private ProgDisplayLayout displayLayout;
-
-    
 
     @Expose
     @SerializedName(value = "processing_step")
@@ -176,7 +178,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "campaign_status")
     @Enumerated(EnumType.STRING)
     private AdCampaignStatus adCampaignStatus;
-
      
     @Expose
     @SerializedName(value = "campaign_stats_id")
@@ -187,13 +188,13 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Cascade(CascadeType.ALL)
     private AdCampaignStats adCampaignStats;
      
-     
-     
-     @SerializedName(value = "advertising_business")
+    //use later when we upgrade to newer design
+    
+    @SerializedName(value = "advertising_business")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "advertising_business",
             joinColumns = {
-                @JoinColumn(name = "program_id", referencedColumnName = "program_join_id")
+                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
             },
             inverseJoinColumns = {
                 @JoinColumn(name = "business_id", referencedColumnName = "business_id")
@@ -202,10 +203,17 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Cascade({CascadeType.ALL})//A user can advertise/campaign from/for 0 or more businesses and multiple campaigns/programs can be for the same business
     private Set<AdBusiness> advertisingBusinesses = new HashSet<>(0);
      
-
+    /**
+     * Use this nigger for storing screen codes separated by ","s
+     */
+    @SerializedName(value = "campaign_screen_codes")
+    @Column(name = "campaign_screen_codes", length = 5000)
+    private String campaignScreenCodes;
+    
+    
     public AdProgram() {
     }
-
+    
     public AdCampaignStatus getAdCampaignStatus() {
         return adCampaignStatus;
     }
@@ -302,12 +310,12 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.numOfFileResources = numOfFileResources;
     }
 
-    public int getProgJoinId() {
-        return progJoinId;
+    public int getCampaignId() {
+        return campaignId;
     }
 
-    public void setProgJoinId(int progJoinId) {
-        this.progJoinId = progJoinId;
+    public void setCampaignId(int campaignId) {
+        this.campaignId = campaignId;
     }
 
     public long getId() {
@@ -338,7 +346,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public int hashCode() {
         int hash = 5;
         hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 53 * hash + this.progJoinId;
+        hash = 53 * hash + this.campaignId;
         return hash;
     }
 
@@ -357,7 +365,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         if (this.id != other.getId()) {
             return false;
         }
-        return this.progJoinId == other.getProgJoinId();
+        return this.campaignId == other.getCampaignId();
     }
 
     public AdCampaignStats getAdCampaignStats() {
@@ -374,6 +382,14 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setAdvertisingBusinesses(Set<AdBusiness> advertisingBusinesses) {
         this.advertisingBusinesses = advertisingBusinesses;
+    }
+
+    public String getCampaignScreenCodes() {
+        return campaignScreenCodes;
+    }
+
+    public void setCampaignScreenCodes(String campaignScreenCodes) {
+        this.campaignScreenCodes = campaignScreenCodes;
     }
 }
 

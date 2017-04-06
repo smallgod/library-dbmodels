@@ -40,7 +40,7 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
 
-    public static final String FETCH_TEXT_QUERY = "SELECT DISTINCT txt FROM AdText txt INNER JOIN txt.adTextPrograms prog where prog.id=:id";
+    public static final String FETCH_TEXT_QUERY = "SELECT DISTINCT txt FROM AdText txt INNER JOIN txt.adTextPrograms prog where prog.campaignId=:campaignId";
     public static final String FETCH_TEXT = "fetch_text";
 
     //HQL queries are written differently especially joins e.g.
@@ -86,7 +86,7 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "program_join_id")
+                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
             }
     )
     @Cascade({CascadeType.ALL})

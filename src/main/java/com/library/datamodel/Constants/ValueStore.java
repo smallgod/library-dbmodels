@@ -1,7 +1,8 @@
 package com.library.datamodel.Constants;
 
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
  *
@@ -20,8 +21,6 @@ public enum ValueStore implements Constants {
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(ValueStore.class);
-
     ValueStore(String enumValue) {
         this.enumValue = enumValue;
     }
@@ -31,7 +30,7 @@ public enum ValueStore implements Constants {
         return this.enumValue;
     }
 
-    public static ValueStore convertToEnum(String value) {
+    public static ValueStore convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
@@ -42,9 +41,8 @@ public enum ValueStore implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + value + " found");
-        throw new IllegalArgumentException("No constant with text " + value + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
 
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Advert Campaign Status", "Failed to convert Advert Campaign Status: " + value + "to Enum");
+        throw error;
     }
 }

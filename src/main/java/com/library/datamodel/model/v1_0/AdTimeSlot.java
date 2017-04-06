@@ -79,7 +79,6 @@ public class AdTimeSlot extends BaseEntity implements Auditable, Serializable {
     private String timeSlotCode; // "EARLYBIRD"
 
     @SerializedName(value = "slot_name")
-
     @Column(name = "slot_name")
     private String timeSlotName; //"Early Bird"
 

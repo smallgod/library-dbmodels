@@ -2,28 +2,26 @@ package com.library.datamodel.Json;
 
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
-import java.util.Set;
 
-public class GetUserCampaignsRequest implements JsonDataModel {
+public class GetTemplateCampaignsRequest implements JsonDataModel {
 
     /*
-    {
-        "method": "GET_USER_ADVERTS",
-        "credentials": {
-          "app_id": "ADER6864g25644777",
-          "api_password": "sLA84009rw2",
-          "token_id": "84938urj9338203u349393"
-        },
-        "params": {
-          "campaign_id": [583746] //default is [] meaning return all campaign ids
+        {
+            "method": "GET_TEMPLATE_ADVERTS",
+            "credentials": {
+              "app_id": "ADER6864g25644777",
+              "api_password": "sLA84009dfewwrw2",
+              "token_id": "84938urj9338203u349393"
+            },
+            "params": {} //We shall have params, for now leave them out
         }
-      }
+             
      */
-    @SerializedName(value = "credentials")
-    private Credentials credentials;
-
     @SerializedName(value = "method")
     private String methodName;
+
+    @SerializedName(value = "credentials")
+    private Credentials credentials;
 
     @SerializedName(value = "params")
     private Params params;
@@ -54,17 +52,6 @@ public class GetUserCampaignsRequest implements JsonDataModel {
 
     public class Params {
 
-        @SerializedName(value = "campaign_id")
-        private Set<Integer> campaignIds;
-
-        public Set<Integer> getCampaignIds() {
-            return campaignIds;
-        }
-
-        public void setCampaignIds(Set<Integer> campaignIds) {
-            this.campaignIds = campaignIds;
-        }
-
-       
     }
+
 }

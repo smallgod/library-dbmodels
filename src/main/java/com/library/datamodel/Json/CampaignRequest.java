@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Set;
 
-public class PlaceAdvertRequest {
+public class CampaignRequest {
 
     /*
         ISIAH 45:11 - LIVING BIBLE / KJV
@@ -122,7 +122,7 @@ public class PlaceAdvertRequest {
 
         @SerializedName("target_info")
         @Expose
-        private Targeting targetInfo;
+        private TargetInfo targetInfo;
 
         @SerializedName("schedule_info")
         @Expose
@@ -148,11 +148,11 @@ public class PlaceAdvertRequest {
             this.basicInfo = basicInfo;
         }
 
-        public Targeting getTargetInfo() {
+        public TargetInfo getTargetInfo() {
             return targetInfo;
         }
 
-        public void setTargetInfo(Targeting targetInfo) {
+        public void setTargetInfo(TargetInfo targetInfo) {
             this.targetInfo = targetInfo;
         }
 
@@ -188,71 +188,7 @@ public class PlaceAdvertRequest {
             this.textInfo = textInfo;
         }
 
-        public class BasicInfo {
-
-            @SerializedName("notifications")
-            @Expose
-            private Boolean notifications;
-
-            @SerializedName("campaign_id")
-            @Expose
-            private int campaignId = 0; //new campaigns are 0 by default, edited campaigns have an ID
-
-            @SerializedName("campaign_name")
-            @Expose
-            private String campaignName;
-
-            @SerializedName("layout_type")
-            @Expose
-            private String layoutType;
-
-            @SerializedName("advert_length")
-            @Expose
-            private Integer advertLength;
-
-            public String getCampaignName() {
-                return campaignName;
-            }
-
-            public void setCampaignName(String campaignName) {
-                this.campaignName = campaignName;
-            }
-
-            public Integer getAdvertLength() {
-                return advertLength;
-            }
-
-            public void setAdvertLength(Integer advertLength) {
-                this.advertLength = advertLength;
-            }
-
-            public Boolean getNotifications() {
-                return notifications;
-            }
-
-            public void setNotifications(Boolean notifications) {
-                this.notifications = notifications;
-            }
-
-            public String getLayoutType() {
-                return layoutType;
-            }
-
-            public void setLayoutType(String layoutType) {
-                this.layoutType = layoutType;
-            }
-
-            public int getCampaignId() {
-                return campaignId;
-            }
-
-            public void setCampaignId(int campaignId) {
-                this.campaignId = campaignId;
-            }
-
-        }
-
-        public class Targeting {
+        public class TargetInfo {
 
             @SerializedName("target_screen_codes")
             @Expose
@@ -304,72 +240,6 @@ public class PlaceAdvertRequest {
 
         }
 
-        public class ScheduleInfo {
-
-            @SerializedName("start_date")
-            @Expose
-            private String startDate;
-            @SerializedName("end_date")
-            @Expose
-            private String endDate;
-
-            @SerializedName("time_slots")
-            @Expose
-            private Set<TimeSlot> timeSlots;
-
-            public String getStartDate() {
-                return startDate;
-            }
-
-            public void setStartDate(String startDate) {
-                this.startDate = startDate;
-            }
-
-            public String getEndDate() {
-                return endDate;
-            }
-
-            public void setEndDate(String endDate) {
-                this.endDate = endDate;
-            }
-
-            public Set<TimeSlot> getTimeSlots() {
-                return timeSlots;
-            }
-
-            public void setTimeSlots(Set<TimeSlot> timeSlots) {
-                this.timeSlots = timeSlots;
-            }
-
-        }
-
-        public class PaymentInfo {
-
-            @SerializedName("payment_method")
-            @Expose
-            private String paymentMethod;
-            @SerializedName("account_number")
-            @Expose
-            private String accountNumber;
-
-            public String getPaymentMethod() {
-                return paymentMethod;
-            }
-
-            public void setPaymentMethod(String paymentMethod) {
-                this.paymentMethod = paymentMethod;
-            }
-
-            public String getAccountNumber() {
-                return accountNumber;
-            }
-
-            public void setAccountNumber(String accountNumber) {
-                this.accountNumber = accountNumber;
-            }
-
-        }
-
         public class ResourcesInfo {
 
             @SerializedName("region")
@@ -410,31 +280,5 @@ public class PlaceAdvertRequest {
 
         }
 
-        public class TextInfo {
-
-            @SerializedName("text")
-            @Expose
-            private String text;
-            @SerializedName("type")
-            @Expose
-            private String type;
-
-            public String getText() {
-                return text;
-            }
-
-            public void setText(String text) {
-                this.text = text;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-        }
     }
 }

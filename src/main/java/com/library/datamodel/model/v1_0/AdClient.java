@@ -17,6 +17,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -43,7 +45,12 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_client")
 
+@NamedQueries({
+    @NamedQuery(name = AdClient.FETCH_CLIENTS, query = AdClient.FETCH_CLIENT_QUERY),})
 public class AdClient extends BaseEntity implements Auditable, Serializable {
+
+    public static final String FETCH_CLIENT_QUERY = "SELECT DISTINCT client FROM AdClient client INNER JOIN client.adUser user where user.userId=:userId";
+    public static final String FETCH_CLIENTS = "fetch_client";
 
     private static final long serialVersionUID = -6439854988797731103L;
 
@@ -72,7 +79,7 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "user_id")
-    @OneToOne 
+    @OneToOne
     @JoinColumns({
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     })

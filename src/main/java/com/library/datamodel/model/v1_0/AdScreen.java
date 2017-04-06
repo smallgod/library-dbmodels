@@ -27,6 +27,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -35,8 +37,70 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @SelectBeforeUpdate(value = true)
 //@Table(name = "ad_screen", uniqueConstraints = @UniqueConstraint(columnNames = {"screen_id"}))
 @Table(name = "ad_screen")
+@NamedQueries({
+    @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_SCREEN_ID, query = AdScreen.FETCH_SCREENS_BY_SCREEN_ID_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_SCREENS, query = AdScreen.FETCH_SCREENS_QUERY),
+
+    @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_PROGRAM_ID, query = AdScreen.FETCH_SCREENS_BY_PROGRAM_ID_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_SCREENCODES_BY_PROGRAM_ID, query = AdScreen.FETCH_SCREENCODES_BY_PROG_ID_QUERY),
+
+    @NamedQuery(name = AdScreen.AREA_AUDIENCE_COUNT, query = AdScreen.AREA_AUDIENCE_COUNT_QUERY),
+    @NamedQuery(name = AdScreen.AREA_SCREEN_COUNT, query = AdScreen.AREA_SCREEN_COUNT_QUERY),
+
+    @NamedQuery(name = AdScreen.BUSINESSTYPE_AUDIENCE_COUNT, query = AdScreen.BUSINESSTYPE_AUDIENCE_COUNT_QUERY),
+    @NamedQuery(name = AdScreen.BUSINESSTYPE_SCREEN_COUNT, query = AdScreen.BUSINESSTYPE_SCREEN_COUNT_QUERY),
+
+    @NamedQuery(name = AdScreen.AUDIENCETYPE_AUDIENCE_COUNT, query = AdScreen.AUDIENCETYPE_AUDIENCE_COUNT_QUERY),
+    @NamedQuery(name = AdScreen.AUDIENCETYPE_SCREEN_COUNT, query = AdScreen.AUDIENCETYPE_SCREEN_COUNT_QUERY),
+
+    @NamedQuery(name = AdScreen.FETCH_TARGETED_AREAS, query = AdScreen.FETCH_TARGETED_AREAS_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_TARGETED_BUSINESS_TYPES, query = AdScreen.FETCH_TARGETED_BUSINESS_TYPES_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_TARGETED_AUDIENCE_TYPES, query = AdScreen.FETCH_TARGETED_AUDIENCE_TYPES_QUERY)
+})
 
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
+
+    public static final String FETCH_SCREENS_BY_SCREEN_ID_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenArea area where screen.screenId IN (:screenIds)";
+    public static final String FETCH_SCREENS_BY_SCREEN_ID = "fetch_screens_by_screenid";
+
+    public static final String FETCH_SCREENS_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenArea area";
+    public static final String FETCH_SCREENS = "fetch_all_screens";
+
+    public static final String FETCH_SCREENS_BY_PROGRAM_ID_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.businessType businessType INNER JOIN screen.screenArea area INNER JOIN cl.adUser user where user.userId IN (:userId) AND cl.campaignId IN (:campaignIds)";
+    public static final String FETCH_SCREENS_BY_PROGRAM_ID = "fetch_screens";
+
+    public static final String FETCH_SCREENCODES_BY_PROG_ID_QUERY = "SELECT DISTINCT screen.screenId FROM AdScreen screen INNER JOIN screen.adPrograms prog WHERE prog.campaignId=:campaignId";
+    public static final String FETCH_SCREENCODES_BY_PROGRAM_ID = "fetch_screens";
+
+    public static final String AREA_AUDIENCE_COUNT_QUERY = "SELECT DISTINCT SUM(audienceCount) FROM AdScreen screen WHERE screenArea.areaCode=:code";
+    public static final String AREA_AUDIENCE_COUNT = "count_area_audience";
+
+    public static final String AREA_SCREEN_COUNT_QUERY = "SELECT DISTINCT SUM(screenId) FROM AdScreen screen WHERE screenArea.areaCode=:code";
+    public static final String AREA_SCREEN_COUNT = "count_area_screens";
+
+    public static final String BUSINESSTYPE_AUDIENCE_COUNT_QUERY = "SELECT DISTINCT SUM(audienceCount) FROM AdScreen screen WHERE screenArea.businessType=:code";
+    public static final String BUSINESSTYPE_AUDIENCE_COUNT = "count_businesstype_audience";
+
+    public static final String BUSINESSTYPE_SCREEN_COUNT_QUERY = "SELECT DISTINCT SUM(screenId) FROM AdScreen screen WHERE screenArea.businessType=:code";
+    public static final String BUSINESSTYPE_SCREEN_COUNT = "count_businesstype_screens";
+
+    public static final String AUDIENCETYPE_AUDIENCE_COUNT_QUERY = "SELECT DISTINCT SUM(audienceTypes) FROM AdScreen screen WHERE screenArea.audienceTypes=:code";
+    public static final String AUDIENCETYPE_AUDIENCE_COUNT = "count_businesstype_audience";
+
+    public static final String AUDIENCETYPE_SCREEN_COUNT_QUERY = "SELECT DISTINCT SUM(screenId) FROM AdScreen screen WHERE screenArea.audienceTypes=:code";
+    public static final String AUDIENCETYPE_SCREEN_COUNT = "count_businesstype_screens";
+
+    public static final String FETCH_TARGETED_AREAS_QUERY = "SELECT DISTINCT area FROM AdScreen screen, screen.screenArea area INNER JOIN screen.adPrograms prog WHERE prog.campaignId=:campaignId";
+    //public static final String FETCH_TARGETED_AREAS_QUERY = "SELECT DISTINCT area FROM AdScreen screen, screen.screenArea area WHERE screen.screenId=:screenId";
+    //public static final String FETCH_TARGETED_AREAS_QUERY = "SELECT DISTINCT area FROM AdScreen screen INNER JOIN screen.screenArea area WHERE screen.screenId=:screenId";
+    //SQL works -> SELECT DISTINCT area.area_code FROM adexpo_main.ad_screen screen, adexpo_main.ad_screen_area area WHERE screen.screen_id='KOKO2';
+    public static final String FETCH_TARGETED_AREAS = "fetch_targeted_areas";
+
+    public static final String FETCH_TARGETED_BUSINESS_TYPES_QUERY = "SELECT DISTINCT business FROM AdScreen screen, screen.businessType INNER JOIN screen.adPrograms prog WHERE prog.campaignId=:campaignId";
+    public static final String FETCH_TARGETED_BUSINESS_TYPES = "fetch_targeted_business";
+
+    public static final String FETCH_TARGETED_AUDIENCE_TYPES_QUERY = "SELECT DISTINCT audience FROM AdScreen screen, screen.audienceTypes audience INNER JOIN screen.adPrograms prog WHERE prog.campaignId=:campaignId";
+    public static final String FETCH_TARGETED_AUDIENCE_TYPES = "fetch_targeted_audience";
 
     private static final long serialVersionUID = 2301296823801925900L;
 
@@ -127,21 +191,34 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "screen_area")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name = "area_code", referencedColumnName = "area_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+        @JoinColumn(name = "screen_area_code", referencedColumnName = "area_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade({CascadeType.ALL})
     private AdArea screenArea;
+
+    @SerializedName(value = "screen_audience")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "screen_audience",
+            joinColumns = {
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
+            }
+    )
+    @Cascade({CascadeType.ALL})
+    private Set<AdAudienceType> audienceTypes = new HashSet<>(0);
 
     @Expose
     @SerializedName(value = "screen_programs")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "ad_screen_programs",
             joinColumns = {
-                @JoinColumn(name = "screen_id")
+                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "program_join_id")
+                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
             }
     )
     @Cascade({CascadeType.ALL})
@@ -349,6 +426,14 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public void setScreenValue(float screenValue) {
         this.screenValue = screenValue;
+    }
+
+    public Set<AdAudienceType> getAudienceTypes() {
+        return audienceTypes;
+    }
+
+    public void setAudienceTypes(Set<AdAudienceType> audienceTypes) {
+        this.audienceTypes = audienceTypes;
     }
 
 }

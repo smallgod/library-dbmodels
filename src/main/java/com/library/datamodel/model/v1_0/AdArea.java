@@ -40,7 +40,22 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
     private int areaCode;
 
     @Column(name = "area_name", length = 1000) //might want to change this - what if the data is too long
-    private String areaName;
+    private String areaName; //areaName can be concantenated to the other params below with a '-' delimeter
+
+    @Column(name = "sub_area")
+    private String subArea; //a sub area below the area-name
+
+    @Column(name = "extra_1")
+    private String extra1; //any descriptive information e.g. front lounge area
+
+    @Column(name = "extra_2")
+    private String extra2;
+
+    @Column(name = "extra_3")
+    private String extra3;
+
+    @Column(name = "extra_4")
+    private String extra4;
 
     public AdArea() {
     }
@@ -72,6 +87,46 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    public String getSubArea() {
+        return subArea;
+    }
+
+    public void setSubArea(String subArea) {
+        this.subArea = subArea;
+    }
+
+    public String getExtra1() {
+        return extra1;
+    }
+
+    public void setExtra1(String extra1) {
+        this.extra1 = extra1;
+    }
+
+    public String getExtra2() {
+        return extra2;
+    }
+
+    public void setExtra2(String extra2) {
+        this.extra2 = extra2;
+    }
+
+    public String getExtra3() {
+        return extra3;
+    }
+
+    public void setExtra3(String extra3) {
+        this.extra3 = extra3;
+    }
+
+    public String getExtra4() {
+        return extra4;
+    }
+
+    public void setExtra4(String extra4) {
+        this.extra4 = extra4;
     }
 
 }

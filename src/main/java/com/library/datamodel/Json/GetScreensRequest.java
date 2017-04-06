@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.Set;
 
-public class GetUserCampaignsRequest implements JsonDataModel {
+public class GetScreensRequest implements JsonDataModel {
 
     /*
     {
-        "method": "GET_USER_ADVERTS",
+        "method": "GET_SCREENS",
         "credentials": {
           "app_id": "ADER6864g25644777",
           "api_password": "sLA84009rw2",
           "token_id": "84938urj9338203u349393"
         },
         "params": {
-          "campaign_id": [583746] //default is [] meaning return all campaign ids
+          "screen_codes": ['CHURCH-K2'] //default is [] meaning return all campaign ids
         }
       }
      */
@@ -54,15 +54,15 @@ public class GetUserCampaignsRequest implements JsonDataModel {
 
     public class Params {
 
-        @SerializedName(value = "campaign_id")
-        private Set<Integer> campaignIds;
+        @SerializedName(value = "screen_codes")
+        private Set<String> screenCodes;
 
-        public Set<Integer> getCampaignIds() {
-            return campaignIds;
+        public Set<String> getScreenCodes() {
+            return screenCodes;
         }
 
-        public void setCampaignIds(Set<Integer> campaignIds) {
-            this.campaignIds = campaignIds;
+        public void setScreenCodes(Set<String> screenCodes) {
+            this.screenCodes = screenCodes;
         }
 
        

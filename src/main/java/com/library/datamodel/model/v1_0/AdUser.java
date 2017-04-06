@@ -3,6 +3,7 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdXpoAccountStatus;
+import com.library.datamodel.Constants.NamedConstants;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -42,8 +45,15 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_user", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id"}))
 
+
+@NamedQueries({
+    @NamedQuery(name = AdUser.FETCH_USERS, query = AdUser.FETCH_USERS_QUERY)
+}) 
 public class AdUser extends BaseEntity implements Auditable, Serializable {
 
+    public static final String FETCH_USERS_QUERY = "SELECT DISTINCT user FROM AdUser user where user.userId=:userId";
+    public static final String FETCH_USERS = "fetch_users";
+   
     private static final long serialVersionUID = -9199479009606759914L;
 
     @Expose
@@ -62,7 +72,7 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
     @Expose
     @SerializedName(value = "user_id")
     @Column(name = "user_id", nullable = false)
-    private String userId = "770000000"; //this can be a telephone number  / primary contact / default for guests
+    private String userId = NamedConstants.GUEST_USER_ID; //this can be a telephone number  / primary contact / default for guests
 
     @Column(name = "password", nullable = false)
     private String password = "#password#"; //default password for guests

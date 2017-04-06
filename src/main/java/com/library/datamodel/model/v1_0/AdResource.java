@@ -41,7 +41,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
     
-    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT res FROM AdResource res INNER JOIN res.adResourcePrograms prog where prog.id=:id";
+    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT res FROM AdResource res INNER JOIN res.adResourcePrograms prog where prog.campaignId=:campaignId";
     public static final String FETCH_RESOURCE = "fetch_resource";
 
     @Expose
@@ -112,7 +112,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "program_join_id")
+                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
             }
     )
     @Cascade({CascadeType.ALL})
