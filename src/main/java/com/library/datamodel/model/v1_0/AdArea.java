@@ -1,22 +1,15 @@
 package com.library.datamodel.model.v1_0;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -37,34 +30,34 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
     private long id;
 
     @Column(name = "area_code")
-    private int areaCode;
+    private String areaCode;
+
+    @Column(name = "country")
+    private String Country;
+
+    @Column(name = "region")
+    private String region; //Central / Western / 
+
+    @Column(name = "district")
+    private String District;
 
     @Column(name = "area_name", length = 1000) //might want to change this - what if the data is too long
-    private String areaName; //areaName can be concantenated to the other params below with a '-' delimeter
+    private String areaName; //e.g. Bugolobi -> areaName can be concantenated to the other params below with a '-' delimeter
 
     @Column(name = "sub_area")
-    private String subArea; //a sub area below the area-name
+    private String subArea1; //a sub area below the area-name
 
-    @Column(name = "extra_1")
-    private String extra1; //any descriptive information e.g. front lounge area
-
-    @Column(name = "extra_2")
-    private String extra2;
-
-    @Column(name = "extra_3")
-    private String extra3;
-
-    @Column(name = "extra_4")
-    private String extra4;
+    @Column(name = "sub_area_2")
+    private String subArea2;
 
     public AdArea() {
     }
 
-    public int getAreaCode() {
+    public String getAreaCode() {
         return areaCode;
     }
 
-    public void setAreaCode(int areaCode) {
+    public void setAreaCode(String areaCode) {
         this.areaCode = areaCode;
     }
 
@@ -84,49 +77,75 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
+    public String getSubArea1() {
+        return subArea1;
+    }
+
+    public void setSubArea1(String subArea1) {
+        this.subArea1 = subArea1;
+    }
+
+    public String getSubArea2() {
+        return subArea2;
+    }
+
+    public void setSubArea2(String subArea2) {
+        this.subArea2 = subArea2;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String Country) {
+        this.Country = Country;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getDistrict() {
+        return District;
+    }
+
+    public void setDistrict(String District) {
+        this.District = District;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
     }
 
-    public String getSubArea() {
-        return subArea;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.areaCode);
+        return hash;
     }
 
-    public void setSubArea(String subArea) {
-        this.subArea = subArea;
-    }
-
-    public String getExtra1() {
-        return extra1;
-    }
-
-    public void setExtra1(String extra1) {
-        this.extra1 = extra1;
-    }
-
-    public String getExtra2() {
-        return extra2;
-    }
-
-    public void setExtra2(String extra2) {
-        this.extra2 = extra2;
-    }
-
-    public String getExtra3() {
-        return extra3;
-    }
-
-    public void setExtra3(String extra3) {
-        this.extra3 = extra3;
-    }
-
-    public String getExtra4() {
-        return extra4;
-    }
-
-    public void setExtra4(String extra4) {
-        this.extra4 = extra4;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdArea other = (AdArea) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return Objects.equals(this.areaCode, other.getAreaCode());
     }
 
 }

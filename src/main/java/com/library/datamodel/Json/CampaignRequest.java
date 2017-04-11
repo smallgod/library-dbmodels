@@ -37,6 +37,7 @@ public class CampaignRequest {
             "schedule_info": {
               "start_date": "2017-03-21",
               "end_date": "2017-03-21",
+              "schedule_type":"LATER",
               "time_slots": [
                 {
                   "name": "EARLYBIRD",
@@ -196,15 +197,15 @@ public class CampaignRequest {
 
             @SerializedName("areas")
             @Expose
-            private Set<Integer> areas = null;
+            private Set<String> areas = null;
 
             @SerializedName("business_types")
             @Expose
-            private Set<Integer> businessTypes = null;
+            private Set<String> businessTypes = null;
 
             @SerializedName("audience_types")
             @Expose
-            private Set<Integer> audienceTypes = null;
+            private Set<String> audienceTypes = null;
 
             public Set<String> getTargetScreenCodes() {
                 return targetScreenCodes;
@@ -214,27 +215,27 @@ public class CampaignRequest {
                 this.targetScreenCodes = targetScreenCodes;
             }
 
-            public Set<Integer> getAreas() {
+            public Set<String> getAreas() {
                 return areas;
             }
 
-            public void setAreas(Set<Integer> areas) {
+            public void setAreas(Set<String> areas) {
                 this.areas = areas;
             }
 
-            public Set<Integer> getBusinessTypes() {
+            public Set<String> getBusinessTypes() {
                 return businessTypes;
             }
 
-            public void setBusinessTypes(Set<Integer> businessTypes) {
+            public void setBusinessTypes(Set<String> businessTypes) {
                 this.businessTypes = businessTypes;
             }
 
-            public Set<Integer> getAudienceTypes() {
+            public Set<String> getAudienceTypes() {
                 return audienceTypes;
             }
 
-            public void setAudienceTypes(Set<Integer> audienceTypes) {
+            public void setAudienceTypes(Set<String> audienceTypes) {
                 this.audienceTypes = audienceTypes;
             }
 

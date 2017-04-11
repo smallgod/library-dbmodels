@@ -4,14 +4,24 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -39,12 +49,9 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_business", uniqueConstraints = @UniqueConstraint(columnNames = {"business_id"}))
 
-/**
- * Business can be belong to either an advertising client or a screen owner
- */
-public class AdBusiness extends BaseEntity implements Auditable, Serializable {
+public class AdBusinessBETTER extends BaseEntity implements Auditable, Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8412758120450080292L;
 
     @Expose
     @SerializedName(value = "id")
@@ -53,21 +60,65 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Expose
+     @Expose
     @SerializedName(value = "is_default")
     @Column(name = "is_default")
-    private boolean isDefault; //default business a user is advertising from if no business is explicitly selected OR a default business for the screen owner
-
+    private boolean isDefault; //default business a user is advertising from if no business is explicitly selected
+     
     @Expose
     @SerializedName(value = "business_id")
     @Column(name = "business_id", nullable = false)
-    private String businessId; // a combination of 4 letters representing the business name (must be unique)
+    private String businessId; // a combination of 3 letters & 3 numbers (unique id)
 
     @SerializedName(value = "business_name")
     @Column(name = "business_name")
     private String businessName;
 
-    public AdBusiness() {
+    @Expose
+    @SerializedName(value = "business_type_code")
+    @OneToOne
+    @JoinColumns({
+        @JoinColumn(name = "business_type", referencedColumnName = "business_type_code")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdBusinessType businessType; // e.g. Plumbing | Telecom
+
+    @Expose
+    @SerializedName(value = "business_location")
+    @OneToOne
+    @JoinColumns({
+        @JoinColumn(name = "business_location", referencedColumnName = "area_code")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdArea businessLocation; // e.g. Ntinda
+
+    @SerializedName(value = "target_audience")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "business_target_audience",
+            joinColumns = {
+                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "audience_code", referencedColumnName = "audience_code")
+            }
+    )
+    @Cascade({CascadeType.ALL})//e.g. Boda-Boda Riders | ALL | Corporates
+    private Set<AdAudienceType> targetAudience = new HashSet<>(0);
+
+    @SerializedName(value = "business_owners")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "business_owners",
+            joinColumns = {
+                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+            }
+    )
+    @Cascade({CascadeType.ALL})//multiple users can own the same business, one user can own multiple businesses
+    private Set<AdUser> businessOwners = new HashSet<>(0);
+
+    public AdBusinessBETTER() {
     }
 
     public String getBusinessId() {
@@ -94,6 +145,30 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
         this.businessName = businessName;
     }
 
+    public Set<AdAudienceType> getTargetAudience() {
+        return targetAudience;
+    }
+
+    public void setTargetAudience(Set<AdAudienceType> targetAudience) {
+        this.targetAudience = targetAudience;
+    }
+
+    public AdBusinessType getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(AdBusinessType businessType) {
+        this.businessType = businessType;
+    }
+
+    public AdArea getBusinessLocation() {
+        return businessLocation;
+    }
+
+    public void setBusinessLocation(AdArea businessLocation) {
+        this.businessLocation = businessLocation;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -118,11 +193,19 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdBusiness other = (AdBusiness) obj;
+        final AdBusinessBETTER other = (AdBusinessBETTER) obj;
         if (this.id != other.getId()) {
             return false;
         }
         return Objects.equals(this.businessId, other.getBusinessId());
+    }
+
+    public Set<AdUser> getBusinessOwners() {
+        return businessOwners;
+    }
+
+    public void setBusinessOwners(Set<AdUser> businessOwners) {
+        this.businessOwners = businessOwners;
     }
 
     public boolean isIsDefault() {

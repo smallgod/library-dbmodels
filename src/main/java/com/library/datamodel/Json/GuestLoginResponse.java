@@ -6,6 +6,7 @@ package com.library.datamodel.Json;
  */
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.AdXpoAccountStatus;
 
 public class GuestLoginResponse {
 
@@ -30,6 +31,14 @@ public class GuestLoginResponse {
     @SerializedName("data")
     @Expose
     private Data data;
+
+    private GuestLoginResponse(boolean success) {
+        this.success = success;
+    }
+
+    public GuestLoginResponse() {
+        this(Boolean.TRUE);
+    }
 
     public boolean isSuccess() {
         return success;
@@ -56,7 +65,7 @@ public class GuestLoginResponse {
 
         public Data() {
 
-            this("GUEST", "You are using a guest account, to upgrade, create new account or login");
+            this(AdXpoAccountStatus.GUEST.getValue(), "Success! You are using a guest account, to upgrade, create new account or login");
         }
 
         @SerializedName("token_id")

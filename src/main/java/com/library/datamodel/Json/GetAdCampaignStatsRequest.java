@@ -106,15 +106,15 @@ public class GetAdCampaignStatsRequest {
 
         @SerializedName("areas")
         @Expose
-        private Set<Integer> areas = new HashSet<>();
+        private Set<String> areas = new HashSet<>();
 
-        @SerializedName("location_types")
+        @SerializedName("business_types")
         @Expose
-        private Set<Integer> locationTypes = new HashSet<>();
+        private Set<String> businessTypes = new HashSet<>();
 
         @SerializedName("audience_types")
         @Expose
-        private Set<Integer> audienceTypes = new HashSet<>();
+        private Set<String> audienceTypes = new HashSet<>();
 
         @SerializedName("start_date")
         @Expose
@@ -123,7 +123,7 @@ public class GetAdCampaignStatsRequest {
         @Expose
         private String endDate;
 
-        @SerializedName("time_slots")
+        @SerializedName("slots") //rename back to 'time_slots'
         @Expose
         private Set<TimeSlot> timeSlots = new HashSet<>();
 
@@ -151,27 +151,27 @@ public class GetAdCampaignStatsRequest {
             this.targetScreenCodes = targetScreenCodes;
         }
 
-        public Set<Integer> getAreas() {
+        public Set<String> getAreas() {
             return areas;
         }
 
-        public void setAreas(Set<Integer> areas) {
+        public void setAreas(Set<String> areas) {
             this.areas = areas;
         }
 
-        public Set<Integer> getLocationTypes() {
-            return locationTypes;
+        public Set<String> getBusinessTypes() {
+            return businessTypes;
         }
 
-        public void setLocationTypes(Set<Integer> locationTypes) {
-            this.locationTypes = locationTypes;
+        public void setBusinessTypes(Set<String> businessTypes) {
+            this.businessTypes = businessTypes;
         }
 
-        public Set<Integer> getAudienceTypes() {
+        public Set<String> getAudienceTypes() {
             return audienceTypes;
         }
 
-        public void setAudienceTypes(Set<Integer> audienceTypes) {
+        public void setAudienceTypes(Set<String> audienceTypes) {
             this.audienceTypes = audienceTypes;
         }
 

@@ -4,7 +4,6 @@ package com.library.datamodel.Constants;
 import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
 import com.library.utilities.GeneralUtils;
-import com.library.utilities.LoggerUtil;
 
 /**
  *
@@ -18,8 +17,6 @@ public enum AdPaymentStatus implements Constants {
     REVERSED("REVERSED");
 
     private final String payStatus;
-
-    private static final LoggerUtil logger = new LoggerUtil(AdPaymentStatus.class);
 
     AdPaymentStatus(String payStatus) {
         this.payStatus = payStatus;

@@ -1,6 +1,5 @@
 package com.library.datamodel.model.v1_0;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
@@ -36,8 +35,8 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
 
     private static final long serialVersionUID = -3434906437273662803L;
 
-    public static final String FETCH_PROG_SLOT_QUERY = "SELECT DISTINCT progslot FROM AdProgramSlot progslot INNER JOIN progslot.adPrograms prog INNER JOIN progslot.adTimeSlots timeslot where progslot.campaignId=:campaignId";
-    public static final String FETCH_PROG_SLOT = "fetch_slot";
+    public static final String FETCH_PROG_SLOT_QUERY = "SELECT DISTINCT progslot FROM AdProgramSlot progslot INNER JOIN progslot.adPrograms prog INNER JOIN progslot.adTimeSlot timeslot where prog.campaignId=:campaignId";
+    public static final String FETCH_PROG_SLOT = "FETCH_PROG_SLOT";
 
     //HQL queries are written differently especially joins e.g.
     //In SQL, select a.id, a.name, a.url from FilesInfo a inner join FilesShare b on a.id=b.fileid where b.userid=5 and b.owner=1;

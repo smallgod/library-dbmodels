@@ -31,6 +31,14 @@ public class CreateAccountResponse {
     @Expose
     private Data data;
 
+    private CreateAccountResponse(boolean success) {
+        this.success = success;
+    }
+
+    public CreateAccountResponse() {
+        this(Boolean.TRUE);
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -56,12 +64,11 @@ public class CreateAccountResponse {
         @SerializedName("otp")
         @Expose
         private int otp;
-        
+
         @SerializedName("first_name")
         @Expose
         private String firstName;
-        
-        
+
         @SerializedName("token_id")
         @Expose
         private String tokenId;

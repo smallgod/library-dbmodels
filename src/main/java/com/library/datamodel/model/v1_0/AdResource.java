@@ -41,7 +41,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
     
-    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT res FROM AdResource res INNER JOIN res.adResourcePrograms prog where prog.campaignId=:campaignId";
+    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
     public static final String FETCH_RESOURCE = "fetch_resource";
 
     @Expose
@@ -108,7 +108,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "program_resources",
             joinColumns = {
-                @JoinColumn(name = "upload_id")
+                @JoinColumn(name = "upload_id", referencedColumnName = "upload_id")
 
             },
             inverseJoinColumns = {

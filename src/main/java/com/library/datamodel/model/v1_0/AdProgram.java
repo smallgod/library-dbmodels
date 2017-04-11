@@ -6,6 +6,7 @@ import com.library.datamodel.Constants.AdCampaignStatus;
 import com.library.datamodel.Constants.AdPaymentStatus;
 import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
+import com.library.datamodel.Constants.ScheduleType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -69,11 +70,11 @@ import org.joda.time.LocalDate;
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND cl.campaignId IN (:campaignIds)";
-    public static final String FETCH_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where cl.campaignId IN (:campaignIds)";
-    public static final String FETCH_ALL_USER_CAMPAIGNS = "fetch_user_campaigns";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID = "fetch_user_campaigns_by_id";
-    public static final String FETCH_CAMPAIGNS = "fetch_campaigns";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds)";
+    public static final String FETCH_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds)";
+    public static final String FETCH_ALL_USER_CAMPAIGNS = "FETCH_ALL_USER_CAMPAIGNS";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID = "FETCH_USER_CAMPAIGNS_BY_ID";
+    public static final String FETCH_CAMPAIGNS = "FETCH_CAMPAIGNS";
 
     private static final long serialVersionUID = -7420964819128665745L;
     
@@ -168,7 +169,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "program_client")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name = "client_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+        @JoinColumn(name = "client_id", referencedColumnName = "user_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
     @Cascade({CascadeType.ALL})
     private AdClient client;
@@ -207,9 +208,23 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
      * Use this nigger for storing screen codes separated by ","s
      */
     @SerializedName(value = "campaign_screen_codes")
-    @Column(name = "campaign_screen_codes", length = 5000)
+    @Column(name = "campaign_screen_codes", length = 15000)
     private String campaignScreenCodes;
     
+    
+    @Expose
+    @SerializedName(value = "schedule_type")
+    @Column(name = "schedule_type")
+    @Enumerated(EnumType.STRING)
+    private ScheduleType scheduleType;
+
+    public ScheduleType getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
+    }
     
     public AdProgram() {
     }

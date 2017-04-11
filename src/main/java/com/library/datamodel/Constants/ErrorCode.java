@@ -13,6 +13,7 @@ import com.library.sgsharedinterface.Constants;
  */
 public enum ErrorCode  implements Constants{
 
+    FILE_NOT_FOUND_ERR("FILE_NOT_FOUND_ERROR"),
     BAD_STATE_ERR("BAD_STATE_ERROR"),
     BAD_REQUEST_ERR("BAD_REQUEST_ERROR"),
     BAD_RESPONSE_ERR("BAD_RESPONSE_ERROR"),
@@ -42,7 +43,9 @@ public enum ErrorCode  implements Constants{
     DATABASE_ERR("DATABASE_ERROR"), 
     BAD_LOGIN_TOKEN_ERR("BAD_LOGIN_TOKEN_ERROR"), 
     TERMS_AND_CONDITIONS_ERR("TERMS_AND_CONDITIONS_ERROR"), 
-    ACCOUNT_VERIFICATION_ERR("ACCOUNT_VERIFICATION_ERROR"); 
+    ACCOUNT_VERIFICATION_ERR("ACCOUNT_VERIFICATION_ERROR"), 
+    SECURITY_ERR("SECURITY_ERROR"), 
+    GENERAL_ERR("GENERAL_ERROR"); 
 
     private final String errorCodeValue;
 

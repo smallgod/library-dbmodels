@@ -48,8 +48,6 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-   
-
     @Expose
     @SerializedName(value = "campaign_cost")
     @Column(name = "campaign_cost")
@@ -59,9 +57,8 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
     @SerializedName(value = "display_count")
     @Column(name = "times_ad_should_play")
     private int numOfTimesAdIsToPlay;
-    
-    
-     @Expose
+
+    @Expose
     @SerializedName(value = "times_ad_has_played")
     @Column(name = "times_ad_has_played")
     private int numOfTimesAdHasPlayed;
@@ -86,10 +83,8 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
     @Column(name = "potential_audience_reach")
     private int potentialAudienceReach;
 
-
     public AdCampaignStats() {
     }
-
 
     public int getNumOfTimesAdHasPlayed() {
         return numOfTimesAdHasPlayed;
@@ -154,8 +149,7 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
     public void setPotentialAudienceReach(int potentialAudienceReach) {
         this.potentialAudienceReach = potentialAudienceReach;
     }
-    
-    
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -185,7 +179,5 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
         }
         return true;
     }
-
-   
 
 }

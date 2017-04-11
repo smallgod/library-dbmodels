@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -49,10 +50,11 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_account")
+@Table(name = "ad_account", uniqueConstraints = @UniqueConstraint(columnNames = {"account_number"}))
 
 @NamedQueries({
     @NamedQuery(name = AdAccount.FETCH_ACCOUNTS, query = AdAccount.FETCH_ACCOUNTS_QUERY),
+    @NamedQuery(name = AdAccount.FETCH_ACCOUNT, query = AdAccount.FETCH_ACCOUNT_QUERY),
     @NamedQuery(name = AdAccount.FETCH_PREFERRED_ACCOUNT, query = AdAccount.FETCH_PREFERRED_ACCOUNT_QUERY)
 })
 
@@ -60,10 +62,13 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 public class AdAccount extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_ACCOUNTS_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId";
-    public static final String FETCH_ACCOUNTS = "fetch_accounts";
+    public static final String FETCH_ACCOUNTS = "FETCH_ACCOUNTS";
 
-    public static final String FETCH_PREFERRED_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId AND users.isAccountPreferred=:ispreferred";
-    public static final String FETCH_PREFERRED_ACCOUNT = "fetch_accounts";
+    public static final String FETCH_PREFERRED_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId AND account.isAccountPreferred=:ispreferred";
+    public static final String FETCH_PREFERRED_ACCOUNT = "FETCH_PREFERRED_ACCOUNT";
+
+    public static final String FETCH_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdAccount account INNER JOIN account.adUsers users where users.userId=:userId AND account.accountNumber=:accountNumber";
+    public static final String FETCH_ACCOUNT = "FETCH_ACCOUNT";
 
     private static final long serialVersionUID = 1590135329856889692L;
 
@@ -87,17 +92,15 @@ public class AdAccount extends BaseEntity implements Auditable, Serializable {
     private boolean isAccountPreferred;
 
     //multiple users can pay from the same account or decide to recieve payments (screen owners) on the same account - we don't mind
-    @Expose
     @SerializedName(value = "account_number_holders")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "account_number_holders",
             joinColumns = {
-                @JoinColumn(name = "account_number"),
-                @JoinColumn(name = "value_store")
+                @JoinColumn(name = "account_number", referencedColumnName = "account_number")
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "user_id")
+                @JoinColumn(name = "user_id", referencedColumnName = "user_id")
             }
     )
     @Cascade({CascadeType.ALL})

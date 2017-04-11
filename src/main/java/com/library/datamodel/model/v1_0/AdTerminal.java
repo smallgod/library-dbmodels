@@ -42,8 +42,8 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     @Column(name = "task_idx")
     @SerializedName(value = "task_idx")
-    private int taskIdX;  
-    
+    private int taskIdX;
+
     @Column(name = "task_idy")
     @SerializedName(value = "task_idy")
     private int taskIdY;
@@ -56,27 +56,6 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "longitude")
     private double longitude;
 
-//    @SerializedName(value = "terminal_screens")
-//    @OneToMany(fetch = FetchType.EAGER) //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-//    @JoinTable(name = "terminal_screens",
-//            joinColumns = {
-//                @JoinColumn(name = "terminal_id", referencedColumnName = "terminal_id", nullable = false, insertable = false, updatable = false)
-//            },
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "screen_id", referencedColumnName = "screen_id", nullable = false, insertable = false, updatable = false)
-//            }
-//    )
-//    @Cascade(CascadeType.SAVE_UPDATE)
-//    private Set<AdScreen> terminalScreens = new HashSet<>(0);
-//    @SerializedName(value = "terminal_screen")
-//    @OneToOne //For now, let's have only one screen (max) for every terminal
-//    @JoinColumns({
-//        @JoinColumn(name = "screen_id", referencedColumnName = "screen_id")
-//    })
-//    @Cascade(CascadeType.SAVE_UPDATE)
-//    private AdScreen terminalScreen;
-    //private int displayWidth; //terminal resolution ??
-    //private int displayHeight;
     public AdTerminal() {
     }
 
@@ -112,11 +91,6 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
         this.taskIdX = taskIdX;
     }
 
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
-
     public String getTerminalName() {
         return terminalName;
     }
@@ -141,6 +115,19 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
         this.id = id;
     }
 
+    public int getTaskIdY() {
+        return taskIdY;
+    }
+
+    public void setTaskIdY(int taskIdY) {
+        this.taskIdY = taskIdY;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -151,35 +138,20 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        
         if (this == obj) {
             return true;
         }
-        
         if (obj == null) {
             return false;
         }
-        
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
         final AdTerminal other = (AdTerminal) obj;
-        
         if (this.id != other.getId()) {
             return false;
         }
-        
         return Objects.equals(this.terminalId, other.getTerminalId());
-
-    }
-
-    public int getTaskIdY() {
-        return taskIdY;
-    }
-
-    public void setTaskIdY(int taskIdY) {
-        this.taskIdY = taskIdY;
     }
 
 }

@@ -174,8 +174,11 @@ public class UpdateAccountRequest implements JsonDataModel {
             @SerializedName(value = "business_location")
             private String businessLocation;
 
+            //@SerializedName(value = "target_audience")
+            //private Set<Integer> targetAudience;
+            
             @SerializedName(value = "target_audience")
-            private Set<Integer> targetAudience;
+            private String targetAudience; //After Mr. B corrects change back to array
             
             
 
@@ -203,11 +206,11 @@ public class UpdateAccountRequest implements JsonDataModel {
                 this.businessLocation = businessLocation;
             }
 
-            public Set<Integer> getTargetAudience() {
+            public String getTargetAudience() {
                 return targetAudience;
             }
 
-            public void setTargetAudience(Set<Integer> targetAudience) {
+            public void setTargetAudience(String targetAudience) {
                 this.targetAudience = targetAudience;
             }
 

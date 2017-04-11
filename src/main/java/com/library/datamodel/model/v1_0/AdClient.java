@@ -50,13 +50,13 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_CLIENT_QUERY = "SELECT DISTINCT client FROM AdClient client INNER JOIN client.adUser user where user.userId=:userId";
-    public static final String FETCH_CLIENTS = "fetch_client";
+    public static final String FETCH_CLIENTS = "FETCH_CLIENTS";
 
     private static final long serialVersionUID = -6439854988797731103L;
 
     @Expose
     @Id
-    @GeneratedValue(generator = "myGenerator")
+    @GeneratedValue(generator = "adClientKeyGenerator")
     @GenericGenerator(
             name = "adClientKeyGenerator",
             strategy = "foreign",

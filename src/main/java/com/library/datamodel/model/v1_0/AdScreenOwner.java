@@ -4,13 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -51,10 +56,6 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     @Column(name = "id", updatable = false, nullable = false)
     @SerializedName(value = "id")
     private long id;
-    
-     @Column(name = "screen_number")
-    @SerializedName(value = "number_of_screens")
-    private int numberOfScreens;
 
     @Expose
     @SerializedName(value = "user_id")
@@ -64,6 +65,20 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
     })
     @Cascade(CascadeType.ALL)
     private AdUser adUser;
+
+    @SerializedName(value = "business_screen_owners")
+    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "business_screen_owners",
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+
+            }
+    )
+    @Cascade({CascadeType.ALL})//multiple users can own the same business, one user can own multiple businesses
+    private Set<AdBusiness> businessScreenOwners = new HashSet<>(0);
 
     public AdScreenOwner() {
     }
@@ -89,13 +104,14 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
         this.adUser = adUser;
     }
 
-    public int getNumberOfScreens() {
-        return numberOfScreens;
+    public Set<AdBusiness> getBusinessScreenOwners() {
+        return businessScreenOwners;
     }
 
-    public void setNumberOfScreens(int numberOfScreens) {
-        this.numberOfScreens = numberOfScreens;
+    public void setBusinessScreenOwners(Set<AdBusiness> businessScreenOwners) {
+        this.businessScreenOwners = businessScreenOwners;
     }
+
 }
 
 //To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection

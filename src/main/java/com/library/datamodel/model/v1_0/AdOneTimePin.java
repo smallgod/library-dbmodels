@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -53,12 +49,12 @@ import org.joda.time.LocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_otp")
 @NamedQueries({
-    @NamedQuery(name = AdOneTimPin.FETCH_OTP, query = AdOneTimPin.FETCH_OTP_QUERY)
+    @NamedQuery(name = AdOneTimePin.FETCH_OTP, query = AdOneTimePin.FETCH_OTP_QUERY)
 })
-public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
+public class AdOneTimePin extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_OTP_QUERY = "SELECT DISTINCT otp FROM AdOneTimPin otp INNER JOIN otp.adUsers users where otp.otp IN (:otp) AND users.userId IN (:userId)";
-    public static final String FETCH_OTP = "fetch_otp";
+    public static final String FETCH_OTP_QUERY = "SELECT DISTINCT otp FROM AdOneTimePin otp INNER JOIN otp.adUsers users where otp.otp IN (:otp) AND users.userId IN (:userId)";
+    public static final String FETCH_OTP = "FETCH_OTP";
 
     private static final long serialVersionUID = 2875511788949066175L;
 
@@ -81,18 +77,21 @@ public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
 
             },
             inverseJoinColumns = {
-                @JoinColumn(name = "primary_phone", referencedColumnName = "primary_phone")
+                @JoinColumn(name = "user_id", referencedColumnName = "user_id")
             }
     )
     @Cascade({CascadeType.ALL})
     private Set<AdUser> adUsers = new HashSet<>(0);
+
+    @Column(name = "message_id")
+    private String messageId; //get this from the SMS API - it returns a message_id
 
     @Type(type = "jodalocaldatetime")
     @Column(name = "otp_expiry_date")
     @SerializedName(value = "otp_expiry_date")
     private LocalDateTime otpExpiryDate;
 
-    public AdOneTimPin() {
+    public AdOneTimePin() {
     }
 
     public long getId() {
@@ -142,7 +141,7 @@ public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdOneTimPin other = (AdOneTimPin) obj;
+        final AdOneTimePin other = (AdOneTimePin) obj;
         return this.id == other.getId();
     }
 
@@ -152,6 +151,14 @@ public class AdOneTimPin extends BaseEntity implements Auditable, Serializable {
 
     public void setOtpExpiryDate(LocalDateTime otpExpiryDate) {
         this.otpExpiryDate = otpExpiryDate;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
 }

@@ -15,21 +15,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for remoteunittype complex type.
+ * <p>Java class for externalunittype complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="remoteunittype"&gt;
+ * &lt;complexType name="externalunittype"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;all&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="jsonurl" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="xmlurl" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="previewurl" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="url" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="extra-1" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="extra-2" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/all&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -39,23 +39,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "remoteunittype", propOrder = {
+@XmlType(name = "externalunittype", propOrder = {
 
 })
-public class Remoteunittype {
+public class Externalunittype {
 
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
-    protected String jsonurl;
-    @XmlElement(required = true)
-    protected String xmlurl;
-    @XmlElement(required = true)
-    protected String previewurl;
+    protected String url;
     @XmlElement(required = true)
     protected String username;
     @XmlElement(required = true)
     protected String password;
+    @XmlElement(name = "extra-1", required = true)
+    protected String extra1;
+    @XmlElement(name = "extra-2", required = true)
+    protected String extra2;
 
     /**
      * Gets the value of the name property.
@@ -82,75 +82,27 @@ public class Remoteunittype {
     }
 
     /**
-     * Gets the value of the jsonurl property.
+     * Gets the value of the url property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getJsonurl() {
-        return jsonurl;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets the value of the jsonurl property.
+     * Sets the value of the url property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setJsonurl(String value) {
-        this.jsonurl = value;
-    }
-
-    /**
-     * Gets the value of the xmlurl property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getXmlurl() {
-        return xmlurl;
-    }
-
-    /**
-     * Sets the value of the xmlurl property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setXmlurl(String value) {
-        this.xmlurl = value;
-    }
-
-    /**
-     * Gets the value of the previewurl property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPreviewurl() {
-        return previewurl;
-    }
-
-    /**
-     * Sets the value of the previewurl property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPreviewurl(String value) {
-        this.previewurl = value;
+    public void setUrl(String value) {
+        this.url = value;
     }
 
     /**
@@ -199,6 +151,54 @@ public class Remoteunittype {
      */
     public void setPassword(String value) {
         this.password = value;
+    }
+
+    /**
+     * Gets the value of the extra1 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getExtra1() {
+        return extra1;
+    }
+
+    /**
+     * Sets the value of the extra1 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExtra1(String value) {
+        this.extra1 = value;
+    }
+
+    /**
+     * Gets the value of the extra2 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getExtra2() {
+        return extra2;
+    }
+
+    /**
+     * Sets the value of the extra2 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExtra2(String value) {
+        this.extra2 = value;
     }
 
 }

@@ -17,7 +17,7 @@ public enum APIMethodName implements Constants {
     UPDATE_ACCOUNT("UPDATE_ACCOUNT"),
     GUEST_LOGIN("GUEST_LOGIN"),
     GET_CAMPAIGN_DETAILS("GET_CAMPAIGN_DETAILS"),
-    GET_CAMPAIGN_STATS("GET_PRICE"),
+    GET_CAMPAIGN_STATS("GET_CAMPAIGN_STATS"),
     GET_CAMPAIGN_STATUS("GET_CAMPAIGN_STATUS"),
     GET_SCREENS("GET_SCREENS"),
     GET_SCREEN_AREAS("GET_SCREEN_AREAS"),
@@ -68,7 +68,7 @@ public enum APIMethodName implements Constants {
             }
         }
 
-        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Method Name", "Failed to convert API Method Name: " + methodName + "to Enum");
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Method Name", "Failed to convert API Method Name: " + methodName + " to Enum");
 
         throw error;
 

@@ -19,7 +19,8 @@ public class CreateAccountRequest implements JsonDataModel {
                   "primary_phone":"256774983602",
                   "preferred_password":"eyru474894833y3994ir94309323943"
                },
-               "addition_info": {
+               "additional_info": {
+                 "user_type": "CLIENT",
                  "agreed_to_terms":true
                }
             }

@@ -16,8 +16,6 @@ public enum AdLength implements Constants {
 
     private final int enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(AdLength.class);
-
     AdLength(int enumValue) {
         this.enumValue = enumValue;
     }

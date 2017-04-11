@@ -1,7 +1,8 @@
 package com.library.datamodel.Constants;
 
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
  *
@@ -14,11 +15,10 @@ public enum ProgDisplayLayout implements Constants {
     TEXT_ONLY("TEXT"),
     FULL_SCREEN("FULLSCREEN"),
     FULLSCREEN_TEXT("FULLSCREEN_TEXT"),
-    AV_ONLY("AV_ONLY");
+    AV_ONLY("AV_ONLY"),
+    UNKNOWN("UNKNOWN");
 
     private final String enumValue;
-
-    private static final LoggerUtil logger = new LoggerUtil(ProgDisplayLayout.class);
 
     ProgDisplayLayout(String enumValue) {
         this.enumValue = enumValue;
@@ -29,7 +29,7 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) {
+    public static ProgDisplayLayout convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
@@ -40,9 +40,7 @@ public enum ProgDisplayLayout implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + value + " found");
-        throw new IllegalArgumentException("No constant with text " + value + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
-
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Display layout", "Failed to convert layout Name: " + value + "to Enum");
+        throw error;
     }
 }

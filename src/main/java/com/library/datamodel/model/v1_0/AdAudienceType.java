@@ -3,6 +3,7 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,21 +28,21 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
     @SerializedName(value = "id")
     private long id;
 
-    // MEN | WOMEN | KIDS | MEN_WOMEN | CORPORATES | ALL | BODA-RIDERS
     @Column(name = "audience_code")
-    private int audienceCode;
+    private String audienceCode;
 
+    // MEN | WOMEN | KIDS | MEN_WOMEN | CORPORATES | ALL | BODA-RIDERS
     @Column(name = "audience_name", length = 1000) //might want to change this - what if the data is too long
     private String audienceName;
 
     public AdAudienceType() {
     }
 
-    public int getAudienceCode() {
+    public String getAudienceCode() {
         return audienceCode;
     }
 
-    public void setAudienceCode(int audienceCode) {
+    public void setAudienceCode(String audienceCode) {
         this.audienceCode = audienceCode;
     }
 
@@ -64,6 +65,32 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.audienceCode);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdAudienceType other = (AdAudienceType) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return Objects.equals(this.audienceCode, other.getAudienceCode());
     }
 
 }

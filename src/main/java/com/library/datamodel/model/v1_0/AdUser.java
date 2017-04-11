@@ -3,7 +3,6 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdXpoAccountStatus;
-import com.library.datamodel.Constants.NamedConstants;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,11 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
@@ -45,37 +44,29 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_user", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id"}))
 
-
 @NamedQueries({
     @NamedQuery(name = AdUser.FETCH_USERS, query = AdUser.FETCH_USERS_QUERY)
-}) 
+})
 public class AdUser extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_USERS_QUERY = "SELECT DISTINCT user FROM AdUser user where user.userId=:userId";
-    public static final String FETCH_USERS = "fetch_users";
-   
+    public static final String FETCH_USERS = "FETCH_USERS";
+
     private static final long serialVersionUID = -9199479009606759914L;
 
-    @Expose
     @Id
-    @GeneratedValue(generator = "myGenerator")
-    @GenericGenerator(
-            name = "adUserKeyGenerator",
-            strategy = "foreign",
-            parameters = @Parameter(
-                    value = "business",
-                    name = "property"
-            )
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    @SerializedName(value = "id")
     private long id;
 
     @Expose
     @SerializedName(value = "user_id")
     @Column(name = "user_id", nullable = false)
-    private String userId = NamedConstants.GUEST_USER_ID; //this can be a telephone number  / primary contact / default for guests
+    private String userId;
 
     @Column(name = "password", nullable = false)
-    private String password = "#password#"; //default password for guests
+    private String password;
 
     @Column(name = "password_encrypted")
     private boolean isPasswordEncrypted = Boolean.FALSE; //default for guests
@@ -195,7 +186,7 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
     public void setAgreedToTermsOfuse(boolean agreedToTermsOfuse) {
         this.agreedToTermsOfuse = agreedToTermsOfuse;
     }
-    
+
     public boolean isIsPasswordEncrypted() {
         return isPasswordEncrypted;
     }

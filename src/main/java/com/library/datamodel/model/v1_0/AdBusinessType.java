@@ -3,6 +3,7 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +31,18 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
     //BAR | SALON | SPORTS_HOUSE | HOTEL | HOSTELS | SCHOOLS | UNIVERSITIES | AIRPORT | BIBANDA | RESTAURANT | SUPERMARKET | SHOP
     @SerializedName(value = "business_type_code")
     @Column(name = "business_type_code")
-    private int businessTypeCode;
+    private String businessTypeCode;
 
     @SerializedName(value = "busines_type_name")
     @Column(name = "busines_type_name", length = 1000)
     private String businessTypeName;
+
+    /**
+     * will be used for giving more description to GET_SCREENS response
+     */
+    @SerializedName(value = "busines_type_short_name")
+    @Column(name = "busines_type_short_name", length = 1000)
+    private String businessTypeshortName;
 
     public AdBusinessType() {
     }
@@ -47,12 +55,11 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
         this.businessTypeName = businessTypeName;
     }
 
-    
-    public int getBusinessTypeCode() {
+    public String getBusinessTypeCode() {
         return businessTypeCode;
     }
 
-    public void setBusinessTypeCode(int businessTypeCode) {
+    public void setBusinessTypeCode(String businessTypeCode) {
         this.businessTypeCode = businessTypeCode;
     }
 
@@ -63,7 +70,15 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
     public void setId(long id) {
         this.id = id;
     }
-    
+
+    public String getBusinessTypeshortName() {
+        return businessTypeshortName;
+    }
+
+    public void setBusinessTypeshortName(String businessTypeshortName) {
+        this.businessTypeshortName = businessTypeshortName;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -71,9 +86,9 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 53 * hash + this.businessTypeCode;
+        int hash = 7;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.businessTypeCode);
         return hash;
     }
 
@@ -89,8 +104,10 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
             return false;
         }
         final AdBusinessType other = (AdBusinessType) obj;
-        return this.businessTypeCode == other.getBusinessTypeCode();
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return Objects.equals(this.businessTypeCode, other.getBusinessTypeCode());
     }
-
 
 }

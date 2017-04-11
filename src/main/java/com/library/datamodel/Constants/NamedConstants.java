@@ -17,6 +17,12 @@ import org.joda.time.Duration;
 public interface NamedConstants {
 
     /**
+     * Will be concantenated to the business ID to 
+     * form a screen_id
+     */
+    public static String SCREEN_START_ID = "01";
+    
+    /**
      * Campaign Ids that will be used as templates
      */
     public static int[] TEMPLATE_CAMPAIGNS = {};
@@ -364,7 +370,7 @@ public interface NamedConstants {
     public static final String SMS_PAYMENT_FAILURE = "Hello {firstName}, payment of {amount} for generator: {generatorId}, has Failed.Reason: {statusDescription}. Please re-initiate another payment. Thank you";
     //public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your PIN is: {otp} & GeneratorID: {generatorId}. Please open your Telesola app & enter the details.However, clear the deposit to activate the generator";
 
-    public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your One Time Pin is: {otp}. To verify your account, please enter PIN and login at: http://advertexpo.com/#/verify";
+    public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your One Time Pin is: {otp}. To verify your account, please login and enter your PIN at: http://advertexpo.com/#/verify -.";
 
     public static final String SMS_API_PARAM_USERNAME = "user";
     public static final String SMS_API_PARAM_PASSOWRD = "password";
@@ -372,5 +378,15 @@ public interface NamedConstants {
     public static final String SMS_API_PARAM_TEXT = "SMSText";
     public static final String SMS_API_PARAM_RECIPIENT = "GSM";
 
-    public static final String GUEST_USER_ID = "770000000";
+    /**
+     * Guest Credentials
+     */
+    public static final String GUEST_USER_ID = "256770000000";
+    public static final String GUEST_USER_PASSWORD = "111111";
+    
+    /**
+     * Guest Credentials
+     */
+    public static final String TEST_USER_ID = "256790790491";
+    public static final String TEST_USER_PASSWORD = "111111";
 }

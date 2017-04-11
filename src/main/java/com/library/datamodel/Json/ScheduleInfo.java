@@ -18,9 +18,14 @@ public class ScheduleInfo {
     @SerializedName("start_date")
     @Expose
     private String startDate;
+    
     @SerializedName("end_date")
     @Expose
     private String endDate;
+    
+    @SerializedName("schedule_type")
+    @Expose
+    private String scheduleType; // INSTANT | LATER
 
     @SerializedName("time_slots")
     @Expose
@@ -48,6 +53,14 @@ public class ScheduleInfo {
 
     public void setTimeSlots(Set<TimeSlot> timeSlots) {
         this.timeSlots = timeSlots;
+    }
+
+    public String getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(String scheduleType) {
+        this.scheduleType = scheduleType;
     }
 
 }

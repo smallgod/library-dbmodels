@@ -17,7 +17,7 @@ import com.library.sgsharedinterface.RemoteRequest;
 public class RemoteUnitWrapper implements RemoteRequest {
 
     private final Remoteunittype remoteUnitType;
-    private Map<String, String> httpParams;
+    private Map<String, Object> httpParams;
 
     public RemoteUnitWrapper(Remoteunittype remoteUnitType) {
         this.remoteUnitType = remoteUnitType;
@@ -47,22 +47,20 @@ public class RemoteUnitWrapper implements RemoteRequest {
     public String getUnitName() {
         return this.remoteUnitType.getName();
     }
-    
+
     @Override
     public String getPreviewUrl() {
         return this.remoteUnitType.getPreviewurl();
     }
 
     @Override
-    public Map<String, String> getHttpParams() {
+    public Map<String, Object> getHttpParams() {
         return httpParams;
     }
 
     @Override
-    public void setHttpParams(Map<String, String> httpParams) {
+    public void setHttpParams(Map<String, Object> httpParams) {
         this.httpParams = httpParams;
     }
-
-    
 
 }
