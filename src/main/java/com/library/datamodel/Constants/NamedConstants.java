@@ -17,16 +17,21 @@ import org.joda.time.Duration;
 public interface NamedConstants {
 
     /**
-     * Will be concantenated to the business ID to 
-     * form a screen_id
+     * Generic error message from a database operation that will be displayed to
+     * users on the UI
+     */
+    public static String GENERIC_DB_ERR_DESC = "Error! Request cannot be processed at the moment, please try again later.";
+
+    /**
+     * Will be concantenated to the business ID to form a screen_id
      */
     public static String SCREEN_START_ID = "01";
-    
+
     /**
      * Campaign Ids that will be used as templates
      */
     public static int[] TEMPLATE_CAMPAIGNS = {};
-    
+
     public static String TEMPLATE_CAMPAIGNS_USER_ID = "774983602";
 
     /**
@@ -383,7 +388,7 @@ public interface NamedConstants {
      */
     public static final String GUEST_USER_ID = "256770000000";
     public static final String GUEST_USER_PASSWORD = "111111";
-    
+
     /**
      * Guest Credentials
      */

@@ -6,6 +6,7 @@ package com.library.datamodel.Json;
  */
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.HashSet;
 import java.util.Set;
 
 public class GetCampaignDetailsResponse {
@@ -175,11 +176,11 @@ public class GetCampaignDetailsResponse {
 
         @SerializedName("resources_info")
         @Expose
-        private Set<ResourcesInfo> resourcesInfo = null;
+        private Set<ResourcesInfo> resourcesInfo = new HashSet<>();
 
         @SerializedName("text_info")
         @Expose
-        private Set<TextInfo> textInfo = null;
+        private Set<TextInfo> textInfo = new HashSet<>();
 
         @SerializedName("campaign_stats")
         @Expose
@@ -257,25 +258,25 @@ public class GetCampaignDetailsResponse {
 
             @SerializedName("target_screen_codes")
             @Expose
-            private Set<String> targetScreenCodes = null;
+            private Set<ScreenData> targetScreenCodes = new HashSet<>();
 
             @SerializedName("areas")
             @Expose
-            private Set<MyTypes> areas = null;
+            private Set<MyTypes> areas = new HashSet<>();
 
             @SerializedName("business_types")
             @Expose
-            private Set<MyTypes> businessTypes = null;
+            private Set<MyTypes> businessTypes = new HashSet<>();
 
             @SerializedName("audience_types")
             @Expose
-            private Set<MyTypes> audienceTypes = null;
+            private Set<MyTypes> audienceTypes = new HashSet<>();
 
-            public Set<String> getTargetScreenCodes() {
+            public Set<ScreenData> getTargetScreenCodes() {
                 return targetScreenCodes;
             }
 
-            public void setTargetScreenCodes(Set<String> targetScreenCodes) {
+            public void setTargetScreenCodes(Set<ScreenData> targetScreenCodes) {
                 this.targetScreenCodes = targetScreenCodes;
             }
 

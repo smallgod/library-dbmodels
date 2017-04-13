@@ -29,7 +29,7 @@ import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@DynamicUpdate(value = true)
+@DynamicUpdate(value = true)//set the dynamic-insert to true, which means exclude unmodified properties in the Hibernate’s SQL update statement.
 @SelectBeforeUpdate(value = true)
 //@Table(name = "ad_text")
 @Table(name = "ad_text", uniqueConstraints = @UniqueConstraint(columnNames = {"text_id"}))
@@ -41,12 +41,12 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     private static final long serialVersionUID = -3434906437273662803L;
 
     public static final String FETCH_TEXT_QUERY = "SELECT DISTINCT txt FROM AdText txt INNER JOIN txt.adTextPrograms prog where prog.campaignId=:campaignId";
-    public static final String FETCH_TEXT = "fetch_text";
+    public static final String FETCH_TEXT = "FETCH_TEXT";
 
     //HQL queries are written differently especially joins e.g.
     //In SQL, select a.id, a.name, a.url from FilesInfo a inner join FilesShare b on a.id=b.fileid where b.userid=5 and b.owner=1;
     //In HQL, is:
-    //select a.id, a.name, a.url from FilesInfo a inner join a.filesShared b where b.userid=5 and b.owner=1;
+    //select a.id, a.name, a.url from FilesInfo a inner join a.filesShared b where b.userid:=5 and b.owner:=1;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
@@ -54,8 +54,8 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     private long id;
 
     @Expose
-    @Column(name = "text_id")
     @SerializedName(value = "text_id")
+    @Column(name = "text_id", nullable = false)
     private long textId;
 
     @Column(name = "text_content")
@@ -79,10 +79,10 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     private boolean isUploadedToDSM;
 
     @SerializedName(value = "program_text")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "program_text",
+    @ManyToMany(fetch = FetchType.LAZY)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "program_text",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
             joinColumns = {
-                @JoinColumn(name = "text_id")
+                @JoinColumn(name = "text_id", referencedColumnName = "text_id")
 
             },
             inverseJoinColumns = {
@@ -158,9 +158,9 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + (int) (this.textId ^ (this.textId >>> 32));
+        int hash = 7;
+        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 43 * hash + (int) (this.textId ^ (this.textId >>> 32));
         return hash;
     }
 

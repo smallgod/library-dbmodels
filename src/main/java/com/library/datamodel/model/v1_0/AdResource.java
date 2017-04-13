@@ -40,9 +40,10 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
-    
+
+    //public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
     public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
-    public static final String FETCH_RESOURCE = "fetch_resource";
+    public static final String FETCH_RESOURCE = "FETCH_RESOURCE";
 
     @Expose
     @SerializedName(value = "id")
@@ -63,7 +64,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Expose(deserialize = false, serialize = false)
     @SerializedName(value = "upload_id")
-    @Column(name = "upload_id") //this by default should be zero(0), since this resourceId is just generated later
+    @Column(name = "upload_id")
     private String uploadId;
 
     @Expose
@@ -105,8 +106,9 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "program_resources")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "program_resources",
+    @ManyToMany(fetch = FetchType.LAZY)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "program_resources",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
+
             joinColumns = {
                 @JoinColumn(name = "upload_id", referencedColumnName = "upload_id")
 
@@ -116,7 +118,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
-    private Set<AdProgram> adResourcePrograms = new HashSet<>(0);
+    private Set<AdProgram> adResourcePrograms = new HashSet<>();
 
     public AdResource() {
     }
@@ -198,14 +200,6 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         this.uploadId = uploadId;
     }
 
-    /*public Set<AdProgram> getAdProgramResources() {
-        return adProgramResources;
-    }
-
-    public void setAdProgramResources(Set<AdProgram> adProgramResources) {
-        this.adProgramResources = adProgramResources;
-    }
-     */
     public int getSequence() {
         return sequence;
     }
@@ -232,9 +226,9 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.uploadId);
+        int hash = 5;
+        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.uploadId);
         return hash;
     }
 
@@ -253,12 +247,10 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         if (this.id != other.getId()) {
             return false;
         }
-        return Objects.equals(this.uploadId, other.getUploadId());
+        if (!Objects.equals(this.uploadId, other.getUploadId())) {
+            return false;
+        }
+        return true;
     }
-
-    
-    
-    
-    
 
 }

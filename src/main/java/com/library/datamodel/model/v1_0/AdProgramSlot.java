@@ -35,7 +35,8 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
 
     private static final long serialVersionUID = -3434906437273662803L;
 
-    public static final String FETCH_PROG_SLOT_QUERY = "SELECT DISTINCT progslot FROM AdProgramSlot progslot INNER JOIN progslot.adPrograms prog INNER JOIN progslot.adTimeSlot timeslot where prog.campaignId=:campaignId";
+    public static final String FETCH_PROG_SLOT_QUERY = "SELECT DISTINCT programSlot FROM AdProgramSlot programSlot INNER JOIN programSlot.adTimeSlot timeslot INNER JOIN programSlot.adPrograms program where program.campaignId=:campaignId";
+    //public static final String FETCH_PROG_SLOT_QUERY = "SELECT DISTINCT progslot FROM AdProgramSlot progslot INNER JOIN progslot.adPrograms prog INNER JOIN progslot.adTimeSlot timeslot where prog.campaignId=:campaignId";
     public static final String FETCH_PROG_SLOT = "FETCH_PROG_SLOT";
 
     //HQL queries are written differently especially joins e.g.
@@ -57,7 +58,7 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
     private int frequency;
 
     @SerializedName(value = "time_slot")
-    @OneToOne
+    @OneToOne()
     @JoinColumns({
         @JoinColumn(name = "time_slot", referencedColumnName = "slot_code")
     })
@@ -65,8 +66,9 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
     private AdTimeSlot adTimeSlot;
 
     @SerializedName(value = "program_slots")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "program_slots",
+    @ManyToMany(fetch = FetchType.LAZY)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "program_slots",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
+
             joinColumns = {
                 @JoinColumn(name = "id")
 
@@ -165,33 +167,6 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
         this.isSunday = isSunday;
     }
 
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdProgramSlot other = (AdProgramSlot) obj;
-        return this.id == other.getId();
-    }
-
     public Set<AdProgram> getAdPrograms() {
         return adPrograms;
     }
@@ -230,6 +205,33 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
 
     public void setAdTimeSlot(AdTimeSlot adTimeSlot) {
         this.adTimeSlot = adTimeSlot;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdProgramSlot other = (AdProgramSlot) obj;
+        return this.id == other.getId();
     }
 
 }

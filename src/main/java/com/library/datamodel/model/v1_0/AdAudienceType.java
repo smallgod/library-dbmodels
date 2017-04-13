@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -17,7 +18,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_audience_type")
+@Table(name = "ad_audience_type", uniqueConstraints = @UniqueConstraint(columnNames = {"audience_code"}))
 public class AdAudienceType extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;

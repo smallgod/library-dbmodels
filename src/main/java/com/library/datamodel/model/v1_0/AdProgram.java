@@ -63,6 +63,7 @@ import org.joda.time.LocalDate;
 @NamedQueries({
     @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
     @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID, query = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS, query = AdProgram.FETCH_CAMPAIGNS_QUERY)
 
 })
@@ -75,6 +76,10 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public static final String FETCH_ALL_USER_CAMPAIGNS = "FETCH_ALL_USER_CAMPAIGNS";
     public static final String FETCH_USER_CAMPAIGNS_BY_ID = "FETCH_USER_CAMPAIGNS_BY_ID";
     public static final String FETCH_CAMPAIGNS = "FETCH_CAMPAIGNS";
+    
+    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY ="SELECT DISTINCT program.campaignScreenCodes FROM AdProgram program WHERE program.campaignId=:campaignId";
+    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID = "FETCH_SCREENCODES_BY_CAMPAIGN_ID";
+    
 
     private static final long serialVersionUID = -7420964819128665745L;
     
@@ -106,7 +111,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "campaign_id")
-    @Column(name = "campaign_id") //this is the ID we internally generate for every program, later when we figure out, we can use the BaseEntity id
+    @Column(name = "campaign_id", nullable = false) //this is the ID we internally generate for every program, later when we figure out, we can use the BaseEntity id
     private int campaignId;
 
     @SerializedName(value = "campaign_name")
@@ -349,40 +354,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.client = client;
     }
 
-   
-    
-    @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
-
-
-     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 53 * hash + this.campaignId;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdProgram other = (AdProgram) obj;
-        if (this.id != other.getId()) {
-            return false;
-        }
-        return this.campaignId == other.getCampaignId();
-    }
-
     public AdCampaignStats getAdCampaignStats() {
         return adCampaignStats;
     }
@@ -406,6 +377,39 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public void setCampaignScreenCodes(String campaignScreenCodes) {
         this.campaignScreenCodes = campaignScreenCodes;
     }
+    
+     @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + this.campaignId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdProgram other = (AdProgram) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return this.campaignId == other.getCampaignId();
+    }
+    
+    
 }
 
 
