@@ -29,7 +29,7 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
     @SerializedName(value = "id")
     private long id;
 
-    @Column(name = "audience_code")
+    @Column(name = "audience_code", nullable = false)
     private String audienceCode;
 
     // MEN | WOMEN | KIDS | MEN_WOMEN | CORPORATES | ALL | BODA-RIDERS
