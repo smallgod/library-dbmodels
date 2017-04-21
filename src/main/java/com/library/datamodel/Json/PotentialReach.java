@@ -25,6 +25,10 @@ public class PotentialReach {
     @SerializedName("screen_count")
     @Expose
     private int screenCount;
+    
+    @SerializedName("estimated_views")
+    @Expose
+    private int estimatedViews;
 
     public int getAmount() {
         return amount;
@@ -48,6 +52,14 @@ public class PotentialReach {
 
     public void setScreenCount(int screenCount) {
         this.screenCount = screenCount;
+    }
+
+    public int getEstimatedViews() {
+        return estimatedViews;
+    }
+
+    public void setEstimatedViews(int estimatedViews) {
+        this.estimatedViews = estimatedViews;
     }
 
 }

@@ -28,21 +28,14 @@ public interface NamedConstants {
     public static String SCREEN_START_ID = "01";
 
     /**
-     * Campaign Ids that will be used as templates
-     */
-    public static int[] TEMPLATE_CAMPAIGNS = {};
-
-    public static String TEMPLATE_CAMPAIGNS_USER_ID = "774983602";
-
-    /**
      * 3SPLIT screen layout description
      */
-    public static String THREE_SPLIT_LAYOUT_DESC = "This layout splits a display/TV screen into 3 portions and 2 portions can be used for advertising, one Scrolling Text and the other Images and/or Video";
+    public static String THREE_SPLIT_LAYOUT_DESC = "Splits a display/TV screen into 3. 2 of the 3 splits are used for advertising with Scrolling Text on the lower split and Images and/or Video on the side split";
     public static int THREE_SPLIT_LAYOUT_PRICE = 1000;
     /**
      * 3SPLIT screen layout description
      */
-    public static String FULLSCREEN_LAYOUT_DESC = "This layout lets the user's adverts fill up the entire display/TV screen. ";
+    public static String FULLSCREEN_LAYOUT_DESC = "This layout lets the user's adverts fill up the entire display/TV screen";
     public static int FULLSCREEN_LAYOUT_PRICE = 1500;
 
     public static int ARREST_CRIPPY_THREADS = 1;
@@ -336,6 +329,11 @@ public interface NamedConstants {
      * Identifies by name the SGDbAdapter object stored in the JOBS datamap
      */
     public static String DB_ADAPTER = "DB_ADAPTER";
+    
+    /**
+     * Directory we are currently uploading files to
+     */
+    public static String FILE_UPLOAD_DIR = "/etc/ug/adcentral/temp/uploads";
 
     /**
      * Advert/Program Slots (minutes) available in one Hour
@@ -394,4 +392,15 @@ public interface NamedConstants {
      */
     public static final String TEST_USER_ID = "256790790491";
     public static final String TEST_USER_PASSWORD = "111111";
+
+    /**
+     * Campaign Ids that will be used as templates
+     */
+    public static int[] TEMPLATE_CAMPAIGNS = {};
+
+    /**
+     * Templates user credentials
+     */
+    public static String TEMPLATE_CAMPAIGNS_USER_ID = "25677777777";
+    public static String TEMPLATE_CAMPAIGNS_USER_PASSWORD = "111111";
 }

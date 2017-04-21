@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
@@ -36,6 +38,13 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @NamedQueries(
         @NamedQuery(name = AdText.FETCH_TEXT, query = AdText.FETCH_TEXT_QUERY)
 )
+@NamedNativeQueries({
+	@NamedNativeQuery(
+	name = "FETCH_TEXT_SQL",
+	query = "SELECT DISTINCT * FROM adexpo_main.ad_text txt INNER JOIN adexpo_main.ad_program prog where prog.campaign_id=:campaignId",
+        resultClass = AdText.class
+	)
+})
 public class AdText extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -3434906437273662803L;
@@ -79,8 +88,8 @@ public class AdText extends BaseEntity implements Auditable, Serializable {
     private boolean isUploadedToDSM;
 
     @SerializedName(value = "program_text")
-    @ManyToMany(fetch = FetchType.LAZY)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "program_text",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
+    @ManyToMany(fetch = FetchType.EAGER)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @JoinTable(name = "program_text",//EAGER works with criteria but throws the infamous NullPointer exception while trying to execute the select HQL query
             joinColumns = {
                 @JoinColumn(name = "text_id", referencedColumnName = "text_id")
 

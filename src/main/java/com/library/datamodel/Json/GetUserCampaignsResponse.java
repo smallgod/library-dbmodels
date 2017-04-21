@@ -6,6 +6,9 @@ package com.library.datamodel.Json;
  */
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.utilities.AmountComparator;
+import com.library.utilities.SizeComparator;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -84,6 +87,7 @@ public class GetUserCampaignsResponse {
 
     public void setData(Set<CampaignInfo> data) {
         this.data = data;
+
     }
 
 }

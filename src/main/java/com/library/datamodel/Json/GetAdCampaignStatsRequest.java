@@ -123,7 +123,7 @@ public class GetAdCampaignStatsRequest {
         @Expose
         private String endDate;
 
-        @SerializedName("slots") //rename back to 'time_slots'
+        @SerializedName("time_slots")
         @Expose
         private Set<TimeSlot> timeSlots = new HashSet<>();
 

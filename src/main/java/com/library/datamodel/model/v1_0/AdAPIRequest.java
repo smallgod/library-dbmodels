@@ -33,11 +33,11 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
             }
     )
 })
-@Entity
+
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_api_request")
-
+@Entity
 public class AdAPIRequest extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -8680066482124886895L;

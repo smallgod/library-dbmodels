@@ -131,8 +131,8 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 23 * hash + Objects.hashCode(this.terminalId);
+        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.terminalId);
         return hash;
     }
 

@@ -28,7 +28,10 @@ import com.library.httpconnmanager.Security;
 import com.library.utilities.HibernateUtils;
 import com.library.utilities.LoggerUtil;
 import com.library.utilities.NumericIDGenerator;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.joda.time.Duration;
 import org.joda.time.LocalTime;
@@ -97,9 +100,11 @@ public class InitialiseDBData {
 
     private AdUser testUser;
     private AdUser guestUser;
+    private AdUser templatesCampaignUser;
     private AdScreenOwner testScreenOwner;
     private AdClient testAdClient;
     private AdClient guestAdClient;
+    private AdClient templatesCampaignClient;
 
     private final CustomHibernate customHibernate;
 
@@ -1076,6 +1081,81 @@ public class InitialiseDBData {
     }
 
     /**
+     * User will be both a testAdClient and a screen owner
+     *
+     * @throws com.library.customexception.MyCustomException
+     */
+    public void addTemplateCampaignsUser() throws MyCustomException {
+
+        String userId = NamedConstants.TEMPLATE_CAMPAIGNS_USER_ID;
+        String password = NamedConstants.TEMPLATE_CAMPAIGNS_USER_PASSWORD;
+
+        templatesCampaignUser = new AdUser();
+        templatesCampaignUser.setAccountStatus(AdXpoAccountStatus.ACTIVE);
+        templatesCampaignUser.setAgreedToTermsOfuse(Boolean.TRUE);
+        templatesCampaignUser.setFirstName("Templates User");
+        templatesCampaignUser.setPrimaryPhone(userId);
+        templatesCampaignUser.setPassword(Security.createHash(password));
+        templatesCampaignUser.setUserId(userId);
+        templatesCampaignUser.setIsPasswordEncrypted(Boolean.TRUE);
+        //adUser.setUserId(GeneralUtils.generateUserId(primaryPhone));
+
+        customHibernate.saveEntity(templatesCampaignUser);
+
+    }
+
+    /**
+     * Update user password
+     *
+     * @param userId
+     * @param oldPassword
+     * @param newPassword
+     * @throws MyCustomException
+     */
+    public void updateUserPassword(String userId, String oldPassword, String newPassword) throws MyCustomException {
+
+        Map<String, Set<Object>> fetchProps = new HashMap<>();
+        //fetchProps.put("password", new HashSet<>(Arrays.asList((Object) oldPassword)));
+        fetchProps.put("userId", new HashSet<>(Arrays.asList((Object) userId)));
+
+        AdUser user = customHibernate.fetchEntity(AdUser.class, fetchProps);
+
+        //validate old password first
+        String hashedPasswordFromDB = user.getPassword();
+        Security.validatePassword(oldPassword, hashedPasswordFromDB);
+
+        user.setPassword(Security.createHash(newPassword));
+        customHibernate.updateEntity(user);
+
+    }
+
+    /**
+     * Update user password
+     *
+     * @param oldUserId
+     * @param newUserId
+     * @param password
+     * @throws MyCustomException
+     */ //has issues - error -> Cannot delete or update a parent row: a foreign key constraint fails 
+    //(`adexpo_main`.`ad_client`, CONSTRAINT `FK_d6m1lbjx8rop1yg0xiukmbhro` FOREIGN KEY (`user_id`) REFERENCES `ad_user` (`user_id`))
+    public void updateUserId(String oldUserId, String newUserId, String password) throws MyCustomException {
+
+        Map<String, Set<Object>> fetchProps = new HashMap<>();
+        //fetchProps.put("password", new HashSet<>(Arrays.asList((Object) password)));
+        fetchProps.put("userId", new HashSet<>(Arrays.asList((Object) oldUserId)));
+
+        AdUser user = customHibernate.fetchEntity(AdUser.class, fetchProps);
+
+        //validate old password first
+        String hashedPasswordFromDB = user.getPassword();
+        Security.validatePassword(password, hashedPasswordFromDB);
+
+        user.setUserId(newUserId);
+        customHibernate.updateEntity(user);
+
+    }
+
+    /**
      * This screen owner will own all the test screens we have
      *
      * @throws com.library.customexception.MyCustomException
@@ -1090,6 +1170,10 @@ public class InitialiseDBData {
 
     }
 
+    /**
+     *
+     * @throws MyCustomException
+     */
     public void addTestCampaignClient() throws MyCustomException {
 
         testAdClient = new AdClient();
@@ -1108,6 +1192,16 @@ public class InitialiseDBData {
         guestAdClient.setNumberOfPrograms(0);
 
         customHibernate.saveEntity(guestAdClient);
+    }
+
+    public void addTemplateCampaignClient() throws MyCustomException {
+
+        templatesCampaignClient = new AdClient();
+        templatesCampaignClient.setAdUser(this.templatesCampaignUser);
+        templatesCampaignClient.setIsToBeCensored(Boolean.TRUE);
+        templatesCampaignClient.setNumberOfPrograms(0);
+
+        customHibernate.saveEntity(templatesCampaignClient);
     }
 
     /**
@@ -1186,7 +1280,7 @@ public class InitialiseDBData {
         //INSTANT - SLOT
         slotAdPrice = new Amounttype();
         slotAdPrice.setCurrencycode("UGX");
-        slotAdPrice.setAmount(5000);
+        slotAdPrice.setAmount(3000);
         AdTimeSlot timeSlot = new AdTimeSlot();
         timeSlot.setStartTime(new LocalTime(0, 0));
         timeSlot.setEndTime(new LocalTime(0, 0));
@@ -1207,7 +1301,7 @@ public class InitialiseDBData {
         timeSlot.setStartTime(new LocalTime(23, 0));
         timeSlot.setEndTime(new LocalTime(3, 59));
         timeSlot.setSlotAdPrice(slotAdPrice);
-        timeSlot.setTimeSlotCode("LATENIGHT");
+        timeSlot.setTimeSlotCode("LATENITE");
         timeSlot.setTimeSlotName("Late Night");
         timeSlot.setTimeSlotDescription("Late in the wee hours of the night, for clubbers and other 'nocturnals' ");
         timeSlot.setIsInstant(Boolean.FALSE);
@@ -1341,17 +1435,11 @@ public class InitialiseDBData {
 
     }
 
-    public void gumaaza() throws MyCustomException {
+    public void gummaaza() throws MyCustomException {
         return;
     }
 
     public void initDB() throws MyCustomException {
-
-        //Guest user
-        addGuestUser();
-
-        //test user
-        addTestUser();
 
         //screen layouts
         addDisplayLayouts();
@@ -1371,11 +1459,23 @@ public class InitialiseDBData {
         //test business
         addTestBusinesses();
 
+        //Guest user
+        addGuestUser();
+
+        //test user
+        addTestUser();
+
+        //Templates campaign user
+        addTemplateCampaignsUser();
+
         // test advert client
         addTestCampaignClient();
 
         // test advert client
         addGuestCampaignClient();
+
+        //Templates campaign client
+        addTemplateCampaignClient();
 
         //add test screenowners after adding businesses
         addTestScreenOwner();

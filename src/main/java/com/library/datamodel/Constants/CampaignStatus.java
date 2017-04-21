@@ -8,7 +8,7 @@ import com.library.utilities.GeneralUtils;
  *
  * @author smallgod
  */
-public enum AdCampaignStatus implements Constants {
+public enum CampaignStatus implements Constants {
 
     DRAFT("DRAFT"),
     PENDING_PAYMENT("PENDING_PAYMENT"),
@@ -21,7 +21,7 @@ public enum AdCampaignStatus implements Constants {
 
     private final String enumValue;
 
-    AdCampaignStatus(String enumValue) {
+    CampaignStatus(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -30,11 +30,11 @@ public enum AdCampaignStatus implements Constants {
         return this.enumValue;
     }
 
-    public static AdCampaignStatus convertToEnum(String value) throws MyCustomException {
+    public static CampaignStatus convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
-            for (AdCampaignStatus availableValue : AdCampaignStatus.values()) {
+            for (CampaignStatus availableValue : CampaignStatus.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

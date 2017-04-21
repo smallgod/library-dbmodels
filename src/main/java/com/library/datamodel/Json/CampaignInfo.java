@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author smallgod
  */
-public class CampaignInfo {
+public class CampaignInfo implements DataList {
 
     @SerializedName("id")
     @Expose
@@ -58,6 +58,7 @@ public class CampaignInfo {
     @Expose
     private String description;
 
+    @Override
     public int getId() {
         return id;
     }
@@ -145,4 +146,7 @@ public class CampaignInfo {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+
 }

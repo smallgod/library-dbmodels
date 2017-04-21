@@ -50,37 +50,47 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
 
     @Expose
     @SerializedName(value = "campaign_cost")
-    @Column(name = "campaign_cost")
+    @Column(name = "campaign_cost", nullable = false)
     private int campaignCost;
 
     @Expose
     @SerializedName(value = "display_count")
-    @Column(name = "times_ad_should_play")
+    @Column(name = "times_ad_should_play", nullable = false)
     private int numOfTimesAdIsToPlay;
 
     @Expose
     @SerializedName(value = "times_ad_has_played")
-    @Column(name = "times_ad_has_played")
+    @Column(name = "times_ad_has_played", nullable = false)
     private int numOfTimesAdHasPlayed;
 
     @Expose
+    @SerializedName(value = "estimated_target_views")
+    @Column(name = "estimated_target_views", nullable = false)
+    private int estimatedTargetViews; //multiply number of times ad is to play with total target audience_count
+    
+    @Expose
+    @SerializedName(value = "estimated_potential_views")
+    @Column(name = "estimated_potential_views", nullable = false)
+    private int estimatedPotentialViews; //figure out algorithm for this
+
+    @Expose
     @SerializedName(value = "target_screen_reach")
-    @Column(name = "target_screen_reach")
+    @Column(name = "target_screen_reach", nullable = false)
     private int targetScreenReach;
 
     @Expose
     @SerializedName(value = "target_audience_reach")
-    @Column(name = "target_audience_reach")
+    @Column(name = "target_audience_reach", nullable = false)
     private int targetAudienceReach;
 
     @Expose
     @SerializedName(value = "potential_screen_reach")
-    @Column(name = "potential_screen_reach")
+    @Column(name = "potential_screen_reach", nullable = false)
     private int potentialScreenReach;
 
     @Expose
     @SerializedName(value = "potential_audience_reach")
-    @Column(name = "potential_audience_reach")
+    @Column(name = "potential_audience_reach", nullable = false)
     private int potentialAudienceReach;
 
     public AdCampaignStats() {
@@ -178,6 +188,22 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
             return false;
         }
         return true;
+    }
+
+    public int getEstimatedTargetViews() {
+        return estimatedTargetViews;
+    }
+
+    public void setEstimatedTargetViews(int estimatedTargetViews) {
+        this.estimatedTargetViews = estimatedTargetViews;
+    }
+
+    public int getEstimatedPotentialViews() {
+        return estimatedPotentialViews;
+    }
+
+    public void setEstimatedPotentialViews(int estimatedPotentialViews) {
+        this.estimatedPotentialViews = estimatedPotentialViews;
     }
 
 }

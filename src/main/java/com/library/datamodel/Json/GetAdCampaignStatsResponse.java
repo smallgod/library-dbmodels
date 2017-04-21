@@ -24,12 +24,14 @@ public class GetAdCampaignStatsResponse {
             "target_reach": {
               "amount": 500,
               "audience_count": 4,
-              "screen_count": 1
+              "screen_count": 1,
+              "estimated_views":1000
             },
             "potential_reach": {
               "amount": 500000,
               "audience_count": 50000,
-              "screen_count": 9100
+              "screen_count": 9100,
+              "estimated_views":1000
             }
           }
         }

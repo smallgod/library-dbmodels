@@ -106,7 +106,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Expose
     @SerializedName(value = "program_resources")
-    @ManyToMany(fetch = FetchType.LAZY)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+    @ManyToMany(fetch = FetchType.EAGER)//LAZY works especially with HQL though with criteria it was throwing the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
     @JoinTable(name = "program_resources",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
 
             joinColumns = {

@@ -2,7 +2,7 @@ package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.library.datamodel.Constants.AdCampaignStatus;
+import com.library.datamodel.Constants.CampaignStatus;
 import com.library.datamodel.Constants.AdPaymentStatus;
 import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
@@ -26,6 +26,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -64,18 +65,22 @@ import org.joda.time.LocalDate;
     @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
     @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID, query = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY),
-    @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS, query = AdProgram.FETCH_CAMPAIGNS_QUERY)
+    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS, query = AdProgram.FETCH_ALL_CAMPAIGNS_QUERY)
 
 })
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds)";
-    public static final String FETCH_CAMPAIGNS_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds)";
+    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY =   "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId ORDER BY prog.id DESC";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    //fetch all specified campaigns regardless whether they belong to a single user or not
+    public static final String FETCH_ALL_CAMPAIGNS_QUERY =          "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user ORDER BY prog.id DESC";
+    public static final String FETCH_ALL_CAMPAIGNS_BY_ID_QUERY =          "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    public static final String FETCH_ALL_CAMPAIGNS_BY_ID = "FETCH_ALL_CAMPAIGNS_BY_ID";
     public static final String FETCH_ALL_USER_CAMPAIGNS = "FETCH_ALL_USER_CAMPAIGNS";
     public static final String FETCH_USER_CAMPAIGNS_BY_ID = "FETCH_USER_CAMPAIGNS_BY_ID";
-    public static final String FETCH_CAMPAIGNS = "FETCH_CAMPAIGNS";
+    public static final String FETCH_ALL_CAMPAIGNS = "FETCH_ALL_CAMPAIGNS";
     
     public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY ="SELECT DISTINCT program.campaignScreenCodes FROM AdProgram program WHERE program.campaignId=:campaignId";
     public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID = "FETCH_SCREENCODES_BY_CAMPAIGN_ID";
@@ -122,6 +127,13 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "ad_length")
     @Column(name = "ad_length")
     private long adLength;
+    
+     @Expose
+    @SerializedName(value = "campaign_days_period")
+    @Column(name = "campaign_days_period", nullable = false)
+    private int CampaignDaysPeriod = 0; //in days
+     
+     //add actualCampaignDays // days on which the campaign is set to run
 
     @Expose
     @SerializedName(value = "notify_client")
@@ -183,11 +195,11 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "campaign_status")
     @Column(name = "campaign_status")
     @Enumerated(EnumType.STRING)
-    private AdCampaignStatus adCampaignStatus;
+    private CampaignStatus adCampaignStatus;
      
     @Expose
     @SerializedName(value = "campaign_stats_id")
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumns({
         @JoinColumn(name = "campaign_stats_id")
     })
@@ -222,6 +234,11 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "schedule_type")
     @Enumerated(EnumType.STRING)
     private ScheduleType scheduleType;
+    
+    
+    @Transient
+    private transient boolean isCampaignExist;
+     
 
     public ScheduleType getScheduleType() {
         return scheduleType;
@@ -234,11 +251,11 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public AdProgram() {
     }
     
-    public AdCampaignStatus getAdCampaignStatus() {
+    public CampaignStatus getAdCampaignStatus() {
         return adCampaignStatus;
     }
 
-    public void setAdCampaignStatus(AdCampaignStatus adCampaignStatus) {
+    public void setAdCampaignStatus(CampaignStatus adCampaignStatus) {
         this.adCampaignStatus = adCampaignStatus;
     }
 
@@ -408,7 +425,22 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         }
         return this.campaignId == other.getCampaignId();
     }
-    
+
+    public int getCampaignDaysPeriod() {
+        return CampaignDaysPeriod;
+    }
+
+    public void setCampaignDaysPeriod(int CampaignDaysPeriod) {
+        this.CampaignDaysPeriod = CampaignDaysPeriod;
+    }
+
+    public boolean isIsCampaignExist() {
+        return isCampaignExist;
+    }
+
+    public void setIsCampaignExist(boolean isCampaignExist) {
+        this.isCampaignExist = isCampaignExist;
+    }
     
 }
 

@@ -10,10 +10,12 @@ import com.library.utilities.GeneralUtils;
  */
 public enum EntityName implements Constants {
 
+    AD_PROGRAM_TIME_SLOT("AD_PROGRAM_TIME_SLOT"),
     TIME_SLOT("TIME_SLOT"),
-    LOCATION_TYPE("LOCATION_TYPE"),
+    BUSINESS_TYPE("LOCATION_TYPE"),
     AUDIENCE_TYPE("AUDIENCE_TYPE"),
     AD_SCREENOWNER("AD_SCREENOWNER"),
+    AD_BUSINESS("AD_BUSINESS"),
     AD_SCHEDULE("AD_SCHEDULE"),
     AD_TERMINAL("AD_TERMINAL"),
     AD_RESOURCE("AD_RESOURCE"),
@@ -23,6 +25,7 @@ public enum EntityName implements Constants {
     AD_SCREEN("AD_SCREEN"),
     AD_CLIENT("AD_CLIENT"),
     AD_OWNER("AD_OWNER"),
+    AD_USER("AD_USER"),
     AD_AREA("AD_AREA"),
     AD_TEXT("AD_TEXT"),
     AUTHOR("AUTHOR"),
