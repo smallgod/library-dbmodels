@@ -241,45 +241,5 @@ public class CampaignRequest {
 
         }
 
-        public class ResourcesInfo {
-
-            @SerializedName("region")
-            @Expose
-            private String region;
-
-            @SerializedName("upload_id")
-            @Expose
-            private String uploadId;
-
-            @SerializedName("sequence")
-            @Expose
-            private Integer sequence;
-
-            public String getUploadId() {
-                return uploadId;
-            }
-
-            public void setUploadId(String uploadId) {
-                this.uploadId = uploadId;
-            }
-
-            public String getRegion() {
-                return region;
-            }
-
-            public void setRegion(String region) {
-                this.region = region;
-            }
-
-            public Integer getSequence() {
-                return sequence;
-            }
-
-            public void setSequence(Integer sequence) {
-                this.sequence = sequence;
-            }
-
-        }
-
     }
 }

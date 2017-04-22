@@ -91,7 +91,7 @@ public class AdAPIRequest extends BaseEntity implements Auditable, Serializable 
     @Column(name = "servlet_path")
     private String servletPath;
 
-    @Column(name = "request_body", length = 5000)
+    @Column(name = "request_body", length = 10000)
     private String requestBody;
 
     public AdAPIRequest() {

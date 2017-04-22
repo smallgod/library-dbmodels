@@ -2,7 +2,7 @@ package com.library.datamodel.Constants;
 
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.sglogger.util.LoggerUtil;
 
 /**
  *

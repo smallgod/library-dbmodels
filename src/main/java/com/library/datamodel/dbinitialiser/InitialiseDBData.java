@@ -25,8 +25,8 @@ import com.library.datamodel.model.v1_0.AdTimeSlot;
 import com.library.datamodel.model.v1_0.AdUser;
 import com.library.hibernate.CustomHibernate;
 import com.library.httpconnmanager.Security;
-import com.library.utilities.HibernateUtils;
-import com.library.utilities.LoggerUtil;
+import com.library.hibernate.utils.HibernateUtils;
+import com.library.sglogger.util.LoggerUtil;
 import com.library.utilities.NumericIDGenerator;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Set;
 import org.joda.time.Duration;
 import org.joda.time.LocalTime;
-import org.openide.util.Exceptions;
 
 /**
  *

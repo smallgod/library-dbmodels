@@ -139,6 +139,12 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "notify_client")
     @Column(name = "notfiy")
     private boolean isToBeNotified; //send SMS notification concerning this ad
+    
+    
+    @Expose
+    @SerializedName(value = "is_selected_codes")
+    @Column(name = "is_selected_codes", nullable = false)
+    private boolean isSelectedScreenCodes; //if the user just selected target screen codes or selected areas/audience/business_type
 
     @Expose
     @SerializedName(value = "display_layout")
@@ -440,6 +446,14 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setIsCampaignExist(boolean isCampaignExist) {
         this.isCampaignExist = isCampaignExist;
+    }
+
+    public boolean isIsSelectedScreenCodes() {
+        return isSelectedScreenCodes;
+    }
+
+    public void setIsSelectedScreenCodes(boolean isSelectedScreenCodes) {
+        this.isSelectedScreenCodes = isSelectedScreenCodes;
     }
     
 }

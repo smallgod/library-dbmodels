@@ -2,7 +2,7 @@ package com.library.datamodel.Constants;
 
 //import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.sgsharedinterface.Constants;
-import com.library.utilities.LoggerUtil;
+import com.library.sglogger.util.LoggerUtil;
 
 /**
  * 

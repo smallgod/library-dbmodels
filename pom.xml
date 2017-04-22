@@ -141,6 +141,13 @@
     <dependencies>
         
          <dependency>
+            <groupId>com.sgcustomexception</groupId>
+            <artifactId>sgcustomexception</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        
+         <dependency>
             <groupId>com.sglogger</groupId>
             <artifactId>sglogger</artifactId>
             <version>1.0</version>
@@ -176,7 +183,7 @@
             <artifactId>usertype.spi</artifactId>
             <version>6.0.1.GA</version>
         </dependency>
-        
+       
     </dependencies>
     
 </project>
