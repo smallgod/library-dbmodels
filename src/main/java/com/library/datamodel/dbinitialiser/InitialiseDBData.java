@@ -861,10 +861,10 @@ public class InitialiseDBData {
     public void addTestScreens() throws MyCustomException {
 
         //STAGING
-        int screen1TaskX = 1490072917;
-        int screen1TaskY = 1490072924;
-        int screen2TaskX = 1490072933;
-        int screen2TaskY = 1490072941;
+        int screen1TaskX = 1492971913;
+        int screen1TaskY = 1492971924;
+        int screen2TaskX = 1492971841;
+        int screen2TaskY = 1492971906;
 
         //PRODUCTION
 //        int screen1TaskX = 1489239354;
@@ -873,8 +873,8 @@ public class InitialiseDBData {
 //        int screen2TaskY = 1489257349;
         int screenHeight = 1080;
         int screenWidth = 1920;
-        String firstTestTerminalId = "230901364454349";
-        String secondTestTerminalId = "233097221599994";
+        String firstTestTerminalId = "233097221599994"; //reverse the terminalIds after connecting the first terminal back
+        String secondTestTerminalId = "230901364454349";
 
         AdTerminal terminal1 = new AdTerminal();
         terminal1.setLatitude(13.0412658); //600017, Chennai
