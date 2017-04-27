@@ -4,138 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.JsonDataModel;
 import java.util.List;
-import javax.persistence.Column;
 
 public class AdSetupRequest implements JsonDataModel {
 
     /*
     
-    {
-   "method":"DAILY_SETUP_STEP2",
-   "terminal_detail":[
-      {
-         "display_date":"2017-01-27",
-         "terminals":[
-            {
-               "task_id":3480434,
-               "task_name":3480434,
-               "terminal_id":230901364454349,
-               "terminal_width":1080,
-               "terminal_height":720,
-               "program_ids":[
-                  1485513768,
-                  1485513769
-               ]
-            },
-            {
-               "task_id":1480434,
-               "task_name":3480434,
-               "terminal_id":230901364454350,
-               "terminal_width":1080,
-               "terminal_height":720,
-               "program_ids":[
-                  1485513769,
-                  1485513768
-               ]
-            }
-         ]
-      }
-   ],
-   "program_detail":[
-      {
-         "display_date":"2017-01-27",
-         "program_ids":[
-            {
-               "program_id":1485513769,
-               "status":"UPDATED",
-               "display_layout":"3SPLIT",
-               "display_times":[
-                  {
-                     "starttime":"14:36:49",
-                     "stoptime":"14:39:49"
-                  },
-                  {
-                     "starttime":"14:46:49",
-                     "stoptime":"14:49:49"
-                  }
-               ],
-               "resources":[
-                  {
-                     "resource_id":97354630322880,
-                     "resource_detail":"30Movies_2017.mp4",
-                     "resource_type":1,
-                     "status":"OLD",
-                     "sequence":1
-                  },
-                  {
-                     "resource_id":97354630323904,
-                     "resource_detail":"breadV.jpg",
-                     "resource_type":0,
-                     "status":"NEW",
-                     "sequence":2
-                  }
-               ],
-                "text": [
-                    {
-                        "text": "This is scrolling text here..",
-                        "type": "SCROLL_TEXT",
-                        "text_id":93939993
-                    },
-                    {
-                        "text": "This is Header text",
-                        "type": "HEADER_TEXT",
-                        "text_id":93934533
-                    }
-                ]
     
-    
-    
-    
-            },
-            {
-               "program_id":1485513768,
-               "status":"NEW",
-               "display_layout":"TEXT",
-               "display_times":[
-                  {
-                     "starttime":"14:50:49",
-                     "stoptime":"14:59:49"
-                  }
-               ],
-               "resources":[
-                  {
-                     "resource_id":97354630325888,
-                     "resource_detail":"chimei-lcd2.vob",
-                     "resource_type":1,
-                     "status":"OLD",
-                     "sequence":1
-                  },
-                  {
-                     "resource_id":97354630323904,
-                     "resource_detail":"breadV.jpg",
-                     "resource_type":0,
-                     "status":"NEW",
-                     "sequence":2
-                  }
-               ],
-                "text": [
-                    {
-                        "text": "This is scrolling text here..",
-                        "type": "SCROLL_TEXT",
-                        "text_id":93934533
-                    },
-                    {
-                        "text": "This is Header text",
-                        "type": "HEADER_TEXT",
-                        "text_id":93934533
-                    }
-                ]
-    
-            }
-         ]
-      }
-   ]
-}
     
      */
     @SerializedName(value = "method")
@@ -391,7 +265,10 @@ public class AdSetupRequest implements JsonDataModel {
                 //private transient long entityId;// will not be serialized or deserialized
                 @SerializedName(value = "resource_id")
                 private long resourceId;
-
+                
+                @SerializedName(value = "upload_id")
+                private transient String uploadId;//the Id we generated from millis of time now when we were uploading the image resource
+                
                 @SerializedName(value = "resource_detail")
                 private String resourceDetail;
 
@@ -404,8 +281,7 @@ public class AdSetupRequest implements JsonDataModel {
                 @SerializedName(value = "sequence")
                 private int sequence;
 
-                @SerializedName(value = "upload_id")
-                private transient String uploadId;
+                
 
                 @SerializedName(value = "uploaded_to_dsm")
                 private transient boolean isUploadedToDSM;
@@ -473,6 +349,7 @@ public class AdSetupRequest implements JsonDataModel {
                 public void setIsUploadedToDSM(boolean isUploadedToDSM) {
                     this.isUploadedToDSM = isUploadedToDSM;
                 }
+
 
             }
 

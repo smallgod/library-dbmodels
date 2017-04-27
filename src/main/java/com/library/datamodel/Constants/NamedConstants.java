@@ -329,9 +329,9 @@ public interface NamedConstants {
      * Identifies by name the SGDbAdapter object stored in the JOBS datamap
      */
     public static String DB_ADAPTER = "DB_ADAPTER";
-    
+
     /**
-     * Directory we are currently uploading files to
+     * Directory we are currently uploading files to -> Need to see a way of having this in configs
      */
     public static String FILE_UPLOAD_DIR = "/etc/ug/adcentral/temp/uploads";
 

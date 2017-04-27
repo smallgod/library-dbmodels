@@ -861,10 +861,10 @@ public class InitialiseDBData {
     public void addTestScreens() throws MyCustomException {
 
         //STAGING
-        int screen1TaskX = 1492971913;
-        int screen1TaskY = 1492971924;
-        int screen2TaskX = 1492971841;
-        int screen2TaskY = 1492971906;
+        int screen1TaskX = 1493101974;
+        int screen1TaskY = 1493101989;
+        int screen2TaskX = 1493102004;
+        int screen2TaskY = 1493102033;
 
         //PRODUCTION
 //        int screen1TaskX = 1489239354;
@@ -1076,6 +1076,22 @@ public class InitialiseDBData {
         //adUser.setUserId(GeneralUtils.generateUserId(primaryPhone));
 
         customHibernate.saveEntity(testUser);
+
+    }
+
+    /**
+     *
+     * @return @throws MyCustomException
+     */
+    private boolean screenLayoutsInitialised() throws MyCustomException {
+
+        int count = customHibernate.countRows(AdScreenLayout.class, null).intValue();
+
+        if (count > 0) {
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
 
     }
 
@@ -1438,7 +1454,17 @@ public class InitialiseDBData {
         return;
     }
 
+    /**
+     * Initialise Database
+     * 
+     * @throws MyCustomException 
+     */
     public void initDB() throws MyCustomException {
+
+        if (screenLayoutsInitialised()) {
+            logger.debug("Database already initialised, skipping!");
+            return;
+        }
 
         //screen layouts
         addDisplayLayouts();
