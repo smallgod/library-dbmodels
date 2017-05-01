@@ -46,7 +46,8 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Table(name = "ad_client")
 
 @NamedQueries({
-    @NamedQuery(name = AdClient.FETCH_CLIENTS, query = AdClient.FETCH_CLIENT_QUERY),})
+    @NamedQuery(name = AdClient.FETCH_CLIENTS, query = AdClient.FETCH_CLIENT_QUERY)
+})
 public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_CLIENT_QUERY = "SELECT DISTINCT client FROM AdClient client INNER JOIN client.adUser user where user.userId=:userId";
@@ -128,9 +129,8 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.adUser);
+        int hash = 5;
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -146,13 +146,8 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         final AdClient other = (AdClient) obj;
-        if (this.id != other.getId()) {
-            return false;
-        }
-        if (!Objects.equals(this.adUser, other.getAdUser())) {
-            return false;
-        }
-        return true;
+
+        return this.id == other.getId();
     }
 
 }

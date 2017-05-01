@@ -15,6 +15,16 @@ import org.joda.time.Duration;
  * @author smallgod
  */
 public interface NamedConstants {
+    
+    /**
+     * Thumbnail maximum width
+     */
+    public static int THUMB_MAX_WIDTH = 300;//pixels
+    
+    /**
+     * Thumbnail maximum height
+     */
+    public static int THUMB_MAX_HEIGHT = 190;//pixels
 
     /**
      * Generic error message from a database operation that will be displayed to

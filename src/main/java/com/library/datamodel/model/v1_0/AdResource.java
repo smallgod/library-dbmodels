@@ -34,16 +34,20 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @SelectBeforeUpdate(value = true)
 //@Table(name = "ad_resource")
 @Table(name = "ad_resource", uniqueConstraints = @UniqueConstraint(columnNames = {"upload_id"}))
-@NamedQueries(
-        @NamedQuery(name = AdResource.FETCH_RESOURCE, query = AdResource.FETCH_RESOURCE_QUERY)
-)
+@NamedQueries({
+    @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_UPLOADID, query = AdResource.FETCH_RESOURCE_BY_UPLOADID_QUERY),
+    @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID, query = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID_QUERY)
+})
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -5362654229120480614L;
 
-    //public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
-    public static final String FETCH_RESOURCE_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
-    public static final String FETCH_RESOURCE = "FETCH_RESOURCE";
+    //public static final String FETCH_RESOURCE_BY_UPLOADID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
+    public static final String FETCH_RESOURCE_BY_UPLOADID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where resource.uploadId=:uploadId";
+    public static final String FETCH_RESOURCE_BY_UPLOADID = "FETCH_RESOURCE_BY_UPLOADID";
+
+    public static final String FETCH_RESOURCE_BY_CAMPAIGNID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
+    public static final String FETCH_RESOURCE_BY_CAMPAIGNID = "FETCH_RESOURCE_BY_CAMPAIGNID";
 
     @Expose
     @SerializedName(value = "id")
@@ -226,9 +230,9 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 11 * hash + Objects.hashCode(this.uploadId);
+        int hash = 7;
+        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.uploadId);
         return hash;
     }
 
@@ -247,10 +251,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
         if (this.id != other.getId()) {
             return false;
         }
-        if (!Objects.equals(this.uploadId, other.getUploadId())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.uploadId, other.getUploadId());
     }
 
 }
