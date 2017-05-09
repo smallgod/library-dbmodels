@@ -24,7 +24,7 @@ public interface NamedConstants {
     /**
      * Thumbnail maximum height
      */
-    public static int THUMB_MAX_HEIGHT = 190;//pixels
+    public static int THUMB_MAX_HEIGHT = 300;//pixels
 
     /**
      * Generic error message from a database operation that will be displayed to
@@ -344,6 +344,11 @@ public interface NamedConstants {
      * Directory we are currently uploading files to -> Need to see a way of having this in configs
      */
     public static String FILE_UPLOAD_DIR = "/etc/ug/adcentral/temp/uploads";
+    
+    /**
+     * character set
+     */
+    public static String CHARSET = "UTF-8";
 
     /**
      * Advert/Program Slots (minutes) available in one Hour

@@ -25,6 +25,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -194,7 +195,8 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @JoinColumns({
         @JoinColumn(name = "client_id", referencedColumnName = "user_id") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
     })
-    @Cascade({CascadeType.ALL})
+    //@Cascade({CascadeType.ALL}) //commented out for causing a duplicate object error when saving with client
+    //org.hibernate.NonUniqueObjectException: A different object with the same identifier value was already associated with the session : [com.library.datamodel.model.v1_0.AdClient#122]
     private AdClient client;
     
     @Expose
@@ -225,6 +227,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})//A user can advertise/campaign from/for 0 or more businesses and multiple campaigns/programs can be for the same business
+    @OrderBy("id")
     private Set<AdBusiness> advertisingBusinesses = new HashSet<>(0);
      
     /**
@@ -401,36 +404,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.campaignScreenCodes = campaignScreenCodes;
     }
     
-     @Override
-    public String getUsername() {
-        return this.getLastModifiedBy();
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 97 * hash + this.campaignId;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdProgram other = (AdProgram) obj;
-        if (this.id != other.getId()) {
-            return false;
-        }
-        return this.campaignId == other.getCampaignId();
-    }
+    
 
     public int getCampaignDaysPeriod() {
         return CampaignDaysPeriod;
@@ -455,6 +429,42 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public void setIsSelectedScreenCodes(boolean isSelectedScreenCodes) {
         this.isSelectedScreenCodes = isSelectedScreenCodes;
     }
+    
+    
+    
+     @Override
+    public String getUsername() {
+        return this.getLastModifiedBy();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 43 * hash + this.campaignId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdProgram other = (AdProgram) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        
+        return this.campaignId == other.getCampaignId();
+    }
+
+    
     
 }
 

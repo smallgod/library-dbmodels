@@ -863,6 +863,7 @@ public class InitialiseDBData {
         //STAGING
         int screen1TaskX = 1493101974;
         int screen1TaskY = 1493101989;
+        
         int screen2TaskX = 1493102004;
         int screen2TaskY = 1493102033;
 
@@ -875,6 +876,7 @@ public class InitialiseDBData {
         int screenWidth = 1920;
         String firstTestTerminalId = "233097221599994"; //reverse the terminalIds after connecting the first terminal back
         String secondTestTerminalId = "230901364454349";
+        
 
         AdTerminal terminal1 = new AdTerminal();
         terminal1.setLatitude(13.0412658); //600017, Chennai

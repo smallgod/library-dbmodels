@@ -6,6 +6,7 @@ package com.library.datamodel.Json;
  */
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.HashSet;
 import java.util.Set;
 
 public class CampaignRequest {
@@ -135,7 +136,7 @@ public class CampaignRequest {
 
         @SerializedName("resources_info")
         @Expose
-        private Set<ResourcesInfo> resourcesInfo = null;
+        private Set<ResourcesInfo> resourcesInfo = new HashSet<>();
 
         @SerializedName("text_info")
         @Expose

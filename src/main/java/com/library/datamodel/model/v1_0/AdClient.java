@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -129,13 +130,15 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.adUser);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj) {
             return true;
         }
@@ -146,8 +149,11 @@ public class AdClient extends BaseEntity implements Auditable, Serializable {
             return false;
         }
         final AdClient other = (AdClient) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
 
-        return this.id == other.getId();
+        return Objects.equals(this.adUser, other.getAdUser());
     }
 
 }

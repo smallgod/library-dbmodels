@@ -2,6 +2,8 @@ package com.library.datamodel.dsm_bridge;
 // default package
 // Generated Dec 17, 2016 3:56:53 PM by Hibernate Tools 4.3.5.Final
 
+import com.library.sgsharedinterface.DBInterface;
+import java.io.Serializable;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -14,7 +16,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "vw_terminal_detail")
-public class VwTerminalDetail implements java.io.Serializable {
+public class VwTerminalDetail implements Serializable, DBInterface  {
+
+    private static final long serialVersionUID = 7245334798988970205L;
 
 	private VwTerminalDetailId id;
 

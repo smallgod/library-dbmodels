@@ -2,6 +2,7 @@ package com.library.datamodel.dsm_bridge;
 // default package
 // Generated Dec 17, 2016 3:56:53 PM by Hibernate Tools 4.3.5.Final
 
+import com.library.utilities.VersionUtils;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,1276 +13,1486 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VwTerminalDetailId implements java.io.Serializable {
 
-	private int cstmId;
-	private long devId;
-	private String name;
-	private String descp;
-	private Integer groupId;
-	private String groupName;
-	private Integer cityId;
-	private String cityName;
-	private Date createTime;
-	private String createUser;
-	private String assignKernel;
-	private String assignApp;
-	private String curKernel;
-	private String curApp;
-	private int kernelUpdated;
-	private int appUpdated;
-	private Integer assignConfigId;
-	private String assignConfigName;
-	private Date assignConfigVersion;
-	private Integer curConfigId;
-	private String curConfigName;
-	private Date curConfigVersion;
-	private int configUpdated;
-	private Integer assignLooptaskId;
-	private String assignLooptaskName;
-	private Date assignLooptaskVersion;
-	private Date assignLoopfileVersion;
-	private Date assignLoopplayVersion;
-	private Date assignLoopstrategyVersion;
-	private Integer curLooptaskId;
-	private String curLooptaskName;
-	private Date curLooptaskVersion;
-	private Date curLoopfileVersion;
-	private Date curLoopplayVersion;
-	private Date curLoopstrategyVersion;
-	private int looptaskUpdated;
-	private Integer assignDemandtaskId;
-	private String assignDemandtaskName;
-	private Date assignDemandtaskVersion;
-	private Date assignDemandfileVersion;
-	private Date assignDemandplayVersion;
-	private Integer curDemandtaskId;
-	private String curDemandtaskName;
-	private Date curDemandtaskVersion;
-	private Date curDemandfileVersion;
-	private Date curDemandplayVersion;
-	private int demandtaskUpdated;
-	private Integer assignPlugintaskId;
-	private String assignPlugintaskName;
-	private Date assignPlugintaskVersion;
-	private Date assignPluginfileVersion;
-	private Date assignPluginplayVersion;
-	private Integer curPlugintaskId;
-	private String curPlugintaskName;
-	private Date curPlugintaskVersion;
-	private Date curPluginfileVersion;
-	private Date curPluginplayVersion;
-	private int plugintaskUpdated;
-	private Date assignSourceVersion;
-	private String restSchedule;
-	private String standbySchedule;
-	private String captureSchedule;
-	private String demandSchedule;
-	private Date scheduleVersion;
-	private String subtitle;
-	private Date subtitleVersion;
-	private Date curSubtitleVersion;
-	private int subtitleUpdated;
-	private int onlineState;
-	private Date logonTime;
-	private Date logoffTime;
-	private long downloadTotal;
-	private long downloadFinished;
-	private int downloadType;
-	private int poweron;
-	private int poweroff;
-	private int aliveInterval;
-	private Date lastAlive;
-	private Date lastPatrol;
-	private Date lastDownload;
-	private long flowLimit;
-	private long netFlow;
-
-	public VwTerminalDetailId() {
-	}
-
-	public VwTerminalDetailId(int cstmId, long devId, String name, String descp, Date createTime, String createUser,
-			int kernelUpdated, int appUpdated, int configUpdated, int looptaskUpdated, int demandtaskUpdated,
-			int plugintaskUpdated, Date assignSourceVersion, String restSchedule, String standbySchedule,
-			String captureSchedule, String demandSchedule, Date scheduleVersion, String subtitle, Date subtitleVersion,
-			Date curSubtitleVersion, int subtitleUpdated, int onlineState, Date logonTime, Date logoffTime,
-			long downloadTotal, long downloadFinished, int downloadType, int poweron, int poweroff, int aliveInterval,
-			Date lastAlive, Date lastPatrol, Date lastDownload, long flowLimit, long netFlow) {
-		this.cstmId = cstmId;
-		this.devId = devId;
-		this.name = name;
-		this.descp = descp;
-		this.createTime = createTime;
-		this.createUser = createUser;
-		this.kernelUpdated = kernelUpdated;
-		this.appUpdated = appUpdated;
-		this.configUpdated = configUpdated;
-		this.looptaskUpdated = looptaskUpdated;
-		this.demandtaskUpdated = demandtaskUpdated;
-		this.plugintaskUpdated = plugintaskUpdated;
-		this.assignSourceVersion = assignSourceVersion;
-		this.restSchedule = restSchedule;
-		this.standbySchedule = standbySchedule;
-		this.captureSchedule = captureSchedule;
-		this.demandSchedule = demandSchedule;
-		this.scheduleVersion = scheduleVersion;
-		this.subtitle = subtitle;
-		this.subtitleVersion = subtitleVersion;
-		this.curSubtitleVersion = curSubtitleVersion;
-		this.subtitleUpdated = subtitleUpdated;
-		this.onlineState = onlineState;
-		this.logonTime = logonTime;
-		this.logoffTime = logoffTime;
-		this.downloadTotal = downloadTotal;
-		this.downloadFinished = downloadFinished;
-		this.downloadType = downloadType;
-		this.poweron = poweron;
-		this.poweroff = poweroff;
-		this.aliveInterval = aliveInterval;
-		this.lastAlive = lastAlive;
-		this.lastPatrol = lastPatrol;
-		this.lastDownload = lastDownload;
-		this.flowLimit = flowLimit;
-		this.netFlow = netFlow;
-	}
-
-	public VwTerminalDetailId(int cstmId, long devId, String name, String descp, Integer groupId, String groupName,
-			Integer cityId, String cityName, Date createTime, String createUser, String assignKernel, String assignApp,
-			String curKernel, String curApp, int kernelUpdated, int appUpdated, Integer assignConfigId,
-			String assignConfigName, Date assignConfigVersion, Integer curConfigId, String curConfigName,
-			Date curConfigVersion, int configUpdated, Integer assignLooptaskId, String assignLooptaskName,
-			Date assignLooptaskVersion, Date assignLoopfileVersion, Date assignLoopplayVersion,
-			Date assignLoopstrategyVersion, Integer curLooptaskId, String curLooptaskName, Date curLooptaskVersion,
-			Date curLoopfileVersion, Date curLoopplayVersion, Date curLoopstrategyVersion, int looptaskUpdated,
-			Integer assignDemandtaskId, String assignDemandtaskName, Date assignDemandtaskVersion,
-			Date assignDemandfileVersion, Date assignDemandplayVersion, Integer curDemandtaskId,
-			String curDemandtaskName, Date curDemandtaskVersion, Date curDemandfileVersion, Date curDemandplayVersion,
-			int demandtaskUpdated, Integer assignPlugintaskId, String assignPlugintaskName,
-			Date assignPlugintaskVersion, Date assignPluginfileVersion, Date assignPluginplayVersion,
-			Integer curPlugintaskId, String curPlugintaskName, Date curPlugintaskVersion, Date curPluginfileVersion,
-			Date curPluginplayVersion, int plugintaskUpdated, Date assignSourceVersion, String restSchedule,
-			String standbySchedule, String captureSchedule, String demandSchedule, Date scheduleVersion,
-			String subtitle, Date subtitleVersion, Date curSubtitleVersion, int subtitleUpdated, int onlineState,
-			Date logonTime, Date logoffTime, long downloadTotal, long downloadFinished, int downloadType, int poweron,
-			int poweroff, int aliveInterval, Date lastAlive, Date lastPatrol, Date lastDownload, long flowLimit,
-			long netFlow) {
-		this.cstmId = cstmId;
-		this.devId = devId;
-		this.name = name;
-		this.descp = descp;
-		this.groupId = groupId;
-		this.groupName = groupName;
-		this.cityId = cityId;
-		this.cityName = cityName;
-		this.createTime = createTime;
-		this.createUser = createUser;
-		this.assignKernel = assignKernel;
-		this.assignApp = assignApp;
-		this.curKernel = curKernel;
-		this.curApp = curApp;
-		this.kernelUpdated = kernelUpdated;
-		this.appUpdated = appUpdated;
-		this.assignConfigId = assignConfigId;
-		this.assignConfigName = assignConfigName;
-		this.assignConfigVersion = assignConfigVersion;
-		this.curConfigId = curConfigId;
-		this.curConfigName = curConfigName;
-		this.curConfigVersion = curConfigVersion;
-		this.configUpdated = configUpdated;
-		this.assignLooptaskId = assignLooptaskId;
-		this.assignLooptaskName = assignLooptaskName;
-		this.assignLooptaskVersion = assignLooptaskVersion;
-		this.assignLoopfileVersion = assignLoopfileVersion;
-		this.assignLoopplayVersion = assignLoopplayVersion;
-		this.assignLoopstrategyVersion = assignLoopstrategyVersion;
-		this.curLooptaskId = curLooptaskId;
-		this.curLooptaskName = curLooptaskName;
-		this.curLooptaskVersion = curLooptaskVersion;
-		this.curLoopfileVersion = curLoopfileVersion;
-		this.curLoopplayVersion = curLoopplayVersion;
-		this.curLoopstrategyVersion = curLoopstrategyVersion;
-		this.looptaskUpdated = looptaskUpdated;
-		this.assignDemandtaskId = assignDemandtaskId;
-		this.assignDemandtaskName = assignDemandtaskName;
-		this.assignDemandtaskVersion = assignDemandtaskVersion;
-		this.assignDemandfileVersion = assignDemandfileVersion;
-		this.assignDemandplayVersion = assignDemandplayVersion;
-		this.curDemandtaskId = curDemandtaskId;
-		this.curDemandtaskName = curDemandtaskName;
-		this.curDemandtaskVersion = curDemandtaskVersion;
-		this.curDemandfileVersion = curDemandfileVersion;
-		this.curDemandplayVersion = curDemandplayVersion;
-		this.demandtaskUpdated = demandtaskUpdated;
-		this.assignPlugintaskId = assignPlugintaskId;
-		this.assignPlugintaskName = assignPlugintaskName;
-		this.assignPlugintaskVersion = assignPlugintaskVersion;
-		this.assignPluginfileVersion = assignPluginfileVersion;
-		this.assignPluginplayVersion = assignPluginplayVersion;
-		this.curPlugintaskId = curPlugintaskId;
-		this.curPlugintaskName = curPlugintaskName;
-		this.curPlugintaskVersion = curPlugintaskVersion;
-		this.curPluginfileVersion = curPluginfileVersion;
-		this.curPluginplayVersion = curPluginplayVersion;
-		this.plugintaskUpdated = plugintaskUpdated;
-		this.assignSourceVersion = assignSourceVersion;
-		this.restSchedule = restSchedule;
-		this.standbySchedule = standbySchedule;
-		this.captureSchedule = captureSchedule;
-		this.demandSchedule = demandSchedule;
-		this.scheduleVersion = scheduleVersion;
-		this.subtitle = subtitle;
-		this.subtitleVersion = subtitleVersion;
-		this.curSubtitleVersion = curSubtitleVersion;
-		this.subtitleUpdated = subtitleUpdated;
-		this.onlineState = onlineState;
-		this.logonTime = logonTime;
-		this.logoffTime = logoffTime;
-		this.downloadTotal = downloadTotal;
-		this.downloadFinished = downloadFinished;
-		this.downloadType = downloadType;
-		this.poweron = poweron;
-		this.poweroff = poweroff;
-		this.aliveInterval = aliveInterval;
-		this.lastAlive = lastAlive;
-		this.lastPatrol = lastPatrol;
-		this.lastDownload = lastDownload;
-		this.flowLimit = flowLimit;
-		this.netFlow = netFlow;
-	}
-
-	@Column(name = "CSTM_ID", nullable = false)
-	public int getCstmId() {
-		return this.cstmId;
-	}
-
-	public void setCstmId(int cstmId) {
-		this.cstmId = cstmId;
-	}
-
-	@Column(name = "DEV_ID", nullable = false)
-	public long getDevId() {
-		return this.devId;
-	}
-
-	public void setDevId(long devId) {
-		this.devId = devId;
-	}
-
-	@Column(name = "NAME", nullable = false, length = 64)
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Column(name = "DESCP", nullable = false, length = 256)
-	public String getDescp() {
-		return this.descp;
-	}
-
-	public void setDescp(String descp) {
-		this.descp = descp;
-	}
-
-	@Column(name = "GROUP_ID")
-	public Integer getGroupId() {
-		return this.groupId;
-	}
-
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
-	}
-
-	@Column(name = "GROUP_NAME", length = 64)
-	public String getGroupName() {
-		return this.groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	@Column(name = "CITY_ID")
-	public Integer getCityId() {
-		return this.cityId;
-	}
-
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
-	}
-
-	@Column(name = "CITY_NAME", length = 64)
-	public String getCityName() {
-		return this.cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-
-	@Column(name = "CREATE_TIME", nullable = false, length = 19)
-	public Date getCreateTime() {
-		return this.createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	@Column(name = "CREATE_USER", nullable = false, length = 64)
-	public String getCreateUser() {
-		return this.createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	@Column(name = "ASSIGN_KERNEL", length = 64)
-	public String getAssignKernel() {
-		return this.assignKernel;
-	}
-
-	public void setAssignKernel(String assignKernel) {
-		this.assignKernel = assignKernel;
-	}
-
-	@Column(name = "ASSIGN_APP", length = 64)
-	public String getAssignApp() {
-		return this.assignApp;
-	}
-
-	public void setAssignApp(String assignApp) {
-		this.assignApp = assignApp;
-	}
-
-	@Column(name = "CUR_KERNEL", length = 64)
-	public String getCurKernel() {
-		return this.curKernel;
-	}
-
-	public void setCurKernel(String curKernel) {
-		this.curKernel = curKernel;
-	}
-
-	@Column(name = "CUR_APP", length = 64)
-	public String getCurApp() {
-		return this.curApp;
-	}
-
-	public void setCurApp(String curApp) {
-		this.curApp = curApp;
-	}
-
-	@Column(name = "KERNEL_UPDATED", nullable = false)
-	public int getKernelUpdated() {
-		return this.kernelUpdated;
-	}
-
-	public void setKernelUpdated(int kernelUpdated) {
-		this.kernelUpdated = kernelUpdated;
-	}
-
-	@Column(name = "APP_UPDATED", nullable = false)
-	public int getAppUpdated() {
-		return this.appUpdated;
-	}
-
-	public void setAppUpdated(int appUpdated) {
-		this.appUpdated = appUpdated;
-	}
-
-	@Column(name = "ASSIGN_CONFIG_ID")
-	public Integer getAssignConfigId() {
-		return this.assignConfigId;
-	}
-
-	public void setAssignConfigId(Integer assignConfigId) {
-		this.assignConfigId = assignConfigId;
-	}
-
-	@Column(name = "ASSIGN_CONFIG_NAME", length = 64)
-	public String getAssignConfigName() {
-		return this.assignConfigName;
-	}
-
-	public void setAssignConfigName(String assignConfigName) {
-		this.assignConfigName = assignConfigName;
-	}
-
-	@Column(name = "ASSIGN_CONFIG_VERSION", length = 19)
-	public Date getAssignConfigVersion() {
-		return this.assignConfigVersion;
-	}
-
-	public void setAssignConfigVersion(Date assignConfigVersion) {
-		this.assignConfigVersion = assignConfigVersion;
-	}
-
-	@Column(name = "CUR_CONFIG_ID")
-	public Integer getCurConfigId() {
-		return this.curConfigId;
-	}
-
-	public void setCurConfigId(Integer curConfigId) {
-		this.curConfigId = curConfigId;
-	}
-
-	@Column(name = "CUR_CONFIG_NAME", length = 64)
-	public String getCurConfigName() {
-		return this.curConfigName;
-	}
-
-	public void setCurConfigName(String curConfigName) {
-		this.curConfigName = curConfigName;
-	}
-
-	@Column(name = "CUR_CONFIG_VERSION", length = 19)
-	public Date getCurConfigVersion() {
-		return this.curConfigVersion;
-	}
-
-	public void setCurConfigVersion(Date curConfigVersion) {
-		this.curConfigVersion = curConfigVersion;
-	}
-
-	@Column(name = "CONFIG_UPDATED", nullable = false)
-	public int getConfigUpdated() {
-		return this.configUpdated;
-	}
-
-	public void setConfigUpdated(int configUpdated) {
-		this.configUpdated = configUpdated;
-	}
-
-	@Column(name = "ASSIGN_LOOPTASK_ID")
-	public Integer getAssignLooptaskId() {
-		return this.assignLooptaskId;
-	}
-
-	public void setAssignLooptaskId(Integer assignLooptaskId) {
-		this.assignLooptaskId = assignLooptaskId;
-	}
-
-	@Column(name = "ASSIGN_LOOPTASK_NAME", length = 64)
-	public String getAssignLooptaskName() {
-		return this.assignLooptaskName;
-	}
-
-	public void setAssignLooptaskName(String assignLooptaskName) {
-		this.assignLooptaskName = assignLooptaskName;
-	}
-
-	@Column(name = "ASSIGN_LOOPTASK_VERSION", length = 19)
-	public Date getAssignLooptaskVersion() {
-		return this.assignLooptaskVersion;
-	}
-
-	public void setAssignLooptaskVersion(Date assignLooptaskVersion) {
-		this.assignLooptaskVersion = assignLooptaskVersion;
-	}
-
-	@Column(name = "ASSIGN_LOOPFILE_VERSION", length = 19)
-	public Date getAssignLoopfileVersion() {
-		return this.assignLoopfileVersion;
-	}
-
-	public void setAssignLoopfileVersion(Date assignLoopfileVersion) {
-		this.assignLoopfileVersion = assignLoopfileVersion;
-	}
-
-	@Column(name = "ASSIGN_LOOPPLAY_VERSION", length = 19)
-	public Date getAssignLoopplayVersion() {
-		return this.assignLoopplayVersion;
-	}
-
-	public void setAssignLoopplayVersion(Date assignLoopplayVersion) {
-		this.assignLoopplayVersion = assignLoopplayVersion;
-	}
-
-	@Column(name = "ASSIGN_LOOPSTRATEGY_VERSION", length = 19)
-	public Date getAssignLoopstrategyVersion() {
-		return this.assignLoopstrategyVersion;
-	}
-
-	public void setAssignLoopstrategyVersion(Date assignLoopstrategyVersion) {
-		this.assignLoopstrategyVersion = assignLoopstrategyVersion;
-	}
-
-	@Column(name = "CUR_LOOPTASK_ID")
-	public Integer getCurLooptaskId() {
-		return this.curLooptaskId;
-	}
-
-	public void setCurLooptaskId(Integer curLooptaskId) {
-		this.curLooptaskId = curLooptaskId;
-	}
-
-	@Column(name = "CUR_LOOPTASK_NAME", length = 64)
-	public String getCurLooptaskName() {
-		return this.curLooptaskName;
-	}
-
-	public void setCurLooptaskName(String curLooptaskName) {
-		this.curLooptaskName = curLooptaskName;
-	}
-
-	@Column(name = "CUR_LOOPTASK_VERSION", length = 19)
-	public Date getCurLooptaskVersion() {
-		return this.curLooptaskVersion;
-	}
-
-	public void setCurLooptaskVersion(Date curLooptaskVersion) {
-		this.curLooptaskVersion = curLooptaskVersion;
-	}
-
-	@Column(name = "CUR_LOOPFILE_VERSION", length = 19)
-	public Date getCurLoopfileVersion() {
-		return this.curLoopfileVersion;
-	}
-
-	public void setCurLoopfileVersion(Date curLoopfileVersion) {
-		this.curLoopfileVersion = curLoopfileVersion;
-	}
-
-	@Column(name = "CUR_LOOPPLAY_VERSION", length = 19)
-	public Date getCurLoopplayVersion() {
-		return this.curLoopplayVersion;
-	}
-
-	public void setCurLoopplayVersion(Date curLoopplayVersion) {
-		this.curLoopplayVersion = curLoopplayVersion;
-	}
-
-	@Column(name = "CUR_LOOPSTRATEGY_VERSION", length = 19)
-	public Date getCurLoopstrategyVersion() {
-		return this.curLoopstrategyVersion;
-	}
-
-	public void setCurLoopstrategyVersion(Date curLoopstrategyVersion) {
-		this.curLoopstrategyVersion = curLoopstrategyVersion;
-	}
-
-	@Column(name = "LOOPTASK_UPDATED", nullable = false)
-	public int getLooptaskUpdated() {
-		return this.looptaskUpdated;
-	}
-
-	public void setLooptaskUpdated(int looptaskUpdated) {
-		this.looptaskUpdated = looptaskUpdated;
-	}
-
-	@Column(name = "ASSIGN_DEMANDTASK_ID")
-	public Integer getAssignDemandtaskId() {
-		return this.assignDemandtaskId;
-	}
-
-	public void setAssignDemandtaskId(Integer assignDemandtaskId) {
-		this.assignDemandtaskId = assignDemandtaskId;
-	}
-
-	@Column(name = "ASSIGN_DEMANDTASK_NAME", length = 64)
-	public String getAssignDemandtaskName() {
-		return this.assignDemandtaskName;
-	}
-
-	public void setAssignDemandtaskName(String assignDemandtaskName) {
-		this.assignDemandtaskName = assignDemandtaskName;
-	}
-
-	@Column(name = "ASSIGN_DEMANDTASK_VERSION", length = 19)
-	public Date getAssignDemandtaskVersion() {
-		return this.assignDemandtaskVersion;
-	}
-
-	public void setAssignDemandtaskVersion(Date assignDemandtaskVersion) {
-		this.assignDemandtaskVersion = assignDemandtaskVersion;
-	}
-
-	@Column(name = "ASSIGN_DEMANDFILE_VERSION", length = 19)
-	public Date getAssignDemandfileVersion() {
-		return this.assignDemandfileVersion;
-	}
-
-	public void setAssignDemandfileVersion(Date assignDemandfileVersion) {
-		this.assignDemandfileVersion = assignDemandfileVersion;
-	}
-
-	@Column(name = "ASSIGN_DEMANDPLAY_VERSION", length = 19)
-	public Date getAssignDemandplayVersion() {
-		return this.assignDemandplayVersion;
-	}
-
-	public void setAssignDemandplayVersion(Date assignDemandplayVersion) {
-		this.assignDemandplayVersion = assignDemandplayVersion;
-	}
-
-	@Column(name = "CUR_DEMANDTASK_ID")
-	public Integer getCurDemandtaskId() {
-		return this.curDemandtaskId;
-	}
-
-	public void setCurDemandtaskId(Integer curDemandtaskId) {
-		this.curDemandtaskId = curDemandtaskId;
-	}
-
-	@Column(name = "CUR_DEMANDTASK_NAME", length = 64)
-	public String getCurDemandtaskName() {
-		return this.curDemandtaskName;
-	}
-
-	public void setCurDemandtaskName(String curDemandtaskName) {
-		this.curDemandtaskName = curDemandtaskName;
-	}
-
-	@Column(name = "CUR_DEMANDTASK_VERSION", length = 19)
-	public Date getCurDemandtaskVersion() {
-		return this.curDemandtaskVersion;
-	}
-
-	public void setCurDemandtaskVersion(Date curDemandtaskVersion) {
-		this.curDemandtaskVersion = curDemandtaskVersion;
-	}
-
-	@Column(name = "CUR_DEMANDFILE_VERSION", length = 19)
-	public Date getCurDemandfileVersion() {
-		return this.curDemandfileVersion;
-	}
-
-	public void setCurDemandfileVersion(Date curDemandfileVersion) {
-		this.curDemandfileVersion = curDemandfileVersion;
-	}
-
-	@Column(name = "CUR_DEMANDPLAY_VERSION", length = 19)
-	public Date getCurDemandplayVersion() {
-		return this.curDemandplayVersion;
-	}
-
-	public void setCurDemandplayVersion(Date curDemandplayVersion) {
-		this.curDemandplayVersion = curDemandplayVersion;
-	}
-
-	@Column(name = "DEMANDTASK_UPDATED", nullable = false)
-	public int getDemandtaskUpdated() {
-		return this.demandtaskUpdated;
-	}
-
-	public void setDemandtaskUpdated(int demandtaskUpdated) {
-		this.demandtaskUpdated = demandtaskUpdated;
-	}
-
-	@Column(name = "ASSIGN_PLUGINTASK_ID")
-	public Integer getAssignPlugintaskId() {
-		return this.assignPlugintaskId;
-	}
-
-	public void setAssignPlugintaskId(Integer assignPlugintaskId) {
-		this.assignPlugintaskId = assignPlugintaskId;
-	}
-
-	@Column(name = "ASSIGN_PLUGINTASK_NAME", length = 64)
-	public String getAssignPlugintaskName() {
-		return this.assignPlugintaskName;
-	}
-
-	public void setAssignPlugintaskName(String assignPlugintaskName) {
-		this.assignPlugintaskName = assignPlugintaskName;
-	}
-
-	@Column(name = "ASSIGN_PLUGINTASK_VERSION", length = 19)
-	public Date getAssignPlugintaskVersion() {
-		return this.assignPlugintaskVersion;
-	}
-
-	public void setAssignPlugintaskVersion(Date assignPlugintaskVersion) {
-		this.assignPlugintaskVersion = assignPlugintaskVersion;
-	}
-
-	@Column(name = "ASSIGN_PLUGINFILE_VERSION", length = 19)
-	public Date getAssignPluginfileVersion() {
-		return this.assignPluginfileVersion;
-	}
-
-	public void setAssignPluginfileVersion(Date assignPluginfileVersion) {
-		this.assignPluginfileVersion = assignPluginfileVersion;
-	}
-
-	@Column(name = "ASSIGN_PLUGINPLAY_VERSION", length = 19)
-	public Date getAssignPluginplayVersion() {
-		return this.assignPluginplayVersion;
-	}
-
-	public void setAssignPluginplayVersion(Date assignPluginplayVersion) {
-		this.assignPluginplayVersion = assignPluginplayVersion;
-	}
-
-	@Column(name = "CUR_PLUGINTASK_ID")
-	public Integer getCurPlugintaskId() {
-		return this.curPlugintaskId;
-	}
-
-	public void setCurPlugintaskId(Integer curPlugintaskId) {
-		this.curPlugintaskId = curPlugintaskId;
-	}
-
-	@Column(name = "CUR_PLUGINTASK_NAME", length = 64)
-	public String getCurPlugintaskName() {
-		return this.curPlugintaskName;
-	}
-
-	public void setCurPlugintaskName(String curPlugintaskName) {
-		this.curPlugintaskName = curPlugintaskName;
-	}
-
-	@Column(name = "CUR_PLUGINTASK_VERSION", length = 19)
-	public Date getCurPlugintaskVersion() {
-		return this.curPlugintaskVersion;
-	}
-
-	public void setCurPlugintaskVersion(Date curPlugintaskVersion) {
-		this.curPlugintaskVersion = curPlugintaskVersion;
-	}
-
-	@Column(name = "CUR_PLUGINFILE_VERSION", length = 19)
-	public Date getCurPluginfileVersion() {
-		return this.curPluginfileVersion;
-	}
-
-	public void setCurPluginfileVersion(Date curPluginfileVersion) {
-		this.curPluginfileVersion = curPluginfileVersion;
-	}
-
-	@Column(name = "CUR_PLUGINPLAY_VERSION", length = 19)
-	public Date getCurPluginplayVersion() {
-		return this.curPluginplayVersion;
-	}
-
-	public void setCurPluginplayVersion(Date curPluginplayVersion) {
-		this.curPluginplayVersion = curPluginplayVersion;
-	}
-
-	@Column(name = "PLUGINTASK_UPDATED", nullable = false)
-	public int getPlugintaskUpdated() {
-		return this.plugintaskUpdated;
-	}
-
-	public void setPlugintaskUpdated(int plugintaskUpdated) {
-		this.plugintaskUpdated = plugintaskUpdated;
-	}
-
-	@Column(name = "ASSIGN_SOURCE_VERSION", nullable = false, length = 19)
-	public Date getAssignSourceVersion() {
-		return this.assignSourceVersion;
-	}
-
-	public void setAssignSourceVersion(Date assignSourceVersion) {
-		this.assignSourceVersion = assignSourceVersion;
-	}
-
-	@Column(name = "REST_SCHEDULE", nullable = false, length = 1024)
-	public String getRestSchedule() {
-		return this.restSchedule;
-	}
-
-	public void setRestSchedule(String restSchedule) {
-		this.restSchedule = restSchedule;
-	}
-
-	@Column(name = "STANDBY_SCHEDULE", nullable = false, length = 1024)
-	public String getStandbySchedule() {
-		return this.standbySchedule;
-	}
-
-	public void setStandbySchedule(String standbySchedule) {
-		this.standbySchedule = standbySchedule;
-	}
-
-	@Column(name = "CAPTURE_SCHEDULE", nullable = false, length = 1024)
-	public String getCaptureSchedule() {
-		return this.captureSchedule;
-	}
-
-	public void setCaptureSchedule(String captureSchedule) {
-		this.captureSchedule = captureSchedule;
-	}
-
-	@Column(name = "DEMAND_SCHEDULE", nullable = false, length = 1024)
-	public String getDemandSchedule() {
-		return this.demandSchedule;
-	}
-
-	public void setDemandSchedule(String demandSchedule) {
-		this.demandSchedule = demandSchedule;
-	}
-
-	@Column(name = "SCHEDULE_VERSION", nullable = false, length = 19)
-	public Date getScheduleVersion() {
-		return this.scheduleVersion;
-	}
-
-	public void setScheduleVersion(Date scheduleVersion) {
-		this.scheduleVersion = scheduleVersion;
-	}
-
-	@Column(name = "SUBTITLE", nullable = false, length = 4096)
-	public String getSubtitle() {
-		return this.subtitle;
-	}
-
-	public void setSubtitle(String subtitle) {
-		this.subtitle = subtitle;
-	}
-
-	@Column(name = "SUBTITLE_VERSION", nullable = false, length = 19)
-	public Date getSubtitleVersion() {
-		return this.subtitleVersion;
-	}
-
-	public void setSubtitleVersion(Date subtitleVersion) {
-		this.subtitleVersion = subtitleVersion;
-	}
-
-	@Column(name = "CUR_SUBTITLE_VERSION", nullable = false, length = 19)
-	public Date getCurSubtitleVersion() {
-		return this.curSubtitleVersion;
-	}
-
-	public void setCurSubtitleVersion(Date curSubtitleVersion) {
-		this.curSubtitleVersion = curSubtitleVersion;
-	}
-
-	@Column(name = "SUBTITLE_UPDATED", nullable = false)
-	public int getSubtitleUpdated() {
-		return this.subtitleUpdated;
-	}
-
-	public void setSubtitleUpdated(int subtitleUpdated) {
-		this.subtitleUpdated = subtitleUpdated;
-	}
-
-	@Column(name = "ONLINE_STATE", nullable = false)
-	public int getOnlineState() {
-		return this.onlineState;
-	}
-
-	public void setOnlineState(int onlineState) {
-		this.onlineState = onlineState;
-	}
-
-	@Column(name = "LOGON_TIME", nullable = false, length = 19)
-	public Date getLogonTime() {
-		return this.logonTime;
-	}
-
-	public void setLogonTime(Date logonTime) {
-		this.logonTime = logonTime;
-	}
-
-	@Column(name = "LOGOFF_TIME", nullable = false, length = 19)
-	public Date getLogoffTime() {
-		return this.logoffTime;
-	}
-
-	public void setLogoffTime(Date logoffTime) {
-		this.logoffTime = logoffTime;
-	}
-
-	@Column(name = "DOWNLOAD_TOTAL", nullable = false)
-	public long getDownloadTotal() {
-		return this.downloadTotal;
-	}
-
-	public void setDownloadTotal(long downloadTotal) {
-		this.downloadTotal = downloadTotal;
-	}
-
-	@Column(name = "DOWNLOAD_FINISHED", nullable = false)
-	public long getDownloadFinished() {
-		return this.downloadFinished;
-	}
-
-	public void setDownloadFinished(long downloadFinished) {
-		this.downloadFinished = downloadFinished;
-	}
-
-	@Column(name = "DOWNLOAD_TYPE", nullable = false)
-	public int getDownloadType() {
-		return this.downloadType;
-	}
-
-	public void setDownloadType(int downloadType) {
-		this.downloadType = downloadType;
-	}
-
-	@Column(name = "POWERON", nullable = false)
-	public int getPoweron() {
-		return this.poweron;
-	}
-
-	public void setPoweron(int poweron) {
-		this.poweron = poweron;
-	}
-
-	@Column(name = "POWEROFF", nullable = false)
-	public int getPoweroff() {
-		return this.poweroff;
-	}
-
-	public void setPoweroff(int poweroff) {
-		this.poweroff = poweroff;
-	}
-
-	@Column(name = "ALIVE_INTERVAL", nullable = false)
-	public int getAliveInterval() {
-		return this.aliveInterval;
-	}
-
-	public void setAliveInterval(int aliveInterval) {
-		this.aliveInterval = aliveInterval;
-	}
-
-	@Column(name = "LAST_ALIVE", nullable = false, length = 19)
-	public Date getLastAlive() {
-		return this.lastAlive;
-	}
-
-	public void setLastAlive(Date lastAlive) {
-		this.lastAlive = lastAlive;
-	}
-
-	@Column(name = "LAST_PATROL", nullable = false, length = 19)
-	public Date getLastPatrol() {
-		return this.lastPatrol;
-	}
-
-	public void setLastPatrol(Date lastPatrol) {
-		this.lastPatrol = lastPatrol;
-	}
-
-	@Column(name = "LAST_DOWNLOAD", nullable = false, length = 19)
-	public Date getLastDownload() {
-		return this.lastDownload;
-	}
-
-	public void setLastDownload(Date lastDownload) {
-		this.lastDownload = lastDownload;
-	}
-
-	@Column(name = "FLOW_LIMIT", nullable = false)
-	public long getFlowLimit() {
-		return this.flowLimit;
-	}
-
-	public void setFlowLimit(long flowLimit) {
-		this.flowLimit = flowLimit;
-	}
-
-	@Column(name = "NET_FLOW", nullable = false)
-	public long getNetFlow() {
-		return this.netFlow;
-	}
-
-	public void setNetFlow(long netFlow) {
-		this.netFlow = netFlow;
-	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof VwTerminalDetailId))
-			return false;
-		VwTerminalDetailId castOther = (VwTerminalDetailId) other;
-
-		return (this.getCstmId() == castOther.getCstmId()) && (this.getDevId() == castOther.getDevId())
-				&& ((this.getName() == castOther.getName()) || (this.getName() != null && castOther.getName() != null
-						&& this.getName().equals(castOther.getName())))
-				&& ((this.getDescp() == castOther.getDescp()) || (this.getDescp() != null
-						&& castOther.getDescp() != null && this.getDescp().equals(castOther.getDescp())))
-				&& ((this.getGroupId() == castOther.getGroupId()) || (this.getGroupId() != null
-						&& castOther.getGroupId() != null && this.getGroupId().equals(castOther.getGroupId())))
-				&& ((this.getGroupName() == castOther.getGroupName()) || (this.getGroupName() != null
-						&& castOther.getGroupName() != null && this.getGroupName().equals(castOther.getGroupName())))
-				&& ((this.getCityId() == castOther.getCityId()) || (this.getCityId() != null
-						&& castOther.getCityId() != null && this.getCityId().equals(castOther.getCityId())))
-				&& ((this.getCityName() == castOther.getCityName()) || (this.getCityName() != null
-						&& castOther.getCityName() != null && this.getCityName().equals(castOther.getCityName())))
-				&& ((this.getCreateTime() == castOther.getCreateTime()) || (this.getCreateTime() != null
-						&& castOther.getCreateTime() != null && this.getCreateTime().equals(castOther.getCreateTime())))
-				&& ((this.getCreateUser() == castOther.getCreateUser()) || (this.getCreateUser() != null
-						&& castOther.getCreateUser() != null && this.getCreateUser().equals(castOther.getCreateUser())))
-				&& ((this.getAssignKernel() == castOther.getAssignKernel())
-						|| (this.getAssignKernel() != null && castOther.getAssignKernel() != null
-								&& this.getAssignKernel().equals(castOther.getAssignKernel())))
-				&& ((this.getAssignApp() == castOther.getAssignApp()) || (this.getAssignApp() != null
-						&& castOther.getAssignApp() != null && this.getAssignApp().equals(castOther.getAssignApp())))
-				&& ((this.getCurKernel() == castOther.getCurKernel()) || (this.getCurKernel() != null
-						&& castOther.getCurKernel() != null && this.getCurKernel().equals(castOther.getCurKernel())))
-				&& ((this.getCurApp() == castOther.getCurApp()) || (this.getCurApp() != null
-						&& castOther.getCurApp() != null && this.getCurApp().equals(castOther.getCurApp())))
-				&& (this.getKernelUpdated() == castOther.getKernelUpdated())
-				&& (this.getAppUpdated() == castOther.getAppUpdated())
-				&& ((this.getAssignConfigId() == castOther.getAssignConfigId())
-						|| (this.getAssignConfigId() != null && castOther.getAssignConfigId() != null
-								&& this.getAssignConfigId().equals(castOther.getAssignConfigId())))
-				&& ((this.getAssignConfigName() == castOther.getAssignConfigName())
-						|| (this.getAssignConfigName() != null && castOther.getAssignConfigName() != null
-								&& this.getAssignConfigName().equals(castOther.getAssignConfigName())))
-				&& ((this.getAssignConfigVersion() == castOther.getAssignConfigVersion())
-						|| (this.getAssignConfigVersion() != null && castOther.getAssignConfigVersion() != null
-								&& this.getAssignConfigVersion().equals(castOther.getAssignConfigVersion())))
-				&& ((this.getCurConfigId() == castOther.getCurConfigId())
-						|| (this.getCurConfigId() != null && castOther.getCurConfigId() != null
-								&& this.getCurConfigId().equals(castOther.getCurConfigId())))
-				&& ((this.getCurConfigName() == castOther.getCurConfigName())
-						|| (this.getCurConfigName() != null && castOther.getCurConfigName() != null
-								&& this.getCurConfigName().equals(castOther.getCurConfigName())))
-				&& ((this.getCurConfigVersion() == castOther.getCurConfigVersion())
-						|| (this.getCurConfigVersion() != null && castOther.getCurConfigVersion() != null
-								&& this.getCurConfigVersion().equals(castOther.getCurConfigVersion())))
-				&& (this.getConfigUpdated() == castOther.getConfigUpdated())
-				&& ((this.getAssignLooptaskId() == castOther.getAssignLooptaskId())
-						|| (this.getAssignLooptaskId() != null && castOther.getAssignLooptaskId() != null
-								&& this.getAssignLooptaskId().equals(castOther.getAssignLooptaskId())))
-				&& ((this.getAssignLooptaskName() == castOther.getAssignLooptaskName())
-						|| (this.getAssignLooptaskName() != null && castOther.getAssignLooptaskName() != null
-								&& this.getAssignLooptaskName().equals(castOther.getAssignLooptaskName())))
-				&& ((this.getAssignLooptaskVersion() == castOther.getAssignLooptaskVersion())
-						|| (this.getAssignLooptaskVersion() != null && castOther.getAssignLooptaskVersion() != null
-								&& this.getAssignLooptaskVersion().equals(castOther.getAssignLooptaskVersion())))
-				&& ((this.getAssignLoopfileVersion() == castOther.getAssignLoopfileVersion())
-						|| (this.getAssignLoopfileVersion() != null && castOther.getAssignLoopfileVersion() != null
-								&& this.getAssignLoopfileVersion().equals(castOther.getAssignLoopfileVersion())))
-				&& ((this.getAssignLoopplayVersion() == castOther.getAssignLoopplayVersion())
-						|| (this.getAssignLoopplayVersion() != null && castOther.getAssignLoopplayVersion() != null
-								&& this.getAssignLoopplayVersion().equals(castOther.getAssignLoopplayVersion())))
-				&& ((this.getAssignLoopstrategyVersion() == castOther.getAssignLoopstrategyVersion())
-						|| (this.getAssignLoopstrategyVersion() != null
-								&& castOther.getAssignLoopstrategyVersion() != null
-								&& this.getAssignLoopstrategyVersion()
-										.equals(castOther.getAssignLoopstrategyVersion())))
-				&& ((this.getCurLooptaskId() == castOther.getCurLooptaskId())
-						|| (this.getCurLooptaskId() != null && castOther.getCurLooptaskId() != null
-								&& this.getCurLooptaskId().equals(castOther.getCurLooptaskId())))
-				&& ((this.getCurLooptaskName() == castOther.getCurLooptaskName())
-						|| (this.getCurLooptaskName() != null && castOther.getCurLooptaskName() != null
-								&& this.getCurLooptaskName().equals(castOther.getCurLooptaskName())))
-				&& ((this.getCurLooptaskVersion() == castOther.getCurLooptaskVersion())
-						|| (this.getCurLooptaskVersion() != null && castOther.getCurLooptaskVersion() != null
-								&& this.getCurLooptaskVersion().equals(castOther.getCurLooptaskVersion())))
-				&& ((this.getCurLoopfileVersion() == castOther.getCurLoopfileVersion())
-						|| (this.getCurLoopfileVersion() != null && castOther.getCurLoopfileVersion() != null
-								&& this.getCurLoopfileVersion().equals(castOther.getCurLoopfileVersion())))
-				&& ((this.getCurLoopplayVersion() == castOther.getCurLoopplayVersion())
-						|| (this.getCurLoopplayVersion() != null && castOther.getCurLoopplayVersion() != null
-								&& this.getCurLoopplayVersion().equals(castOther.getCurLoopplayVersion())))
-				&& ((this.getCurLoopstrategyVersion() == castOther.getCurLoopstrategyVersion())
-						|| (this.getCurLoopstrategyVersion() != null && castOther.getCurLoopstrategyVersion() != null
-								&& this.getCurLoopstrategyVersion().equals(castOther.getCurLoopstrategyVersion())))
-				&& (this.getLooptaskUpdated() == castOther.getLooptaskUpdated())
-				&& ((this.getAssignDemandtaskId() == castOther.getAssignDemandtaskId())
-						|| (this.getAssignDemandtaskId() != null && castOther.getAssignDemandtaskId() != null
-								&& this.getAssignDemandtaskId().equals(castOther.getAssignDemandtaskId())))
-				&& ((this.getAssignDemandtaskName() == castOther.getAssignDemandtaskName())
-						|| (this.getAssignDemandtaskName() != null && castOther.getAssignDemandtaskName() != null
-								&& this.getAssignDemandtaskName().equals(castOther.getAssignDemandtaskName())))
-				&& ((this.getAssignDemandtaskVersion() == castOther.getAssignDemandtaskVersion())
-						|| (this.getAssignDemandtaskVersion() != null && castOther.getAssignDemandtaskVersion() != null
-								&& this.getAssignDemandtaskVersion().equals(castOther.getAssignDemandtaskVersion())))
-				&& ((this.getAssignDemandfileVersion() == castOther.getAssignDemandfileVersion())
-						|| (this.getAssignDemandfileVersion() != null && castOther.getAssignDemandfileVersion() != null
-								&& this.getAssignDemandfileVersion().equals(castOther.getAssignDemandfileVersion())))
-				&& ((this.getAssignDemandplayVersion() == castOther.getAssignDemandplayVersion())
-						|| (this.getAssignDemandplayVersion() != null && castOther.getAssignDemandplayVersion() != null
-								&& this.getAssignDemandplayVersion().equals(castOther.getAssignDemandplayVersion())))
-				&& ((this.getCurDemandtaskId() == castOther.getCurDemandtaskId())
-						|| (this.getCurDemandtaskId() != null && castOther.getCurDemandtaskId() != null
-								&& this.getCurDemandtaskId().equals(castOther.getCurDemandtaskId())))
-				&& ((this.getCurDemandtaskName() == castOther.getCurDemandtaskName())
-						|| (this.getCurDemandtaskName() != null && castOther.getCurDemandtaskName() != null
-								&& this.getCurDemandtaskName().equals(castOther.getCurDemandtaskName())))
-				&& ((this.getCurDemandtaskVersion() == castOther.getCurDemandtaskVersion())
-						|| (this.getCurDemandtaskVersion() != null && castOther.getCurDemandtaskVersion() != null
-								&& this.getCurDemandtaskVersion().equals(castOther.getCurDemandtaskVersion())))
-				&& ((this.getCurDemandfileVersion() == castOther.getCurDemandfileVersion())
-						|| (this.getCurDemandfileVersion() != null && castOther.getCurDemandfileVersion() != null
-								&& this.getCurDemandfileVersion().equals(castOther.getCurDemandfileVersion())))
-				&& ((this.getCurDemandplayVersion() == castOther.getCurDemandplayVersion())
-						|| (this.getCurDemandplayVersion() != null && castOther.getCurDemandplayVersion() != null
-								&& this.getCurDemandplayVersion().equals(castOther.getCurDemandplayVersion())))
-				&& (this.getDemandtaskUpdated() == castOther.getDemandtaskUpdated())
-				&& ((this.getAssignPlugintaskId() == castOther.getAssignPlugintaskId())
-						|| (this.getAssignPlugintaskId() != null && castOther.getAssignPlugintaskId() != null
-								&& this.getAssignPlugintaskId().equals(castOther.getAssignPlugintaskId())))
-				&& ((this.getAssignPlugintaskName() == castOther.getAssignPlugintaskName())
-						|| (this.getAssignPlugintaskName() != null && castOther.getAssignPlugintaskName() != null
-								&& this.getAssignPlugintaskName().equals(castOther.getAssignPlugintaskName())))
-				&& ((this.getAssignPlugintaskVersion() == castOther.getAssignPlugintaskVersion())
-						|| (this.getAssignPlugintaskVersion() != null && castOther.getAssignPlugintaskVersion() != null
-								&& this.getAssignPlugintaskVersion().equals(castOther.getAssignPlugintaskVersion())))
-				&& ((this.getAssignPluginfileVersion() == castOther.getAssignPluginfileVersion())
-						|| (this.getAssignPluginfileVersion() != null && castOther.getAssignPluginfileVersion() != null
-								&& this.getAssignPluginfileVersion().equals(castOther.getAssignPluginfileVersion())))
-				&& ((this.getAssignPluginplayVersion() == castOther.getAssignPluginplayVersion())
-						|| (this.getAssignPluginplayVersion() != null && castOther.getAssignPluginplayVersion() != null
-								&& this.getAssignPluginplayVersion().equals(castOther.getAssignPluginplayVersion())))
-				&& ((this.getCurPlugintaskId() == castOther.getCurPlugintaskId())
-						|| (this.getCurPlugintaskId() != null && castOther.getCurPlugintaskId() != null
-								&& this.getCurPlugintaskId().equals(castOther.getCurPlugintaskId())))
-				&& ((this.getCurPlugintaskName() == castOther.getCurPlugintaskName())
-						|| (this.getCurPlugintaskName() != null && castOther.getCurPlugintaskName() != null
-								&& this.getCurPlugintaskName().equals(castOther.getCurPlugintaskName())))
-				&& ((this.getCurPlugintaskVersion() == castOther.getCurPlugintaskVersion())
-						|| (this.getCurPlugintaskVersion() != null && castOther.getCurPlugintaskVersion() != null
-								&& this.getCurPlugintaskVersion().equals(castOther.getCurPlugintaskVersion())))
-				&& ((this.getCurPluginfileVersion() == castOther.getCurPluginfileVersion())
-						|| (this.getCurPluginfileVersion() != null && castOther.getCurPluginfileVersion() != null
-								&& this.getCurPluginfileVersion().equals(castOther.getCurPluginfileVersion())))
-				&& ((this.getCurPluginplayVersion() == castOther.getCurPluginplayVersion())
-						|| (this.getCurPluginplayVersion() != null && castOther.getCurPluginplayVersion() != null
-								&& this.getCurPluginplayVersion().equals(castOther.getCurPluginplayVersion())))
-				&& (this.getPlugintaskUpdated() == castOther.getPlugintaskUpdated())
-				&& ((this.getAssignSourceVersion() == castOther.getAssignSourceVersion())
-						|| (this.getAssignSourceVersion() != null && castOther.getAssignSourceVersion() != null
-								&& this.getAssignSourceVersion().equals(castOther.getAssignSourceVersion())))
-				&& ((this.getRestSchedule() == castOther.getRestSchedule())
-						|| (this.getRestSchedule() != null && castOther.getRestSchedule() != null
-								&& this.getRestSchedule().equals(castOther.getRestSchedule())))
-				&& ((this.getStandbySchedule() == castOther.getStandbySchedule())
-						|| (this.getStandbySchedule() != null && castOther.getStandbySchedule() != null
-								&& this.getStandbySchedule().equals(castOther.getStandbySchedule())))
-				&& ((this.getCaptureSchedule() == castOther.getCaptureSchedule())
-						|| (this.getCaptureSchedule() != null && castOther.getCaptureSchedule() != null
-								&& this.getCaptureSchedule().equals(castOther.getCaptureSchedule())))
-				&& ((this.getDemandSchedule() == castOther.getDemandSchedule())
-						|| (this.getDemandSchedule() != null && castOther.getDemandSchedule() != null
-								&& this.getDemandSchedule().equals(castOther.getDemandSchedule())))
-				&& ((this.getScheduleVersion() == castOther.getScheduleVersion())
-						|| (this.getScheduleVersion() != null && castOther.getScheduleVersion() != null
-								&& this.getScheduleVersion().equals(castOther.getScheduleVersion())))
-				&& ((this.getSubtitle() == castOther.getSubtitle()) || (this.getSubtitle() != null
-						&& castOther.getSubtitle() != null && this.getSubtitle().equals(castOther.getSubtitle())))
-				&& ((this.getSubtitleVersion() == castOther.getSubtitleVersion())
-						|| (this.getSubtitleVersion() != null && castOther.getSubtitleVersion() != null
-								&& this.getSubtitleVersion().equals(castOther.getSubtitleVersion())))
-				&& ((this.getCurSubtitleVersion() == castOther.getCurSubtitleVersion())
-						|| (this.getCurSubtitleVersion() != null && castOther.getCurSubtitleVersion() != null
-								&& this.getCurSubtitleVersion().equals(castOther.getCurSubtitleVersion())))
-				&& (this.getSubtitleUpdated() == castOther.getSubtitleUpdated())
-				&& (this.getOnlineState() == castOther.getOnlineState())
-				&& ((this.getLogonTime() == castOther.getLogonTime()) || (this.getLogonTime() != null
-						&& castOther.getLogonTime() != null && this.getLogonTime().equals(castOther.getLogonTime())))
-				&& ((this.getLogoffTime() == castOther.getLogoffTime()) || (this.getLogoffTime() != null
-						&& castOther.getLogoffTime() != null && this.getLogoffTime().equals(castOther.getLogoffTime())))
-				&& (this.getDownloadTotal() == castOther.getDownloadTotal())
-				&& (this.getDownloadFinished() == castOther.getDownloadFinished())
-				&& (this.getDownloadType() == castOther.getDownloadType())
-				&& (this.getPoweron() == castOther.getPoweron()) && (this.getPoweroff() == castOther.getPoweroff())
-				&& (this.getAliveInterval() == castOther.getAliveInterval())
-				&& ((this.getLastAlive() == castOther.getLastAlive()) || (this.getLastAlive() != null
-						&& castOther.getLastAlive() != null && this.getLastAlive().equals(castOther.getLastAlive())))
-				&& ((this.getLastPatrol() == castOther.getLastPatrol()) || (this.getLastPatrol() != null
-						&& castOther.getLastPatrol() != null && this.getLastPatrol().equals(castOther.getLastPatrol())))
-				&& ((this.getLastDownload() == castOther.getLastDownload())
-						|| (this.getLastDownload() != null && castOther.getLastDownload() != null
-								&& this.getLastDownload().equals(castOther.getLastDownload())))
-				&& (this.getFlowLimit() == castOther.getFlowLimit()) && (this.getNetFlow() == castOther.getNetFlow());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + this.getCstmId();
-		result = 37 * result + (int) this.getDevId();
-		result = 37 * result + (getName() == null ? 0 : this.getName().hashCode());
-		result = 37 * result + (getDescp() == null ? 0 : this.getDescp().hashCode());
-		result = 37 * result + (getGroupId() == null ? 0 : this.getGroupId().hashCode());
-		result = 37 * result + (getGroupName() == null ? 0 : this.getGroupName().hashCode());
-		result = 37 * result + (getCityId() == null ? 0 : this.getCityId().hashCode());
-		result = 37 * result + (getCityName() == null ? 0 : this.getCityName().hashCode());
-		result = 37 * result + (getCreateTime() == null ? 0 : this.getCreateTime().hashCode());
-		result = 37 * result + (getCreateUser() == null ? 0 : this.getCreateUser().hashCode());
-		result = 37 * result + (getAssignKernel() == null ? 0 : this.getAssignKernel().hashCode());
-		result = 37 * result + (getAssignApp() == null ? 0 : this.getAssignApp().hashCode());
-		result = 37 * result + (getCurKernel() == null ? 0 : this.getCurKernel().hashCode());
-		result = 37 * result + (getCurApp() == null ? 0 : this.getCurApp().hashCode());
-		result = 37 * result + this.getKernelUpdated();
-		result = 37 * result + this.getAppUpdated();
-		result = 37 * result + (getAssignConfigId() == null ? 0 : this.getAssignConfigId().hashCode());
-		result = 37 * result + (getAssignConfigName() == null ? 0 : this.getAssignConfigName().hashCode());
-		result = 37 * result + (getAssignConfigVersion() == null ? 0 : this.getAssignConfigVersion().hashCode());
-		result = 37 * result + (getCurConfigId() == null ? 0 : this.getCurConfigId().hashCode());
-		result = 37 * result + (getCurConfigName() == null ? 0 : this.getCurConfigName().hashCode());
-		result = 37 * result + (getCurConfigVersion() == null ? 0 : this.getCurConfigVersion().hashCode());
-		result = 37 * result + this.getConfigUpdated();
-		result = 37 * result + (getAssignLooptaskId() == null ? 0 : this.getAssignLooptaskId().hashCode());
-		result = 37 * result + (getAssignLooptaskName() == null ? 0 : this.getAssignLooptaskName().hashCode());
-		result = 37 * result + (getAssignLooptaskVersion() == null ? 0 : this.getAssignLooptaskVersion().hashCode());
-		result = 37 * result + (getAssignLoopfileVersion() == null ? 0 : this.getAssignLoopfileVersion().hashCode());
-		result = 37 * result + (getAssignLoopplayVersion() == null ? 0 : this.getAssignLoopplayVersion().hashCode());
-		result = 37 * result
-				+ (getAssignLoopstrategyVersion() == null ? 0 : this.getAssignLoopstrategyVersion().hashCode());
-		result = 37 * result + (getCurLooptaskId() == null ? 0 : this.getCurLooptaskId().hashCode());
-		result = 37 * result + (getCurLooptaskName() == null ? 0 : this.getCurLooptaskName().hashCode());
-		result = 37 * result + (getCurLooptaskVersion() == null ? 0 : this.getCurLooptaskVersion().hashCode());
-		result = 37 * result + (getCurLoopfileVersion() == null ? 0 : this.getCurLoopfileVersion().hashCode());
-		result = 37 * result + (getCurLoopplayVersion() == null ? 0 : this.getCurLoopplayVersion().hashCode());
-		result = 37 * result + (getCurLoopstrategyVersion() == null ? 0 : this.getCurLoopstrategyVersion().hashCode());
-		result = 37 * result + this.getLooptaskUpdated();
-		result = 37 * result + (getAssignDemandtaskId() == null ? 0 : this.getAssignDemandtaskId().hashCode());
-		result = 37 * result + (getAssignDemandtaskName() == null ? 0 : this.getAssignDemandtaskName().hashCode());
-		result = 37 * result
-				+ (getAssignDemandtaskVersion() == null ? 0 : this.getAssignDemandtaskVersion().hashCode());
-		result = 37 * result
-				+ (getAssignDemandfileVersion() == null ? 0 : this.getAssignDemandfileVersion().hashCode());
-		result = 37 * result
-				+ (getAssignDemandplayVersion() == null ? 0 : this.getAssignDemandplayVersion().hashCode());
-		result = 37 * result + (getCurDemandtaskId() == null ? 0 : this.getCurDemandtaskId().hashCode());
-		result = 37 * result + (getCurDemandtaskName() == null ? 0 : this.getCurDemandtaskName().hashCode());
-		result = 37 * result + (getCurDemandtaskVersion() == null ? 0 : this.getCurDemandtaskVersion().hashCode());
-		result = 37 * result + (getCurDemandfileVersion() == null ? 0 : this.getCurDemandfileVersion().hashCode());
-		result = 37 * result + (getCurDemandplayVersion() == null ? 0 : this.getCurDemandplayVersion().hashCode());
-		result = 37 * result + this.getDemandtaskUpdated();
-		result = 37 * result + (getAssignPlugintaskId() == null ? 0 : this.getAssignPlugintaskId().hashCode());
-		result = 37 * result + (getAssignPlugintaskName() == null ? 0 : this.getAssignPlugintaskName().hashCode());
-		result = 37 * result
-				+ (getAssignPlugintaskVersion() == null ? 0 : this.getAssignPlugintaskVersion().hashCode());
-		result = 37 * result
-				+ (getAssignPluginfileVersion() == null ? 0 : this.getAssignPluginfileVersion().hashCode());
-		result = 37 * result
-				+ (getAssignPluginplayVersion() == null ? 0 : this.getAssignPluginplayVersion().hashCode());
-		result = 37 * result + (getCurPlugintaskId() == null ? 0 : this.getCurPlugintaskId().hashCode());
-		result = 37 * result + (getCurPlugintaskName() == null ? 0 : this.getCurPlugintaskName().hashCode());
-		result = 37 * result + (getCurPlugintaskVersion() == null ? 0 : this.getCurPlugintaskVersion().hashCode());
-		result = 37 * result + (getCurPluginfileVersion() == null ? 0 : this.getCurPluginfileVersion().hashCode());
-		result = 37 * result + (getCurPluginplayVersion() == null ? 0 : this.getCurPluginplayVersion().hashCode());
-		result = 37 * result + this.getPlugintaskUpdated();
-		result = 37 * result + (getAssignSourceVersion() == null ? 0 : this.getAssignSourceVersion().hashCode());
-		result = 37 * result + (getRestSchedule() == null ? 0 : this.getRestSchedule().hashCode());
-		result = 37 * result + (getStandbySchedule() == null ? 0 : this.getStandbySchedule().hashCode());
-		result = 37 * result + (getCaptureSchedule() == null ? 0 : this.getCaptureSchedule().hashCode());
-		result = 37 * result + (getDemandSchedule() == null ? 0 : this.getDemandSchedule().hashCode());
-		result = 37 * result + (getScheduleVersion() == null ? 0 : this.getScheduleVersion().hashCode());
-		result = 37 * result + (getSubtitle() == null ? 0 : this.getSubtitle().hashCode());
-		result = 37 * result + (getSubtitleVersion() == null ? 0 : this.getSubtitleVersion().hashCode());
-		result = 37 * result + (getCurSubtitleVersion() == null ? 0 : this.getCurSubtitleVersion().hashCode());
-		result = 37 * result + this.getSubtitleUpdated();
-		result = 37 * result + this.getOnlineState();
-		result = 37 * result + (getLogonTime() == null ? 0 : this.getLogonTime().hashCode());
-		result = 37 * result + (getLogoffTime() == null ? 0 : this.getLogoffTime().hashCode());
-		result = 37 * result + (int) this.getDownloadTotal();
-		result = 37 * result + (int) this.getDownloadFinished();
-		result = 37 * result + this.getDownloadType();
-		result = 37 * result + this.getPoweron();
-		result = 37 * result + this.getPoweroff();
-		result = 37 * result + this.getAliveInterval();
-		result = 37 * result + (getLastAlive() == null ? 0 : this.getLastAlive().hashCode());
-		result = 37 * result + (getLastPatrol() == null ? 0 : this.getLastPatrol().hashCode());
-		result = 37 * result + (getLastDownload() == null ? 0 : this.getLastDownload().hashCode());
-		result = 37 * result + (int) this.getFlowLimit();
-		result = 37 * result + (int) this.getNetFlow();
-		return result;
-	}
+    private int cstmId;
+    private long devId;
+    private String name = "default";
+    private String descp= "default";
+    private Integer groupId =0;
+    private String groupName= "default";
+    private Integer cityId=0;
+    private String cityName= "default";
+    private Date createTime = VersionUtils.defaultVersion();
+    private String createUser= "default";
+    private String assignKernel= "default";
+    private String assignApp= "default";
+    private String curKernel= "default";
+    private String curApp= "default";
+    private int kernelUpdated;
+    private int appUpdated;
+    private Integer assignConfigId=0;
+    private String assignConfigName= "default";
+    private Date assignConfigVersion=VersionUtils.defaultVersion();
+    private Integer curConfigId=0;
+    private String curConfigName= "default";
+    private Date curConfigVersion=VersionUtils.defaultVersion();
+    private int configUpdated;
+    private Integer assignLooptaskId=0;
+    private String assignLooptaskName= "default";
+    private Date assignLooptaskVersion=VersionUtils.defaultVersion();
+    private Date assignLoopfileVersion=VersionUtils.defaultVersion();
+    private Date assignLoopplayVersion=VersionUtils.defaultVersion();
+    private Date assignLoopstrategyVersion=VersionUtils.defaultVersion();
+    private Integer curLooptaskId=0;
+    private String curLooptaskName="default";
+    private Date curLooptaskVersion=VersionUtils.defaultVersion();
+    private Date curLoopfileVersion=VersionUtils.defaultVersion();
+    private Date curLoopplayVersion=VersionUtils.defaultVersion();
+    private Date curLoopstrategyVersion=VersionUtils.defaultVersion();
+    private int looptaskUpdated;
+    private Integer assignDemandtaskId=0;
+    private String assignDemandtaskName= "default";
+    private Date assignDemandtaskVersion=VersionUtils.defaultVersion();
+    private Date assignDemandfileVersion=VersionUtils.defaultVersion();
+    private Date assignDemandplayVersion=VersionUtils.defaultVersion();
+    private Integer curDemandtaskId=0;
+    private String curDemandtaskName= "default";
+    private Date curDemandtaskVersion=VersionUtils.defaultVersion();
+    private Date curDemandfileVersion=VersionUtils.defaultVersion();
+    private Date curDemandplayVersion=VersionUtils.defaultVersion();
+    private int demandtaskUpdated;
+    private Integer assignPlugintaskId=0;
+    private String assignPlugintaskName= "default";
+    private Date assignPlugintaskVersion=VersionUtils.defaultVersion();
+    private Date assignPluginfileVersion=VersionUtils.defaultVersion();
+    private Date assignPluginplayVersion=VersionUtils.defaultVersion();
+    private Integer curPlugintaskId=0;
+    private String curPlugintaskName= "default";
+    private Date curPlugintaskVersion=VersionUtils.defaultVersion();
+    private Date curPluginfileVersion=VersionUtils.defaultVersion();
+    private Date curPluginplayVersion=VersionUtils.defaultVersion();
+    private int plugintaskUpdated;
+    private Date assignSourceVersion=VersionUtils.defaultVersion();
+    private String restSchedule= "default";
+    private String standbySchedule= "default";
+    private String captureSchedule= "default";
+    private String demandSchedule= "default";
+    private Date scheduleVersion=VersionUtils.defaultVersion();
+    private String subtitle= "default";
+    private Date subtitleVersion=VersionUtils.defaultVersion();
+    private Date curSubtitleVersion=VersionUtils.defaultVersion();
+    private int subtitleUpdated;
+    private int onlineState;
+    private Date logonTime=VersionUtils.defaultVersion();
+    private Date logoffTime=VersionUtils.defaultVersion();
+    private long downloadTotal;
+    private long downloadFinished;
+    private int downloadType;
+    private int poweron;
+    private int poweroff;
+    private int aliveInterval;
+    private Date lastAlive=VersionUtils.defaultVersion();
+    private Date lastPatrol=VersionUtils.defaultVersion();
+    private Date lastDownload=VersionUtils.defaultVersion();
+    private long flowLimit;
+    private long netFlow;
+
+    public VwTerminalDetailId() {
+    }
+
+    public VwTerminalDetailId(int cstmId, long devId, String name, String descp, Date createTime, String createUser,
+            int kernelUpdated, int appUpdated, int configUpdated, int looptaskUpdated, int demandtaskUpdated,
+            int plugintaskUpdated, Date assignSourceVersion, String restSchedule, String standbySchedule,
+            String captureSchedule, String demandSchedule, Date scheduleVersion, String subtitle, Date subtitleVersion,
+            Date curSubtitleVersion, int subtitleUpdated, int onlineState, Date logonTime, Date logoffTime,
+            long downloadTotal, long downloadFinished, int downloadType, int poweron, int poweroff, int aliveInterval,
+            Date lastAlive, Date lastPatrol, Date lastDownload, long flowLimit, long netFlow) {
+        this.cstmId = cstmId;
+        this.devId = devId;
+        this.name = name;
+        this.descp = descp;
+        this.createTime = createTime;
+        this.createUser = createUser;
+        this.kernelUpdated = kernelUpdated;
+        this.appUpdated = appUpdated;
+        this.configUpdated = configUpdated;
+        this.looptaskUpdated = looptaskUpdated;
+        this.demandtaskUpdated = demandtaskUpdated;
+        this.plugintaskUpdated = plugintaskUpdated;
+        this.assignSourceVersion = assignSourceVersion;
+        this.restSchedule = restSchedule;
+        this.standbySchedule = standbySchedule;
+        this.captureSchedule = captureSchedule;
+        this.demandSchedule = demandSchedule;
+        this.scheduleVersion = scheduleVersion;
+        this.subtitle = subtitle;
+        this.subtitleVersion = subtitleVersion;
+        this.curSubtitleVersion = curSubtitleVersion;
+        this.subtitleUpdated = subtitleUpdated;
+        this.onlineState = onlineState;
+        this.logonTime = logonTime;
+        this.logoffTime = logoffTime;
+        this.downloadTotal = downloadTotal;
+        this.downloadFinished = downloadFinished;
+        this.downloadType = downloadType;
+        this.poweron = poweron;
+        this.poweroff = poweroff;
+        this.aliveInterval = aliveInterval;
+        this.lastAlive = lastAlive;
+        this.lastPatrol = lastPatrol;
+        this.lastDownload = lastDownload;
+        this.flowLimit = flowLimit;
+        this.netFlow = netFlow;
+    }
+
+    public VwTerminalDetailId(int cstmId, long devId, String name, String descp, Integer groupId, String groupName,
+            Integer cityId, String cityName, Date createTime, String createUser, String assignKernel, String assignApp,
+            String curKernel, String curApp, int kernelUpdated, int appUpdated, Integer assignConfigId,
+            String assignConfigName, Date assignConfigVersion, Integer curConfigId, String curConfigName,
+            Date curConfigVersion, int configUpdated, Integer assignLooptaskId, String assignLooptaskName,
+            Date assignLooptaskVersion, Date assignLoopfileVersion, Date assignLoopplayVersion,
+            Date assignLoopstrategyVersion, Integer curLooptaskId, String curLooptaskName, Date curLooptaskVersion,
+            Date curLoopfileVersion, Date curLoopplayVersion, Date curLoopstrategyVersion, int looptaskUpdated,
+            Integer assignDemandtaskId, String assignDemandtaskName, Date assignDemandtaskVersion,
+            Date assignDemandfileVersion, Date assignDemandplayVersion, Integer curDemandtaskId,
+            String curDemandtaskName, Date curDemandtaskVersion, Date curDemandfileVersion, Date curDemandplayVersion,
+            int demandtaskUpdated, Integer assignPlugintaskId, String assignPlugintaskName,
+            Date assignPlugintaskVersion, Date assignPluginfileVersion, Date assignPluginplayVersion,
+            Integer curPlugintaskId, String curPlugintaskName, Date curPlugintaskVersion, Date curPluginfileVersion,
+            Date curPluginplayVersion, int plugintaskUpdated, Date assignSourceVersion, String restSchedule,
+            String standbySchedule, String captureSchedule, String demandSchedule, Date scheduleVersion,
+            String subtitle, Date subtitleVersion, Date curSubtitleVersion, int subtitleUpdated, int onlineState,
+            Date logonTime, Date logoffTime, long downloadTotal, long downloadFinished, int downloadType, int poweron,
+            int poweroff, int aliveInterval, Date lastAlive, Date lastPatrol, Date lastDownload, long flowLimit,
+            long netFlow) {
+        this.cstmId = cstmId;
+        this.devId = devId;
+        this.name = name;
+        this.descp = descp;
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.cityId = cityId;
+        this.cityName = cityName;
+        this.createTime = createTime;
+        this.createUser = createUser;
+        this.assignKernel = assignKernel;
+        this.assignApp = assignApp;
+        this.curKernel = curKernel;
+        this.curApp = curApp;
+        this.kernelUpdated = kernelUpdated;
+        this.appUpdated = appUpdated;
+        this.assignConfigId = assignConfigId;
+        this.assignConfigName = assignConfigName;
+        this.assignConfigVersion = assignConfigVersion;
+        this.curConfigId = curConfigId;
+        this.curConfigName = curConfigName;
+        this.curConfigVersion = curConfigVersion;
+        this.configUpdated = configUpdated;
+        this.assignLooptaskId = assignLooptaskId;
+        this.assignLooptaskName = assignLooptaskName;
+        this.assignLooptaskVersion = assignLooptaskVersion;
+        this.assignLoopfileVersion = assignLoopfileVersion;
+        this.assignLoopplayVersion = assignLoopplayVersion;
+        this.assignLoopstrategyVersion = assignLoopstrategyVersion;
+        this.curLooptaskId = curLooptaskId;
+        this.curLooptaskName = curLooptaskName;
+        this.curLooptaskVersion = curLooptaskVersion;
+        this.curLoopfileVersion = curLoopfileVersion;
+        this.curLoopplayVersion = curLoopplayVersion;
+        this.curLoopstrategyVersion = curLoopstrategyVersion;
+        this.looptaskUpdated = looptaskUpdated;
+        this.assignDemandtaskId = assignDemandtaskId;
+        this.assignDemandtaskName = assignDemandtaskName;
+        this.assignDemandtaskVersion = assignDemandtaskVersion;
+        this.assignDemandfileVersion = assignDemandfileVersion;
+        this.assignDemandplayVersion = assignDemandplayVersion;
+        this.curDemandtaskId = curDemandtaskId;
+        this.curDemandtaskName = curDemandtaskName;
+        this.curDemandtaskVersion = curDemandtaskVersion;
+        this.curDemandfileVersion = curDemandfileVersion;
+        this.curDemandplayVersion = curDemandplayVersion;
+        this.demandtaskUpdated = demandtaskUpdated;
+        this.assignPlugintaskId = assignPlugintaskId;
+        this.assignPlugintaskName = assignPlugintaskName;
+        this.assignPlugintaskVersion = assignPlugintaskVersion;
+        this.assignPluginfileVersion = assignPluginfileVersion;
+        this.assignPluginplayVersion = assignPluginplayVersion;
+        this.curPlugintaskId = curPlugintaskId;
+        this.curPlugintaskName = curPlugintaskName;
+        this.curPlugintaskVersion = curPlugintaskVersion;
+        this.curPluginfileVersion = curPluginfileVersion;
+        this.curPluginplayVersion = curPluginplayVersion;
+        this.plugintaskUpdated = plugintaskUpdated;
+        this.assignSourceVersion = assignSourceVersion;
+        this.restSchedule = restSchedule;
+        this.standbySchedule = standbySchedule;
+        this.captureSchedule = captureSchedule;
+        this.demandSchedule = demandSchedule;
+        this.scheduleVersion = scheduleVersion;
+        this.subtitle = subtitle;
+        this.subtitleVersion = subtitleVersion;
+        this.curSubtitleVersion = curSubtitleVersion;
+        this.subtitleUpdated = subtitleUpdated;
+        this.onlineState = onlineState;
+        this.logonTime = logonTime;
+        this.logoffTime = logoffTime;
+        this.downloadTotal = downloadTotal;
+        this.downloadFinished = downloadFinished;
+        this.downloadType = downloadType;
+        this.poweron = poweron;
+        this.poweroff = poweroff;
+        this.aliveInterval = aliveInterval;
+        this.lastAlive = lastAlive;
+        this.lastPatrol = lastPatrol;
+        this.lastDownload = lastDownload;
+        this.flowLimit = flowLimit;
+        this.netFlow = netFlow;
+    }
+
+    @Column(name = "CSTM_ID", nullable = false)
+    public int getCstmId() {
+        return this.cstmId;
+    }
+
+    public void setCstmId(int cstmId) {
+        this.cstmId = cstmId;
+    }
+
+    @Column(name = "DEV_ID", nullable = false)
+    public long getDevId() {
+        return this.devId;
+    }
+
+    public void setDevId(long devId) {
+        this.devId = devId;
+    }
+
+    @Column(name = "NAME", nullable = false, length = 64)
+    public String getName() {
+        if (this.name == null) {
+            this.name = "name";
+        }
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "DESCP", nullable = false, length = 256)
+    public String getDescp() {
+        if (this.descp == null) {
+            this.descp = "descp";
+        }
+        return this.descp;
+    }
+
+    public void setDescp(String descp) {
+        this.descp = descp;
+    }
+
+    @Column(name = "GROUP_ID", nullable = false)//
+    public Integer getGroupId() {
+        if (this.groupId == null) {
+            this.groupId = 0;
+        }
+        return this.groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    @Column(name = "GROUP_NAME", nullable = false, length = 64)//
+    public String getGroupName() {
+        if (this.groupName == null) {
+            this.groupName = "groupName";
+        }
+        return this.groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    @Column(name = "CITY_ID", nullable = false)//
+    public Integer getCityId() {
+        if (this.cityId == null) {
+            this.cityId = 0;
+        }
+        return this.cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+
+    @Column(name = "CITY_NAME", nullable = false, length = 64)//
+    public String getCityName() {
+        if (this.cityName == null) {
+            this.cityName = "cityName";
+        }
+        return this.cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    @Column(name = "CREATE_TIME", nullable = false, length = 19)
+    public Date getCreateTime() {
+        if (this.createTime == null) {
+            this.createTime = VersionUtils.defaultVersion();
+        }
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    @Column(name = "CREATE_USER", nullable = false, length = 64)
+    public String getCreateUser() {
+        if (this.createUser == null) {
+            this.createUser = "createUser";
+        }
+        return this.createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    @Column(name = "ASSIGN_KERNEL", nullable = false, length = 64)//
+    public String getAssignKernel() {
+        if (this.assignKernel == null) {
+            this.assignKernel = "assignKernel";
+        }
+        return this.assignKernel;
+    }
+
+    public void setAssignKernel(String assignKernel) {
+        this.assignKernel = assignKernel;
+    }
+
+    @Column(name = "ASSIGN_APP", nullable = false, length = 64)//
+    public String getAssignApp() {
+        if (this.assignApp == null) {
+            this.assignApp = "assignApp";
+        }
+        return this.assignApp;
+    }
+
+    public void setAssignApp(String assignApp) {
+        this.assignApp = assignApp;
+    }
+
+    @Column(name = "CUR_KERNEL", nullable = false, length = 64)//
+    public String getCurKernel() {
+        if (this.curKernel == null) {
+            this.curKernel = "curKernel";
+        }
+        return this.curKernel;
+    }
+
+    public void setCurKernel(String curKernel) {
+        this.curKernel = curKernel;
+    }
+
+    @Column(name = "CUR_APP", nullable = false, length = 64)//
+    public String getCurApp() {
+        if (this.curApp == null) {
+            this.curApp = "curApp";
+        }
+        return this.curApp;
+    }
+
+    public void setCurApp(String curApp) {
+        this.curApp = curApp;
+    }
+
+    @Column(name = "KERNEL_UPDATED", nullable = false)
+    public int getKernelUpdated() {
+        return this.kernelUpdated;
+    }
+
+    public void setKernelUpdated(int kernelUpdated) {
+        this.kernelUpdated = kernelUpdated;
+    }
+
+    @Column(name = "APP_UPDATED", nullable = false)
+    public int getAppUpdated() {
+        return this.appUpdated;
+    }
+
+    public void setAppUpdated(int appUpdated) {
+        this.appUpdated = appUpdated;
+    }
+
+    @Column(name = "ASSIGN_CONFIG_ID", nullable = false)//
+    public Integer getAssignConfigId() {
+        if (this.assignConfigId == null) {
+            this.assignConfigId = 0;
+        }
+        return this.assignConfigId;
+    }
+
+    public void setAssignConfigId(Integer assignConfigId) {
+        this.assignConfigId = assignConfigId;
+    }
+
+    @Column(name = "ASSIGN_CONFIG_NAME", nullable = false, length = 64)//
+    public String getAssignConfigName() {
+        if (this.assignConfigName == null) {
+            this.assignConfigName = "assignConfigName";
+        }
+        return this.assignConfigName;
+    }
+
+    public void setAssignConfigName(String assignConfigName) {
+        this.assignConfigName = assignConfigName;
+    }
+
+    @Column(name = "ASSIGN_CONFIG_VERSION", nullable = false, length = 19)//
+    public Date getAssignConfigVersion() {
+        if (this.assignConfigVersion == null) {
+            this.assignConfigVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignConfigVersion;
+    }
+
+    public void setAssignConfigVersion(Date assignConfigVersion) {
+        this.assignConfigVersion = assignConfigVersion;
+    }
+
+    @Column(name = "CUR_CONFIG_ID", nullable = false)//
+    public Integer getCurConfigId() {
+        if (this.curConfigId == null) {
+            this.curConfigId = 0;
+        }
+        return this.curConfigId;
+    }
+
+    public void setCurConfigId(Integer curConfigId) {
+        this.curConfigId = curConfigId;
+    }
+
+    @Column(name = "CUR_CONFIG_NAME", nullable = false, length = 64)//
+    public String getCurConfigName() {
+        if (this.curConfigName == null) {
+            this.curConfigName = "curConfigName";
+        }
+        return this.curConfigName;
+    }
+
+    public void setCurConfigName(String curConfigName) {
+        this.curConfigName = curConfigName;
+    }
+
+    @Column(name = "CUR_CONFIG_VERSION", nullable = false, length = 19)//
+    public Date getCurConfigVersion() {
+        if (this.curConfigVersion == null) {
+            this.curConfigVersion = VersionUtils.defaultVersion();
+        }
+        return this.curConfigVersion;
+    }
+
+    public void setCurConfigVersion(Date curConfigVersion) {
+        this.curConfigVersion = curConfigVersion;
+    }
+
+    @Column(name = "CONFIG_UPDATED", nullable = false)
+    public int getConfigUpdated() {
+
+        return this.configUpdated;
+    }
+
+    public void setConfigUpdated(int configUpdated) {
+        this.configUpdated = configUpdated;
+    }
+
+    @Column(name = "ASSIGN_LOOPTASK_ID", nullable = false)//
+    public Integer getAssignLooptaskId() {
+        if (this.assignLooptaskId == null) {
+            this.assignLooptaskId = 0;
+        }
+        return this.assignLooptaskId;
+    }
+
+    public void setAssignLooptaskId(Integer assignLooptaskId) {
+        this.assignLooptaskId = assignLooptaskId;
+    }
+
+    @Column(name = "ASSIGN_LOOPTASK_NAME", nullable = false, length = 64)//
+    public String getAssignLooptaskName() {
+        if (this.assignLooptaskName == null) {
+            this.assignLooptaskName = "assignLooptaskName";
+        }
+        return this.assignLooptaskName;
+    }
+
+    public void setAssignLooptaskName(String assignLooptaskName) {
+        this.assignLooptaskName = assignLooptaskName;
+    }
+
+    @Column(name = "ASSIGN_LOOPTASK_VERSION", nullable = false, length = 19)//
+    public Date getAssignLooptaskVersion() {
+        if (this.assignLooptaskVersion == null) {
+            this.assignLooptaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignLooptaskVersion;
+    }
+
+    public void setAssignLooptaskVersion(Date assignLooptaskVersion) {
+        this.assignLooptaskVersion = assignLooptaskVersion;
+    }
+
+    @Column(name = "ASSIGN_LOOPFILE_VERSION", nullable = false, length = 19)//
+    public Date getAssignLoopfileVersion() {
+        if (this.assignLoopfileVersion == null) {
+            this.assignLoopfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignLoopfileVersion;
+    }
+
+    public void setAssignLoopfileVersion(Date assignLoopfileVersion) {
+        this.assignLoopfileVersion = assignLoopfileVersion;
+    }
+
+    @Column(name = "ASSIGN_LOOPPLAY_VERSION", nullable = false, length = 19)//
+    public Date getAssignLoopplayVersion() {
+        if (this.assignLoopplayVersion == null) {
+            this.assignLoopplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignLoopplayVersion;
+    }
+
+    public void setAssignLoopplayVersion(Date assignLoopplayVersion) {
+        this.assignLoopplayVersion = assignLoopplayVersion;
+    }
+
+    @Column(name = "ASSIGN_LOOPSTRATEGY_VERSION", nullable = false, length = 19)//
+    public Date getAssignLoopstrategyVersion() {
+        if (this.assignLoopstrategyVersion == null) {
+            this.assignLoopstrategyVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignLoopstrategyVersion;
+    }
+
+    public void setAssignLoopstrategyVersion(Date assignLoopstrategyVersion) {
+        this.assignLoopstrategyVersion = assignLoopstrategyVersion;
+    }
+
+    @Column(name = "CUR_LOOPTASK_ID", nullable = false)//
+    public Integer getCurLooptaskId() {
+        if (this.curLooptaskId == null) {
+            this.curLooptaskId = 0;
+        }
+        return this.curLooptaskId;
+    }
+
+    public void setCurLooptaskId(Integer curLooptaskId) {
+        this.curLooptaskId = curLooptaskId;
+    }
+
+    @Column(name = "CUR_LOOPTASK_NAME", nullable = false, length = 64)//
+    public String getCurLooptaskName() {
+        if (this.curLooptaskName == null) {
+            this.curLooptaskName = "curLooptaskName";
+        }
+        return this.curLooptaskName;
+    }
+
+    public void setCurLooptaskName(String curLooptaskName) {
+        this.curLooptaskName = curLooptaskName;
+    }
+
+    @Column(name = "CUR_LOOPTASK_VERSION", nullable = false, length = 19)//
+    public Date getCurLooptaskVersion() {
+        if (this.curLooptaskVersion == null) {
+            this.curLooptaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.curLooptaskVersion;
+    }
+
+    public void setCurLooptaskVersion(Date curLooptaskVersion) {
+        this.curLooptaskVersion = curLooptaskVersion;
+    }
+
+    @Column(name = "CUR_LOOPFILE_VERSION", nullable = false, length = 19)//
+    public Date getCurLoopfileVersion() {
+        if (this.curLoopfileVersion == null) {
+            this.curLoopfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.curLoopfileVersion;
+    }
+
+    public void setCurLoopfileVersion(Date curLoopfileVersion) {
+        this.curLoopfileVersion = curLoopfileVersion;
+    }
+
+    @Column(name = "CUR_LOOPPLAY_VERSION", nullable = false, length = 19)//
+    public Date getCurLoopplayVersion() {
+        if (this.curLoopplayVersion == null) {
+            this.curLoopplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.curLoopplayVersion;
+    }
+
+    public void setCurLoopplayVersion(Date curLoopplayVersion) {
+        this.curLoopplayVersion = curLoopplayVersion;
+    }
+
+    @Column(name = "CUR_LOOPSTRATEGY_VERSION", nullable = false, length = 19)//
+    public Date getCurLoopstrategyVersion() {
+        if (this.curLoopstrategyVersion == null) {
+            this.curLoopstrategyVersion = VersionUtils.defaultVersion();
+        }
+        return this.curLoopstrategyVersion;
+    }
+
+    public void setCurLoopstrategyVersion(Date curLoopstrategyVersion) {
+        this.curLoopstrategyVersion = curLoopstrategyVersion;
+    }
+
+    @Column(name = "LOOPTASK_UPDATED", nullable = false)
+    public int getLooptaskUpdated() {
+        return this.looptaskUpdated;
+    }
+
+    public void setLooptaskUpdated(int looptaskUpdated) {
+        this.looptaskUpdated = looptaskUpdated;
+    }
+
+    @Column(name = "ASSIGN_DEMANDTASK_ID", nullable = false)//
+    public Integer getAssignDemandtaskId() {
+        if (this.assignDemandtaskId == null) {
+            this.assignDemandtaskId = 0;
+        }
+        return this.assignDemandtaskId;
+    }
+
+    public void setAssignDemandtaskId(Integer assignDemandtaskId) {
+        this.assignDemandtaskId = assignDemandtaskId;
+    }
+
+    @Column(name = "ASSIGN_DEMANDTASK_NAME", nullable = false, length = 64)//
+    public String getAssignDemandtaskName() {
+        if (this.assignDemandtaskName == null) {
+            this.assignDemandtaskName = "assignDemandtaskName";
+        }
+        return this.assignDemandtaskName;
+    }
+
+    public void setAssignDemandtaskName(String assignDemandtaskName) {
+        this.assignDemandtaskName = assignDemandtaskName;
+    }
+
+    @Column(name = "ASSIGN_DEMANDTASK_VERSION", nullable = false, length = 19)//
+    public Date getAssignDemandtaskVersion() {
+        if (this.assignDemandtaskVersion == null) {
+            this.assignDemandtaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignDemandtaskVersion;
+    }
+
+    public void setAssignDemandtaskVersion(Date assignDemandtaskVersion) {
+        this.assignDemandtaskVersion = assignDemandtaskVersion;
+    }
+
+    @Column(name = "ASSIGN_DEMANDFILE_VERSION", nullable = false, length = 19)//
+    public Date getAssignDemandfileVersion() {
+        if (this.assignDemandfileVersion == null) {
+            this.assignDemandfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignDemandfileVersion;
+    }
+
+    public void setAssignDemandfileVersion(Date assignDemandfileVersion) {
+        this.assignDemandfileVersion = assignDemandfileVersion;
+    }
+
+    @Column(name = "ASSIGN_DEMANDPLAY_VERSION", nullable = false, length = 19)//
+    public Date getAssignDemandplayVersion() {
+        if (this.assignDemandplayVersion == null) {
+            this.assignDemandplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignDemandplayVersion;
+    }
+
+    public void setAssignDemandplayVersion(Date assignDemandplayVersion) {
+        this.assignDemandplayVersion = assignDemandplayVersion;
+    }
+
+    @Column(name = "CUR_DEMANDTASK_ID", nullable = false)//
+    public Integer getCurDemandtaskId() {
+        if (this.curDemandtaskId == null) {
+            this.curDemandtaskId = 0;
+        }
+        return this.curDemandtaskId;
+    }
+
+    public void setCurDemandtaskId(Integer curDemandtaskId) {
+        this.curDemandtaskId = curDemandtaskId;
+    }
+
+    @Column(name = "CUR_DEMANDTASK_NAME", nullable = false, length = 64)//
+    public String getCurDemandtaskName() {
+        if (this.curDemandtaskName == null) {
+            this.curDemandtaskName = "curDemandtaskName";
+        }
+        return this.curDemandtaskName;
+    }
+
+    public void setCurDemandtaskName(String curDemandtaskName) {
+        this.curDemandtaskName = curDemandtaskName;
+    }
+
+    @Column(name = "CUR_DEMANDTASK_VERSION", nullable = false, length = 19)//
+    public Date getCurDemandtaskVersion() {
+        if (this.curDemandtaskVersion == null) {
+            this.curDemandtaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.curDemandtaskVersion;
+    }
+
+    public void setCurDemandtaskVersion(Date curDemandtaskVersion) {
+        this.curDemandtaskVersion = curDemandtaskVersion;
+    }
+
+    @Column(name = "CUR_DEMANDFILE_VERSION", nullable = false, length = 19)//
+    public Date getCurDemandfileVersion() {
+        if (this.curDemandfileVersion == null) {
+            this.curDemandfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.curDemandfileVersion;
+    }
+
+    public void setCurDemandfileVersion(Date curDemandfileVersion) {
+        this.curDemandfileVersion = curDemandfileVersion;
+    }
+
+    @Column(name = "CUR_DEMANDPLAY_VERSION", nullable = false, length = 19)//
+    public Date getCurDemandplayVersion() {
+        if (this.curDemandplayVersion == null) {
+            this.curDemandplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.curDemandplayVersion;
+    }
+
+    public void setCurDemandplayVersion(Date curDemandplayVersion) {
+        this.curDemandplayVersion = curDemandplayVersion;
+    }
+
+    @Column(name = "DEMANDTASK_UPDATED", nullable = false)
+    public int getDemandtaskUpdated() {
+        return this.demandtaskUpdated;
+    }
+
+    public void setDemandtaskUpdated(int demandtaskUpdated) {
+        this.demandtaskUpdated = demandtaskUpdated;
+    }
+
+    @Column(name = "ASSIGN_PLUGINTASK_ID", nullable = false)//
+    public Integer getAssignPlugintaskId() {
+        if (this.assignPlugintaskId == null) {
+            this.assignPlugintaskId = 0;
+        }
+        return this.assignPlugintaskId;
+    }
+
+    public void setAssignPlugintaskId(Integer assignPlugintaskId) {
+        this.assignPlugintaskId = assignPlugintaskId;
+    }
+
+    @Column(name = "ASSIGN_PLUGINTASK_NAME", nullable = false, length = 64)//
+    public String getAssignPlugintaskName() {
+        if (this.assignPlugintaskName == null) {
+            this.assignPlugintaskName = "assignPlugintaskName";
+        }
+        return this.assignPlugintaskName;
+    }
+
+    public void setAssignPlugintaskName(String assignPlugintaskName) {
+        this.assignPlugintaskName = assignPlugintaskName;
+    }
+
+    @Column(name = "ASSIGN_PLUGINTASK_VERSION", nullable = false, length = 19)//
+    public Date getAssignPlugintaskVersion() {
+        if (this.assignPlugintaskVersion == null) {
+            this.assignPlugintaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignPlugintaskVersion;
+    }
+
+    public void setAssignPlugintaskVersion(Date assignPlugintaskVersion) {
+        this.assignPlugintaskVersion = assignPlugintaskVersion;
+    }
+
+    @Column(name = "ASSIGN_PLUGINFILE_VERSION", nullable = false, length = 19)//
+    public Date getAssignPluginfileVersion() {
+        if (this.assignPluginfileVersion == null) {
+            this.assignPluginfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignPluginfileVersion;
+    }
+
+    public void setAssignPluginfileVersion(Date assignPluginfileVersion) {
+        this.assignPluginfileVersion = assignPluginfileVersion;
+    }
+
+    @Column(name = "ASSIGN_PLUGINPLAY_VERSION", nullable = false, length = 19)//
+    public Date getAssignPluginplayVersion() {
+        if (this.assignPluginplayVersion == null) {
+            this.assignPluginplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignPluginplayVersion;
+    }
+
+    public void setAssignPluginplayVersion(Date assignPluginplayVersion) {
+        this.assignPluginplayVersion = assignPluginplayVersion;
+    }
+
+    @Column(name = "CUR_PLUGINTASK_ID", nullable = false)//
+    public Integer getCurPlugintaskId() {
+
+        if (this.curPlugintaskId == null) {
+            this.curPlugintaskId = 0;
+        }
+        return this.curPlugintaskId;
+    }
+
+    public void setCurPlugintaskId(Integer curPlugintaskId) {
+        this.curPlugintaskId = curPlugintaskId;
+    }
+
+    @Column(name = "CUR_PLUGINTASK_NAME", nullable = false, length = 64)//
+    public String getCurPlugintaskName() {
+        if (this.curPlugintaskName == null) {
+            this.curPlugintaskName = "curPlugintaskName";
+        }
+        return this.curPlugintaskName;
+    }
+
+    public void setCurPlugintaskName(String curPlugintaskName) {
+        this.curPlugintaskName = curPlugintaskName;
+    }
+
+    @Column(name = "CUR_PLUGINTASK_VERSION", nullable = false, length = 19)//
+    public Date getCurPlugintaskVersion() {
+        if (this.curPlugintaskVersion == null) {
+            this.curPlugintaskVersion = VersionUtils.defaultVersion();
+        }
+        return this.curPlugintaskVersion;
+    }
+
+    public void setCurPlugintaskVersion(Date curPlugintaskVersion) {
+        this.curPlugintaskVersion = curPlugintaskVersion;
+    }
+
+    @Column(name = "CUR_PLUGINFILE_VERSION", nullable = false, length = 19)//
+    public Date getCurPluginfileVersion() {
+        if (this.curPluginfileVersion == null) {
+            this.curPluginfileVersion = VersionUtils.defaultVersion();
+        }
+        return this.curPluginfileVersion;
+    }
+
+    public void setCurPluginfileVersion(Date curPluginfileVersion) {
+        this.curPluginfileVersion = curPluginfileVersion;
+    }
+
+    @Column(name = "CUR_PLUGINPLAY_VERSION", nullable = false, length = 19)//
+    public Date getCurPluginplayVersion() {
+        if (this.curPluginplayVersion == null) {
+            this.curPluginplayVersion = VersionUtils.defaultVersion();
+        }
+        return this.curPluginplayVersion;
+    }
+
+    public void setCurPluginplayVersion(Date curPluginplayVersion) {
+        this.curPluginplayVersion = curPluginplayVersion;
+    }
+
+    @Column(name = "PLUGINTASK_UPDATED", nullable = false)
+    public int getPlugintaskUpdated() {
+        return this.plugintaskUpdated;
+    }
+
+    public void setPlugintaskUpdated(int plugintaskUpdated) {
+        this.plugintaskUpdated = plugintaskUpdated;
+    }
+
+    @Column(name = "ASSIGN_SOURCE_VERSION", nullable = false, length = 19)
+    public Date getAssignSourceVersion() {
+
+        if (this.assignSourceVersion == null) {
+            this.assignSourceVersion = VersionUtils.defaultVersion();
+        }
+        return this.assignSourceVersion;
+    }
+
+    public void setAssignSourceVersion(Date assignSourceVersion) {
+        this.assignSourceVersion = assignSourceVersion;
+    }
+
+    @Column(name = "REST_SCHEDULE", nullable = false, length = 1024)
+    public String getRestSchedule() {
+
+        if (this.restSchedule == null) {
+            this.restSchedule = "restSchedule";
+        }
+        return this.restSchedule;
+    }
+
+    public void setRestSchedule(String restSchedule) {
+        this.restSchedule = restSchedule;
+    }
+
+    @Column(name = "STANDBY_SCHEDULE", nullable = false, length = 1024)
+    public String getStandbySchedule() {
+        if (this.standbySchedule == null) {
+            this.standbySchedule = "standbySchedule";
+        }
+        return this.standbySchedule;
+    }
+
+    public void setStandbySchedule(String standbySchedule) {
+        this.standbySchedule = standbySchedule;
+    }
+
+    @Column(name = "CAPTURE_SCHEDULE", nullable = false, length = 1024)
+    public String getCaptureSchedule() {
+        if (this.captureSchedule == null) {
+            this.captureSchedule = "captureSchedule";
+        }
+        return this.captureSchedule;
+    }
+
+    public void setCaptureSchedule(String captureSchedule) {
+        this.captureSchedule = captureSchedule;
+    }
+
+    @Column(name = "DEMAND_SCHEDULE", nullable = false, length = 1024)
+    public String getDemandSchedule() {
+
+        if (this.demandSchedule == null) {
+            this.demandSchedule = "demandSchedule";
+        }
+        return this.demandSchedule;
+    }
+
+    public void setDemandSchedule(String demandSchedule) {
+        this.demandSchedule = demandSchedule;
+    }
+
+    @Column(name = "SCHEDULE_VERSION", nullable = false, length = 19)
+    public Date getScheduleVersion() {
+
+        if (this.scheduleVersion == null) {
+            this.scheduleVersion = VersionUtils.defaultVersion();
+        }
+        return this.scheduleVersion;
+    }
+
+    public void setScheduleVersion(Date scheduleVersion) {
+        this.scheduleVersion = scheduleVersion;
+    }
+
+    @Column(name = "SUBTITLE", nullable = false, length = 4096)
+    public String getSubtitle() {
+
+        if (this.subtitle == null) {
+            this.subtitle = "subtitle";
+        }
+        return this.subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    @Column(name = "SUBTITLE_VERSION", nullable = false, length = 19)
+    public Date getSubtitleVersion() {
+
+        if (this.subtitleVersion == null) {
+            this.subtitleVersion = VersionUtils.defaultVersion();
+        }
+        return this.subtitleVersion;
+    }
+
+    public void setSubtitleVersion(Date subtitleVersion) {
+        this.subtitleVersion = subtitleVersion;
+    }
+
+    @Column(name = "CUR_SUBTITLE_VERSION", nullable = false, length = 19)
+    public Date getCurSubtitleVersion() {
+
+        if (this.curSubtitleVersion == null) {
+            this.curSubtitleVersion = VersionUtils.defaultVersion();
+        }
+        return this.curSubtitleVersion;
+    }
+
+    public void setCurSubtitleVersion(Date curSubtitleVersion) {
+        this.curSubtitleVersion = curSubtitleVersion;
+    }
+
+    @Column(name = "SUBTITLE_UPDATED", nullable = false)
+    public int getSubtitleUpdated() {
+        return this.subtitleUpdated;
+    }
+
+    public void setSubtitleUpdated(int subtitleUpdated) {
+        this.subtitleUpdated = subtitleUpdated;
+    }
+
+    @Column(name = "ONLINE_STATE", nullable = false)
+    public int getOnlineState() {
+        return this.onlineState;
+    }
+
+    public void setOnlineState(int onlineState) {
+        this.onlineState = onlineState;
+    }
+
+    @Column(name = "LOGON_TIME", nullable = false, length = 19)
+    public Date getLogonTime() {
+
+        if (this.logonTime == null) {
+            this.logonTime = VersionUtils.defaultVersion();
+        }
+        return this.logonTime;
+    }
+
+    public void setLogonTime(Date logonTime) {
+        this.logonTime = logonTime;
+    }
+
+    @Column(name = "LOGOFF_TIME", nullable = false, length = 19)
+    public Date getLogoffTime() {
+
+        if (this.logoffTime == null) {
+            this.logoffTime = VersionUtils.defaultVersion();
+        }
+        return this.logoffTime;
+    }
+
+    public void setLogoffTime(Date logoffTime) {
+        this.logoffTime = logoffTime;
+    }
+
+    @Column(name = "DOWNLOAD_TOTAL", nullable = false)
+    public long getDownloadTotal() {
+        return this.downloadTotal;
+    }
+
+    public void setDownloadTotal(long downloadTotal) {
+        this.downloadTotal = downloadTotal;
+    }
+
+    @Column(name = "DOWNLOAD_FINISHED", nullable = false)
+    public long getDownloadFinished() {
+        return this.downloadFinished;
+    }
+
+    public void setDownloadFinished(long downloadFinished) {
+        this.downloadFinished = downloadFinished;
+    }
+
+    @Column(name = "DOWNLOAD_TYPE", nullable = false)
+    public int getDownloadType() {
+        return this.downloadType;
+    }
+
+    public void setDownloadType(int downloadType) {
+        this.downloadType = downloadType;
+    }
+
+    @Column(name = "POWERON", nullable = false)
+    public int getPoweron() {
+        return this.poweron;
+    }
+
+    public void setPoweron(int poweron) {
+        this.poweron = poweron;
+    }
+
+    @Column(name = "POWEROFF", nullable = false)
+    public int getPoweroff() {
+        return this.poweroff;
+    }
+
+    public void setPoweroff(int poweroff) {
+        this.poweroff = poweroff;
+    }
+
+    @Column(name = "ALIVE_INTERVAL", nullable = false)
+    public int getAliveInterval() {
+        return this.aliveInterval;
+    }
+
+    public void setAliveInterval(int aliveInterval) {
+        this.aliveInterval = aliveInterval;
+    }
+
+    @Column(name = "LAST_ALIVE", nullable = false, length = 19)
+    public Date getLastAlive() {
+
+        if (this.lastAlive == null) {
+            this.lastAlive = VersionUtils.defaultVersion();
+        }
+        return this.lastAlive;
+    }
+
+    public void setLastAlive(Date lastAlive) {
+        this.lastAlive = lastAlive;
+    }
+
+    @Column(name = "LAST_PATROL", nullable = false, length = 19)
+    public Date getLastPatrol() {
+
+        if (this.lastPatrol == null) {
+            this.lastPatrol = VersionUtils.defaultVersion();
+        }
+        return this.lastPatrol;
+    }
+
+    public void setLastPatrol(Date lastPatrol) {
+        this.lastPatrol = lastPatrol;
+    }
+
+    @Column(name = "LAST_DOWNLOAD", nullable = false, length = 19)
+    public Date getLastDownload() {
+
+        if (this.lastDownload == null) {
+            this.lastDownload = VersionUtils.defaultVersion();
+        }
+        return this.lastDownload;
+    }
+
+    public void setLastDownload(Date lastDownload) {
+        this.lastDownload = lastDownload;
+    }
+
+    @Column(name = "FLOW_LIMIT", nullable = false)
+    public long getFlowLimit() {
+        return this.flowLimit;
+    }
+
+    public void setFlowLimit(long flowLimit) {
+        this.flowLimit = flowLimit;
+    }
+
+    @Column(name = "NET_FLOW", nullable = false)
+    public long getNetFlow() {
+
+        return this.netFlow;
+    }
+
+    public void setNetFlow(long netFlow) {
+        this.netFlow = netFlow;
+    }
+
+    public boolean equals(Object other) {
+        if ((this == other)) {
+            return true;
+        }
+        if ((other == null)) {
+            return false;
+        }
+        if (!(other instanceof VwTerminalDetailId)) {
+            return false;
+        }
+        VwTerminalDetailId castOther = (VwTerminalDetailId) other;
+
+        return (this.getCstmId() == castOther.getCstmId()) && (this.getDevId() == castOther.getDevId())
+                && ((this.getName() == castOther.getName()) || (this.getName() != null && castOther.getName() != null
+                && this.getName().equals(castOther.getName())))
+                && ((this.getDescp() == castOther.getDescp()) || (this.getDescp() != null
+                && castOther.getDescp() != null && this.getDescp().equals(castOther.getDescp())))
+                && ((this.getGroupId() == castOther.getGroupId()) || (this.getGroupId() != null
+                && castOther.getGroupId() != null && this.getGroupId().equals(castOther.getGroupId())))
+                && ((this.getGroupName() == castOther.getGroupName()) || (this.getGroupName() != null
+                && castOther.getGroupName() != null && this.getGroupName().equals(castOther.getGroupName())))
+                && ((this.getCityId() == castOther.getCityId()) || (this.getCityId() != null
+                && castOther.getCityId() != null && this.getCityId().equals(castOther.getCityId())))
+                && ((this.getCityName() == castOther.getCityName()) || (this.getCityName() != null
+                && castOther.getCityName() != null && this.getCityName().equals(castOther.getCityName())))
+                && ((this.getCreateTime() == castOther.getCreateTime()) || (this.getCreateTime() != null
+                && castOther.getCreateTime() != null && this.getCreateTime().equals(castOther.getCreateTime())))
+                && ((this.getCreateUser() == castOther.getCreateUser()) || (this.getCreateUser() != null
+                && castOther.getCreateUser() != null && this.getCreateUser().equals(castOther.getCreateUser())))
+                && ((this.getAssignKernel() == castOther.getAssignKernel())
+                || (this.getAssignKernel() != null && castOther.getAssignKernel() != null
+                && this.getAssignKernel().equals(castOther.getAssignKernel())))
+                && ((this.getAssignApp() == castOther.getAssignApp()) || (this.getAssignApp() != null
+                && castOther.getAssignApp() != null && this.getAssignApp().equals(castOther.getAssignApp())))
+                && ((this.getCurKernel() == castOther.getCurKernel()) || (this.getCurKernel() != null
+                && castOther.getCurKernel() != null && this.getCurKernel().equals(castOther.getCurKernel())))
+                && ((this.getCurApp() == castOther.getCurApp()) || (this.getCurApp() != null
+                && castOther.getCurApp() != null && this.getCurApp().equals(castOther.getCurApp())))
+                && (this.getKernelUpdated() == castOther.getKernelUpdated())
+                && (this.getAppUpdated() == castOther.getAppUpdated())
+                && ((this.getAssignConfigId() == castOther.getAssignConfigId())
+                || (this.getAssignConfigId() != null && castOther.getAssignConfigId() != null
+                && this.getAssignConfigId().equals(castOther.getAssignConfigId())))
+                && ((this.getAssignConfigName() == castOther.getAssignConfigName())
+                || (this.getAssignConfigName() != null && castOther.getAssignConfigName() != null
+                && this.getAssignConfigName().equals(castOther.getAssignConfigName())))
+                && ((this.getAssignConfigVersion() == castOther.getAssignConfigVersion())
+                || (this.getAssignConfigVersion() != null && castOther.getAssignConfigVersion() != null
+                && this.getAssignConfigVersion().equals(castOther.getAssignConfigVersion())))
+                && ((this.getCurConfigId() == castOther.getCurConfigId())
+                || (this.getCurConfigId() != null && castOther.getCurConfigId() != null
+                && this.getCurConfigId().equals(castOther.getCurConfigId())))
+                && ((this.getCurConfigName() == castOther.getCurConfigName())
+                || (this.getCurConfigName() != null && castOther.getCurConfigName() != null
+                && this.getCurConfigName().equals(castOther.getCurConfigName())))
+                && ((this.getCurConfigVersion() == castOther.getCurConfigVersion())
+                || (this.getCurConfigVersion() != null && castOther.getCurConfigVersion() != null
+                && this.getCurConfigVersion().equals(castOther.getCurConfigVersion())))
+                && (this.getConfigUpdated() == castOther.getConfigUpdated())
+                && ((this.getAssignLooptaskId() == castOther.getAssignLooptaskId())
+                || (this.getAssignLooptaskId() != null && castOther.getAssignLooptaskId() != null
+                && this.getAssignLooptaskId().equals(castOther.getAssignLooptaskId())))
+                && ((this.getAssignLooptaskName() == castOther.getAssignLooptaskName())
+                || (this.getAssignLooptaskName() != null && castOther.getAssignLooptaskName() != null
+                && this.getAssignLooptaskName().equals(castOther.getAssignLooptaskName())))
+                && ((this.getAssignLooptaskVersion() == castOther.getAssignLooptaskVersion())
+                || (this.getAssignLooptaskVersion() != null && castOther.getAssignLooptaskVersion() != null
+                && this.getAssignLooptaskVersion().equals(castOther.getAssignLooptaskVersion())))
+                && ((this.getAssignLoopfileVersion() == castOther.getAssignLoopfileVersion())
+                || (this.getAssignLoopfileVersion() != null && castOther.getAssignLoopfileVersion() != null
+                && this.getAssignLoopfileVersion().equals(castOther.getAssignLoopfileVersion())))
+                && ((this.getAssignLoopplayVersion() == castOther.getAssignLoopplayVersion())
+                || (this.getAssignLoopplayVersion() != null && castOther.getAssignLoopplayVersion() != null
+                && this.getAssignLoopplayVersion().equals(castOther.getAssignLoopplayVersion())))
+                && ((this.getAssignLoopstrategyVersion() == castOther.getAssignLoopstrategyVersion())
+                || (this.getAssignLoopstrategyVersion() != null
+                && castOther.getAssignLoopstrategyVersion() != null
+                && this.getAssignLoopstrategyVersion()
+                .equals(castOther.getAssignLoopstrategyVersion())))
+                && ((this.getCurLooptaskId() == castOther.getCurLooptaskId())
+                || (this.getCurLooptaskId() != null && castOther.getCurLooptaskId() != null
+                && this.getCurLooptaskId().equals(castOther.getCurLooptaskId())))
+                && ((this.getCurLooptaskName() == castOther.getCurLooptaskName())
+                || (this.getCurLooptaskName() != null && castOther.getCurLooptaskName() != null
+                && this.getCurLooptaskName().equals(castOther.getCurLooptaskName())))
+                && ((this.getCurLooptaskVersion() == castOther.getCurLooptaskVersion())
+                || (this.getCurLooptaskVersion() != null && castOther.getCurLooptaskVersion() != null
+                && this.getCurLooptaskVersion().equals(castOther.getCurLooptaskVersion())))
+                && ((this.getCurLoopfileVersion() == castOther.getCurLoopfileVersion())
+                || (this.getCurLoopfileVersion() != null && castOther.getCurLoopfileVersion() != null
+                && this.getCurLoopfileVersion().equals(castOther.getCurLoopfileVersion())))
+                && ((this.getCurLoopplayVersion() == castOther.getCurLoopplayVersion())
+                || (this.getCurLoopplayVersion() != null && castOther.getCurLoopplayVersion() != null
+                && this.getCurLoopplayVersion().equals(castOther.getCurLoopplayVersion())))
+                && ((this.getCurLoopstrategyVersion() == castOther.getCurLoopstrategyVersion())
+                || (this.getCurLoopstrategyVersion() != null && castOther.getCurLoopstrategyVersion() != null
+                && this.getCurLoopstrategyVersion().equals(castOther.getCurLoopstrategyVersion())))
+                && (this.getLooptaskUpdated() == castOther.getLooptaskUpdated())
+                && ((this.getAssignDemandtaskId() == castOther.getAssignDemandtaskId())
+                || (this.getAssignDemandtaskId() != null && castOther.getAssignDemandtaskId() != null
+                && this.getAssignDemandtaskId().equals(castOther.getAssignDemandtaskId())))
+                && ((this.getAssignDemandtaskName() == castOther.getAssignDemandtaskName())
+                || (this.getAssignDemandtaskName() != null && castOther.getAssignDemandtaskName() != null
+                && this.getAssignDemandtaskName().equals(castOther.getAssignDemandtaskName())))
+                && ((this.getAssignDemandtaskVersion() == castOther.getAssignDemandtaskVersion())
+                || (this.getAssignDemandtaskVersion() != null && castOther.getAssignDemandtaskVersion() != null
+                && this.getAssignDemandtaskVersion().equals(castOther.getAssignDemandtaskVersion())))
+                && ((this.getAssignDemandfileVersion() == castOther.getAssignDemandfileVersion())
+                || (this.getAssignDemandfileVersion() != null && castOther.getAssignDemandfileVersion() != null
+                && this.getAssignDemandfileVersion().equals(castOther.getAssignDemandfileVersion())))
+                && ((this.getAssignDemandplayVersion() == castOther.getAssignDemandplayVersion())
+                || (this.getAssignDemandplayVersion() != null && castOther.getAssignDemandplayVersion() != null
+                && this.getAssignDemandplayVersion().equals(castOther.getAssignDemandplayVersion())))
+                && ((this.getCurDemandtaskId() == castOther.getCurDemandtaskId())
+                || (this.getCurDemandtaskId() != null && castOther.getCurDemandtaskId() != null
+                && this.getCurDemandtaskId().equals(castOther.getCurDemandtaskId())))
+                && ((this.getCurDemandtaskName() == castOther.getCurDemandtaskName())
+                || (this.getCurDemandtaskName() != null && castOther.getCurDemandtaskName() != null
+                && this.getCurDemandtaskName().equals(castOther.getCurDemandtaskName())))
+                && ((this.getCurDemandtaskVersion() == castOther.getCurDemandtaskVersion())
+                || (this.getCurDemandtaskVersion() != null && castOther.getCurDemandtaskVersion() != null
+                && this.getCurDemandtaskVersion().equals(castOther.getCurDemandtaskVersion())))
+                && ((this.getCurDemandfileVersion() == castOther.getCurDemandfileVersion())
+                || (this.getCurDemandfileVersion() != null && castOther.getCurDemandfileVersion() != null
+                && this.getCurDemandfileVersion().equals(castOther.getCurDemandfileVersion())))
+                && ((this.getCurDemandplayVersion() == castOther.getCurDemandplayVersion())
+                || (this.getCurDemandplayVersion() != null && castOther.getCurDemandplayVersion() != null
+                && this.getCurDemandplayVersion().equals(castOther.getCurDemandplayVersion())))
+                && (this.getDemandtaskUpdated() == castOther.getDemandtaskUpdated())
+                && ((this.getAssignPlugintaskId() == castOther.getAssignPlugintaskId())
+                || (this.getAssignPlugintaskId() != null && castOther.getAssignPlugintaskId() != null
+                && this.getAssignPlugintaskId().equals(castOther.getAssignPlugintaskId())))
+                && ((this.getAssignPlugintaskName() == castOther.getAssignPlugintaskName())
+                || (this.getAssignPlugintaskName() != null && castOther.getAssignPlugintaskName() != null
+                && this.getAssignPlugintaskName().equals(castOther.getAssignPlugintaskName())))
+                && ((this.getAssignPlugintaskVersion() == castOther.getAssignPlugintaskVersion())
+                || (this.getAssignPlugintaskVersion() != null && castOther.getAssignPlugintaskVersion() != null
+                && this.getAssignPlugintaskVersion().equals(castOther.getAssignPlugintaskVersion())))
+                && ((this.getAssignPluginfileVersion() == castOther.getAssignPluginfileVersion())
+                || (this.getAssignPluginfileVersion() != null && castOther.getAssignPluginfileVersion() != null
+                && this.getAssignPluginfileVersion().equals(castOther.getAssignPluginfileVersion())))
+                && ((this.getAssignPluginplayVersion() == castOther.getAssignPluginplayVersion())
+                || (this.getAssignPluginplayVersion() != null && castOther.getAssignPluginplayVersion() != null
+                && this.getAssignPluginplayVersion().equals(castOther.getAssignPluginplayVersion())))
+                && ((this.getCurPlugintaskId() == castOther.getCurPlugintaskId())
+                || (this.getCurPlugintaskId() != null && castOther.getCurPlugintaskId() != null
+                && this.getCurPlugintaskId().equals(castOther.getCurPlugintaskId())))
+                && ((this.getCurPlugintaskName() == castOther.getCurPlugintaskName())
+                || (this.getCurPlugintaskName() != null && castOther.getCurPlugintaskName() != null
+                && this.getCurPlugintaskName().equals(castOther.getCurPlugintaskName())))
+                && ((this.getCurPlugintaskVersion() == castOther.getCurPlugintaskVersion())
+                || (this.getCurPlugintaskVersion() != null && castOther.getCurPlugintaskVersion() != null
+                && this.getCurPlugintaskVersion().equals(castOther.getCurPlugintaskVersion())))
+                && ((this.getCurPluginfileVersion() == castOther.getCurPluginfileVersion())
+                || (this.getCurPluginfileVersion() != null && castOther.getCurPluginfileVersion() != null
+                && this.getCurPluginfileVersion().equals(castOther.getCurPluginfileVersion())))
+                && ((this.getCurPluginplayVersion() == castOther.getCurPluginplayVersion())
+                || (this.getCurPluginplayVersion() != null && castOther.getCurPluginplayVersion() != null
+                && this.getCurPluginplayVersion().equals(castOther.getCurPluginplayVersion())))
+                && (this.getPlugintaskUpdated() == castOther.getPlugintaskUpdated())
+                && ((this.getAssignSourceVersion() == castOther.getAssignSourceVersion())
+                || (this.getAssignSourceVersion() != null && castOther.getAssignSourceVersion() != null
+                && this.getAssignSourceVersion().equals(castOther.getAssignSourceVersion())))
+                && ((this.getRestSchedule() == castOther.getRestSchedule())
+                || (this.getRestSchedule() != null && castOther.getRestSchedule() != null
+                && this.getRestSchedule().equals(castOther.getRestSchedule())))
+                && ((this.getStandbySchedule() == castOther.getStandbySchedule())
+                || (this.getStandbySchedule() != null && castOther.getStandbySchedule() != null
+                && this.getStandbySchedule().equals(castOther.getStandbySchedule())))
+                && ((this.getCaptureSchedule() == castOther.getCaptureSchedule())
+                || (this.getCaptureSchedule() != null && castOther.getCaptureSchedule() != null
+                && this.getCaptureSchedule().equals(castOther.getCaptureSchedule())))
+                && ((this.getDemandSchedule() == castOther.getDemandSchedule())
+                || (this.getDemandSchedule() != null && castOther.getDemandSchedule() != null
+                && this.getDemandSchedule().equals(castOther.getDemandSchedule())))
+                && ((this.getScheduleVersion() == castOther.getScheduleVersion())
+                || (this.getScheduleVersion() != null && castOther.getScheduleVersion() != null
+                && this.getScheduleVersion().equals(castOther.getScheduleVersion())))
+                && ((this.getSubtitle() == castOther.getSubtitle()) || (this.getSubtitle() != null
+                && castOther.getSubtitle() != null && this.getSubtitle().equals(castOther.getSubtitle())))
+                && ((this.getSubtitleVersion() == castOther.getSubtitleVersion())
+                || (this.getSubtitleVersion() != null && castOther.getSubtitleVersion() != null
+                && this.getSubtitleVersion().equals(castOther.getSubtitleVersion())))
+                && ((this.getCurSubtitleVersion() == castOther.getCurSubtitleVersion())
+                || (this.getCurSubtitleVersion() != null && castOther.getCurSubtitleVersion() != null
+                && this.getCurSubtitleVersion().equals(castOther.getCurSubtitleVersion())))
+                && (this.getSubtitleUpdated() == castOther.getSubtitleUpdated())
+                && (this.getOnlineState() == castOther.getOnlineState())
+                && ((this.getLogonTime() == castOther.getLogonTime()) || (this.getLogonTime() != null
+                && castOther.getLogonTime() != null && this.getLogonTime().equals(castOther.getLogonTime())))
+                && ((this.getLogoffTime() == castOther.getLogoffTime()) || (this.getLogoffTime() != null
+                && castOther.getLogoffTime() != null && this.getLogoffTime().equals(castOther.getLogoffTime())))
+                && (this.getDownloadTotal() == castOther.getDownloadTotal())
+                && (this.getDownloadFinished() == castOther.getDownloadFinished())
+                && (this.getDownloadType() == castOther.getDownloadType())
+                && (this.getPoweron() == castOther.getPoweron()) && (this.getPoweroff() == castOther.getPoweroff())
+                && (this.getAliveInterval() == castOther.getAliveInterval())
+                && ((this.getLastAlive() == castOther.getLastAlive()) || (this.getLastAlive() != null
+                && castOther.getLastAlive() != null && this.getLastAlive().equals(castOther.getLastAlive())))
+                && ((this.getLastPatrol() == castOther.getLastPatrol()) || (this.getLastPatrol() != null
+                && castOther.getLastPatrol() != null && this.getLastPatrol().equals(castOther.getLastPatrol())))
+                && ((this.getLastDownload() == castOther.getLastDownload())
+                || (this.getLastDownload() != null && castOther.getLastDownload() != null
+                && this.getLastDownload().equals(castOther.getLastDownload())))
+                && (this.getFlowLimit() == castOther.getFlowLimit()) && (this.getNetFlow() == castOther.getNetFlow());
+    }
+
+    public int hashCode() {
+        int result = 17;
+
+        result = 37 * result + this.getCstmId();
+        result = 37 * result + (int) this.getDevId();
+        result = 37 * result + (getName() == null ? 0 : this.getName().hashCode());
+        result = 37 * result + (getDescp() == null ? 0 : this.getDescp().hashCode());
+        result = 37 * result + (getGroupId() == null ? 0 : this.getGroupId().hashCode());
+        result = 37 * result + (getGroupName() == null ? 0 : this.getGroupName().hashCode());
+        result = 37 * result + (getCityId() == null ? 0 : this.getCityId().hashCode());
+        result = 37 * result + (getCityName() == null ? 0 : this.getCityName().hashCode());
+        result = 37 * result + (getCreateTime() == null ? 0 : this.getCreateTime().hashCode());
+        result = 37 * result + (getCreateUser() == null ? 0 : this.getCreateUser().hashCode());
+        result = 37 * result + (getAssignKernel() == null ? 0 : this.getAssignKernel().hashCode());
+        result = 37 * result + (getAssignApp() == null ? 0 : this.getAssignApp().hashCode());
+        result = 37 * result + (getCurKernel() == null ? 0 : this.getCurKernel().hashCode());
+        result = 37 * result + (getCurApp() == null ? 0 : this.getCurApp().hashCode());
+        result = 37 * result + this.getKernelUpdated();
+        result = 37 * result + this.getAppUpdated();
+        result = 37 * result + (getAssignConfigId() == null ? 0 : this.getAssignConfigId().hashCode());
+        result = 37 * result + (getAssignConfigName() == null ? 0 : this.getAssignConfigName().hashCode());
+        result = 37 * result + (getAssignConfigVersion() == null ? 0 : this.getAssignConfigVersion().hashCode());
+        result = 37 * result + (getCurConfigId() == null ? 0 : this.getCurConfigId().hashCode());
+        result = 37 * result + (getCurConfigName() == null ? 0 : this.getCurConfigName().hashCode());
+        result = 37 * result + (getCurConfigVersion() == null ? 0 : this.getCurConfigVersion().hashCode());
+        result = 37 * result + this.getConfigUpdated();
+        result = 37 * result + (getAssignLooptaskId() == null ? 0 : this.getAssignLooptaskId().hashCode());
+        result = 37 * result + (getAssignLooptaskName() == null ? 0 : this.getAssignLooptaskName().hashCode());
+        result = 37 * result + (getAssignLooptaskVersion() == null ? 0 : this.getAssignLooptaskVersion().hashCode());
+        result = 37 * result + (getAssignLoopfileVersion() == null ? 0 : this.getAssignLoopfileVersion().hashCode());
+        result = 37 * result + (getAssignLoopplayVersion() == null ? 0 : this.getAssignLoopplayVersion().hashCode());
+        result = 37 * result
+                + (getAssignLoopstrategyVersion() == null ? 0 : this.getAssignLoopstrategyVersion().hashCode());
+        result = 37 * result + (getCurLooptaskId() == null ? 0 : this.getCurLooptaskId().hashCode());
+        result = 37 * result + (getCurLooptaskName() == null ? 0 : this.getCurLooptaskName().hashCode());
+        result = 37 * result + (getCurLooptaskVersion() == null ? 0 : this.getCurLooptaskVersion().hashCode());
+        result = 37 * result + (getCurLoopfileVersion() == null ? 0 : this.getCurLoopfileVersion().hashCode());
+        result = 37 * result + (getCurLoopplayVersion() == null ? 0 : this.getCurLoopplayVersion().hashCode());
+        result = 37 * result + (getCurLoopstrategyVersion() == null ? 0 : this.getCurLoopstrategyVersion().hashCode());
+        result = 37 * result + this.getLooptaskUpdated();
+        result = 37 * result + (getAssignDemandtaskId() == null ? 0 : this.getAssignDemandtaskId().hashCode());
+        result = 37 * result + (getAssignDemandtaskName() == null ? 0 : this.getAssignDemandtaskName().hashCode());
+        result = 37 * result
+                + (getAssignDemandtaskVersion() == null ? 0 : this.getAssignDemandtaskVersion().hashCode());
+        result = 37 * result
+                + (getAssignDemandfileVersion() == null ? 0 : this.getAssignDemandfileVersion().hashCode());
+        result = 37 * result
+                + (getAssignDemandplayVersion() == null ? 0 : this.getAssignDemandplayVersion().hashCode());
+        result = 37 * result + (getCurDemandtaskId() == null ? 0 : this.getCurDemandtaskId().hashCode());
+        result = 37 * result + (getCurDemandtaskName() == null ? 0 : this.getCurDemandtaskName().hashCode());
+        result = 37 * result + (getCurDemandtaskVersion() == null ? 0 : this.getCurDemandtaskVersion().hashCode());
+        result = 37 * result + (getCurDemandfileVersion() == null ? 0 : this.getCurDemandfileVersion().hashCode());
+        result = 37 * result + (getCurDemandplayVersion() == null ? 0 : this.getCurDemandplayVersion().hashCode());
+        result = 37 * result + this.getDemandtaskUpdated();
+        result = 37 * result + (getAssignPlugintaskId() == null ? 0 : this.getAssignPlugintaskId().hashCode());
+        result = 37 * result + (getAssignPlugintaskName() == null ? 0 : this.getAssignPlugintaskName().hashCode());
+        result = 37 * result
+                + (getAssignPlugintaskVersion() == null ? 0 : this.getAssignPlugintaskVersion().hashCode());
+        result = 37 * result
+                + (getAssignPluginfileVersion() == null ? 0 : this.getAssignPluginfileVersion().hashCode());
+        result = 37 * result
+                + (getAssignPluginplayVersion() == null ? 0 : this.getAssignPluginplayVersion().hashCode());
+        result = 37 * result + (getCurPlugintaskId() == null ? 0 : this.getCurPlugintaskId().hashCode());
+        result = 37 * result + (getCurPlugintaskName() == null ? 0 : this.getCurPlugintaskName().hashCode());
+        result = 37 * result + (getCurPlugintaskVersion() == null ? 0 : this.getCurPlugintaskVersion().hashCode());
+        result = 37 * result + (getCurPluginfileVersion() == null ? 0 : this.getCurPluginfileVersion().hashCode());
+        result = 37 * result + (getCurPluginplayVersion() == null ? 0 : this.getCurPluginplayVersion().hashCode());
+        result = 37 * result + this.getPlugintaskUpdated();
+        result = 37 * result + (getAssignSourceVersion() == null ? 0 : this.getAssignSourceVersion().hashCode());
+        result = 37 * result + (getRestSchedule() == null ? 0 : this.getRestSchedule().hashCode());
+        result = 37 * result + (getStandbySchedule() == null ? 0 : this.getStandbySchedule().hashCode());
+        result = 37 * result + (getCaptureSchedule() == null ? 0 : this.getCaptureSchedule().hashCode());
+        result = 37 * result + (getDemandSchedule() == null ? 0 : this.getDemandSchedule().hashCode());
+        result = 37 * result + (getScheduleVersion() == null ? 0 : this.getScheduleVersion().hashCode());
+        result = 37 * result + (getSubtitle() == null ? 0 : this.getSubtitle().hashCode());
+        result = 37 * result + (getSubtitleVersion() == null ? 0 : this.getSubtitleVersion().hashCode());
+        result = 37 * result + (getCurSubtitleVersion() == null ? 0 : this.getCurSubtitleVersion().hashCode());
+        result = 37 * result + this.getSubtitleUpdated();
+        result = 37 * result + this.getOnlineState();
+        result = 37 * result + (getLogonTime() == null ? 0 : this.getLogonTime().hashCode());
+        result = 37 * result + (getLogoffTime() == null ? 0 : this.getLogoffTime().hashCode());
+        result = 37 * result + (int) this.getDownloadTotal();
+        result = 37 * result + (int) this.getDownloadFinished();
+        result = 37 * result + this.getDownloadType();
+        result = 37 * result + this.getPoweron();
+        result = 37 * result + this.getPoweroff();
+        result = 37 * result + this.getAliveInterval();
+        result = 37 * result + (getLastAlive() == null ? 0 : this.getLastAlive().hashCode());
+        result = 37 * result + (getLastPatrol() == null ? 0 : this.getLastPatrol().hashCode());
+        result = 37 * result + (getLastDownload() == null ? 0 : this.getLastDownload().hashCode());
+        result = 37 * result + (int) this.getFlowLimit();
+        result = 37 * result + (int) this.getNetFlow();
+        return result;
+    }
 
 }

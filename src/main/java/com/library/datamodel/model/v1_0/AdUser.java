@@ -55,7 +55,7 @@ public class AdUser extends BaseEntity implements Auditable, Serializable {
     private static final long serialVersionUID = -9199479009606759914L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     @SerializedName(value = "id")
     private long id;

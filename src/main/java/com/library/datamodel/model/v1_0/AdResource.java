@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
@@ -36,7 +37,9 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Table(name = "ad_resource", uniqueConstraints = @UniqueConstraint(columnNames = {"upload_id"}))
 @NamedQueries({
     @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_UPLOADID, query = AdResource.FETCH_RESOURCE_BY_UPLOADID_QUERY),
-    @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID, query = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID_QUERY)
+    @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID, query = AdResource.FETCH_RESOURCE_BY_CAMPAIGNID_QUERY),
+    @NamedQuery(name = AdResource.FETCH_RESOURCE_BY_ENTITYID, query = AdResource.FETCH_RESOURCE_BY_ENTITYID_QUERY),
+    @NamedQuery(name = AdResource.FETCH_RES_BY_CAMPNID_N_UPLDID, query = AdResource.FETCH_RES_BY_CAMPNID_N_UPLDID_QUERY)
 })
 public class AdResource extends BaseEntity implements Auditable, Serializable {
 
@@ -48,6 +51,12 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_RESOURCE_BY_CAMPAIGNID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId";
     public static final String FETCH_RESOURCE_BY_CAMPAIGNID = "FETCH_RESOURCE_BY_CAMPAIGNID";
+
+    public static final String FETCH_RESOURCE_BY_ENTITYID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where resource.id=:id";
+    public static final String FETCH_RESOURCE_BY_ENTITYID = "FETCH_RESOURCE_BY_ENTITYID";
+
+    public static final String FETCH_RES_BY_CAMPNID_N_UPLDID_QUERY = "SELECT DISTINCT resource FROM AdResource resource INNER JOIN resource.adResourcePrograms programs where programs.campaignId=:campaignId AND resource.uploadId=:uploadId";
+    public static final String FETCH_RES_BY_CAMPNID_N_UPLDID = "FETCH_RES_BY_CAMPNID_N_UPLDID";
 
     @Expose
     @SerializedName(value = "id")
@@ -122,6 +131,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
+     @OrderBy("id")
     private Set<AdProgram> adResourcePrograms = new HashSet<>();
 
     public AdResource() {

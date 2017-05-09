@@ -8,9 +8,60 @@ import java.util.List;
 public class AdSetupRequest implements JsonDataModel {
 
     /*
-    
-    
-    
+
+        {
+          "method": "UPLOAD_SCHEDULE_TO_DSM",
+          "terminal_detail": [
+            {
+              "display_date": "2017-05-02",
+              "terminals": [
+                {
+                  "terminal_id": "233097221599994",
+                  "terminal_width": 1920,
+                  "terminal_height": 1080,
+                  "task_idx": 1493101974,
+                  "task_idy": 1493101989,
+                  "task_name": "First Terminal",
+                  "program_ids": [
+                    1493741055
+                  ]
+                }
+              ]
+            }
+          ],
+          "program_detail": [
+            {
+              "display_date": "2017-05-02",
+              "program_ids": [
+                {
+                  "entityId": 230,
+                  "program_id": 1493741055,
+                  "campaign_id":848483993,
+                  "status": "NEW",
+                  "display_layout": "FULLSCREEN",
+                  "display_times": [
+                    {
+                      "starttime": "19:05:00",
+                      "stoptime": "19:06:00"
+                    }
+                  ],
+                  "resources": [
+                    {
+                      "entityId": 232,
+                      "resource_id": 97893813781568,
+                      "resource_detail": "resname_1493741024751.PNG",
+                      "resource_type": 0,
+                      "status": "OLD",
+                      "sequence": 1
+                    }
+                  ],
+                  "text": []
+                }
+              ]
+            }
+          ]
+        }
+
      */
     @SerializedName(value = "method")
     private String methodName;
@@ -160,6 +211,9 @@ public class AdSetupRequest implements JsonDataModel {
             @SerializedName(value = "program_id")
             private int programId;
 
+            @SerializedName(value = "campaign_id")
+            private int campaignId;
+
             @SerializedName(value = "status")
             private String status;
 
@@ -232,6 +286,14 @@ public class AdSetupRequest implements JsonDataModel {
                 this.entityId = entityId;
             }
 
+            public int getCampaignId() {
+                return campaignId;
+            }
+
+            public void setCampaignId(int campaignId) {
+                this.campaignId = campaignId;
+            }
+
             public class DisplayTime {
 
                 @SerializedName(value = "starttime")
@@ -265,10 +327,10 @@ public class AdSetupRequest implements JsonDataModel {
                 //private transient long entityId;// will not be serialized or deserialized
                 @SerializedName(value = "resource_id")
                 private long resourceId;
-                
+
                 @SerializedName(value = "upload_id")
-                private transient String uploadId;//the Id we generated from millis of time now when we were uploading the image resource
-                
+                private String uploadId;//the Id we generated from millis of time now when we were uploading the image resource
+
                 @SerializedName(value = "resource_detail")
                 private String resourceDetail;
 
@@ -281,10 +343,8 @@ public class AdSetupRequest implements JsonDataModel {
                 @SerializedName(value = "sequence")
                 private int sequence;
 
-                
-
                 @SerializedName(value = "uploaded_to_dsm")
-                private transient boolean isUploadedToDSM;
+                private boolean isUploadedToDSM;
 
                 public long getEntityId() {
                     return entityId;
@@ -349,7 +409,6 @@ public class AdSetupRequest implements JsonDataModel {
                 public void setIsUploadedToDSM(boolean isUploadedToDSM) {
                     this.isUploadedToDSM = isUploadedToDSM;
                 }
-
 
             }
 
