@@ -3,11 +3,10 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.CampaignStatus;
-import com.library.datamodel.Constants.AdPaymentStatus;
-import com.library.datamodel.Constants.AdvertStep;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.datamodel.Constants.ScheduleType;
 import com.library.sgsharedinterface.Auditable;
+import com.library.utilities.DateUtils;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +41,7 @@ import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 @TypeDefs({
     @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
@@ -63,6 +63,7 @@ import org.joda.time.LocalDate;
 @Table(name = "ad_program", uniqueConstraints = @UniqueConstraint(columnNames = {"campaign_id"}))
 
 @NamedQueries({
+    @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS_BY_PAYMENT_ID, query = AdProgram.FETCH_CAMPAIGNS_BY_PAYMENT_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
     @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID, query = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY),
@@ -73,18 +74,21 @@ import org.joda.time.LocalDate;
 
 public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY =   "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId=:userId ORDER BY prog.id DESC";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY = "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    public static final String FETCH_CAMPAIGNS_BY_STATUS_QUERY =       "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where prog.adCampaignStatus IN (:campaignStatuses)";
+    public static final String FETCH_CAMPAIGNS_BY_PAYMENT_ID_QUERY =   "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where pd.internalPaymentID=:internalPaymentID";
+    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY =        "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId=:userId ORDER BY prog.id DESC";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY =      "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
     //fetch all specified campaigns regardless whether they belong to a single user or not
-    public static final String FETCH_ALL_CAMPAIGNS_QUERY =          "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user ORDER BY prog.id DESC";
-    public static final String FETCH_ALL_CAMPAIGNS_BY_ID_QUERY =          "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    public static final String FETCH_ALL_CAMPAIGNS_QUERY =             "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user ORDER BY prog.id DESC";
+    public static final String FETCH_ALL_CAMPAIGNS_BY_ID_QUERY =       "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY ="SELECT DISTINCT program.campaignScreenCodes FROM AdProgram program WHERE program.campaignId=:campaignId";
+    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID = "FETCH_SCREENCODES_BY_CAMPAIGN_ID";
     public static final String FETCH_ALL_CAMPAIGNS_BY_ID = "FETCH_ALL_CAMPAIGNS_BY_ID";
     public static final String FETCH_ALL_USER_CAMPAIGNS = "FETCH_ALL_USER_CAMPAIGNS";
     public static final String FETCH_USER_CAMPAIGNS_BY_ID = "FETCH_USER_CAMPAIGNS_BY_ID";
     public static final String FETCH_ALL_CAMPAIGNS = "FETCH_ALL_CAMPAIGNS";
-    
-    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY ="SELECT DISTINCT program.campaignScreenCodes FROM AdProgram program WHERE program.campaignId=:campaignId";
-    public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID = "FETCH_SCREENCODES_BY_CAMPAIGN_ID";
+    public static final String FETCH_CAMPAIGNS_BY_PAYMENT_ID = "FETCH_CAMPAIGNS_BY_PAYMENT_ID";
+    public static final String FETCH_CAMPAIGNS_BY_STATUS = "FETCH_CAMPAIGNS_BY_STATUS";
     
 
     private static final long serialVersionUID = -7420964819128665745L;
@@ -153,19 +157,15 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private ProgDisplayLayout displayLayout;
 
+    /*
     @Expose
     @SerializedName(value = "processing_step")
     @Column(name = "processing_step")
     @Enumerated(EnumType.STRING)
     private AdvertStep adStep;//at which processing level this advert is at
+    */
 
-    //whether this advert has been paid for or not - if an advert is rejected after payment, 
-    //payment should be reversed and this value should read 'REVERSED'
-    @Expose
-    @SerializedName(value = "payment_status")
-    @Column(name = "payment_status")
-    @Enumerated(EnumType.STRING)
-    private AdPaymentStatus paymentStatus;
+   
     
     @Expose
     @SerializedName(value = "start_date")
@@ -204,6 +204,27 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Column(name = "campaign_status")
     @Enumerated(EnumType.STRING)
     private CampaignStatus adCampaignStatus;
+    
+   
+    @Expose
+    @SerializedName(value = "same_status_picks")
+    @Column(name = "same_status_picks", nullable = false)
+    /**
+     * Number of times this campaign program has been picked 
+     * with the same status
+     */
+    private int sameStatusPick = 0;
+    
+    
+    @Expose
+    @SerializedName(value = "status_change_time")
+    @Column(name = "status_change_time", nullable = false)
+    @Type(type = "jodalocaldatetime")
+    /**
+     * Time status was last changed for this campaign
+     */
+    private LocalDateTime statusChangeTime = DateUtils.getDateTimeNow();
+    
      
     @Expose
     @SerializedName(value = "campaign_stats_id")
@@ -213,6 +234,16 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     })
     @Cascade(CascadeType.ALL)
     private AdCampaignStats adCampaignStats;
+    
+    @Expose
+    @SerializedName(value = "payment_details_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        //@JoinColumn(name = "payment_details_id", referencedColumnName = "internal_payment_id")
+        @JoinColumn(name = "payment_details_id")
+    })
+    @Cascade(CascadeType.ALL)
+    private AdPaymentDetails adPaymentDetails;
      
     //use later when we upgrade to newer design
     
@@ -244,6 +275,16 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private ScheduleType scheduleType;
     
+    @Expose
+    @SerializedName(value = "to_review")
+    @Column(name = "to_review", nullable = false)
+    private boolean isToBeReviewed = Boolean.TRUE; //whether or not campaign is to be reviewed
+    
+    @Expose
+    @SerializedName(value = "is_reviewed")
+    @Column(name = "is_reviewed", nullable = false)
+    private boolean isReviewed = Boolean.FALSE; //whether or not campaign has been reviewed
+    
     
     @Transient
     private transient boolean isCampaignExist;
@@ -268,21 +309,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.adCampaignStatus = adCampaignStatus;
     }
 
-    public AdvertStep getAdStep() {
-        return adStep;
-    }
-
-    public void setAdStep(AdvertStep adStep) {
-        this.adStep = adStep;
-    }
-
-    public AdPaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(AdPaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 
     public int getAdvertProgramId() {
         return advertProgramId;
@@ -462,6 +488,46 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         }
         
         return this.campaignId == other.getCampaignId();
+    }
+
+    public AdPaymentDetails getAdPaymentDetails() {
+        return adPaymentDetails;
+    }
+
+    public void setAdPaymentDetails(AdPaymentDetails adPaymentDetails) {
+        this.adPaymentDetails = adPaymentDetails;
+    }
+
+    public int getSameStatusPick() {
+        return sameStatusPick;
+    }
+
+    public void setSameStatusPick(int sameStatusPick) {
+        this.sameStatusPick = sameStatusPick;
+    }
+
+    public LocalDateTime getStatusChangeTime() {
+        return statusChangeTime;
+    }
+
+    public void setStatusChangeTime(LocalDateTime statusChangeTime) {
+        this.statusChangeTime = statusChangeTime;
+    }
+
+    public boolean isIsToBeReviewed() {
+        return isToBeReviewed;
+    }
+
+    public void setIsToBeReviewed(boolean isToBeReviewed) {
+        this.isToBeReviewed = isToBeReviewed;
+    }
+
+    public boolean isIsReviewed() {
+        return isReviewed;
+    }
+
+    public void setIsReviewed(boolean isReviewed) {
+        this.isReviewed = isReviewed;
     }
 
     

@@ -1,6 +1,5 @@
 package com.library.datamodel.Constants;
 
-//import com.advertexpo.addisplay.exceptiontype.MyCustomException;
 import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
 import com.library.utilities.GeneralUtils;
@@ -11,10 +10,14 @@ import com.library.utilities.GeneralUtils;
  */
 public enum AdPaymentStatus implements Constants {
 
-    NOT_PAID("NOT_PAID"),
-    INITIATED("PAY_REQUESTED"),
+    
+    PAY_NEW("NEW"), //Newly logged payment
+    PAY_INITIATED("INITIATED"),
     PAID("PAID"),
-    REVERSED("REVERSED");
+    PAY_FAILED("FAILED"),
+    PAY_REVERSED("REVERSED"),
+    //PAY_EXPIRED("EXPIRED"), //time for payment has expired
+    STATUS_UNKNOWN("UNKNOWN");
 
     private final String payStatus;
 
@@ -27,12 +30,11 @@ public enum AdPaymentStatus implements Constants {
         return this.payStatus;
     }
 
-    
     /**
-     * 
+     *
      * @param payStatusValue
      * @return
-     * @throws MyCustomException 
+     * @throws MyCustomException
      */
     public static AdPaymentStatus convertToEnum(String payStatusValue) throws MyCustomException {
 

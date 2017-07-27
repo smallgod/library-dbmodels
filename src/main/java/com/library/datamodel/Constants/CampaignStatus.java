@@ -10,15 +10,27 @@ import com.library.utilities.GeneralUtils;
  */
 public enum CampaignStatus implements Constants {
 
-    DRAFT("DRAFT"),
-    PENDING_PAYMENT("PENDING_PAYMENT"),
-    IN_REVIEW("IN_REVIEW"),
-    ACTIVE("ACTIVE"), //when scheduled
-    COMPLETED("COMPLETED"), //when reached end_date
-    FLAGGED("FLAGGED"),
-    REJECTED("REJECTED"),
-    REVERSED("REVERSED");
+    DRAFT("DRAFT"), //ad still in draft form, not yet placed //STEP-0
+    NEW("NEW"), //An ad just placed  //STEP-1
+    PENDING_PAYMENT("PENDING PAYMENT"), //ad picked for payment //STEP-2
+    PROCESSING("PROCESSING"), //includes payment being under payment or optimising & any other processing //STEP-3
+    IN_REVIEW("IN REVIEW"), //STEP-4
+    ACTIVE("ACTIVE"), //when scheduled OR afer review & just waiting to be scheduled //STEP-5
+    COMPLETED("COMPLETED"), //Reached it's display end_date //STEP-6
+    FLAGGED("FLAGGED"), //Can be at any STEP - when ad is flagged off by system or admin for possible violation of Terms of Uses
+    ESCALATED("ESCALATED"), //Can be at any STEP - When one of the steps is problematic especially payments
+    REJECTED("REJECTED"),//Can be at any STEP
+    REVERSED("REVERSED");//Can be at any STEP
 
+    /*
+     LOG(1),
+    AUTHORISE(2),
+    PAY(3),
+    OPTIMISE(4),
+    SCHEDULE(5),
+    DISPLAY(5),
+    FINAL(6); //successful or customer refunded
+     */
     private final String enumValue;
 
     CampaignStatus(String enumValue) {

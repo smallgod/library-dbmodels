@@ -553,6 +553,7 @@ public class InitialiseDBData {
         bus15.setBusinessTypeshortName("hospital");
 
         Set<AdBusinessType> businessTypes = new HashSet<>();
+        
         businessTypes.add(bus1);
         businessTypes.add(bus2);
         businessTypes.add(bus3);
@@ -1201,6 +1202,10 @@ public class InitialiseDBData {
         customHibernate.saveEntity(testAdClient);
     }
 
+    /**
+     * 
+     * @throws MyCustomException 
+     */
     public void addGuestCampaignClient() throws MyCustomException {
 
         guestAdClient = new AdClient();
@@ -1211,6 +1216,10 @@ public class InitialiseDBData {
         customHibernate.saveEntity(guestAdClient);
     }
 
+    /**
+     * 
+     * @throws MyCustomException 
+     */
     public void addTemplateCampaignClient() throws MyCustomException {
 
         templatesCampaignClient = new AdClient();
@@ -1510,5 +1519,194 @@ public class InitialiseDBData {
         //test screens
         addTestScreens();
     }
+    
+    
+    
+    /**
+     * Add Test screens
+     *
+     * @throws com.library.customexception.MyCustomException
+     */
+    public void addMoreTestScreens() throws MyCustomException {
+
+        //STAGING
+        int screen1TaskX = 1494940365;
+        int screen1TaskY = 1494940380;
+        
+        int screen2TaskX = 1494940402;
+        int screen2TaskY = 1494940417;
+
+        //PRODUCTION
+//        int screen1TaskX = 1489239354;
+//        int screen1TaskY = 1489257284;
+//        int screen2TaskX = 1489257323;
+//        int screen2TaskY = 1489257349;
+        int screenHeight = 1080;
+        int screenWidth = 1920;
+        String firstTestTerminalId = "230901364440706"; //"233097221599994"; //reverse the terminalIds after connecting the first terminal back
+        String secondTestTerminalId = "230901364454349";
+        
+
+        AdTerminal terminal1 = new AdTerminal();
+        terminal1.setLatitude(13.0412658); //600017, Chennai
+        terminal1.setLongitude(80.2338514);
+        terminal1.setTerminalId(firstTestTerminalId);
+        terminal1.setTaskIdX(screen1TaskX);
+        terminal1.setTaskIdY(screen1TaskY);
+        terminal1.setTerminalName("First Terminal");
+        terminal1.setTerminalDescription("This is my test terminal, original - chill out!!");
+
+        AdScreen screen1 = new AdScreen();
+        screen1.setAudienceCount(15);
+        screen1.setDisplayHeight(screenHeight);
+        screen1.setDisplayWidth(screenWidth);
+        screen1.setScreenId(generateScreenId(busy32.getBusinessId()));
+        screen1.setScreenSize(AdScreenSize.THIRTYTWO);
+        screen1.setScreenType(AdScreenType.FLAT_LCD_TV);
+        screen1.setSupportTerminal(terminal1);
+        screen1.setVendorName("HiSense");
+        screen1.setScreenOwnerBusiness(busy32); //get business name from here for GET_SCREENS
+        screen1.setScreenValue(1.200f); //determined by number of screens connected, audience, location, size, etc
+        screen1.setBusinessType(bus12);
+        screen1.getAudienceTypes().add(aud1);
+        screen1.setScreenArea(area1);
+        screen1.setExtra1("Village Mall");//like a building housing the business
+        screen1.setExtra2("lounge"); //e.g. where exactly the screen is located
+        screen1.setExtra3(""); //ignore for now i guess
+        screen1.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen2 = new AdScreen();
+        screen2.setAudienceCount(10);
+        screen2.setDisplayHeight(screenHeight);
+        screen2.setDisplayWidth(screenWidth);
+        screen2.setScreenSize(AdScreenSize.FOURTY);
+        screen2.setScreenType(AdScreenType.FLAT_LCD_TV);
+        screen2.setSupportTerminal(terminal1);
+        screen2.setVendorName("LG");
+        screen2.setScreenId(generateScreenId(busy2.getBusinessId()));
+        screen2.setScreenOwnerBusiness(busy2); //get business name from here for GET_SCREENS
+        screen2.setScreenValue(1.125f); //determined by number of screens connected, audience, location, size, etc
+        screen2.setBusinessType(bus1);
+        screen2.getAudienceTypes().add(aud4);
+        screen2.setScreenArea(area1);
+        screen2.setExtra1(""); //like a building, road housing the business
+        screen2.setExtra2("counter");//e.g. where exactly the screen is located
+        screen2.setExtra3(""); //ignore for now i guess
+        screen2.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen3 = new AdScreen();
+        screen3.setAudienceCount(40);
+        screen3.setDisplayHeight(screenHeight);
+        screen3.setDisplayWidth(screenWidth);
+        screen3.setScreenId(generateScreenId(busy3.getBusinessId()));
+        screen3.setScreenSize(AdScreenSize.THIRTYTWO);
+        screen3.setScreenType(AdScreenType.FLAT_LCD_TV);
+        screen3.setSupportTerminal(terminal1);
+        screen3.setVendorName("Panasonic");
+        screen3.setScreenOwnerBusiness(busy3); //get business name from here for GET_SCREENS
+        screen3.setScreenValue(1.275f); //determined by number of screens connected, audience, location, size, etc
+        screen3.setBusinessType(bus12);
+        screen3.getAudienceTypes().add(aud2);
+        screen3.getAudienceTypes().add(aud9);
+        screen3.setScreenArea(area1);
+        screen3.setExtra1("Village Mall");//like a building, road housing the business
+        screen3.setExtra2("entrance"); //e.g. where exactly the screen is located
+        screen3.setExtra3(""); //ignore for now i guess
+        screen3.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen4 = new AdScreen();
+        screen4.setAudienceCount(20);
+        screen4.setDisplayHeight(screenHeight);
+        screen4.setDisplayWidth(screenWidth);
+        screen4.setScreenId(generateScreenId(busy4.getBusinessId()));
+        screen4.setScreenSize(AdScreenSize.FIFTYTWO);
+        screen4.setScreenType(AdScreenType.FLAT_LED_TV);
+        screen4.setSupportTerminal(terminal1);
+        screen4.setVendorName("Sony");
+        screen4.setScreenOwnerBusiness(busy4); //get business name from here for GET_SCREENS
+        screen4.setScreenValue(1.325f); //determined by number of screens connected, audience, location, size, etc
+        screen4.setBusinessType(bus3);
+        screen4.getAudienceTypes().add(aud4);
+        screen4.getAudienceTypes().add(aud10);
+        screen4.setScreenArea(area2);
+        screen4.setExtra1("");//like a building, road housing the business
+        screen4.setExtra2("main screen"); //e.g. where exactly the screen is located
+        screen4.setExtra3(""); //ignore for now i guess
+        screen4.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen5 = new AdScreen();
+        screen5.setAudienceCount(15);
+        screen5.setDisplayHeight(screenHeight);
+        screen5.setDisplayWidth(screenWidth);
+        screen5.setScreenId(generateScreenId(busy5.getBusinessId()));
+        screen5.setScreenSize(AdScreenSize.THIRTYTWO);
+        screen5.setScreenType(AdScreenType.FLAT_LED_TV);
+        screen5.setSupportTerminal(terminal1);
+        screen5.setVendorName("Samsung");
+        screen5.setScreenOwnerBusiness(busy5); //get business name from here for GET_SCREENS
+        screen5.setScreenValue(1.100f); //determined by number of screens connected, audience, location, size, etc
+        screen5.setBusinessType(bus6);
+        screen5.getAudienceTypes().add(aud8);
+        screen5.setScreenArea(area3);
+        screen5.setExtra1("Bombo Rd");//like a building, road housing the business
+        screen5.setExtra2("reception"); //e.g. where exactly the screen is located
+        screen5.setExtra3(""); //ignore for now i guess
+        screen5.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen6 = new AdScreen();
+        screen6.setAudienceCount(17);
+        screen6.setDisplayHeight(screenHeight);
+        screen6.setDisplayWidth(screenWidth);
+        screen6.setScreenId(generateScreenId(busy6.getBusinessId()));
+        screen6.setScreenSize(AdScreenSize.FOURTY);
+        screen6.setScreenType(AdScreenType.FLAT_LED_TV);
+        screen6.setSupportTerminal(terminal1);
+        screen6.setVendorName("Samsung");
+        screen6.setScreenOwnerBusiness(busy6); //get business name from here for GET_SCREENS
+        screen6.setScreenValue(1.200f); //determined by number of screens connected, audience, location, size, etc
+        screen6.setBusinessType(bus14);
+        screen6.getAudienceTypes().add(aud9);
+        screen6.setScreenArea(area3);
+        screen6.setExtra1("Kla Rd");//like a building, road housing the business
+        screen6.setExtra2("reception"); //e.g. where exactly the screen is located
+        screen6.setExtra3(""); //ignore for now i guess
+        screen6.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        AdScreen screen7 = new AdScreen();
+        screen7.setAudienceCount(21);
+        screen7.setDisplayHeight(screenHeight);
+        screen7.setDisplayWidth(screenWidth);
+        screen7.setScreenId(generateScreenId(busy7.getBusinessId()));
+        screen7.setScreenSize(AdScreenSize.FIFTYTWO);
+        screen7.setScreenType(AdScreenType.FLAT_LED_TV);
+        screen7.setSupportTerminal(terminal1);
+        screen7.setVendorName("Samsung");
+        screen7.setScreenOwnerBusiness(busy7); //get business name from here for GET_SCREENS
+        screen7.setScreenValue(1.300f); //determined by number of screens connected, audience, location, size, etc
+        screen7.setBusinessType(bus15);
+        screen7.getAudienceTypes().add(aud9);
+        screen7.setScreenArea(area3);
+        screen7.setExtra1("Bombo Rd");//like a building, road housing the business
+        screen7.setExtra2("reception"); //e.g. where exactly the screen is located
+        screen7.setExtra3(""); //ignore for now i guess
+        screen7.setExtra4("");//get from AdBusinessType  -> getAdBusinessTypeShortName();
+
+        adScreens.add(screen1);
+        adScreens.add(screen2);
+        adScreens.add(screen3);
+        adScreens.add(screen4);
+        adScreens.add(screen5);
+        adScreens.add(screen6);
+        adScreens.add(screen7);
+
+        customHibernate.saveBulk(adScreens);
+    }
+    
+    public void initDBWithMoreData() throws MyCustomException {
+
+        
+    }
+    
+    
 
 }

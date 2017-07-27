@@ -15,12 +15,37 @@ import org.joda.time.Duration;
  * @author smallgod
  */
 public interface NamedConstants {
-    
+
+    public static final String ADMIN_SMS_RECIPIENT = "256790790491";
+
+    public static final String ADVERTXPO_CALLBACK_URL = "http://advertxpo.com:9099/api/json";
+    public static final String MAMBOPAY_DEBIT_URL = "https://mambopay.azure-api.net/api/v1/mtnmobilemoneyapi/debit";
+
+    //public static final String SUBSCRIPTION_KEY = "9389259ec349469682c71910ab6f4ac3";
+    public static final String SUBSCRIPTION_KEY = "f3abdfa6568a4d8da75c27aa8fbd26ce"; //UNLIMITED
+
+    public static final String MAMBOPAY_DEBIT_MISSING_SUBSCRIPTION_KEY_2 = "401";
+    public static final int MAMBOPAY_DEBIT_MISSING_SUBSCRIPTION_KEY = 401;
+    public static final int MAMBOPAY_DEBIT_ACCOUNT_UNREGISTERED = 101;
+    public static final int MAMBOPAY_DEBIT_INSUFFICIENT_FUNDS = 106;
+    public static final int MAMBOPAY_DEBIT_BELOW_THRESHOLD = 105;
+    public static final int MAMBOPAY_DEBIT_PAYMENT_EXPIRED = 103;
+    public static final int MAMBOPAY_DEBIT_SUCCESS = 1;
+    public static final String MAMBOPAY_DEBIT_PROCESSING = "01";
+    public static final String MAMBOPAY_DEBIT_DUPLICATE = "02";
+
+    //MAMBO-PAY DEBIT API HTTP PARAMS
+    public static final String MAMBOPAY_PARAM_MSISDN = "msisdn";
+    public static final String MAMBOPAY_PARAM_AMOUNT = "amount";
+    public static final String MAMBOPAY_PARAM_TRANSID = "transaction_id";
+    public static final String MAMBOPAY_PARAM_CALLBACKURL = "callbackurl";
+    public static final String MAMBOPAY_HEADER_SUBSCKEY = "Ocp-Apim-Subscription-Key";
+
     /**
      * Thumbnail maximum width
      */
     public static int THUMB_MAX_WIDTH = 300;//pixels
-    
+
     /**
      * Thumbnail maximum height
      */
@@ -48,9 +73,13 @@ public interface NamedConstants {
     public static String FULLSCREEN_LAYOUT_DESC = "This layout lets the user's adverts fill up the entire display/TV screen";
     public static int FULLSCREEN_LAYOUT_PRICE = 1500;
 
-    public static int ARREST_CRIPPY_THREADS = 1;
+    public static int ARREST_CREEPY_THREADS = 1;
+
+    public static final Lock FETCH_CAMPAIGNS_LOCK = new ReentrantLock();
 
     public static final Lock FETCH_SCHEDULE_LOCK = new ReentrantLock();
+
+    public static final Lock FETCH_PAYMENTS_LOCK = new ReentrantLock();
 
     /**
      * Use this mutex to lock threads on sensitive portions of code
@@ -60,7 +89,17 @@ public interface NamedConstants {
     /**
      * Use this mutex to lock threads on sensitive portions of code
      */
+    public static final String FETCH_CAMPAIGNS_MUTEX = "FETCH_CAMPAIGNS_MUTEX";
+
+    /**
+     * Use this mutex to lock threads on sensitive portions of code
+     */
     public static final String FETCH_SCHEDULE_MUTEX = "FETCH_SCHEDULE_MUTEX";
+
+    /**
+     * Use this mutex to lock threads on sensitive portions of code
+     */
+    public static final String AD_PAYMENT_MUTEX = "AD_PAYMENT_MUTEX";
 
     /**
      * 1 minute Delay in scheduling the advert due to system delays, for example
@@ -68,7 +107,7 @@ public interface NamedConstants {
      * by the player etc
      *
      */
-    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(60).getMillis(); //changed from 120
+    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(0).getMillis(); //changed from 120 to 60 to 0
 
     /**
      * Date time string formats
@@ -341,10 +380,11 @@ public interface NamedConstants {
     public static String DB_ADAPTER = "DB_ADAPTER";
 
     /**
-     * Directory we are currently uploading files to -> Need to see a way of having this in configs
+     * Directory we are currently uploading files to -> Need to see a way of
+     * having this in configs
      */
     public static String FILE_UPLOAD_DIR = "/etc/ug/adcentral/temp/uploads";
-    
+
     /**
      * character set
      */
@@ -390,6 +430,13 @@ public interface NamedConstants {
 
     public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your One Time Pin is: {otp}. To verify your account, please login and enter your PIN at: http://advertexpo.com/#/verify -.";
 
+    public static final String SMS_TEMPLATE_NEW_CAMPAIGN_ADMIN = "Hi advertXpo admin, a new campaign just hit the system at: {createTime}. Cost: {campaignCost}, MoMo a/c: {momoAccount}";
+
+    public static final String SMS_TEMPLATE_CAMPAIGN_ESCALATE_ADMIN = "Hi advertXpo admin, campaign with id: {id} has been escalated. Manual intervention required. MoMo a/c: {momoAccount}";
+
+    public static final String SMS_TEMPLATE_CAMPAIGN_REVIEW_ADMIN = "Hi advertXpo admin, campaign with id: {id} needs to be reviewed. MoMo a/c: {momoAccount}";
+
+    
     public static final String SMS_API_PARAM_USERNAME = "user";
     public static final String SMS_API_PARAM_PASSOWRD = "password";
     public static final String SMS_API_PARAM_SENDER = "sender";

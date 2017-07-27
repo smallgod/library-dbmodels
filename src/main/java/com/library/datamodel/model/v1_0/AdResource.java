@@ -131,7 +131,7 @@ public class AdResource extends BaseEntity implements Auditable, Serializable {
             }
     )
     @Cascade({CascadeType.ALL})
-     @OrderBy("id")
+    @OrderBy("id")
     private Set<AdProgram> adResourcePrograms = new HashSet<>();
 
     public AdResource() {
