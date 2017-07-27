@@ -379,6 +379,14 @@ public interface NamedConstants {
      */
     public static String DB_ADAPTER = "DB_ADAPTER";
 
+    public static String SECOND_JOBSDATA = "SECOND_JOBSDATA";
+
+    public static String THIRD_JOBSDATA = "THIRD_JOBSDATA";
+
+    public static String TRIGGER_NOW = "TRIGGER_NOW";
+
+    public static String PAYMENTS_DATA = "PAYMENTS_DATA";
+
     /**
      * Directory we are currently uploading files to -> Need to see a way of
      * having this in configs
@@ -436,7 +444,6 @@ public interface NamedConstants {
 
     public static final String SMS_TEMPLATE_CAMPAIGN_REVIEW_ADMIN = "Hi advertXpo admin, campaign with id: {id} needs to be reviewed. MoMo a/c: {momoAccount}";
 
-    
     public static final String SMS_API_PARAM_USERNAME = "user";
     public static final String SMS_API_PARAM_PASSOWRD = "password";
     public static final String SMS_API_PARAM_SENDER = "sender";

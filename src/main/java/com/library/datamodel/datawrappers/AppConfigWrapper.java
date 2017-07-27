@@ -60,7 +60,7 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
      * @param tempDir
      * @param daemonProfile
      */
-    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir,  String tempDir, String daemonProfile) {
+    public AppConfigWrapper(Appconfig appConfig, String configsDir, String logsDir, String projectDir, String tempDir, String daemonProfile) {
 
         this(appConfig, "", configsDir, logsDir, projectDir, "", tempDir, daemonProfile);
     }
@@ -206,6 +206,46 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
 
         return this.appConfig.getSchedulers().getMidnightcall().getGroupname();
 
+    }
+
+    @Override
+    public String getAdPaymentJobName() {
+        return this.appConfig.getSchedulers().getPaymentsfetcher().getJobname();
+    }
+
+    @Override
+    public String getAdPaymentTriggerName() {
+        return this.appConfig.getSchedulers().getPaymentsfetcher().getTriggername();
+    }
+
+    @Override
+    public int getAdPaymentInterval() {
+        return this.appConfig.getSchedulers().getPaymentsfetcher().getInterval();
+    }
+
+    @Override
+    public String getAdPaymentGroupName() {
+        return this.appConfig.getSchedulers().getPaymentsfetcher().getGroupname();
+    }
+
+    @Override
+    public String getAdCampaignProcessorJobName() {
+        return this.appConfig.getSchedulers().getCampaignsprocessor().getJobname();
+    }
+
+    @Override
+    public String getAdCampaignProcessorTriggerName() {
+        return this.appConfig.getSchedulers().getCampaignsprocessor().getTriggername();
+    }
+
+    @Override
+    public int getAdCampaignProcessorInterval() {
+        return this.appConfig.getSchedulers().getCampaignsprocessor().getInterval();
+    }
+
+    @Override
+    public String getAdCampaignProcessorGroupName() {
+        return this.appConfig.getSchedulers().getCampaignsprocessor().getGroupname();
     }
 
     @Override
