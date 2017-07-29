@@ -6,7 +6,6 @@ import com.library.datamodel.Constants.CampaignStatus;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.datamodel.Constants.ScheduleType;
 import com.library.sgsharedinterface.Auditable;
-import com.library.utilities.DateUtils;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -68,7 +67,8 @@ import org.joda.time.LocalDateTime;
     @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID, query = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID_QUERY),
-    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS, query = AdProgram.FETCH_ALL_CAMPAIGNS_QUERY)
+    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS, query = AdProgram.FETCH_ALL_CAMPAIGNS_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS_BY_STATUS, query = AdProgram.FETCH_CAMPAIGNS_BY_STATUS_QUERY)
 
 })
 
@@ -90,8 +90,9 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public static final String FETCH_CAMPAIGNS_BY_PAYMENT_ID = "FETCH_CAMPAIGNS_BY_PAYMENT_ID";
     public static final String FETCH_CAMPAIGNS_BY_STATUS = "FETCH_CAMPAIGNS_BY_STATUS";
     
+    private static final long serialVersionUID = 7580435289074737150L;
+    
 
-    private static final long serialVersionUID = -7420964819128665745L;
     
     //Select i from Inventory i,Category c INNER JOIN i.product ip INNER JOIN c.products cp where ip = cp and c.id=?
     
@@ -157,15 +158,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private ProgDisplayLayout displayLayout;
 
-    /*
-    @Expose
-    @SerializedName(value = "processing_step")
-    @Column(name = "processing_step")
-    @Enumerated(EnumType.STRING)
-    private AdvertStep adStep;//at which processing level this advert is at
-    */
-
-   
     
     @Expose
     @SerializedName(value = "start_date")
@@ -205,25 +197,24 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private CampaignStatus adCampaignStatus;
     
-   
-    @Expose
-    @SerializedName(value = "same_status_picks")
-    @Column(name = "same_status_picks", nullable = false)
-    /**
+    
+   /**
      * Number of times this campaign program has been picked 
      * with the same status
      */
+    @Expose
+    @SerializedName(value = "same_status_picks")
+    @Column(name = "same_status_picks", nullable = false)
     private int sameStatusPick = 0;
     
-    
-    @Expose
-    @SerializedName(value = "status_change_time")
-    @Column(name = "status_change_time", nullable = false)
-    @Type(type = "jodalocaldatetime")
-    /**
+        /**
      * Time status was last changed for this campaign
      */
-    private LocalDateTime statusChangeTime = DateUtils.getDateTimeNow();
+    @Expose
+    @SerializedName(value = "status_change_time")
+    @Type(type = "jodalocaldatetime")
+    @Column(name = "status_change_time")
+    private LocalDateTime statusChangeTime;
     
      
     @Expose

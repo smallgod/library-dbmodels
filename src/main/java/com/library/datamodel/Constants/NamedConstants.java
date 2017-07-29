@@ -5,6 +5,9 @@
  */
 package com.library.datamodel.Constants;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.joda.time.DateTimeZone;
@@ -18,7 +21,7 @@ public interface NamedConstants {
 
     public static final String ADMIN_SMS_RECIPIENT = "256790790491";
 
-    public static final String ADVERTXPO_CALLBACK_URL = "http://advertxpo.com:9099/api/json";
+    public static final String ADVERTXPO_CALLBACK_URL = "http://advertxpo.com:9008/adcentral/api/json";
     public static final String MAMBOPAY_DEBIT_URL = "https://mambopay.azure-api.net/api/v1/mtnmobilemoneyapi/debit";
 
     //public static final String SUBSCRIPTION_KEY = "9389259ec349469682c71910ab6f4ac3";
@@ -383,9 +386,16 @@ public interface NamedConstants {
 
     public static String THIRD_JOBSDATA = "THIRD_JOBSDATA";
 
-    public static String TRIGGER_NOW = "TRIGGER_NOW";
+    public static String TRIGGER_NOW_PAYPROCESSOR = "TRIGGER_NOW_PAYPROCESSOR";
+    
+     public static String TRIGGER_NOW_CAMPAIGNPROCESSOR = "TRIGGER_NOW_CAMPAIGNPROCESSOR";
 
-    public static String PAYMENTS_DATA = "PAYMENTS_DATA";
+    public static String PAYMENTS_DETAILS = "PAYMENTS_DETAILS";
+    
+    public static String CAMPAIGN_DETAILS = "CAMPAIGN_DETAILS";
+    
+    
+    public static Set<String> ALL_COLUMNS = new HashSet<>(Arrays.asList("ALL"));
 
     /**
      * Directory we are currently uploading files to -> Need to see a way of
