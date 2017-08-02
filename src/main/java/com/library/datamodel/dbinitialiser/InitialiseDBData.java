@@ -875,7 +875,7 @@ public class InitialiseDBData {
 //        int screen2TaskY = 1489257349;
         int screenHeight = 1080;
         int screenWidth = 1920;
-        String firstTestTerminalId = "233097221599994"; //reverse the terminalIds after connecting the first terminal back
+        String firstTestTerminalId = "230901364440706"; //reverse the terminalIds after connecting the first terminal back
         String secondTestTerminalId = "230901364454349";
         
 
@@ -1530,8 +1530,8 @@ public class InitialiseDBData {
     public void addMoreTestScreens() throws MyCustomException {
 
         //STAGING
-        int screen1TaskX = 1494940365;
-        int screen1TaskY = 1494940380;
+        int screen1TaskX = 1501684843;
+        int screen1TaskY = 1501684885;
         
         int screen2TaskX = 1494940402;
         int screen2TaskY = 1494940417;

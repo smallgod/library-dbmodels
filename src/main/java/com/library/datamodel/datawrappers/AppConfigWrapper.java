@@ -165,24 +165,24 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
-    public String getAdFetcherJobName() {
-        return this.appConfig.getSchedulers().getPickpending().getJobname();
+    public String getAdDisplayProcessorobName() {
+        return this.appConfig.getSchedulers().getDisplayProcessor().getJobname();
     }
 
     @Override
-    public String getAdFetcherTriggerName() {
-        return this.appConfig.getSchedulers().getPickpending().getTriggername();
+    public String getAdDisplayProcessorTriggerName() {
+        return this.appConfig.getSchedulers().getDisplayProcessor().getTriggername();
     }
 
     @Override
-    public int getAdFetcherInterval() {
-        return this.appConfig.getSchedulers().getPickpending().getInterval();
+    public int getAdDisplayProcessorInterval() {
+        return this.appConfig.getSchedulers().getDisplayProcessor().getInterval();
     }
 
     @Override
-    public String getAdFetcherGroupName() {
+    public String getAdDisplayProcessorGroupName() {
 
-        return this.appConfig.getSchedulers().getPickpending().getGroupname();
+        return this.appConfig.getSchedulers().getDisplayProcessor().getGroupname();
 
     }
 
@@ -209,43 +209,43 @@ public final class AppConfigWrapper implements SharedAppConfigIF {
     }
 
     @Override
-    public String getAdPaymentJobName() {
-        return this.appConfig.getSchedulers().getPaymentsfetcher().getJobname();
+    public String getAdPaymentProcessorJobName() {
+        return this.appConfig.getSchedulers().getPaymentProcessor().getJobname();
     }
 
     @Override
-    public String getAdPaymentTriggerName() {
-        return this.appConfig.getSchedulers().getPaymentsfetcher().getTriggername();
+    public String getAdPaymentProcessorTriggerName() {
+        return this.appConfig.getSchedulers().getPaymentProcessor().getTriggername();
     }
 
     @Override
-    public int getAdPaymentInterval() {
-        return this.appConfig.getSchedulers().getPaymentsfetcher().getInterval();
+    public int getAdPaymentProcessorInterval() {
+        return this.appConfig.getSchedulers().getPaymentProcessor().getInterval();
     }
 
     @Override
-    public String getAdPaymentGroupName() {
-        return this.appConfig.getSchedulers().getPaymentsfetcher().getGroupname();
+    public String getAdPaymentProcessorGroupName() {
+        return this.appConfig.getSchedulers().getPaymentProcessor().getGroupname();
     }
 
     @Override
     public String getAdCampaignProcessorJobName() {
-        return this.appConfig.getSchedulers().getCampaignsprocessor().getJobname();
+        return this.appConfig.getSchedulers().getCampaignProcessor().getJobname();
     }
 
     @Override
     public String getAdCampaignProcessorTriggerName() {
-        return this.appConfig.getSchedulers().getCampaignsprocessor().getTriggername();
+        return this.appConfig.getSchedulers().getCampaignProcessor().getTriggername();
     }
 
     @Override
     public int getAdCampaignProcessorInterval() {
-        return this.appConfig.getSchedulers().getCampaignsprocessor().getInterval();
+        return this.appConfig.getSchedulers().getCampaignProcessor().getInterval();
     }
 
     @Override
     public String getAdCampaignProcessorGroupName() {
-        return this.appConfig.getSchedulers().getCampaignsprocessor().getGroupname();
+        return this.appConfig.getSchedulers().getCampaignProcessor().getGroupname();
     }
 
     @Override

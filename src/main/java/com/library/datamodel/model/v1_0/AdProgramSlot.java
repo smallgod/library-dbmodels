@@ -70,7 +70,8 @@ public class AdProgramSlot extends BaseEntity implements Auditable, Serializable
     @JoinTable(name = "program_slots",//EAGER works with criteria but throws the infamous NullPointer exceptin while trying to execute the select query
 
             joinColumns = {
-                @JoinColumn(name = "id")
+                //@JoinColumn(name = "program_slot_id", referencedColumnName = "id")
+                 @JoinColumn(name = "id")
 
             },
             inverseJoinColumns = {

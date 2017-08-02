@@ -2,6 +2,7 @@ package com.library.datamodel.model.v1_0;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.library.datamodel.Constants.AdSlotsReserve;
 import com.library.datamodel.Constants.CampaignStatus;
 import com.library.datamodel.Constants.ProgDisplayLayout;
 import com.library.datamodel.Constants.ScheduleType;
@@ -66,7 +67,7 @@ import org.joda.time.LocalDateTime;
     @NamedQuery(name = AdProgram.FETCH_ALL_USER_CAMPAIGNS, query = AdProgram.FETCH_ALL_USER_CAMPAIGNS_QUERY),
     @NamedQuery(name = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_USER_CAMPAIGNS_BY_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID, query = AdProgram.FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY),
-    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID, query = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID_QUERY),
+    @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS_BY_CAMPAIGN_ID, query = AdProgram.FETCH_ALL_CAMPAIGNS_BY_ID_QUERY),
     @NamedQuery(name = AdProgram.FETCH_ALL_CAMPAIGNS, query = AdProgram.FETCH_ALL_CAMPAIGNS_QUERY),
     @NamedQuery(name = AdProgram.FETCH_CAMPAIGNS_BY_STATUS, query = AdProgram.FETCH_CAMPAIGNS_BY_STATUS_QUERY)
 
@@ -83,7 +84,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     public static final String FETCH_ALL_CAMPAIGNS_BY_ID_QUERY =       "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
     public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID_QUERY ="SELECT DISTINCT program.campaignScreenCodes FROM AdProgram program WHERE program.campaignId=:campaignId";
     public static final String FETCH_SCREENCODES_BY_CAMPAIGN_ID = "FETCH_SCREENCODES_BY_CAMPAIGN_ID";
-    public static final String FETCH_ALL_CAMPAIGNS_BY_ID = "FETCH_ALL_CAMPAIGNS_BY_ID";
+    public static final String FETCH_ALL_CAMPAIGNS_BY_CAMPAIGN_ID = "FETCH_ALL_CAMPAIGNS_BY_ID";
     public static final String FETCH_ALL_USER_CAMPAIGNS = "FETCH_ALL_USER_CAMPAIGNS";
     public static final String FETCH_USER_CAMPAIGNS_BY_ID = "FETCH_USER_CAMPAIGNS_BY_ID";
     public static final String FETCH_ALL_CAMPAIGNS = "FETCH_ALL_CAMPAIGNS";
@@ -267,6 +268,12 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private ScheduleType scheduleType;
     
     @Expose
+    @SerializedName(value = "ad_slot_reserve")
+    @Column(name = "ad_slot_reserve")
+    @Enumerated(EnumType.STRING)
+    private AdSlotsReserve adSlotReserve;
+    
+    @Expose
     @SerializedName(value = "to_review")
     @Column(name = "to_review", nullable = false)
     private boolean isToBeReviewed = Boolean.TRUE; //whether or not campaign is to be reviewed
@@ -275,6 +282,7 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "is_reviewed")
     @Column(name = "is_reviewed", nullable = false)
     private boolean isReviewed = Boolean.FALSE; //whether or not campaign has been reviewed
+    
     
     
     @Transient
@@ -519,6 +527,14 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setIsReviewed(boolean isReviewed) {
         this.isReviewed = isReviewed;
+    }
+
+    public AdSlotsReserve getAdSlotReserve() {
+        return adSlotReserve;
+    }
+
+    public void setAdSlotReserve(AdSlotsReserve adSlotReserve) {
+        this.adSlotReserve = adSlotReserve;
     }
 
     

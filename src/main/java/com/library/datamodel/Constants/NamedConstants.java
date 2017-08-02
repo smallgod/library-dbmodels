@@ -45,6 +45,16 @@ public interface NamedConstants {
     public static final String MAMBOPAY_HEADER_SUBSCKEY = "Ocp-Apim-Subscription-Key";
 
     /**
+     * When a scheduler is first created it is in "stand-by" mode, and will not
+     * fire triggers for this delay
+     */
+    public static int CAMPAIGN_JOB_SCHEDULE_START_DELAY = 10;//seconds
+
+    public static int PAYMENT_JOB_SCHEDULE_START_DELAY = 25;
+
+    public static int DISPLAY_JOB_SCHEDULE_START_DELAY = 40;
+
+    /**
      * Thumbnail maximum width
      */
     public static int THUMB_MAX_WIDTH = 300;//pixels
@@ -105,12 +115,22 @@ public interface NamedConstants {
     public static final String AD_PAYMENT_MUTEX = "AD_PAYMENT_MUTEX";
 
     /**
+     * UPDATE DB MUTEX
+     */
+    public static final String UPDATE_DB_MUTEX = "UPDATE_DB_MUTEX";
+
+    /**
      * 1 minute Delay in scheduling the advert due to system delays, for example
      * Uploading Resources to servers, moving resources, downloading resources
      * by the player etc
      *
      */
-    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(0).getMillis(); //changed from 120 to 60 to 0
+    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(60).getMillis(); //changed from 120 to 60 to 0
+
+    /**
+     * SSL certificates
+     */
+    public static final String PEER_CERTIFICATES = "PEER_CERTIFICATES";
 
     /**
      * Date time string formats
@@ -378,23 +398,33 @@ public interface NamedConstants {
     public static String CLIENT_POOL = "CLIENT_POOL";
 
     /**
-     * Identifies by name the SGDbAdapter object stored in the JOBS datamap
+     * Identifies by name the external db access adapter object stored in the
+     * JOBS datamap
      */
-    public static String DB_ADAPTER = "DB_ADAPTER";
+    public static String EXTERNAL_DB_ACCESS = "EXTERNAL_DB_ACCESS";
+
+    /**
+     * Identifies by name the internal db access adapter object stored in the
+     * JOBS datamap
+     */
+    public static String INTERNAL_DB_ACCESS = "INTERNAL_DB_ACCESS";
 
     public static String SECOND_JOBSDATA = "SECOND_JOBSDATA";
 
     public static String THIRD_JOBSDATA = "THIRD_JOBSDATA";
 
     public static String TRIGGER_NOW_PAYPROCESSOR = "TRIGGER_NOW_PAYPROCESSOR";
+
+    public static String TRIGGER_NOW_CAMPAIGNPROCESSOR = "TRIGGER_NOW_CAMPAIGNPROCESSOR";
     
-     public static String TRIGGER_NOW_CAMPAIGNPROCESSOR = "TRIGGER_NOW_CAMPAIGNPROCESSOR";
+    public static String TRIGGER_NOW_DISPLAYPROCESSOR = "TRIGGER_NOW_DISPLAYPROCESSOR";
 
     public static String PAYMENTS_DETAILS = "PAYMENTS_DETAILS";
-    
+
+    public static String PAYMENTS_ID = "PAYMENTS_ID";
+
     public static String CAMPAIGN_DETAILS = "CAMPAIGN_DETAILS";
-    
-    
+
     public static Set<String> ALL_COLUMNS = new HashSet<>(Arrays.asList("ALL"));
 
     /**
