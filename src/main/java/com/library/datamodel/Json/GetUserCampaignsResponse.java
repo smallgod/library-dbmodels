@@ -24,6 +24,7 @@ public class GetUserCampaignsResponse {
                 "screen_reach": 253,
                 "audience_reach": 9909,
                 "campaign_status": "IN_REVIEW",
+                "creation_date_time": "2017-03-23 23:23",
                 "start_date": "2017-03-23",
                 "end_date": "2017-03-29",
                 "display_count": 160, //number of times ad will be shown
@@ -37,6 +38,7 @@ public class GetUserCampaignsResponse {
                 "screen_reach": 253,
                 "audience_reach": 9909,
                 "campaign_status": "ACTIVE",
+                "creation_date_time": "2017-03-23 23:23",
                 "start_date": "2017-03-23",
                 "end_date": "2017-03-29",
                 "display_count": 88,

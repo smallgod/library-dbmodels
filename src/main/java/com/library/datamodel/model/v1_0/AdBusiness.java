@@ -67,6 +67,14 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
     @Column(name = "business_name")
     private String businessName;
 
+    @SerializedName(value = "location_contact")
+    @Column(name = "location_contact", nullable = false)
+    private String businessContact;
+
+    @SerializedName(value = "screens_at_loc")
+    @Column(name = "screens_at_loc")
+    private int numberOfScreens = 0;
+
     public AdBusiness() {
     }
 
@@ -131,6 +139,22 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
 
     public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+    public String getBusinessContact() {
+        return businessContact;
+    }
+
+    public void setBusinessContact(String businessContact) {
+        this.businessContact = businessContact;
+    }
+
+    public int getNumberOfScreens() {
+        return numberOfScreens;
+    }
+
+    public void setNumberOfScreens(int numberOfScreens) {
+        this.numberOfScreens = numberOfScreens;
     }
 
 }

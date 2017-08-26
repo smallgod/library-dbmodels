@@ -22,6 +22,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
@@ -57,11 +58,11 @@ import org.hibernate.annotations.SelectBeforeUpdate;
     @NamedQuery(name = AdScreen.FETCH_TARGETED_AREAS, query = AdScreen.FETCH_TARGETED_AREAS_QUERY),
     @NamedQuery(name = AdScreen.FETCH_TARGETED_BUSINESS_TYPES, query = AdScreen.FETCH_TARGETED_BUSINESS_TYPES_QUERY),
     @NamedQuery(name = AdScreen.FETCH_TARGETED_AUDIENCE_TYPES, query = AdScreen.FETCH_TARGETED_AUDIENCE_TYPES_QUERY),
-    
+
     @NamedQuery(name = AdScreen.FETCH_AREAS, query = AdScreen.FETCH_AREAS_QUERY),
     @NamedQuery(name = AdScreen.FETCH_BUSINESS_TYPES, query = AdScreen.FETCH_BUSINESS_TYPES_QUERY),
     @NamedQuery(name = AdScreen.FETCH_AUDIENCE_TYPES, query = AdScreen.FETCH_AUDIENCE_TYPES_QUERY),
-    
+
     @NamedQuery(name = AdScreen.FETCH_TARGET_SCREENS, query = AdScreen.FETCH_TARGET_SCREENS_QUERY)
 
 })
@@ -70,7 +71,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_TARGET_SCREENS_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenArea area INNER JOIN screen.businessType busType INNER JOIN screen.audienceTypes audType WHERE area.areaCode IN (:areaCodes) AND busType.businessTypeCode IN (:businessCodes) AND audType.audienceCode IN (:audienceCodes)";
     public static final String FETCH_TARGET_SCREENS = "FETCH_TARGET_SCREENS";
-    
+
     public static final String GET_SCREENS_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenArea area INNER JOIN screen.businessType biztype INNER JOIN screen.screenOwnerBusiness business";
     public static final String GET_SCREENS = "GET_SCREENS";
 
@@ -113,7 +114,7 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     public static final String FETCH_TARGETED_BUSINESS_TYPES_QUERY = "SELECT DISTINCT business FROM AdScreen screen INNER JOIN screen.businessType business WHERE screen.screenId IN (:screenIds)";
     public static final String FETCH_TARGETED_BUSINESS_TYPES = "FETCH_TARGETED_BUSINESS_TYPES";
 
-    public static final String FETCH_TARGETED_AUDIENCE_TYPES_QUERY = "SELECT DISTINCT audience FROM AdScreen screen INNER JOIN screen.audienceTypes audience WHERE screen.screenId IN (:screenIds)"; 
+    public static final String FETCH_TARGETED_AUDIENCE_TYPES_QUERY = "SELECT DISTINCT audience FROM AdScreen screen INNER JOIN screen.audienceTypes audience WHERE screen.screenId IN (:screenIds)";
     public static final String FETCH_TARGETED_AUDIENCE_TYPES = "FETCH_TARGETED_AUDIENCE_TYPES";
 
     //---> was commented --> public static final String FETCH_TARGETED_AREAS_QUERY = "SELECT DISTINCT area FROM AdScreen screen, screen.screenArea area WHERE screen.screenId=:screenId";
@@ -194,15 +195,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     private AdTerminal supportTerminal;
 
     @Expose
-    @SerializedName(value = "business_type_code")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
-    })
-    @Cascade(CascadeType.ALL)
-    private AdBusinessType businessType;
-
-    @Expose
     @SerializedName(value = "screen_owner")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
@@ -219,7 +211,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     })
     @Cascade({CascadeType.ALL})
     private AdArea screenArea;
-    
 
     @SerializedName(value = "screen_audience")
     @ManyToMany(fetch = FetchType.EAGER)
@@ -233,6 +224,20 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     )
     @Cascade({CascadeType.ALL})
     private Set<AdAudienceType> audienceTypes = new HashSet<>(0);
+    
+        
+        
+        
+        
+
+    @Expose
+    @SerializedName(value = "business_type_code")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name = "business_type_code", referencedColumnName = "business_type_code") // we can leave this Join-Column out, if we leave it out, Hibernate will use the entity Id
+    })
+    @Cascade(CascadeType.ALL)
+    private AdBusinessType businessType;
 
     //I really want to move this relationship to AdProgram but the way I schedule stuff need be considered before doing so..
     //Let's instead use the field called 'campaignScreenCodes' inside AdProgram it is a long comma-separated varchar
@@ -370,8 +375,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         this.screenValue = screenValue;
     }
 
-
-
     public String getExtra1() {
         return extra1;
     }
@@ -494,7 +497,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 //            )
 //    )
 //    private long id;
-
     public Set<AdAudienceType> getAudienceTypes() {
         return audienceTypes;
     }

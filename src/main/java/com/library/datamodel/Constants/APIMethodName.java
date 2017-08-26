@@ -47,7 +47,8 @@ public enum APIMethodName implements Constants {
     UPDATE_BULK("UPDATE_BULK"),
     BIND_TERMINALS("BIND_TERMINALS"),
     SAVE_BULK("SAVE_BULK"),
-    FETCH_RESOURCES("FETCH_RESOURCES");
+    FETCH_RESOURCES("FETCH_RESOURCES"),
+    CREATE_NEW_LOCATION("CREATE_NEW_LOCATION");
 
     private final String methodNameString;
 

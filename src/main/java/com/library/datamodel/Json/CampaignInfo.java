@@ -42,7 +42,11 @@ public class CampaignInfo implements DataList {
     @Expose
     private String campaignStatus;
 
-    @SerializedName("start_date")
+    @SerializedName("creation_date_time")
+    @Expose
+    private String creationDateTime;
+    
+     @SerializedName("start_date")
     @Expose
     private String startDate;
 
@@ -145,6 +149,14 @@ public class CampaignInfo implements DataList {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCreationDateTime() {
+        return creationDateTime;
+    }
+
+    public void setCreationDateTime(String creationDateTime) {
+        this.creationDateTime = creationDateTime;
     }
 
 
