@@ -584,226 +584,317 @@ public class InitialiseDBData {
         busy1.setBusinessName("Le Village Wines");
         busy1.setBusinessId("LEVI");
         busy1.setIsDefault(true);
+        busy1.setNumberOfScreens(1);
+        busy1.setBusinessContact("256790790491");
 
         busy2 = new AdBusiness();
         busy2.setBusinessName("Katch the Sun");
         busy2.setIsDefault(true);
         busy2.setBusinessId("KSUN");
+        busy2.setNumberOfScreens(1);
+        busy2.setBusinessContact("256790790491");
 
         busy3 = new AdBusiness();
         busy3.setBusinessName("Nakumatt");
         busy3.setIsDefault(true);
         busy3.setBusinessId("NKMT");
+        busy3.setNumberOfScreens(1);
+        busy3.setBusinessContact("256790790491");
 
         busy4 = new AdBusiness();
         busy4.setBusinessName("Top Bets");
         busy4.setIsDefault(true);
         busy4.setBusinessId("TOPB");
+        busy4.setNumberOfScreens(1);
+        busy4.setBusinessContact("256790790491");
 
         busy5 = new AdBusiness();
         busy5.setBusinessName("Equatoria Hotel");
         busy5.setIsDefault(true);
         busy5.setBusinessId("EQUA");
+        busy5.setNumberOfScreens(1);
+        busy5.setBusinessContact("256790790491");
 
         busy6 = new AdBusiness();
         busy6.setBusinessName("Mayfair Casino");
         busy6.setIsDefault(true);
         busy6.setBusinessId("MAYF");
+        busy6.setNumberOfScreens(1);
+        busy6.setBusinessContact("256790790491");
 
         busy7 = new AdBusiness();
         busy7.setBusinessName("Norvik Hospital");
         busy7.setIsDefault(true);
         busy7.setBusinessId("NORV");
+        busy7.setNumberOfScreens(1);
+        busy7.setBusinessContact("256790790491");
 
         busy8 = new AdBusiness();
         busy8.setBusinessName("Ethiopian Village Restaurant ");
         busy8.setIsDefault(true);
         busy8.setBusinessId("EVIL");
+        busy8.setNumberOfScreens(1);
+        busy8.setBusinessContact("256790790491");
 
         busy9 = new AdBusiness();
         busy9.setBusinessName("Muriel's Restaurant");
         busy9.setIsDefault(true);
         busy9.setBusinessId("MURI");
+        busy9.setNumberOfScreens(1);
+        busy9.setBusinessContact("256790790491");
 
         busy10 = new AdBusiness();
         busy10.setBusinessName("Iguana Lounge");
         busy10.setIsDefault(true);
         busy10.setBusinessId("IGUA");
+        busy10.setNumberOfScreens(1);
+        busy10.setBusinessContact("256790790491");
 
         busy11 = new AdBusiness();
         busy11.setBusinessName("Sky Lounge");
         busy11.setIsDefault(true);
         busy11.setBusinessId("SKYL");
+        busy11.setNumberOfScreens(1);
+        busy11.setBusinessContact("256790790491");
 
         busy12 = new AdBusiness();
         busy12.setBusinessName("Bistro Restaurant");
         busy12.setIsDefault(true);
         busy12.setBusinessId("BIST");
+        busy12.setNumberOfScreens(1);
+        busy12.setBusinessContact("256790790491");
 
         busy13 = new AdBusiness();
         busy13.setBusinessName("Protea Hotel");
         busy13.setIsDefault(true);
         busy13.setBusinessId("PROT");
+        busy13.setNumberOfScreens(1);
+        busy13.setBusinessContact("256790790491");
 
         busy14 = new AdBusiness();
         busy14.setBusinessName("Prunes Restaurant");
         busy14.setIsDefault(true);
         busy14.setBusinessId("PRUN");
+        busy14.setNumberOfScreens(1);
+        busy14.setBusinessContact("256790790491");
 
         busy15 = new AdBusiness();
         busy15.setBusinessName("UNHCR canteen");
         busy15.setIsDefault(true);
         busy15.setBusinessId("UNHC");
+        busy15.setNumberOfScreens(1);
+        busy15.setBusinessContact("256790790491");
 
         busy16 = new AdBusiness();
         busy16.setBusinessName("Big Mike's Café");
         busy16.setIsDefault(true);
         busy16.setBusinessId("BMIK");
+        busy16.setNumberOfScreens(1);
+        busy16.setBusinessContact("256790790491");
 
         busy17 = new AdBusiness();
         busy17.setBusinessName("The Lawns Restaurant");
         busy17.setIsDefault(true);
         busy17.setBusinessId("LAWN");
+        busy17.setNumberOfScreens(1);
+        busy17.setBusinessContact("256790790491");
 
         busy18 = new AdBusiness();
         busy18.setBusinessName("White Rose Restaurant");
         busy18.setIsDefault(true);
         busy18.setBusinessId("WIRO");
+        busy18.setNumberOfScreens(1);
+        busy18.setBusinessContact("256790790491");
 
         busy19 = new AdBusiness();
         busy19.setBusinessName("University Hall");
         busy19.setIsDefault(true);
         busy19.setBusinessId("UHAL");
+        busy19.setNumberOfScreens(1);
+        busy19.setBusinessContact("256790790491");
 
         busy20 = new AdBusiness();
         busy20.setBusinessName("Tuskys");
         busy20.setIsDefault(true);
         busy20.setBusinessId("TUSK");
+        busy20.setNumberOfScreens(1);
+        busy20.setBusinessContact("256790790491");
 
         busy21 = new AdBusiness();
         busy21.setBusinessName("MUK Guest House");
         busy21.setIsDefault(true);
         busy21.setBusinessId("MUKG");
+        busy21.setNumberOfScreens(1);
+        busy21.setBusinessContact("256790790491");
 
         busy22 = new AdBusiness();
         busy22.setBusinessName("Game shopping mall");
         busy22.setIsDefault(true);
         busy22.setBusinessId("GAME");
+        busy22.setNumberOfScreens(1);
+        busy22.setBusinessContact("256790790491");
 
         busy23 = new AdBusiness();
         busy23.setBusinessName("Stanley Hall");
         busy23.setIsDefault(true);
         busy23.setBusinessId("STAH");
+        busy23.setNumberOfScreens(1);
+        busy23.setBusinessContact("256790790491");
 
         busy24 = new AdBusiness();
         busy24.setBusinessName("Barclays Bank");
         busy24.setIsDefault(true);
         busy24.setBusinessId("BARC");
+        busy24.setNumberOfScreens(1);
+        busy24.setBusinessContact("256790790491");
 
         busy26 = new AdBusiness();
         busy26.setBusinessName("Quality Foods Mall");
         busy26.setIsDefault(true);
         busy26.setBusinessId("QFUD");
+        busy26.setNumberOfScreens(1);
+        busy26.setBusinessContact("256790790491");
 
         busy27 = new AdBusiness();
         busy27.setBusinessName("Cayenne Club");
         busy27.setIsDefault(true);
         busy27.setBusinessId("CYNN");
+        busy27.setNumberOfScreens(1);
+        busy27.setBusinessContact("256790790491");
 
         busy29 = new AdBusiness();
         busy29.setBusinessName("Friecca Pharmacy");
         busy29.setIsDefault(true);
         busy29.setBusinessId("FRIC");
+        busy29.setNumberOfScreens(1);
+        busy29.setBusinessContact("256790790491");
 
         busy30 = new AdBusiness();
         busy30.setBusinessName("Superbets");
         busy30.setIsDefault(true);
         busy30.setBusinessId("SUPA");
+        busy30.setNumberOfScreens(1);
+        busy30.setBusinessContact("256790790491");
 
         busy31 = new AdBusiness();
         busy31.setBusinessName("Bill's Cinema");
         busy31.setIsDefault(true);
         busy31.setBusinessId("BILZ");
+        busy31.setNumberOfScreens(1);
+        busy31.setBusinessContact("256790790491");
 
         busy32 = new AdBusiness();
         busy32.setBusinessName("Travellers' Restaurant");
         busy32.setIsDefault(true);
         busy32.setBusinessId("TRVL");
+        busy32.setNumberOfScreens(1);
+        busy32.setBusinessContact("256790790491");
 
         busy33 = new AdBusiness();
         busy33.setBusinessName("St Andrew's Hostel");
         busy33.setIsDefault(true);
         busy33.setBusinessId("SAND");
+        busy33.setNumberOfScreens(1);
+        busy33.setBusinessContact("256790790491");
 
         busy34 = new AdBusiness();
         busy34.setBusinessName("Superbets");
         busy34.setIsDefault(true);
         busy34.setBusinessId("SUPB");
+        busy34.setNumberOfScreens(1);
+        busy34.setBusinessContact("256790790491");
 
         busy35 = new AdBusiness();
         busy35.setBusinessName("2K Restaurant");
         busy35.setIsDefault(true);
         busy35.setBusinessId("TWOK");
+        busy35.setNumberOfScreens(1);
+        busy35.setBusinessContact("256790790491");
 
         busy36 = new AdBusiness();
+        busy36.setBusinessContact("256790790491");
         busy36.setBusinessName("Staff Canteen");
         busy36.setIsDefault(true);
         busy36.setBusinessId("SMUK");
+        busy36.setNumberOfScreens(1);
+        busy36.setBusinessContact("256790790491");
 
         busy37 = new AdBusiness();
         busy37.setBusinessName("Kampala Medical Chambers");
         busy37.setIsDefault(true);
         busy37.setBusinessId("KPMC");
+        busy37.setNumberOfScreens(1);
+        busy37.setBusinessContact("256790790491");
 
         busy38 = new AdBusiness();
         busy38.setBusinessName("Fortune Bets");
         busy38.setIsDefault(true);
         busy38.setBusinessId("FORT");
+        busy38.setNumberOfScreens(1);
+        busy38.setBusinessContact("256790790491");
 
         busy39 = new AdBusiness();
         busy39.setBusinessName("Galz Betting");
         busy39.setIsDefault(true);
         busy39.setBusinessId("GALZ");
+        busy39.setNumberOfScreens(1);
+        busy39.setBusinessContact("256790790491");
 
         busy40 = new AdBusiness();
         busy40.setBusinessName("Koko Bar");
         busy40.setIsDefault(true);
         busy40.setBusinessId("KOKO");
+        busy40.setNumberOfScreens(1);
+        busy40.setBusinessContact("256790790491");
 
         busy41 = new AdBusiness();
         busy41.setBusinessName("Hotel Inter-Tropix");
         busy41.setIsDefault(true);
         busy41.setBusinessId("HITX");
+        busy41.setNumberOfScreens(1);
+        busy41.setBusinessContact("256790790491");
 
         busy42 = new AdBusiness();
         busy42.setBusinessName("Source of the Nile Hotel");
         busy42.setIsDefault(true);
         busy42.setBusinessId("SOTN");
+        busy42.setNumberOfScreens(1);
+        busy42.setBusinessContact("256790790491");
 
         busy43 = new AdBusiness();
         busy43.setBusinessName("Benrich");
         busy43.setIsDefault(true);
         busy43.setBusinessId("BRICH");
+        busy43.setNumberOfScreens(1);
+        busy43.setBusinessContact("256790790491");
 
         busy44 = new AdBusiness();
         busy44.setBusinessName("The 500");
         busy44.setIsDefault(true);
         busy44.setBusinessId("DAFV");
+        busy44.setNumberOfScreens(1);
+        busy44.setBusinessContact("256790790491");
 
         busy45 = new AdBusiness();
         busy45.setBusinessName("Mugiez");
         busy45.setIsDefault(true);
         busy45.setBusinessId("MUGZ");
+        busy45.setNumberOfScreens(1);
+        busy45.setBusinessContact("256790790491");
 
         busy46 = new AdBusiness();
         busy46.setBusinessName("Watoto");
         busy46.setIsDefault(true);
         busy46.setBusinessId("WATO");
+        busy46.setNumberOfScreens(1);
+        busy46.setBusinessContact("256790790491");
 
         busy47 = new AdBusiness();
         busy47.setBusinessName("Style and Smile Saloon");
         busy47.setIsDefault(true);
         busy47.setBusinessId("SASS");
+        busy47.setNumberOfScreens(1);
+        busy47.setBusinessContact("256790790491");
 
         testBusinesses.add(busy1);
         testBusinesses.add(busy2);
@@ -1053,6 +1144,7 @@ public class InitialiseDBData {
         guestUser.setPassword(Security.createHash(password));
         guestUser.setUserId(userId);
         guestUser.setIsPasswordEncrypted(Boolean.TRUE);
+        guestUser.setFailedLoginAttempts(0);
         //adUser.setUserId(GeneralUtils.generateUserId(primaryPhone));
 
         customHibernate.saveEntity(guestUser);
@@ -1076,6 +1168,7 @@ public class InitialiseDBData {
         testUser.setPassword(Security.createHash(password));
         testUser.setUserId(userId);
         testUser.setIsPasswordEncrypted(Boolean.TRUE);
+        guestUser.setFailedLoginAttempts(0);
         //adUser.setUserId(GeneralUtils.generateUserId(primaryPhone));
 
         customHibernate.saveEntity(testUser);
@@ -1116,6 +1209,7 @@ public class InitialiseDBData {
         templatesCampaignUser.setPassword(Security.createHash(password));
         templatesCampaignUser.setUserId(userId);
         templatesCampaignUser.setIsPasswordEncrypted(Boolean.TRUE);
+        guestUser.setFailedLoginAttempts(0);
         //adUser.setUserId(GeneralUtils.generateUserId(primaryPhone));
 
         customHibernate.saveEntity(templatesCampaignUser);
