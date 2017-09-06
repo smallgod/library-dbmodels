@@ -34,6 +34,10 @@ public class CampaignInfo implements DataList {
     @Expose
     private int audienceReach;
 
+    @SerializedName("estimated_views")
+    @Expose
+    private int estimatedViews;
+
     @SerializedName("screen_reach")
     @Expose
     private int screenReach;
@@ -41,12 +45,16 @@ public class CampaignInfo implements DataList {
     @SerializedName("campaign_status")
     @Expose
     private String campaignStatus;
+    
+    @SerializedName("readable_status")
+    @Expose
+    private String readableStatus;
 
     @SerializedName("creation_date_time")
     @Expose
     private String creationDateTime;
-    
-     @SerializedName("start_date")
+
+    @SerializedName("start_date")
     @Expose
     private String startDate;
 
@@ -159,6 +167,20 @@ public class CampaignInfo implements DataList {
         this.creationDateTime = creationDateTime;
     }
 
+    public int getEstimatedViews() {
+        return estimatedViews;
+    }
 
+    public void setEstimatedViews(int estimatedViews) {
+        this.estimatedViews = estimatedViews;
+    }
+
+    public String getReadableStatus() {
+        return readableStatus;
+    }
+
+    public void setReadableStatus(String readableStatus) {
+        this.readableStatus = readableStatus;
+    }
 
 }

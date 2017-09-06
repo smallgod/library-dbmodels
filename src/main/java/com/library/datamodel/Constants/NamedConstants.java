@@ -71,6 +71,11 @@ public interface NamedConstants {
     public static String GENERIC_DB_ERR_DESC = "Error! Request cannot be processed at the moment, please try again later.";
 
     /**
+     * Generic error message to be displayed to users on the UI
+     */
+    public static String GENERIC_ERR_DESC = "Sorry, request can't be processed now. Please try again later or contact us";
+
+    /**
      * Will be concantenated to the business ID to form a screen_id
      */
     public static String SCREEN_START_ID = "01";
@@ -154,6 +159,11 @@ public interface NamedConstants {
      * "2016-07-25 08:55:09"
      */
     public static final String DATE_TIME_DASH_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * DateTime format without seconds e.g. "2016-07-25 08:55"
+     */
+    public static final String DATE_TIME_DASH_NO_SECONDS_FORMAT = "yyyy-MM-dd HH:mm";
 
     /**
      * The Date only format we are using in this application is in the format
@@ -416,7 +426,7 @@ public interface NamedConstants {
     public static String TRIGGER_NOW_PAYPROCESSOR = "TRIGGER_NOW_PAYPROCESSOR";
 
     public static String TRIGGER_NOW_CAMPAIGNPROCESSOR = "TRIGGER_NOW_CAMPAIGNPROCESSOR";
-    
+
     public static String TRIGGER_NOW_DISPLAYPROCESSOR = "TRIGGER_NOW_DISPLAYPROCESSOR";
 
     public static String PAYMENTS_DETAILS = "PAYMENTS_DETAILS";
@@ -476,7 +486,7 @@ public interface NamedConstants {
     public static final String SMS_PAYMENT_FAILURE = "Hello {firstName}, payment of {amount} for generator: {generatorId}, has Failed.Reason: {statusDescription}. Please re-initiate another payment. Thank you";
     //public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your PIN is: {otp} & GeneratorID: {generatorId}. Please open your Telesola app & enter the details.However, clear the deposit to activate the generator";
 
-    public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your One Time Pin is: {otp}. To verify your account, please login and enter your PIN at: http://advertexpo.com/#/verify -.";
+    public static final String SMS_TEMPLATE_OTP = "Hello {firstName}, your One Time Pin is: {otp}. To verify your account, please login and enter your PIN at: http://advertxpo.com/#/confirm_otp -.";
 
     public static final String SMS_TEMPLATE_NEW_CAMPAIGN_ADMIN = "Hi advertXpo admin, a new campaign just hit the system at: {createTime}. Cost: {campaignCost}, MoMo a/c: {momoAccount}";
 

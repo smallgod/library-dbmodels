@@ -553,7 +553,7 @@ public class InitialiseDBData {
         bus15.setBusinessTypeshortName("hospital");
 
         Set<AdBusinessType> businessTypes = new HashSet<>();
-        
+
         businessTypes.add(bus1);
         businessTypes.add(bus2);
         businessTypes.add(bus3);
@@ -952,32 +952,31 @@ public class InitialiseDBData {
      */
     public void addTestScreens() throws MyCustomException {
 
-        //STAGING
-        int screen1TaskX = 1493101974;
-        int screen1TaskY = 1493101989;
-        
-        int screen2TaskX = 1493102004;
-        int screen2TaskY = 1493102033;
+        //STAGE
+        int terminalOneTaskX = 1501684843;
+        int terminalOneTaskY = 1501684885;
+        int terminalOneTaskZ = 1504710509;
 
-        //PRODUCTION
-//        int screen1TaskX = 1489239354;
-//        int screen1TaskY = 1489257284;
-//        int screen2TaskX = 1489257323;
-//        int screen2TaskY = 1489257349;
-        int screenHeight = 1080;
-        int screenWidth = 1920;
+        //PROD
+        //int terminalOneTaskX = 1493101974;
+        //int terminalOneTaskY = 1493101989;
+        //int terminalOneTaskZ = 1504714261;
+        
         String firstTestTerminalId = "230901364440706"; //reverse the terminalIds after connecting the first terminal back
         String secondTestTerminalId = "230901364454349";
-        
 
         AdTerminal terminal1 = new AdTerminal();
         terminal1.setLatitude(13.0412658); //600017, Chennai
         terminal1.setLongitude(80.2338514);
         terminal1.setTerminalId(firstTestTerminalId);
-        terminal1.setTaskIdX(screen1TaskX);
-        terminal1.setTaskIdY(screen1TaskY);
         terminal1.setTerminalName("First Terminal");
         terminal1.setTerminalDescription("This is my test terminal, original - chill out!!");
+        terminal1.setTaskIdX(terminalOneTaskX);
+        terminal1.setTaskIdY(terminalOneTaskY);
+        terminal1.setTaskIdZ(terminalOneTaskZ);
+
+        int screenHeight = 1080;
+        int screenWidth = 1920;
 
         AdScreen screen1 = new AdScreen();
         screen1.setAudienceCount(30);
@@ -1297,8 +1296,8 @@ public class InitialiseDBData {
     }
 
     /**
-     * 
-     * @throws MyCustomException 
+     *
+     * @throws MyCustomException
      */
     public void addGuestCampaignClient() throws MyCustomException {
 
@@ -1311,8 +1310,8 @@ public class InitialiseDBData {
     }
 
     /**
-     * 
-     * @throws MyCustomException 
+     *
+     * @throws MyCustomException
      */
     public void addTemplateCampaignClient() throws MyCustomException {
 
@@ -1561,8 +1560,8 @@ public class InitialiseDBData {
 
     /**
      * Initialise Database
-     * 
-     * @throws MyCustomException 
+     *
+     * @throws MyCustomException
      */
     public void initDB() throws MyCustomException {
 
@@ -1587,7 +1586,7 @@ public class InitialiseDBData {
         addTestAreaData();
 
         //test business
-        addTestBusinesses();
+        addTestBusinesses(); //un-comment when issue is resolved
 
         //Guest user
         addGuestUser();
@@ -1608,14 +1607,12 @@ public class InitialiseDBData {
         addTemplateCampaignClient();
 
         //add test screenowners after adding businesses
-        addTestScreenOwner();
+        addTestScreenOwner(); //un-comment when issue is resolved
 
         //test screens
         addTestScreens();
     }
-    
-    
-    
+
     /**
      * Add Test screens
      *
@@ -1623,30 +1620,24 @@ public class InitialiseDBData {
      */
     public void addMoreTestScreens() throws MyCustomException {
 
-        //STAGING
+        ///STAGE
         int screen1TaskX = 1501684843;
-        int screen1TaskY = 1501684885;
-        
-        int screen2TaskX = 1494940402;
-        int screen2TaskY = 1494940417;
+        int screen2TaskY = 1501684885;
 
-        //PRODUCTION
-//        int screen1TaskX = 1489239354;
-//        int screen1TaskY = 1489257284;
-//        int screen2TaskX = 1489257323;
-//        int screen2TaskY = 1489257349;
+        //PROD
+        //int terminalOneTaskX = 1493101974;
+        //int terminalONeTaskY = 1493101989;
         int screenHeight = 1080;
         int screenWidth = 1920;
         String firstTestTerminalId = "230901364440706"; //"233097221599994"; //reverse the terminalIds after connecting the first terminal back
         String secondTestTerminalId = "230901364454349";
-        
 
         AdTerminal terminal1 = new AdTerminal();
         terminal1.setLatitude(13.0412658); //600017, Chennai
         terminal1.setLongitude(80.2338514);
         terminal1.setTerminalId(firstTestTerminalId);
         terminal1.setTaskIdX(screen1TaskX);
-        terminal1.setTaskIdY(screen1TaskY);
+        terminal1.setTaskIdY(screen2TaskY);
         terminal1.setTerminalName("First Terminal");
         terminal1.setTerminalDescription("This is my test terminal, original - chill out!!");
 
@@ -1795,12 +1786,9 @@ public class InitialiseDBData {
 
         customHibernate.saveBulk(adScreens);
     }
-    
+
     public void initDBWithMoreData() throws MyCustomException {
 
-        
     }
-    
-    
 
 }

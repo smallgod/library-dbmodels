@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GB2312"?> <config> 
+    <error>0</error> 
+    <cstm_id>20120101</cstm_id> 
+    <task_id>1487861423</task_id> 
+    <task_name>screen1</task_name> 
+    <task_ver>20170223 175023</task_ver> 
+    <filelist_ver>20170223 175023</filelist_ver> 
+    <program_ver>20170223 175023</program_ver> 
+    <plugin_task_id>1483813314</plugin_task_id> 
+    <plugin_task_ver>20170107 231104</plugin_task_ver> 
+    <plugin_filelist_ver>20170107 231104</plugin_filelist_ver> 
+    <plugin_program_ver>20170107 231104</plugin_program_ver> 
+    <demand_task_id>0</demand_task_id> 
+    <demand_task_ver></demand_task_ver> 
+    <demand_filelist_ver></demand_filelist_ver> 
+    <demand_program_ver></demand_program_ver> 
+    <strategy_ver>20170223 175023</strategy_ver> 
+    <bin_ver></bin_ver> 
+    <kernel_ver></kernel_ver> 
+    <config_id>0</config_id> 
+    <config_ver></config_ver> 
+    <subtitle>19700101 000000</subtitle> 
+    <source>19700101 000000</source> 
+    <schedule>19700101 000000</schedule> 
+    <time>1487913787</time> 
+</config>

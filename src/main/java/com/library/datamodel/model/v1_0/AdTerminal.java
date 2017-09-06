@@ -48,6 +48,10 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "task_idy")
     private int taskIdY;
 
+    @Column(name = "task_idz")
+    @SerializedName(value = "task_idz")
+    private int taskIdZ;
+
     @Column(name = "latitude", precision = 9, scale = 7)
     @SerializedName(value = "latitude")
     private double latitude;
@@ -121,6 +125,14 @@ public class AdTerminal extends BaseEntity implements Auditable, Serializable {
 
     public void setTaskIdY(int taskIdY) {
         this.taskIdY = taskIdY;
+    }
+
+    public int getTaskIdZ() {
+        return taskIdZ;
+    }
+
+    public void setTaskIdZ(int taskIdZ) {
+        this.taskIdZ = taskIdZ;
     }
 
     @Override

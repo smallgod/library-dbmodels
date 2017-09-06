@@ -21,6 +21,7 @@ public class AdSetupRequest implements JsonDataModel {
                   "terminal_height": 1080,
                   "task_idx": 1493101974,
                   "task_idy": 1493101989,
+                  "task_idz": 1493101993,
                   "task_name": "First Terminal",
                   "program_ids": [
                     1493741055
@@ -112,6 +113,9 @@ public class AdSetupRequest implements JsonDataModel {
 
             @SerializedName(value = "task_idy")
             private int taskIdY;
+            
+            @SerializedName(value = "task_idz")
+            private int taskIdZ;
 
             @SerializedName(value = "task_name")
             private String taskName;
@@ -173,6 +177,14 @@ public class AdSetupRequest implements JsonDataModel {
 
             public void setTaskIdY(int taskIdY) {
                 this.taskIdY = taskIdY;
+            }
+
+            public int getTaskIdZ() {
+                return taskIdZ;
+            }
+
+            public void setTaskIdZ(int taskIdZ) {
+                this.taskIdZ = taskIdZ;
             }
 
         }
