@@ -9,9 +9,6 @@ import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.DBInterface;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
@@ -19,6 +16,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalTime;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -33,6 +31,12 @@ import org.joda.time.LocalDateTime;
             }
     ),
     @TypeDef(name = "jodalocaldate", typeClass = PersistentLocalDate.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    ),
+    @TypeDef(name = "jodalocaltime", typeClass = PersistentLocalTime.class,
             parameters = {
                 @Parameter(value = "UTC", name = "databaseZone"),
                 @Parameter(value = "UTC", name = "javaZone")

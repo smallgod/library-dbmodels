@@ -27,6 +27,8 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
 import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @TypeDefs({
     @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
@@ -47,7 +49,14 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_screenowner")
 
-public class AdScreenOwner extends BaseEntity implements Auditable, Serializable {
+@NamedQueries({
+    @NamedQuery(name = AdScreenOwnerOLD.FETCH_OWNERS, query = AdScreenOwnerOLD.FETCH_OWNER_QUERY)
+})
+
+public class AdScreenOwnerOLD extends BaseEntity implements Auditable, Serializable {
+
+    public static final String FETCH_OWNER_QUERY = "SELECT DISTINCT owner FROM AdScreenOwner owner INNER JOIN owner.adUser user INNER JOIN owner.businesses businesses where user.userId=:userId";
+    public static final String FETCH_OWNERS = "FETCH_OWNERS";
 
     private static final long serialVersionUID = -7420964819128665745L;
 
@@ -64,7 +73,7 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     })
     @Cascade(CascadeType.ALL)
-    private AdUser adUser;
+    private AdUser adUser; //this is a user who owns the screen, AdUser object might me confusing - perhaps change AdUser to User
 
     @SerializedName(value = "business_screen_owners")
     @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
@@ -77,10 +86,10 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
 
             }
     )
-    @Cascade({CascadeType.ALL})//multiple users can own the same business, one user can own multiple businesses
-    private Set<AdBusiness> businessScreenOwners = new HashSet<>(0);
+    @Cascade({CascadeType.ALL})//multiple users can own the same business?? [I think it should be single-owner one or many businesses], one user can own multiple businesses
+    private Set<AdBusiness> businesses = new HashSet<>(0);
 
-    public AdScreenOwner() {
+    public AdScreenOwnerOLD() {
     }
 
     @Override
@@ -104,12 +113,12 @@ public class AdScreenOwner extends BaseEntity implements Auditable, Serializable
         this.adUser = adUser;
     }
 
-    public Set<AdBusiness> getBusinessScreenOwners() {
-        return businessScreenOwners;
+    public Set<AdBusiness> getBusinesses() {
+        return businesses;
     }
 
-    public void setBusinessScreenOwners(Set<AdBusiness> businessScreenOwners) {
-        this.businessScreenOwners = businessScreenOwners;
+    public void setBusinesses(Set<AdBusiness> businesses) {
+        this.businesses = businesses;
     }
 
 }

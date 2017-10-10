@@ -10,6 +10,7 @@ import com.library.utilities.GeneralUtils;
  */
 public enum ValueStore implements Constants {
 
+    SEYEYA_CREDIT("SEYEYA_CREDIT"),
     MTNMOMO_UG("MTNMOMO_UG"),
     AIRTELMOMO_UG("AIRTELMOMO_UG"),
     CENTE_UG("CENTE_UG"),

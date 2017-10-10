@@ -18,8 +18,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_area")
 
-//can be used for both screens and normal areas in the database
-public class AdArea extends BaseEntity implements Auditable, Serializable {
+
+public class AdAreaOLD extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
 
@@ -50,7 +50,7 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
     @Column(name = "sub_area_2")
     private String subArea2;
 
-    public AdArea() {
+    public AdAreaOLD() {
     }
 
     public String getAreaCode() {
@@ -141,7 +141,7 @@ public class AdArea extends BaseEntity implements Auditable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdArea other = (AdArea) obj;
+        final AdAreaOLD other = (AdAreaOLD) obj;
         if (this.id != other.getId()) {
             return false;
         }

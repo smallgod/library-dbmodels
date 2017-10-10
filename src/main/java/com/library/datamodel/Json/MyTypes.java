@@ -18,10 +18,6 @@ public class MyTypes {
     @Expose
     private int id;
 
-    @Expose
-    @SerializedName("code")
-    private String code;
-
     @SerializedName("name")
     @Expose
     private String name;
@@ -65,13 +61,4 @@ public class MyTypes {
     public void setAudienceCount(int audienceCount) {
         this.audienceCount = audienceCount;
     }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
 }

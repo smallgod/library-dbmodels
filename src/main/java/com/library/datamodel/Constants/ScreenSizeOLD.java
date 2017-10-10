@@ -8,31 +8,26 @@ import com.library.sglogger.util.LoggerUtil;
  *
  * @author smallgod
  */
-public enum AdScreenSize implements Constants {
+public enum ScreenSizeOLD implements Constants {
 
     @SerializedName("15 INCH")
     FIFTEEN("15 INCH"),
-    
     @SerializedName("21 INCH")
     TWENTYONE("21 INCH"),
-    
     @SerializedName("29 INCH")
     TWENTYNINE("29 INCH"),
-    
     @SerializedName("32 INCH")
     THIRTYTWO("32 INCH"),
-    
     @SerializedName("40 INCH")
     FOURTY("40 INCH"),
-    
     @SerializedName("52 INCH")
     FIFTYTWO("52 INCH");
 
     private final String enumValue;
 
-    private static final LoggerUtil logger = new LoggerUtil(AdScreenSize.class);
+    private static final LoggerUtil logger = new LoggerUtil(ScreenSizeOLD.class);
 
-    AdScreenSize(String enumValue) {
+    ScreenSizeOLD(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -41,11 +36,11 @@ public enum AdScreenSize implements Constants {
         return this.enumValue;
     }
 
-    public static AdScreenSize convertToEnum(String value) {
+    public static ScreenSizeOLD convertToEnum(String value) {
 
         if (value != null) {
 
-            for (AdScreenSize availableValue : AdScreenSize.values()) {
+            for (ScreenSizeOLD availableValue : ScreenSizeOLD.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;

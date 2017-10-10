@@ -31,9 +31,21 @@ public class CampaignRequest {
             },
             "target_info": {
               "target_screen_codes": [],
-              "areas": [1],
+              "areas": ["namuwongo", "Kisasi"],
               "business_types": [1],
-              "audience_types": [1]
+              "audience_types": [1],
+    
+    
+                ///just added///
+    
+                "audience_xtics":{
+                  "gender":[],
+                  "age":[]
+                }
+    
+                /// added up-to here ///
+    
+    
             },
             "schedule_info": {
               "start_date": "2017-03-21",

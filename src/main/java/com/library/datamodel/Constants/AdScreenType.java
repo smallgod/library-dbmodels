@@ -1,8 +1,10 @@
 package com.library.datamodel.Constants;
 
 import com.google.gson.annotations.SerializedName;
+import com.library.customexception.MyCustomException;
 import com.library.sgsharedinterface.Constants;
 import com.library.sglogger.util.LoggerUtil;
+import com.library.utilities.GeneralUtils;
 
 /**
  *
@@ -34,7 +36,7 @@ public enum AdScreenType implements Constants {
         return this.enumValue;
     }
 
-    public static AdScreenType convertToEnum(String value) {
+    public static AdScreenType convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
@@ -45,9 +47,8 @@ public enum AdScreenType implements Constants {
                 }
             }
         }
-        logger.warn("No constant with text " + value + " found");
-        throw new IllegalArgumentException("No constant with text " + value + " found");
-        //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + value, ErrorCategory.CLIENT_ERR_TYPE);
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported screen type value", "Failed to convert value: " + value + " to Enum");
+        throw error;
 
     }
 }

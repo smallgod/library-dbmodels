@@ -490,6 +490,8 @@ public interface NamedConstants {
 
     public static final String SMS_TEMPLATE_NEW_CAMPAIGN_ADMIN = "Hi advertXpo admin, a new campaign just hit the system at: {createTime}. Cost: {campaignCost}, MoMo a/c: {momoAccount}";
 
+    public static final String SMS_TEMPLATE_CONTACT_US_REQ_ADMIN = "Hi admin, enquiry from: {phoneContact}. Excerpt: {messageExcerpt}..";
+
     public static final String SMS_TEMPLATE_CAMPAIGN_ESCALATE_ADMIN = "Hi advertXpo admin, campaign with id: {id} has been escalated. Manual intervention required. MoMo a/c: {momoAccount}";
 
     public static final String SMS_TEMPLATE_CAMPAIGN_REVIEW_ADMIN = "Hi advertXpo admin, campaign with id: {id} needs to be reviewed. MoMo a/c: {momoAccount}";

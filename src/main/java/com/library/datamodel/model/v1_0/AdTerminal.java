@@ -10,15 +10,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDate;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
+import org.jadira.usertype.dateandtime.joda.PersistentLocalTime;
 
+@TypeDefs({
+    @TypeDef(name = "jodalocaldatetime", typeClass = PersistentLocalDateTime.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    ),
+    @TypeDef(name = "jodalocaldate", typeClass = PersistentLocalDate.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    ),
+    @TypeDef(name = "jodalocaltime", typeClass = PersistentLocalTime.class,
+            parameters = {
+                @Parameter(value = "UTC", name = "databaseZone"),
+                @Parameter(value = "UTC", name = "javaZone")
+            }
+    )
+})
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_terminal")
+@Table(name = "ad_terminal", uniqueConstraints = @UniqueConstraint(columnNames = {"terminal_id"}))
 
+@NamedQueries({
+    @NamedQuery(name = AdTerminal.FETCH_TERMINAL, query = AdTerminal.FETCH_TERMINAL_QUERY)
+})
 public class AdTerminal extends BaseEntity implements Auditable, Serializable {
+
+    public static final String FETCH_TERMINAL_QUERY = "SELECT supportTerminal FROM AdTerminal supportTerminal WHERE supportTerminal.terminalId=:terminalId";
+    public static final String FETCH_TERMINAL = "FETCH_TERMINAL";
 
     private static final long serialVersionUID = -7420964819128665745L;
 

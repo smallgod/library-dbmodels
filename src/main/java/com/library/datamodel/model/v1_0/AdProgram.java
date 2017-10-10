@@ -261,6 +261,22 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     private String campaignScreenCodes;
     
     
+    @SerializedName(value = "campaign_service_ids")
+    @Column(name = "campaign_service_ids", length = 10000)
+    private String campaignBusinessServiceIds;
+    
+    
+    @SerializedName(value = "campaign_area_ids")
+    @Column(name = "campaign_area_ids", length = 10000)
+    private String campaignAreaIds;
+    
+    
+    @SerializedName(value = "campaign_audiencetype_ids")
+    @Column(name = "campaign_audiencetype_ids", length = 10000)
+    private String campaignAudienceTypeIds;
+  
+    
+    
     @Expose
     @SerializedName(value = "schedule_type")
     @Column(name = "schedule_type")
@@ -535,6 +551,30 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public void setAdSlotReserve(AdSlotsReserve adSlotReserve) {
         this.adSlotReserve = adSlotReserve;
+    }
+
+    public String getCampaignBusinessServiceIds() {
+        return campaignBusinessServiceIds;
+    }
+
+    public void setCampaignBusinessServiceIds(String campaignBusinessServiceIds) {
+        this.campaignBusinessServiceIds = campaignBusinessServiceIds;
+    }
+
+    public String getCampaignAreaIds() {
+        return campaignAreaIds;
+    }
+
+    public void setCampaignAreaIds(String campaignAreaIds) {
+        this.campaignAreaIds = campaignAreaIds;
+    }
+
+    public String getCampaignAudienceTypeIds() {
+        return campaignAudienceTypeIds;
+    }
+
+    public void setCampaignAudienceTypeIds(String campaignAudienceTypeIds) {
+        this.campaignAudienceTypeIds = campaignAudienceTypeIds;
     }
 
     

@@ -3,7 +3,6 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +15,9 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_business_type")
+@Table(name = "ad_business_service")
 
-public class AdBusinessType extends BaseEntity implements Auditable, Serializable {
+public class AdBusinessService extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -1139458573433634348L;
 
@@ -29,38 +28,26 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
     private long id;
 
     //BAR | SALON | SPORTS_HOUSE | HOTEL | HOSTELS | SCHOOLS | UNIVERSITIES | AIRPORT | BIBANDA | RESTAURANT | SUPERMARKET | SHOP
-    @SerializedName(value = "business_type_code")
-    @Column(name = "business_type_code")
-    private String businessTypeCode;
-
-    @SerializedName(value = "busines_type_name")
-    @Column(name = "busines_type_name", length = 1000)
-    private String businessTypeName;
+    @SerializedName(value = "busines_service_name")
+    @Column(name = "busines_service_name", length = 1000)
+    private String businessServiceName;
 
     /**
      * will be used for giving more description to GET_SCREENS response
      */
-    @SerializedName(value = "busines_type_short_name")
-    @Column(name = "busines_type_short_name", length = 1000)
-    private String businessTypeshortName;
+    @SerializedName(value = "busines_service_short_name")
+    @Column(name = "busines_service_short_name", length = 1000)
+    private String businessServiceShortName;
 
-    public AdBusinessType() {
+    public AdBusinessService() {
     }
 
-    public String getBusinessTypeName() {
-        return businessTypeName;
+    public String getBusinessServiceName() {
+        return businessServiceName;
     }
 
-    public void setBusinessTypeName(String businessTypeName) {
-        this.businessTypeName = businessTypeName;
-    }
-
-    public String getBusinessTypeCode() {
-        return businessTypeCode;
-    }
-
-    public void setBusinessTypeCode(String businessTypeCode) {
-        this.businessTypeCode = businessTypeCode;
+    public void setBusinessServiceName(String businessServiceName) {
+        this.businessServiceName = businessServiceName;
     }
 
     public long getId() {
@@ -71,12 +58,12 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
         this.id = id;
     }
 
-    public String getBusinessTypeshortName() {
-        return businessTypeshortName;
+    public String getBusinessServiceShortName() {
+        return businessServiceShortName;
     }
 
-    public void setBusinessTypeshortName(String businessTypeshortName) {
-        this.businessTypeshortName = businessTypeshortName;
+    public void setBusinessServiceShortName(String businessServiceShortName) {
+        this.businessServiceShortName = businessServiceShortName;
     }
 
     @Override
@@ -87,8 +74,7 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 37 * hash + Objects.hashCode(this.businessTypeCode);
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -103,11 +89,8 @@ public class AdBusinessType extends BaseEntity implements Auditable, Serializabl
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AdBusinessType other = (AdBusinessType) obj;
-        if (this.id != other.getId()) {
-            return false;
-        }
-        return Objects.equals(this.businessTypeCode, other.getBusinessTypeCode());
+        final AdBusinessService other = (AdBusinessService) obj;
+        return this.id == other.getId();
     }
 
 }
