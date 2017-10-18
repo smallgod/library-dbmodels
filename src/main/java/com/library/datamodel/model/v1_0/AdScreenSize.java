@@ -45,7 +45,7 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 })
 public class AdScreenSize extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_SCREEN_SIZE_QUERY = "SELECT screenSize FROM AdScreenSize screenSize WHERE screenSize.screenSizeCode=:code";
+    public static final String FETCH_SCREEN_SIZE_QUERY = "SELECT screenSize FROM AdScreenSize screenSize WHERE screenSize.screenSizeCode=:screenSizeCode";
     public static final String FETCH_SCREEN_SIZE = "FETCH_SCREEN_SIZE";
 
     private static final long serialVersionUID = 7733884536250533392L;
@@ -68,8 +68,8 @@ public class AdScreenSize extends BaseEntity implements Auditable, Serializable 
     private String screenSizeName; // e.g. "15 INCH"
 
     @Expose
-    @SerializedName(value = "scrren_size_value")
-    @Column(name = "scrren_size_value")
+    @SerializedName(value = "screen_size_value")
+    @Column(name = "screen_size_value")
     private float screenSizeValue; // different sixes attract different %s that affect pricing
 
     public AdScreenSize() {

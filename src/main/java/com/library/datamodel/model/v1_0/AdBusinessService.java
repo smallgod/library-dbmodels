@@ -9,13 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_business_service")
+@Table(name = "ad_business_service", uniqueConstraints = @UniqueConstraint(columnNames = {"busines_service_short_name"}))
 
 public class AdBusinessService extends BaseEntity implements Auditable, Serializable {
 
@@ -27,7 +28,6 @@ public class AdBusinessService extends BaseEntity implements Auditable, Serializ
     @SerializedName(value = "id")
     private long id;
 
-    //BAR | SALON | SPORTS_HOUSE | HOTEL | HOSTELS | SCHOOLS | UNIVERSITIES | AIRPORT | BIBANDA | RESTAURANT | SUPERMARKET | SHOP
     @SerializedName(value = "busines_service_name")
     @Column(name = "busines_service_name", length = 1000)
     private String businessServiceName;
@@ -35,8 +35,9 @@ public class AdBusinessService extends BaseEntity implements Auditable, Serializ
     /**
      * will be used for giving more description to GET_SCREENS response
      */
+    //BAR | SALON | SPORTS_HOUSE | HOTEL | HOSTELS | SCHOOLS | UNIVERSITIES | AIRPORT | BIBANDA | RESTAURANT | SUPERMARKET | SHOP
     @SerializedName(value = "busines_service_short_name")
-    @Column(name = "busines_service_short_name", length = 1000)
+    @Column(name = "busines_service_short_name", length = 1000, nullable = false)
     private String businessServiceShortName;
 
     public AdBusinessService() {
@@ -69,28 +70,6 @@ public class AdBusinessService extends BaseEntity implements Auditable, Serializ
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdBusinessService other = (AdBusinessService) obj;
-        return this.id == other.getId();
     }
 
 }

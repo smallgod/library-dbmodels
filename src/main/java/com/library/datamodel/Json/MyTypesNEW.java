@@ -12,15 +12,11 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author smallgod
  */
-public class MyTypes {
+public class MyTypesNEW {
 
     @SerializedName("id")
     @Expose
-    private String id;
-
-    @Expose
-    @SerializedName("code")
-    private String code;
+    private int id;
 
     @SerializedName("name")
     @Expose
@@ -34,11 +30,11 @@ public class MyTypes {
     @Expose
     private int screenCount;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -65,13 +61,4 @@ public class MyTypes {
     public void setAudienceCount(int audienceCount) {
         this.audienceCount = audienceCount;
     }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
 }

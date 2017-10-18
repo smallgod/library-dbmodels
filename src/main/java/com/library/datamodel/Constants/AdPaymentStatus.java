@@ -10,7 +10,7 @@ import com.library.utilities.GeneralUtils;
  */
 public enum AdPaymentStatus implements Constants {
 
-    
+    PAY_DRAFT("DRAFT"), //for just saved campaigns - still in draft form
     PAY_NEW("NEW"), //Newly logged payment
     PAY_INITIATED("INITIATED"),
     PAID("PAID"),

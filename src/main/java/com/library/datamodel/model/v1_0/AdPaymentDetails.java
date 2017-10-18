@@ -223,4 +223,28 @@ public class AdPaymentDetails extends BaseEntity implements Auditable, Serializa
     public void setStatusDescription(String statusDescription) {
         this.statusDescription = statusDescription;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AdPaymentDetails other = (AdPaymentDetails) obj;
+        return this.id == other.getId();
+    }
+    
+    
 }

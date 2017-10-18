@@ -3,6 +3,8 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdScreenType;
+import com.library.datamodel.Constants.ScreenPlacement;
+import com.library.datamodel.Constants.ScreenSplit;
 import com.library.datamodel.Constants.ScreenPopularity;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
@@ -38,29 +40,34 @@ import org.hibernate.annotations.SelectBeforeUpdate;
     @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_SCREEN_CODE, query = AdScreen.FETCH_SCREENS_BY_SCREEN_CODE_QUERY),
     @NamedQuery(name = AdScreen.FETCH_SCREEN_BUSINESSES, query = AdScreen.FETCH_SCREEN_BUSINESSES_QUERY),
     @NamedQuery(name = AdScreen.FETCH_ALL_SCREENS, query = AdScreen.FETCH_ALL_SCREENS_QUERY),
-    @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_AUDIENCE_ID, query = AdScreen.FETCH_SCREENS_BY_AUDIENCE_QUERY)
+    @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_AUDIENCE_ID, query = AdScreen.FETCH_SCREENS_BY_AUDIENCE_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_SCREENS_BY_AREA, query = AdScreen.FETCH_SCREENS_BY_AREA_QUERY),
+    @NamedQuery(name = AdScreen.FETCH_BUSINESS_BY_SCREEN_ID, query = AdScreen.FETCH_BUSINESS_BY_SCREEN_ID_QUERY)
 
 })
 
 public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_SCREENS_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenSize screenSize INNER JOIN screen.supportTerminal supportTerminal INNER JOIN screen.adBusiness adBusiness WHERE screen.screenId IN (:screenId)";
-    public static final String FETCH_SCREENS_BY_SCREEN_CODE = "FETCH_SCREENS_BY_SCREEN_ID";
+    public static final String FETCH_SCREENS_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenSize screenSize INNER JOIN screen.supportTerminal terminal INNER JOIN screen.adBusiness business WHERE screen.screenId IN (:screenId)";
+    public static final String FETCH_SCREENS_BY_SCREEN_CODE = "FETCH_SCREENS_BY_SCREEN_CODE";
 
     public static final String FETCH_ALL_SCREENS_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.screenSize screenSize INNER JOIN screen.supportTerminal supportTerminal INNER JOIN screen.adBusiness adBusiness";
-    public static final String FETCH_ALL_SCREENS = "FETCH_SCREENS";
+    public static final String FETCH_ALL_SCREENS = "FETCH_ALL_SCREENS";
 
-    public static final String FETCH_SCREEN_BUSINESSES_QUERY = "SELECT DISTINCT adBusiness FROM AdScreen screen INNER JOIN screen.adBusiness WHERE screen.screenId IN (:screenId)";
+    public static final String FETCH_SCREEN_BUSINESSES_QUERY = "SELECT DISTINCT business FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE screen.screenId IN (:screenId)";
     public static final String FETCH_SCREEN_BUSINESSES = "FETCH_SCREEN_BUSINESSES";
 
     public static final String FETCH_SCREEN_BY_BUSINESS_ID_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE business.businessId IN (:businessId)";
     public static final String FETCH_SCREEN_BY_BUSINESS_ID = "FETCH_SCREEN_BY_BUSINESS_ID";
 
-    public static final String FETCH_SCREENS_BY_AREA_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE business.area IN (:areas) AND screen.isPublishScreen='true'";
+    public static final String FETCH_SCREENS_BY_AREA_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE business.area IN (:area)";
     public static final String FETCH_SCREENS_BY_AREA = "FETCH_SCREENS_BY_AREA";
 
-    public static final String FETCH_SCREENS_BY_AUDIENCE_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE business.area IN (:areas)";
+    public static final String FETCH_SCREENS_BY_AUDIENCE_QUERY = "SELECT DISTINCT screen FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE business.area IN (:area)";
     public static final String FETCH_SCREENS_BY_AUDIENCE_ID = "FETCH_SCREENS_BY_AUDIENCE_ID";
+
+    public static final String FETCH_BUSINESS_BY_SCREEN_ID_QUERY = "SELECT DISTINCT business FROM AdScreen screen INNER JOIN screen.adBusiness business WHERE screen.screenId IN (:screenId)";
+    public static final String FETCH_BUSINESS_BY_SCREEN_ID = "FETCH_BUSINESS_BY_SCREEN_ID";
 
     private static final long serialVersionUID = 2301296823801925900L;
 
@@ -151,14 +158,23 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
     @Enumerated(EnumType.STRING)
     private ScreenPopularity screenPopularity;//in comparison to other screens in same area if more than one 
 
+    @Expose
+    @SerializedName(value = "screen_split")
+    @Column(name = "screen_split")
+    @Enumerated(EnumType.STRING)
+    private ScreenSplit screenSplit; //Full screen means any other splits are allowed, TEXT_ONLY means higher splits like full, 3split are not allowed
+
+    @Expose
+    @SerializedName(value = "screen_placement")
+    @Column(name = "screen_placement")
+    @Enumerated(EnumType.STRING)
+    private ScreenPlacement screenPlacement;
+
     @Column(name = "publish")
     private boolean isPublishScreen; //show screen on user UI or not
 
     @Column(name = "allow_volume")
     private boolean isAllowVolume;
-
-    @Column(name = "screen_placement")
-    private String screenPlacement; // e.g. front lounge area
 
     @Column(name = "extra_1")
     private String extra1; //any other info (descriptive info) to identify this screen e.g. front lounge area
@@ -304,14 +320,6 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
         return Objects.equals(this.screenId, other.getScreenId());
     }
 
-    public String getScreenPlacement() {
-        return screenPlacement;
-    }
-
-    public void setScreenPlacement(String screenPlacement) {
-        this.screenPlacement = screenPlacement;
-    }
-
     public ScreenPopularity getScreenPopularity() {
         return screenPopularity;
     }
@@ -326,6 +334,22 @@ public class AdScreen extends BaseEntity implements Auditable, Serializable {
 
     public void setIsAllowVolume(boolean isAllowVolume) {
         this.isAllowVolume = isAllowVolume;
+    }
+
+    public ScreenSplit getScreenSplit() {
+        return screenSplit;
+    }
+
+    public void setScreenSplit(ScreenSplit screenSplit) {
+        this.screenSplit = screenSplit;
+    }
+
+    public ScreenPlacement getScreenPlacement() {
+        return screenPlacement;
+    }
+
+    public void setScreenPlacement(ScreenPlacement screenPlacement) {
+        this.screenPlacement = screenPlacement;
     }
 
     /**

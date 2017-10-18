@@ -9,7 +9,7 @@ import com.library.customexception.MyCustomException;
 import com.library.datamodel.Constants.AdScreenType;
 import com.library.datamodel.Constants.AdXpoAccountStatus;
 import com.library.datamodel.Constants.NamedConstants;
-import com.library.datamodel.Constants.ProgDisplayLayout;
+import com.library.datamodel.Constants.ScreenSplit;
 import com.library.datamodel.jaxb.config.v1_0.Amounttype;
 import com.library.datamodel.model.v1_0.AdAudienceType;
 import com.library.datamodel.model.v1_0.AdBusiness;
@@ -1524,37 +1524,37 @@ public class InitDb {
 //
 //        //FULLSCREEN
 //        AdScreenLayout fullScreenLayout = new AdScreenLayout();
-//        fullScreenLayout.setLayoutId(ProgDisplayLayout.FULL_SCREEN.getValue());
+//        fullScreenLayout.setLayoutId(ScreenSplit.FULL_SCREEN.getValue());
 //        fullScreenLayout.setLayoutName("Full-Screen only layout");
 //        fullScreenLayout.setLayoutValue(1.500f);
 //
 //        //FULLSCREEN-TEXT
 //        AdScreenLayout fullScreenTextLayout = new AdScreenLayout();
-//        fullScreenTextLayout.setLayoutId(ProgDisplayLayout.FULLSCREEN_TEXT.getValue());
+//        fullScreenTextLayout.setLayoutId(ScreenSplit.FULLSCREEN_TEXT.getValue());
 //        fullScreenTextLayout.setLayoutName("Full-Screen and Text layout");
 //        fullScreenTextLayout.setLayoutValue(1.750f);
 //
 //        //3SPLIT
 //        AdScreenLayout threeScreenSplit = new AdScreenLayout();
-//        threeScreenSplit.setLayoutId(ProgDisplayLayout.THREE_SPLIT.getValue());
+//        threeScreenSplit.setLayoutId(ScreenSplit.THREE_SPLIT.getValue());
 //        threeScreenSplit.setLayoutName("3-Screen split layout");
 //        threeScreenSplit.setLayoutValue(1.300f);
 //
 //        //2SPLIT
 //        AdScreenLayout twoScreenSplit = new AdScreenLayout();
-//        twoScreenSplit.setLayoutId(ProgDisplayLayout.TWO_SPLIT.getValue());
+//        twoScreenSplit.setLayoutId(ScreenSplit.TWO_SPLIT.getValue());
 //        twoScreenSplit.setLayoutName("2-Screen split layout");
 //        twoScreenSplit.setLayoutValue(1.200f);
 //
 //        //TEXT
 //        AdScreenLayout textOnlyLayout = new AdScreenLayout();
-//        textOnlyLayout.setLayoutId(ProgDisplayLayout.TEXT_ONLY.getValue());
+//        textOnlyLayout.setLayoutId(ScreenSplit.TEXT_ONLY.getValue());
 //        textOnlyLayout.setLayoutName("Text-Only layout");
 //        textOnlyLayout.setLayoutValue(1.000f);
 //
 //        //UNKNOWN
 //        AdScreenLayout unKnownLayout = new AdScreenLayout();
-//        unKnownLayout.setLayoutId(ProgDisplayLayout.UNKNOWN.getValue());
+//        unKnownLayout.setLayoutId(ScreenSplit.UNKNOWN.getValue());
 //        unKnownLayout.setLayoutName("Unknown layout");
 //        unKnownLayout.setLayoutValue(1.000f);
 //        unKnownLayout.setDescription("This will be the default layout used especially if there is no layout chosen. It can be anything");

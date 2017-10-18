@@ -50,10 +50,10 @@ import org.hibernate.annotations.NamedQuery;
 @Table(name = "ad_screenowner")
 
 @NamedQueries({
-    @NamedQuery(name = AdScreenOwnerOLD.FETCH_OWNERS, query = AdScreenOwnerOLD.FETCH_OWNER_QUERY)
+    @NamedQuery(name = AdScreenOwner.FETCH_OWNERS, query = AdScreenOwner.FETCH_OWNER_QUERY)
 })
 
-public class AdScreenOwnerOLD extends BaseEntity implements Auditable, Serializable {
+public class AdScreenOwner extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_OWNER_QUERY = "SELECT DISTINCT owner FROM AdScreenOwner owner INNER JOIN owner.adUser user INNER JOIN owner.businesses businesses where user.userId=:userId";
     public static final String FETCH_OWNERS = "FETCH_OWNERS";
@@ -89,7 +89,7 @@ public class AdScreenOwnerOLD extends BaseEntity implements Auditable, Serializa
     @Cascade({CascadeType.ALL})//multiple users can own the same business?? [I think it should be single-owner one or many businesses], one user can own multiple businesses
     private Set<AdBusiness> businesses = new HashSet<>(0);
 
-    public AdScreenOwnerOLD() {
+    public AdScreenOwner() {
     }
 
     @Override

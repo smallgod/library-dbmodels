@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.datamodel.Constants.AdSlotsReserve;
 import com.library.datamodel.Constants.CampaignStatus;
-import com.library.datamodel.Constants.ProgDisplayLayout;
+import com.library.datamodel.Constants.ScreenSplit;
 import com.library.datamodel.Constants.ScheduleType;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
@@ -77,8 +77,8 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
 
     public static final String FETCH_CAMPAIGNS_BY_STATUS_QUERY =       "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where prog.adCampaignStatus IN (:campaignStatuses)";
     public static final String FETCH_CAMPAIGNS_BY_PAYMENT_ID_QUERY =   "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where pd.internalPaymentID=:internalPaymentID";
-    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY =        "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId=:userId ORDER BY prog.id DESC";
-    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY =      "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
+    public static final String FETCH_ALL_USER_CAMPAIGNS_QUERY =        "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId=:userId";
+    public static final String FETCH_USER_CAMPAIGNS_BY_ID_QUERY =      "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where user.userId IN (:userId) AND prog.campaignId IN (:campaignIds)";
     //fetch all specified campaigns regardless whether they belong to a single user or not
     public static final String FETCH_ALL_CAMPAIGNS_QUERY =             "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user ORDER BY prog.id DESC";
     public static final String FETCH_ALL_CAMPAIGNS_BY_ID_QUERY =       "SELECT DISTINCT prog FROM AdProgram prog INNER JOIN prog.adCampaignStats stats INNER JOIN prog.client cl INNER JOIN prog.adPaymentDetails pd INNER JOIN cl.adUser user where prog.campaignId IN (:campaignIds) ORDER BY prog.id DESC";
@@ -151,13 +151,13 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @Expose
     @SerializedName(value = "is_selected_codes")
     @Column(name = "is_selected_codes", nullable = false)
-    private boolean isSelectedScreenCodes; //if the user just selected target screen codes or selected areas/audience/business_type
+    private boolean isSelectedScreenCodes = Boolean.FALSE; //if the user just selected target screen codes or selected areas/audience/business_type
 
     @Expose
     @SerializedName(value = "display_layout")
     @Column(name = "display_layout")
     @Enumerated(EnumType.STRING)
-    private ProgDisplayLayout displayLayout;
+    private ScreenSplit displayLayout;
 
     
     @Expose
@@ -239,19 +239,19 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
      
     //use later when we upgrade to newer design
     
-    @SerializedName(value = "advertising_business")
-    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
-    @JoinTable(name = "advertising_business",
-            joinColumns = {
-                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
-            }
-    )
-    @Cascade({CascadeType.ALL})//A user can advertise/campaign from/for 0 or more businesses and multiple campaigns/programs can be for the same business
-    @OrderBy("id")
-    private Set<AdBusiness> advertisingBusinesses = new HashSet<>(0);
+//    @SerializedName(value = "advertising_business")
+//    @ManyToMany(fetch = FetchType.EAGER)//To-Do change this back to LAZY later when you find a solution to the exception  org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+//    @JoinTable(name = "advertising_business",
+//            joinColumns = {
+//                @JoinColumn(name = "campaign_id", referencedColumnName = "campaign_id")
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "business_id", referencedColumnName = "business_id")
+//            }
+//    )
+//    @Cascade({CascadeType.ALL})//A user can advertise/campaign from/for 0 or more businesses and multiple campaigns/programs can be for the same business
+//    @OrderBy("id")
+//    private Set<AdBusiness> advertisingBusinesses = new HashSet<>(0);
      
     /**
      * Use this nigger for storing screen codes separated by ","s
@@ -274,8 +274,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
     @SerializedName(value = "campaign_audiencetype_ids")
     @Column(name = "campaign_audiencetype_ids", length = 10000)
     private String campaignAudienceTypeIds;
-  
-    
     
     @Expose
     @SerializedName(value = "schedule_type")
@@ -357,11 +355,11 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.isToBeNotified = isToBeNotified;
     }
 
-    public ProgDisplayLayout getDisplayLayout() {
+    public ScreenSplit getDisplayLayout() {
         return displayLayout;
     }
 
-    public void setDisplayLayout(ProgDisplayLayout displayLayout) {
+    public void setDisplayLayout(ScreenSplit displayLayout) {
         this.displayLayout = displayLayout;
     }
 
@@ -429,13 +427,6 @@ public class AdProgram extends BaseEntity implements Auditable, Serializable {
         this.adCampaignStats = adCampaignStats;
     }
 
-    public Set<AdBusiness> getAdvertisingBusinesses() {
-        return advertisingBusinesses;
-    }
-
-    public void setAdvertisingBusinesses(Set<AdBusiness> advertisingBusinesses) {
-        this.advertisingBusinesses = advertisingBusinesses;
-    }
 
     public String getCampaignScreenCodes() {
         return campaignScreenCodes;

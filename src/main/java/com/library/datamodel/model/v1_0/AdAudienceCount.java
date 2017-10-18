@@ -15,6 +15,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
@@ -51,17 +52,16 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_audience_count")
+@Table(name = "ad_audience_count", uniqueConstraints = @UniqueConstraint(columnNames = {"code"}))
 
 @NamedQueries({
-    @NamedQuery(name = AdAudienceCount.FETCH_AUDIENCE_COUNT_BY_SCREEN_CODE, query = AdAudienceCount.FETCH_AUDIENCE_COUNT_BY_SCREEN_CODE_QUERY)
-
+    @NamedQuery(name = AdAudienceCount.COUNT_AUDIENCE_BY_SCREEN_CODE, query = AdAudienceCount.COUNT_AUDIENCE_BY_SCREEN_CODE_QUERY)
 })
 
 public class AdAudienceCount extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_AUDIENCE_COUNT_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT audienceCount FROM AdAudienceCount audienceCount INNER JOIN audienceCount.adTimeSlot adTimeSlot INNER JOIN audienceCount.adScreen adScreen WHERE screen.screenId IN (:screenId)";
-    public static final String FETCH_AUDIENCE_COUNT_BY_SCREEN_CODE = "FETCH_SCREENS_BY_SCREEN_ID";
+    public static final String COUNT_AUDIENCE_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT audienceCount FROM AdAudienceCount audienceCount INNER JOIN audienceCount.adTimeSlot timeSlot INNER JOIN audienceCount.adScreen screen WHERE screen.screenId IN (:screenId)";
+    public static final String COUNT_AUDIENCE_BY_SCREEN_CODE = "COUNT_AUDIENCE_BY_SCREEN_CODE";
 
     private static final long serialVersionUID = 5475033620308432546L;
 
@@ -71,6 +71,10 @@ public class AdAudienceCount extends BaseEntity implements Auditable, Serializab
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
+
+    @SerializedName(value = "code")
+    @Column(name = "code", nullable = false)
+    private long code;
 
     @SerializedName(value = "monday")
     @Column(name = "monday")
@@ -225,6 +229,14 @@ public class AdAudienceCount extends BaseEntity implements Auditable, Serializab
         this.adScreen = adScreen;
     }
 
+    public long getCode() {
+        return code;
+    }
+
+    public void setCode(long code) {
+        this.code = code;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -232,8 +244,9 @@ public class AdAudienceCount extends BaseEntity implements Auditable, Serializab
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 67 * hash + (int) (this.code ^ (this.code >>> 32));
         return hash;
     }
 
@@ -249,6 +262,9 @@ public class AdAudienceCount extends BaseEntity implements Auditable, Serializab
             return false;
         }
         final AdAudienceCount other = (AdAudienceCount) obj;
-        return this.id == other.getId();
+        if (this.id != other.getId()) {
+            return false;
+        }
+        return this.code == other.getCode();
     }
 }

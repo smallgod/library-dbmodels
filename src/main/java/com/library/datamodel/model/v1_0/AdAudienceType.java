@@ -3,12 +3,14 @@ package com.library.datamodel.model.v1_0;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -16,7 +18,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_audience_type")
+@Table(name = "ad_audience_type", uniqueConstraints = @UniqueConstraint(columnNames = {"audience_name"}))
 public class AdAudienceType extends BaseEntity implements Auditable, Serializable {
 
     private static final long serialVersionUID = -7420964819128665745L;
@@ -28,7 +30,7 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
     private long id;
 
     // MEN | WOMEN | KIDS | MEN_WOMEN | CORPORATES | ALL | BODA-RIDERS
-    @Column(name = "audience_name", length = 1000) //might want to change this - what if the data is too long
+    @Column(name = "audience_name", length = 1000, nullable = false) //might want to change this - what if the data is too long
     private String audienceName;
 
     public AdAudienceType() {
@@ -57,8 +59,9 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 29 * hash + Objects.hashCode(this.audienceName);
         return hash;
     }
 
@@ -74,7 +77,12 @@ public class AdAudienceType extends BaseEntity implements Auditable, Serializabl
             return false;
         }
         final AdAudienceType other = (AdAudienceType) obj;
-        return this.id == other.getId();
+        if (this.id != other.getId()) {
+            return false;
+        }
+        if (!Objects.equals(this.audienceName, other.getAudienceName())) {
+            return false;
+        }
+        return true;
     }
-
 }

@@ -6,26 +6,20 @@
 package com.library.datamodel.dbinitialiser;
 
 import com.library.customexception.MyCustomException;
-import com.library.datamodel.Constants.AdScreenType;
 import com.library.datamodel.Constants.AdXpoAccountStatus;
 import com.library.datamodel.Constants.NamedConstants;
-import com.library.datamodel.Constants.ProgDisplayLayout;
+import com.library.datamodel.Constants.ScreenSplit;
 import com.library.datamodel.jaxb.config.v1_0.Amounttype;
 import com.library.datamodel.model.v1_0.AdAudienceType;
-import com.library.datamodel.model.v1_0.AdBusiness;
 import com.library.datamodel.model.v1_0.AdBusinessService;
 import com.library.datamodel.model.v1_0.AdClient;
-import com.library.datamodel.model.v1_0.AdScreen;
 import com.library.datamodel.model.v1_0.AdScreenLayout;
 import com.library.datamodel.model.v1_0.AdScreenSize;
-import com.library.datamodel.model.v1_0.AdTerminal;
 import com.library.datamodel.model.v1_0.AdTimeSlot;
 import com.library.datamodel.model.v1_0.AdUser;
 import com.library.hibernate.CustomHibernate;
 import com.library.httpconnmanager.Security;
-import com.library.hibernate.utils.HibernateUtils;
 import com.library.sglogger.util.LoggerUtil;
-import com.library.utilities.NumericIDGenerator;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,37 +35,6 @@ import org.joda.time.LocalTime;
 public class InitialiseDBData {
 
     private static final LoggerUtil logger = new LoggerUtil(InitialiseDBData.class);
-
-    //AdAudience types
-    private AdAudienceType aud1;
-    private AdAudienceType aud2;
-    private AdAudienceType aud3;
-    private AdAudienceType aud4;
-    private AdAudienceType aud5;
-    private AdAudienceType aud6;
-    private AdAudienceType aud7;
-    private AdAudienceType aud8;
-    private AdAudienceType aud9;
-    private AdAudienceType aud10;
-    private AdAudienceType aud11;
-    private AdAudienceType aud12;
-
-    //Business types
-    private AdBusinessService bus1;
-    private AdBusinessService bus2;
-    private AdBusinessService bus3;
-    private AdBusinessService bus4;
-    private AdBusinessService bus5;
-    private AdBusinessService bus6;
-    private AdBusinessService bus7;
-    private AdBusinessService bus8;
-    private AdBusinessService bus9;
-    private AdBusinessService bus10;
-    private AdBusinessService bus11;
-    private AdBusinessService bus12;
-    private AdBusinessService bus13;
-    private AdBusinessService bus14;
-    private AdBusinessService bus15;
 
     private AdUser testUser;
     private AdUser guestUser;
@@ -92,41 +55,41 @@ public class InitialiseDBData {
      */
     public void addAudienceTypes() throws MyCustomException {
 
-        aud1 = new AdAudienceType();
+        AdAudienceType aud1 = new AdAudienceType();
         aud1.setAudienceName("Corporates");
 
-        aud2 = new AdAudienceType();
+        AdAudienceType aud2 = new AdAudienceType();
         aud2.setAudienceName("Expats");
 
-        aud3 = new AdAudienceType();
+        AdAudienceType aud3 = new AdAudienceType();
         aud3.setAudienceName("Families");
 
-        aud4 = new AdAudienceType();
+        AdAudienceType aud4 = new AdAudienceType();
         aud4.setAudienceName("Mainly men");
 
-        aud5 = new AdAudienceType();
+        AdAudienceType aud5 = new AdAudienceType();
         aud5.setAudienceName("Mainly women");
 
-        aud6 = new AdAudienceType();
+        AdAudienceType aud6 = new AdAudienceType();
         aud6.setAudienceName("Students");
 
-        aud7 = new AdAudienceType();
+        AdAudienceType aud7 = new AdAudienceType();
         aud7.setAudienceName("Tourists");
 
-        aud8 = new AdAudienceType();
+        AdAudienceType aud8 = new AdAudienceType();
         aud8.setAudienceName("Traders");
 
-        aud9 = new AdAudienceType();
+        AdAudienceType aud9 = new AdAudienceType();
         aud9.setAudienceName("Upscale");
 
-        aud10 = new AdAudienceType();
+        AdAudienceType aud10 = new AdAudienceType();
         aud10.setAudienceName("Boda-boda cyclists");
 
-        aud11 = new AdAudienceType();
+        AdAudienceType aud11 = new AdAudienceType();
         aud11.setAudienceName("Business people");
 
-        aud12 = new AdAudienceType();
-        aud11.setAudienceName("Taxi drivers");
+        AdAudienceType aud12 = new AdAudienceType();
+        aud12.setAudienceName("Taxi drivers");
 
         Set<AdAudienceType> audienceTypes = new HashSet<>();
         audienceTypes.add(aud1);
@@ -150,66 +113,66 @@ public class InitialiseDBData {
      *
      * @throws MyCustomException
      */
-    public void addBusinessTypes() throws MyCustomException {
+    public void addBusinessServices() throws MyCustomException {
         //BAR | SALON | SPORTS_HOUSE | HOTEL | HOSTELS | SCHOOLS | UNIVERSITIES | AIRPORT | BIBANDA | RESTAURANT | SUPERMARKET | SHOP
 
-        bus1 = new AdBusinessService();
+        AdBusinessService bus1 = new AdBusinessService();
         bus1.setBusinessServiceName("Bar");
         bus1.setBusinessServiceShortName("bar");
 
-        bus2 = new AdBusinessService();
+        AdBusinessService bus2 = new AdBusinessService();
         bus2.setBusinessServiceName("Salon");
         bus2.setBusinessServiceShortName("salon");
 
-        bus3 = new AdBusinessService();
+        AdBusinessService bus3 = new AdBusinessService();
         bus3.setBusinessServiceName("Sports Betting");
         bus3.setBusinessServiceShortName("betting");
 
-        bus4 = new AdBusinessService();
+        AdBusinessService bus4 = new AdBusinessService();
         bus4.setBusinessServiceName("Small Shop");
         bus4.setBusinessServiceShortName("shop");
 
-        bus5 = new AdBusinessService();
+        AdBusinessService bus5 = new AdBusinessService();
         bus5.setBusinessServiceName("Local cinema - Kibanda");
         bus5.setBusinessServiceShortName("kibanda");
 
-        bus6 = new AdBusinessService();
+        AdBusinessService bus6 = new AdBusinessService();
         bus6.setBusinessServiceName("Hotel");
         bus6.setBusinessServiceShortName("hotel");
 
-        bus7 = new AdBusinessService();
+        AdBusinessService bus7 = new AdBusinessService();
         bus7.setBusinessServiceName("Hostel");
         bus7.setBusinessServiceShortName("hostel");
 
-        bus8 = new AdBusinessService();
+        AdBusinessService bus8 = new AdBusinessService();
         bus8.setBusinessServiceName("School");
         bus8.setBusinessServiceShortName("school");
 
-        bus9 = new AdBusinessService();
+        AdBusinessService bus9 = new AdBusinessService();
         bus9.setBusinessServiceName("University");
         bus9.setBusinessServiceShortName("versity");
 
-        bus10 = new AdBusinessService();
+        AdBusinessService bus10 = new AdBusinessService();
         bus10.setBusinessServiceName("Aiport");
         bus10.setBusinessServiceShortName("airport");
 
-        bus11 = new AdBusinessService();
+        AdBusinessService bus11 = new AdBusinessService();
         bus11.setBusinessServiceName("Restaurant");
         bus11.setBusinessServiceShortName("restaurant");
 
-        bus12 = new AdBusinessService();
+        AdBusinessService bus12 = new AdBusinessService();
         bus12.setBusinessServiceName("Super market");
         bus12.setBusinessServiceShortName("supermarket");
 
-        bus13 = new AdBusinessService();
+        AdBusinessService bus13 = new AdBusinessService();
         bus13.setBusinessServiceName("Community audience");
         bus13.setBusinessServiceShortName("community");
 
-        bus14 = new AdBusinessService();
+        AdBusinessService bus14 = new AdBusinessService();
         bus14.setBusinessServiceName("Casino");
         bus14.setBusinessServiceShortName("casino");
 
-        bus15 = new AdBusinessService();
+        AdBusinessService bus15 = new AdBusinessService();
         bus15.setBusinessServiceName("Hospital");
         bus15.setBusinessServiceShortName("hospital");
 
@@ -232,52 +195,6 @@ public class InitialiseDBData {
         businessTypes.add(bus15);
 
         customHibernate.saveBulk(businessTypes);
-
-    }
-
-    /**
-     * Add a terminal You can later add a screen and link it to this terminal or
-     * vice-versa
-     *
-     * @param taskX
-     * @param taskY
-     * @param taskZ
-     * @param terminalId
-     * @param terminalName
-     * @param terminalDesc
-     * @param latitude
-     * @param longitude
-     * @return
-     * @throws com.library.customexception.MyCustomException
-     */
-    public AdTerminal addTerminal( //can be done independently of screen addition
-            int taskX,
-            int taskY,
-            int taskZ,
-            String terminalId,
-            String terminalName,
-            String terminalDesc,
-            double latitude,
-            double longitude
-    ) throws MyCustomException {
-
-        //PROD
-        //int taskX = 1493101974;
-        //int taskY = 1493101989;
-        //int taskZ = 1504714261;
-        AdTerminal terminal = new AdTerminal();
-        terminal.setLatitude(latitude);
-        terminal.setLongitude(longitude);
-        terminal.setTerminalId(terminalId);
-        terminal.setTerminalName(terminalName);
-        terminal.setTerminalDescription(terminalDesc);
-        terminal.setTaskIdX(taskX);
-        terminal.setTaskIdY(taskY);
-        terminal.setTaskIdZ(taskZ);
-
-        customHibernate.saveEntity(terminal);
-
-        return terminal;
 
     }
 
@@ -531,37 +448,37 @@ public class InitialiseDBData {
 
         //FULLSCREEN
         AdScreenLayout fullScreenLayout = new AdScreenLayout();
-        fullScreenLayout.setLayoutId(ProgDisplayLayout.FULL_SCREEN.getValue());
+        fullScreenLayout.setLayoutId(ScreenSplit.FULL_SCREEN.getValue());
         fullScreenLayout.setLayoutName("Full-Screen only layout");
         fullScreenLayout.setLayoutValue(1.500f);
 
         //FULLSCREEN-TEXT
         AdScreenLayout fullScreenTextLayout = new AdScreenLayout();
-        fullScreenTextLayout.setLayoutId(ProgDisplayLayout.FULLSCREEN_TEXT.getValue());
+        fullScreenTextLayout.setLayoutId(ScreenSplit.FULLSCREEN_TEXT.getValue());
         fullScreenTextLayout.setLayoutName("Full-Screen and Text layout");
         fullScreenTextLayout.setLayoutValue(1.750f);
 
         //3SPLIT
         AdScreenLayout threeScreenSplit = new AdScreenLayout();
-        threeScreenSplit.setLayoutId(ProgDisplayLayout.THREE_SPLIT.getValue());
+        threeScreenSplit.setLayoutId(ScreenSplit.THREE_SPLIT.getValue());
         threeScreenSplit.setLayoutName("3-Screen split layout");
         threeScreenSplit.setLayoutValue(1.300f);
 
         //2SPLIT
         AdScreenLayout twoScreenSplit = new AdScreenLayout();
-        twoScreenSplit.setLayoutId(ProgDisplayLayout.TWO_SPLIT.getValue());
+        twoScreenSplit.setLayoutId(ScreenSplit.TWO_SPLIT.getValue());
         twoScreenSplit.setLayoutName("2-Screen split layout");
         twoScreenSplit.setLayoutValue(1.200f);
 
         //TEXT
         AdScreenLayout textOnlyLayout = new AdScreenLayout();
-        textOnlyLayout.setLayoutId(ProgDisplayLayout.TEXT_ONLY.getValue());
+        textOnlyLayout.setLayoutId(ScreenSplit.TEXT_ONLY.getValue());
         textOnlyLayout.setLayoutName("Text-Only layout");
         textOnlyLayout.setLayoutValue(1.000f);
 
         //UNKNOWN
         AdScreenLayout unKnownLayout = new AdScreenLayout();
-        unKnownLayout.setLayoutId(ProgDisplayLayout.UNKNOWN.getValue());
+        unKnownLayout.setLayoutId(ScreenSplit.UNKNOWN.getValue());
         unKnownLayout.setLayoutName("Unknown layout");
         unKnownLayout.setLayoutValue(1.000f);
         unKnownLayout.setDescription("This will be the default layout used especially if there is no layout chosen. It can be anything");
@@ -716,30 +633,30 @@ public class InitialiseDBData {
      * @return
      * @throws MyCustomException
      */
-    public String generateScreenId(String businessId) throws MyCustomException {
-
-        //get the most recent Screen under this business
-        AdScreen recentScreen = customHibernate.getMostRecentRecord(AdScreen.class, "id", "adBusiness.businessId", businessId);
-        String incremStart;
-
-        if (recentScreen == null) {
-            logger.debug("recentScreen is null");
-
-            incremStart = NamedConstants.SCREEN_START_ID;
-        } else {
-            String idToIncrement = recentScreen.getScreenId();
-            int len = idToIncrement.length();
-            idToIncrement = idToIncrement.substring(len - 2); //e.g. if screenId is SASS01, substring will give us -> '01'
-
-            //generatorId = AlphaNumericIDGenerator.generateNextId(idToIncrement);
-            incremStart = NumericIDGenerator.generateNextId(idToIncrement);
-        }
-
-        String screenId = businessId + "-" + incremStart;
-
-        return screenId;
-
-    }
+//    public String generateScreenId(String businessId) throws MyCustomException {
+//
+//        //get the most recent Screen under this business
+//        AdScreen recentScreen = customHibernate.getMostRecentRecord(AdScreen.class, "id", "adBusiness.businessId", businessId);
+//        String incremStart;
+//
+//        if (recentScreen == null) {
+//            logger.debug("recentScreen is null");
+//
+//            incremStart = NamedConstants.SCREEN_START_ID;
+//        } else {
+//            String idToIncrement = recentScreen.getScreenId();
+//            int len = idToIncrement.length();
+//            idToIncrement = idToIncrement.substring(len - 2); //e.g. if screenId is SASS01, substring will give us -> '01'
+//
+//            //generatorId = AlphaNumericIDGenerator.generateNextId(idToIncrement);
+//            incremStart = NumericIDGenerator.generateNextId(idToIncrement);
+//        }
+//
+//        String screenId = businessId + "-" + incremStart;
+//
+//        return screenId;
+//
+//    }
 
     public void gummaaza() throws MyCustomException {
         return;
@@ -757,6 +674,8 @@ public class InitialiseDBData {
             return;
         }
 
+        logger.info("Here in initDB - start");
+
         //screen layouts
         addDisplayLayouts();
 
@@ -770,7 +689,9 @@ public class InitialiseDBData {
         addAudienceTypes();
 
         //business types
-        addBusinessTypes();
+        addBusinessServices();
+
+        logger.info("Here in initDB - mid");
 
         //Guest user
         addGuestUser();
@@ -789,6 +710,8 @@ public class InitialiseDBData {
 
         //Templates campaign client
         addTemplateCampaignClient();
+
+        logger.info("Here in initDB - end");
 
         //add terminal -terminalId is got from DSM server database after syncing terminal to server
         //AdTerminal terminal = addTerminal(1506182937, 1506182957, 1504710509, "230901364440706", "FORTEBET Terminal-1", "First pilot terminal - Original terminal - ForteBet", 13.0412658, 80.2338514); //Chenai - India -> 600017

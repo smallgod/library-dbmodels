@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,29 +57,21 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 
 @NamedQueries({
     @NamedQuery(name = AdBusiness.FETCH_BUSINESS_BY_ID, query = AdBusiness.FETCH_BUSINESS_BY_ID_QUERY),
-
     @NamedQuery(name = AdBusiness.FETCH_BUSINESS_SERVICES, query = AdBusiness.FETCH_BUSINESS_SERVICES_QUERY),
-    @NamedQuery(name = AdBusiness.FETCH_TARGETED_BUSINESS_SERVICES, query = AdBusiness.FETCH_TARGETED_BUSINESS_SERVICES_QUERY),
-
-    @NamedQuery(name = AdBusiness.AREA_AUDIENCE_COUNT, query = AdBusiness.AREA_AUDIENCE_COUNT_QUERY),
-    @NamedQuery(name = AdBusiness.AREA_SCREEN_COUNT, query = AdBusiness.AREA_SCREEN_COUNT_QUERY),
-
-    @NamedQuery(name = AdBusiness.BUSINESSTYPE_AUDIENCE_COUNT, query = AdBusiness.BUSINESSTYPE_AUDIENCE_COUNT_QUERY),
-    @NamedQuery(name = AdBusiness.BUSINESSTYPE_SCREEN_COUNT, query = AdBusiness.BUSINESSTYPE_SCREEN_COUNT_QUERY),
-
+    @NamedQuery(name = AdBusiness.FETCH_BUSINESS_SERVICES_BY_ID, query = AdBusiness.FETCH_BUSINESS_SERVICES_BY_ID_QUERY),
     @NamedQuery(name = AdBusiness.FETCH_BUSINESS_BY_AUDIENCETYPE, query = AdBusiness.FETCH_BUSINESS_BY_AUDIENCETYPE_QUERY),
     @NamedQuery(name = AdBusiness.FETCH_BUSINESS_BY_SERVICE_ID, query = AdBusiness.FETCH_BUSINESS_BY_SERVICE_QUERY),
-    
-    @NamedQuery(name = AdBusiness.AUDIENCETYPE_SCREEN_COUNT, query = AdBusiness.AUDIENCETYPE_SCREEN_COUNT_QUERY),
-
-    @NamedQuery(name = AdBusiness.FETCH_TARGETED_AREAS, query = AdBusiness.FETCH_TARGETED_AREAS_QUERY),
-    @NamedQuery(name = AdBusiness.FETCH_TARGETED_AUDIENCE_TYPES, query = AdBusiness.FETCH_TARGETED_AUDIENCE_TYPES_QUERY),
-
+    @NamedQuery(name = AdBusiness.FETCH_AUDIENCE_TYPES_BY_BIZ_ID, query = AdBusiness.FETCH_AUDIENCE_TYPES_BY_BIZ_ID_QUERY),
+    @NamedQuery(name = AdBusiness.FETCH_AUDIENCE_TYPES, query = AdBusiness.FETCH_AUDIENCE_TYPES_QUERY),
     @NamedQuery(name = AdBusiness.FETCH_AREAS, query = AdBusiness.FETCH_AREAS_QUERY),
     @NamedQuery(name = AdBusiness.FETCH_BUSINESS_TYPES, query = AdBusiness.FETCH_BUSINESS_TYPES_QUERY),
-    @NamedQuery(name = AdBusiness.FETCH_AUDIENCE_TYPES, query = AdBusiness.FETCH_AUDIENCE_TYPES_QUERY),
+    @NamedQuery(name = AdBusiness.FETCH_AUDIENCETYPE_BY_ID, query = AdBusiness.FETCH_AUDIENCETYPE_BY_ID_QUERY),
+    @NamedQuery(name = AdBusiness.FETCH_AUDIENCE_TYPE_IDS, query = AdBusiness.FETCH_AUDIENCE_TYPE_IDS_QUERY),
+    @NamedQuery(name = AdBusiness.FETCH_BUSINESS_TYPE_IDS, query = AdBusiness.FETCH_BUSINESS_TYPE_IDS_QUERY)
+    
+    
+    
 
-    @NamedQuery(name = AdBusiness.FETCH_AUDIENCE_TYPES, query = AdBusiness.FETCH_AUDIENCE_TYPES_QUERY)
 })
 //can be used for both screens and normal areas in the database
 /**
@@ -90,58 +84,43 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
  */
 public class AdBusiness extends BaseEntity implements Auditable, Serializable {
 
-    public static final String FETCH_TARGETED_AUDIENCE_TYPES_QUERY = "SELECT DISTINCT audienceTypes FROM AdBusiness business INNER JOIN business.audienceTypes audienceTypes WHERE business.id IN (:ids)";
-    public static final String FETCH_TARGETED_AUDIENCE_TYPES = "FETCH_TARGETED_AUDIENCE_TYPES";
+    public static final String FETCH_BUSINESS_BY_ID_QUERY = "SELECT business FROM AdBusiness business WHERE business.businessId=:businessId";
+    public static final String FETCH_BUSINESS_BY_ID = "FETCH_BUSINESS_BY_ID";
 
-    public static final String FETCH_TARGETED_BUSINESS_TYPES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessService businessServices WHERE business.id IN (:ids)";
-    public static final String FETCH_TARGETED_BUSINESS_TYPES = "FETCH_TARGETED_BUSINESS_TYPES";
+    public static final String FETCH_BUSINESS_SERVICES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices";
+    public static final String FETCH_BUSINESS_SERVICES = "FETCH_BUSINESS_SERVICES";
+
+    public static final String FETCH_BUSINESS_SERVICES_BY_ID_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices WHERE businessServices.id IN (:ids)";
+    public static final String FETCH_BUSINESS_SERVICES_BY_ID = "FETCH_BUSINESS_SERVICES_BY_ID";
+
+    public static final String FETCH_AUDIENCETYPE_BY_ID_QUERY = "SELECT DISTINCT audienceTypes FROM AdBusiness business INNER JOIN business.audienceTypes audienceTypes WHERE audienceTypes.id IN (:ids)";
+    public static final String FETCH_AUDIENCETYPE_BY_ID = "FETCH_AUDIENCETYPE_BY_ID";
 
     public static final String FETCH_BUSINESS_BY_AUDIENCETYPE_QUERY = "SELECT DISTINCT business FROM AdBusiness business INNER JOIN business.audienceTypes audience WHERE audience.id=:id";
     public static final String FETCH_BUSINESS_BY_AUDIENCETYPE = "FETCH_BUSINESS_BY_AUDIENCETYPE";
 
     public static final String FETCH_BUSINESS_BY_SERVICE_QUERY = "SELECT DISTINCT business FROM AdBusiness business INNER JOIN business.businessServices businessServices WHERE businessServices.id=:id";
     public static final String FETCH_BUSINESS_BY_SERVICE_ID = "FETCH_BUSINESS_BY_SERVICE_ID";
-    
-    public static final String FETCH_AREAS_QUERY = "SELECT DISTINCT area FROM AdBusiness business INNER JOIN business.area area";
-    public static final String FETCH_AREAS = "FETCH_AREAS";
-    
-    public static final String FETCH_BUSINESS_TYPES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices";
-    public static final String FETCH_BUSINESS_TYPES = "FETCH_BUSINESS_TYPES";
+
+    public static final String FETCH_AUDIENCE_TYPES_BY_BIZ_ID_QUERY = "SELECT DISTINCT audienceTypes FROM AdBusiness business INNER JOIN business.audienceTypes audienceTypes WHERE business.id IN (:ids)";
+    public static final String FETCH_AUDIENCE_TYPES_BY_BIZ_ID = "FETCH_AUDIENCE_TYPES_BY_BIZ_ID";
 
     public static final String FETCH_AUDIENCE_TYPES_QUERY = "SELECT DISTINCT audienceTypes FROM AdBusiness business INNER JOIN business.audienceTypes audienceTypes";
     public static final String FETCH_AUDIENCE_TYPES = "FETCH_AUDIENCE_TYPES";
+    
+    public static final String FETCH_AUDIENCE_TYPE_IDS_QUERY = "SELECT DISTINCT audienceTypes.id FROM AdBusiness business INNER JOIN business.audienceTypes audienceTypes";
+    public static final String FETCH_AUDIENCE_TYPE_IDS = "FETCH_AUDIENCE_TYPE_IDS";
 
+    public static final String FETCH_AREAS_QUERY = "SELECT DISTINCT business.area FROM AdBusiness business";
+    public static final String FETCH_AREAS = "FETCH_AREAS";
+
+    public static final String FETCH_BUSINESS_TYPES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices";
+    public static final String FETCH_BUSINESS_TYPES = "FETCH_BUSINESS_TYPES";
+    
+    public static final String FETCH_BUSINESS_TYPE_IDS_QUERY = "SELECT DISTINCT businessServices.id FROM AdBusiness business INNER JOIN business.businessServices businessServices";
+    public static final String FETCH_BUSINESS_TYPE_IDS = "FETCH_BUSINESS_TYPE_IDS";
 
     private static final long serialVersionUID = -9145189073667975787L;
-
-    public static final String FETCH_BUSINESS_BY_ID_QUERY = "SELECT business FROM AdBusiness business WHERE business.businessId=:businessId";
-    public static final String FETCH_BUSINESS_BY_ID = "FETCH_BUSINESS_BY_ID";
-
-    public static final String FETCH_BUSINESS_SERVICES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices";
-    public static final String FETCH_TARGETED_BUSINESS_SERVICES_QUERY = "SELECT DISTINCT businessServices FROM AdBusiness business INNER JOIN business.businessServices businessServices WHERE businessServices.id IN (:ids)";
-    public static final String AREA_SCREEN_COUNT_QUERY = "SELECT DISTINCT COUNT(business.screenId) FROM AdBusiness business WHERE business.area=:area";
-
-    public static final String FETCH_BUSINESS_SERVICES = "FETCH_BUSINESS_SERVICES";
-    public static final String FETCH_TARGETED_BUSINESS_SERVICES = "FETCH_TARGETED_BUSINESS_TYPES";
-    public static final String AREA_SCREEN_COUNT = "AREA_SCREEN_COUNT";
-
-    public static final String AREA_AUDIENCE_COUNT_QUERY = "SELECT DISTINCT SUM(business.audienceCount) FROM AdBusiness business INNER JOIN business.screenArea area WHERE area.id=:id";
-    public static final String AREA_AUDIENCE_COUNT = "AREA_AUDIENCE_COUNT";
-
-    public static final String BUSINESSTYPE_AUDIENCE_COUNT_QUERY = "SELECT DISTINCT SUM(business.audienceCount) FROM AdBusiness business INNER JOIN business.businessType business WHERE business.id=:id";
-
-    public static final String BUSINESSTYPE_AUDIENCE_COUNT = "BUSINESSTYPE_AUDIENCE_COUNT";
-
-    public static final String BUSINESSTYPE_SCREEN_COUNT_QUERY = "SELECT DISTINCT COUNT(business.screenId) FROM AdBusiness business INNER JOIN business.businessType business WHERE business.id=:id";
-    public static final String BUSINESSTYPE_SCREEN_COUNT = "BUSINESSTYPE_SCREEN_COUNT";
-
-    public static final String AUDIENCETYPE_SCREEN_COUNT_QUERY = "SELECT DISTINCT COUNT(business.screenId) FROM AdBusiness business INNER JOIN business.audienceTypes audience WHERE audience.id=:id";
-    public static final String AUDIENCETYPE_SCREEN_COUNT = "AUDIENCETYPE_SCREEN_COUNT";
-
-    public static final String FETCH_TARGETED_AREAS_QUERY = "SELECT DISTINCT area FROM AdBusiness business INNER JOIN business.screenArea area WHERE business.screenId IN (:screenIds)";
-    public static final String FETCH_TARGETED_AREAS = "FETCH_TARGETED_AREAS";
-
-    
 
     @Expose
     @SerializedName(value = "id")
@@ -218,8 +197,8 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
     @Column(name = "district")
     private String district;
 
-    @SerializedName(value = "state")
-    @Column(name = "business_state")
+    @SerializedName(value = "state_province")
+    @Column(name = "state_province")
     private String state;
 
     @SerializedName(value = "country")
@@ -228,6 +207,7 @@ public class AdBusiness extends BaseEntity implements Auditable, Serializable {
 
     @SerializedName(value = "type")
     @Column(name = "type")//Business can be belong to either an advertising client or a screen owner
+    @Enumerated(EnumType.STRING)
     private LocationType type; //ADVERT_LOCATION | CLIENT_LOCATION | BOTH
 
     @Expose

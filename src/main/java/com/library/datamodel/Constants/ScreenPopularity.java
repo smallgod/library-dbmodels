@@ -10,9 +10,9 @@ import com.library.utilities.GeneralUtils;
  */
 public enum ScreenPopularity implements Constants {
 
-    LEAST_POPULAR("hardly watched"),
-    AVERAGE("average"),
-    MOST_POPULAR("most watched");
+    LEAST_POPULAR("LEAST_POPULAR"), //hardly watched
+    AVERAGE("AVERAGE"), //average
+    MOST_POPULAR("MOST_POPULAR"); //most watched
 
     private final String enumValue;
 

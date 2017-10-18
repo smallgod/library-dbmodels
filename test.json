@@ -1,85 +1,12 @@
+
 {
     "success": true,
-    "data": {
-        "basic_info": {
-            "notifications": true,
-            "campaign_id": 1504473432,
-            "campaign_name": "Test Ad 3",
-            "layout_type": "3SPLIT",
-            "advert_length": 60
-        },
-        "target_info": {
-            "target_screen_codes": [{
-                    "id": 1,
-                    "screen_code": "EQUA-01",
-                    "business_name": "Equatoria Hotel",
-                    "sub_area": "City centre",
-                    "area_name": "Kampala",
-                    "extra_1": "Bombo Rd",
-                    "extra_2": "reception",
-                    "extra_3": "hotel",
-                    "extra_4": "",
-                    "alias": "Equatoria Hotel - Bombo Rd - City centre - reception"
-                }],
-            "areas": [],
-            "business_types": [],
-            "audience_types": []
-        },
-        "schedule_info": {
-            "start_date": "2017-09-04",
-            "end_date": "2017-09-04",
-            "schedule_type": "INSTANT",
-            "time_slots": [{
-                    "name": "INSTANT",
-                    "preferred_hour": -1,
-                    "frequency": 1,
-                    "days": []
-                }]
-        },
-        "payment_info": {
-            "value_store": "MTNMOMO_UG",
-            "account_number": "0774983602"
-        },
-        "resources_info": [{
-                "region": "LEFT",
-                "upload_id": "1504367927207.jpg",
-                "sequence": 2,
-                "preview_url": "http://localhost:9008/adcentral/thumbs/1504367927207.jpg",
-                "upload_name": "resname_1504367927207.jpg",
-                "type": "IMAGE"
-            }, {
-                "region": "LEFT",
-                "upload_id": "1504367922566.jpg",
-                "sequence": 1,
-                "preview_url": "http://localhost:9008/adcentral/thumbs/1504367922566.jpg",
-                "upload_name": "resname_1504367922566.jpg",
-                "type": "IMAGE"
-            }],
-        "text_info": [{
-                "text": "Anthony's shop",
-                "type": "HEADER_TEXT"
-            }, {
-                "text": "For personalised gifts visit ......",
-                "type": "SCROLL_TEXT"
-            }],
-        "campaign_stats": {
-            "display_count": 1,
-            "target_reach": {
-                "amount": 5575,
-                "audience_count": 15,
-                "screen_count": 1,
-                "estimated_views": 15
-            },
-            "potential_reach": {
-                "amount": 0,
-                "audience_count": 153,
-                "screen_count": 7,
-                "estimated_views": 0
-            }
-        },
-        "campaign_status": {
-            "status": "ESCALATED",
-            "description": "Tried to play campaign but found display time: 00:22:00 in the past (time now: 01:22:09 )"
+    "data": [
+        {
+            "id": "0",
+            "name": "Kyanja",
+            "audience_count": 577,
+            "screen_count": 5
         }
-    }
+    ]
 }

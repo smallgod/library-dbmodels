@@ -50,47 +50,47 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
 
     @Expose
     @SerializedName(value = "campaign_cost")
-    @Column(name = "campaign_cost", nullable = false)
+    @Column(name = "campaign_cost")
     private int campaignCost;
 
     @Expose
     @SerializedName(value = "display_count")
-    @Column(name = "times_ad_should_play", nullable = false)
+    @Column(name = "expected_ad_play_count")
     private int numOfTimesAdIsToPlay;
 
     @Expose
     @SerializedName(value = "times_ad_has_played")
-    @Column(name = "times_ad_has_played", nullable = false)
+    @Column(name = "actual_ad_play_count")
     private int numOfTimesAdHasPlayed;
 
     @Expose
     @SerializedName(value = "estimated_target_views")
-    @Column(name = "estimated_target_views", nullable = false)
+    @Column(name = "estimated_target_views")
     private int estimatedTargetViews; //multiply number of times ad is to play with total target audience_count
     
     @Expose
     @SerializedName(value = "estimated_potential_views")
-    @Column(name = "estimated_potential_views", nullable = false)
+    @Column(name = "estimated_potential_views")
     private int estimatedPotentialViews; //figure out algorithm for this
 
     @Expose
     @SerializedName(value = "target_screen_reach")
-    @Column(name = "target_screen_reach", nullable = false)
+    @Column(name = "target_screen_reach")
     private int targetScreenReach;
 
     @Expose
     @SerializedName(value = "target_audience_reach")
-    @Column(name = "target_audience_reach", nullable = false)
+    @Column(name = "target_audience_reach")
     private int targetAudienceReach;
 
     @Expose
     @SerializedName(value = "potential_screen_reach")
-    @Column(name = "potential_screen_reach", nullable = false)
+    @Column(name = "potential_screen_reach")
     private int potentialScreenReach;
 
     @Expose
     @SerializedName(value = "potential_audience_reach")
-    @Column(name = "potential_audience_reach", nullable = false)
+    @Column(name = "potential_audience_reach")
     private int potentialAudienceReach;
 
     public AdCampaignStats() {

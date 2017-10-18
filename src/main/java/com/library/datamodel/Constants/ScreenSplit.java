@@ -8,7 +8,7 @@ import com.library.utilities.GeneralUtils;
  *
  * @author smallgod
  */
-public enum ProgDisplayLayout implements Constants {
+public enum ScreenSplit implements Constants {
 
     TWO_SPLIT("2SPLIT"),
     THREE_SPLIT("3SPLIT"),
@@ -20,7 +20,7 @@ public enum ProgDisplayLayout implements Constants {
 
     private final String enumValue;
 
-    ProgDisplayLayout(String enumValue) {
+    ScreenSplit(String enumValue) {
         this.enumValue = enumValue;
     }
 
@@ -29,18 +29,18 @@ public enum ProgDisplayLayout implements Constants {
         return this.enumValue;
     }
 
-    public static ProgDisplayLayout convertToEnum(String value) throws MyCustomException {
+    public static ScreenSplit convertToEnum(String value) throws MyCustomException {
 
         if (value != null) {
 
-            for (ProgDisplayLayout availableValue : ProgDisplayLayout.values()) {
+            for (ScreenSplit availableValue : ScreenSplit.values()) {
 
                 if (value.equalsIgnoreCase(availableValue.getValue())) {
                     return availableValue;
                 }
             }
         }
-        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported Display layout", "Failed to convert layout Name: " + value + "to Enum");
+        MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported screen split layout", "Failed to convert split layout Name: " + value + "to Enum");
         throw error;
     }
 }

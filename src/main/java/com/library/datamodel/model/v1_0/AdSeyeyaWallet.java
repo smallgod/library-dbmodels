@@ -22,8 +22,6 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.TypeDef;
@@ -50,26 +48,7 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @SelectBeforeUpdate(value = true)
 @Table(name = "ad_seyeya_wallet", uniqueConstraints = @UniqueConstraint(columnNames = {"account_number"}))
 
-@NamedQueries({
-    @NamedQuery(name = AdSeyeyaWallet.FETCH_USER_ACCOUNTS, query = AdSeyeyaWallet.FETCH_USER_ACCOUNTS_QUERY),
-    @NamedQuery(name = AdSeyeyaWallet.FETCH_THIS_ACCOUNT, query = AdSeyeyaWallet.FETCH_THIS_ACCOUNT_QUERY),
-    @NamedQuery(name = AdSeyeyaWallet.FETCH_ACCOUNT, query = AdSeyeyaWallet.FETCH_ACCOUNT_QUERY),
-    @NamedQuery(name = AdSeyeyaWallet.FETCH_PREFERRED_ACCOUNT, query = AdSeyeyaWallet.FETCH_PREFERRED_ACCOUNT_QUERY)
-})
-
 public class AdSeyeyaWallet extends BaseEntity implements Auditable, Serializable {
-
-    public static final String FETCH_USER_ACCOUNTS_QUERY = "SELECT DISTINCT account FROM AdSeyeyaWallet account INNER JOIN account.adUsers users where users.userId=:userId";
-    public static final String FETCH_USER_ACCOUNTS = "FETCH_USER_ACCOUNTS";
-
-    public static final String FETCH_THIS_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdSeyeyaWallet account INNER JOIN account.adUsers users where account.accountNumber=:accountNumber";
-    public static final String FETCH_THIS_ACCOUNT = "FETCH_THIS_ACCOUNT";
-
-    public static final String FETCH_PREFERRED_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdSeyeyaWallet account INNER JOIN account.adUsers users where users.userId=:userId AND account.isAccountPreferred=:ispreferred";
-    public static final String FETCH_PREFERRED_ACCOUNT = "FETCH_PREFERRED_ACCOUNT";
-
-    public static final String FETCH_ACCOUNT_QUERY = "SELECT DISTINCT account FROM AdSeyeyaWallet account INNER JOIN account.adUsers users where users.userId=:userId AND account.accountNumber=:accountNumber";
-    public static final String FETCH_ACCOUNT = "FETCH_ACCOUNT";
 
     private static final long serialVersionUID = 5418240214727369514L;
 
@@ -95,22 +74,18 @@ public class AdSeyeyaWallet extends BaseEntity implements Auditable, Serializabl
     private AccountType accountType;
 
     @Expose
-    @Embedded
     @Column(name = "previous_balance")
     private int previousBalance;
 
     @Expose
-    @Embedded
     @Column(name = "current_balance")
     private int currentBalance;
 
     @Expose
-    @Embedded
     @Column(name = "reserved_balance")
     private int reservedBalance; //when a user makes a payment, the amount is reserved till completion of transaction which determines if we are doing a revesal or not
 
     @Expose
-    @Embedded
     @Column(name = "cummulative_balance")
     private int cummulativeTopUpBalance;
 

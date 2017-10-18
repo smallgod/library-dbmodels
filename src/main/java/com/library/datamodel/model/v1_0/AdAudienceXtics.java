@@ -4,14 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.library.sgsharedinterface.Auditable;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -37,7 +35,7 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Entity
 @DynamicUpdate(value = true)
 @SelectBeforeUpdate(value = true)
-@Table(name = "ad_audience_xtics", uniqueConstraints = @UniqueConstraint(columnNames = {"xtics_id"}))
+@Table(name = "ad_audience_xtics")
 
 //can be used for both screens and normal areas in the database
 /**
@@ -101,7 +99,7 @@ public class AdAudienceXtics extends BaseEntity implements Auditable, Serializab
 
     @Expose
     @SerializedName(value = "english")
-    @Column(name = "english")
+    @Column(name = "lang_english")
     private int langEnglish;
 
     @Expose
@@ -113,7 +111,7 @@ public class AdAudienceXtics extends BaseEntity implements Auditable, Serializab
     @SerializedName(value = "kinyarwanda")
     @Column(name = "lang_kinyarwanda")
     private int langKinyarwanda;
-    
+
     @Expose
     @SerializedName(value = "luganda")
     @Column(name = "lang_luganda")
@@ -309,6 +307,14 @@ public class AdAudienceXtics extends BaseEntity implements Auditable, Serializab
         this.ageAbove56 = ageAbove56;
     }
 
+    public int getLangLuganda() {
+        return langLuganda;
+    }
+
+    public void setLangLuganda(int langLuganda) {
+        this.langLuganda = langLuganda;
+    }
+
     @Override
     public String getUsername() {
         return this.getLastModifiedBy();
@@ -335,13 +341,4 @@ public class AdAudienceXtics extends BaseEntity implements Auditable, Serializab
         final AdAudienceXtics other = (AdAudienceXtics) obj;
         return this.id == other.getId();
     }
-
-    public int getLangLuganda() {
-        return langLuganda;
-    }
-
-    public void setLangLuganda(int langLuganda) {
-        this.langLuganda = langLuganda;
-    }
-
 }
