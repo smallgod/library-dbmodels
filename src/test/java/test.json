@@ -1,3 +1,18 @@
 {
-    "name": "smallgod"
+    "success": true,
+    "data": {
+        "display_count": 1,
+        "target_reach": {
+            "amount": 747,
+            "audience_count": 946,
+            "screen_count": 1,
+            "estimated_views": 946
+        },
+        "potential_reach": {
+            "amount": 0,
+            "audience_count": 82491,
+            "screen_count": 3,
+            "estimated_views": 0
+        }
+    }
 }

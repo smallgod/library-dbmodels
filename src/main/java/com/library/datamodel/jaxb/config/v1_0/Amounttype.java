@@ -4,22 +4,21 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2017.04.07 at 12:15:15 PM EAT 
 //
-
-
 package com.library.datamodel.jaxb.config.v1_0;
 
-import jaxb.com.library.datamodel.config.v1_0.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for amounttype complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>
+ * Java class for amounttype complex type.
+ *
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ *
  * <pre>
  * &lt;complexType name="amounttype"&gt;
  *   &lt;complexContent&gt;
@@ -32,14 +31,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "amounttype", propOrder = {
-    "amount",
-    "currencycode"
-})
+@XmlType(
+        name = "amounttype",
+        propOrder = {
+            "amount",
+            "currencycode"
+        })
 public class Amounttype {
 
     protected int amount;
@@ -48,7 +49,7 @@ public class Amounttype {
 
     /**
      * Gets the value of the amount property.
-     * 
+     *
      */
     public int getAmount() {
         return amount;
@@ -56,7 +57,7 @@ public class Amounttype {
 
     /**
      * Sets the value of the amount property.
-     * 
+     *
      */
     public void setAmount(int value) {
         this.amount = value;
@@ -64,11 +65,9 @@ public class Amounttype {
 
     /**
      * Gets the value of the currencycode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getCurrencycode() {
         return currencycode;
@@ -76,11 +75,9 @@ public class Amounttype {
 
     /**
      * Sets the value of the currencycode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setCurrencycode(String value) {
         this.currencycode = value;

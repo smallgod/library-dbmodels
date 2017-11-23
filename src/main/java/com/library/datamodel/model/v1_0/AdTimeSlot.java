@@ -67,7 +67,7 @@ import org.joda.time.LocalTime;
 @Table(name = "ad_time_slot", uniqueConstraints = @UniqueConstraint(columnNames = {"slot_code"}))
 
 @NamedQueries({
-    @NamedQuery(name = AdTimeSlot.FETCH_CHEAPEST_SLOT, query = AdTimeSlot.FETCH_CHEAPEST_SLOT_QUERY),
+    @NamedQuery(name = AdTimeSlot.FETCH_NON_FREE_SLOTS, query = AdTimeSlot.FETCH_NON_FREE_SLOTS_QUERY),
     @NamedQuery(name = AdTimeSlot.FETCH_TIME_SLOT, query = AdTimeSlot.FETCH_TIME_SLOT_QUERY)
 })
 public class AdTimeSlot extends BaseEntity implements Auditable, Serializable {
@@ -77,8 +77,8 @@ public class AdTimeSlot extends BaseEntity implements Auditable, Serializable {
     public static final String FETCH_TIME_SLOT_QUERY = "SELECT DISTINCT slot FROM AdTimeSlot slot WHERE slot.timeSlotCode=:slotCode";
     public static final String FETCH_TIME_SLOT = "FETCH_TIME_SLOT";
 
-    public static final String FETCH_CHEAPEST_SLOT_QUERY = "SELECT DISTINCT slot FROM AdTimeSlot slot WHERE slot.timeSlotCode NOT IN (:freebie)";
-    public static final String FETCH_CHEAPEST_SLOT = "FETCH_CHEAPEST_SLOT"; //cheapest slot code not freebie
+    public static final String FETCH_NON_FREE_SLOTS_QUERY = "SELECT DISTINCT slot FROM AdTimeSlot slot WHERE slot.timeSlotCode NOT IN (:freebie)";
+    public static final String FETCH_NON_FREE_SLOTS = "FETCH_NON_FREE_SLOTS";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

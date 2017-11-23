@@ -67,7 +67,7 @@ public class AdCampaignStats extends BaseEntity implements Auditable, Serializab
     @SerializedName(value = "estimated_target_views")
     @Column(name = "estimated_target_views")
     private int estimatedTargetViews; //multiply number of times ad is to play with total target audience_count
-    
+
     @Expose
     @SerializedName(value = "estimated_potential_views")
     @Column(name = "estimated_potential_views")

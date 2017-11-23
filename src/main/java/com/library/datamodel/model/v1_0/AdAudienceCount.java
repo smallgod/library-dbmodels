@@ -55,13 +55,17 @@ import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime;
 @Table(name = "ad_audience_count", uniqueConstraints = @UniqueConstraint(columnNames = {"code"}))
 
 @NamedQueries({
-    @NamedQuery(name = AdAudienceCount.COUNT_AUDIENCE_BY_SCREEN_CODE, query = AdAudienceCount.COUNT_AUDIENCE_BY_SCREEN_CODE_QUERY)
+    @NamedQuery(name = AdAudienceCount.FETCH_AUDIENCE_BY_SCREEN_CODE, query = AdAudienceCount.FETCH_AUDIENCE_BY_SCREEN_CODE_QUERY),
+    @NamedQuery(name = AdAudienceCount.FETCH_BY_SCREENID_AND_SLOT, query = AdAudienceCount.FETCH_BY_SCREENID_AND_SLOT_QUERY)
 })
 
 public class AdAudienceCount extends BaseEntity implements Auditable, Serializable {
 
-    public static final String COUNT_AUDIENCE_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT audienceCount FROM AdAudienceCount audienceCount INNER JOIN audienceCount.adTimeSlot timeSlot INNER JOIN audienceCount.adScreen screen WHERE screen.screenId IN (:screenId)";
-    public static final String COUNT_AUDIENCE_BY_SCREEN_CODE = "COUNT_AUDIENCE_BY_SCREEN_CODE";
+    public static final String FETCH_AUDIENCE_BY_SCREEN_CODE_QUERY = "SELECT DISTINCT audienceCount FROM AdAudienceCount audienceCount INNER JOIN audienceCount.adTimeSlot timeSlot INNER JOIN audienceCount.adScreen screen WHERE screen.screenId IN (:screenId)";
+    public static final String FETCH_AUDIENCE_BY_SCREEN_CODE = "FETCH_AUDIENCE_BY_SCREEN_CODE";
+
+    public static final String FETCH_BY_SCREENID_AND_SLOT_QUERY = "SELECT DISTINCT audienceCount FROM AdAudienceCount audienceCount INNER JOIN audienceCount.adTimeSlot timeSlot INNER JOIN audienceCount.adScreen screen WHERE screen.screenId IN (:screenId) AND timeSlot.timeSlotCode IN (:timeSlotCode)";
+    public static final String FETCH_BY_SCREENID_AND_SLOT = "FETCH_BY_SCREENID_AND_SLOT";
 
     private static final long serialVersionUID = 5475033620308432546L;
 

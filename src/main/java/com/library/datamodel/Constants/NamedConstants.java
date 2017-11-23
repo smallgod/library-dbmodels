@@ -19,6 +19,24 @@ import org.joda.time.Duration;
  */
 public interface NamedConstants {
 
+    /**
+     * 1 minute Delay in scheduling the advert due to system delays, for example
+     * Uploading Resources to servers, moving resources, downloading resources
+     * by the player etc
+     *
+     */
+    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(60).getMillis(); //changed from 120 to 60 to 0
+
+    public static final long PAY_TIME = Duration.standardSeconds(300).getMillis();
+
+    public static final long REVIEW_TIME = Duration.standardSeconds(300).getMillis();
+
+    public static final long DOWNLOAD_TIME_FULLSCREEN = Duration.standardSeconds(420).getMillis();
+
+    public static final long DOWNLOAD_TIME_3SPLIT = Duration.standardSeconds(300).getMillis();
+
+    public static final long DOWNLOAD_TIME_TEXT = Duration.standardSeconds(60).getMillis();//1min for text upload
+
     public static final String ADMIN_SMS_RECIPIENT = "256790790491";
 
     public static final String ADVERTXPO_CALLBACK_URL = "http://advertxpo.com:9008/adcentral/api/json";
@@ -125,14 +143,6 @@ public interface NamedConstants {
     public static final String UPDATE_DB_MUTEX = "UPDATE_DB_MUTEX";
 
     /**
-     * 1 minute Delay in scheduling the advert due to system delays, for example
-     * Uploading Resources to servers, moving resources, downloading resources
-     * by the player etc
-     *
-     */
-    public static final long SYSTEM_SCHEDULE_DELAY_MILLIS = Duration.standardSeconds(60).getMillis(); //changed from 120 to 60 to 0
-
-    /**
      * SSL certificates
      */
     public static final String PEER_CERTIFICATES = "PEER_CERTIFICATES";
@@ -149,6 +159,8 @@ public interface NamedConstants {
      *
      */
     public static final String KAMPALA_TIME_ZONE = "Africa/Kampala";
+
+    public static final DateTimeZone KAMPALA_DATE_TIME_ZONE = DateTimeZone.forID("Africa/Kampala");
 
     public static final DateTimeZone UTC_TIME_ZONE = DateTimeZone.UTC;
 
@@ -495,6 +507,8 @@ public interface NamedConstants {
     public static final String SMS_TEMPLATE_CAMPAIGN_ESCALATE_ADMIN = "Hi advertXpo admin, campaign with id: {id} has been escalated. Manual intervention required. MoMo a/c: {momoAccount}";
 
     public static final String SMS_TEMPLATE_CAMPAIGN_REVIEW_ADMIN = "Hi advertXpo admin, campaign with id: {id} needs to be reviewed. MoMo a/c: {momoAccount}";
+
+    public static final String SMS_TEMPLATE_CAMPAIGN_SCHEDULE_MSG = "Hello, you campaign with id: {id} has been scheduled to start playing at, {time}";
 
     public static final String SMS_API_PARAM_USERNAME = "user";
     public static final String SMS_API_PARAM_PASSOWRD = "password";
