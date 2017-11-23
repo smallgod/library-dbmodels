@@ -39,6 +39,5 @@ public enum HTTPMethod implements Constants {
         logger.warn("No constant with text " + methodName + " found");
         throw new IllegalArgumentException("No constant with text " + methodName + " found");
         //throw new MyCustomException("Unsupported Status Exception", ErrorCode.NOT_SUPPORTED_ERR, "Unsupported status value :: " + methodName, ErrorCategory.CLIENT_ERR_TYPE);
-
     }
 }
