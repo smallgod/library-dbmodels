@@ -78,7 +78,6 @@ public enum APIMethodName implements Constants {
         }
 
         MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Method Name", "Failed to convert API Method Name: " + methodName + " to Enum");
-
         throw error;
 
     }

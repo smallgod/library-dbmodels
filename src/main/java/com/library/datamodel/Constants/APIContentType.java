@@ -40,7 +40,6 @@ public enum APIContentType implements Constants {
         }
 
         MyCustomException error = GeneralUtils.getSingleError(ErrorCode.NOT_SUPPORTED_ERR, "Unsupported API Content Type", "Failed to convert APIContentType: " + givenApiType + "to Enum");
-
         throw error;
     }
 }
